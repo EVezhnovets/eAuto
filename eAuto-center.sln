@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eAutoApp.Web", "src\eAutoApp.Web\eAutoApp.Web.csproj", "{9EEAB97D-28CF-422A-B909-8AF476966600}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eAuto.Web", "src\eAuto.Web\eAuto.Web.csproj", "{9EEAB97D-28CF-422A-B909-8AF476966600}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
