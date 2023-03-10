@@ -7,11 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eAuto.Web", "src\eAuto.Web\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9C81F387-7768-4185-8910-9CC9CE6CF39B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eAuto.Domain", "eAuto.Domain\eAuto.Domain.csproj", "{45F87D07-8DB7-4A4C-BF27-AF8F40AE6138}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eAuto.Domain", "src\eAuto.Domain\eAuto.Domain.csproj", "{45F87D07-8DB7-4A4C-BF27-AF8F40AE6138}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eAuto.Data", "eAuto.Data\eAuto.Data.csproj", "{28105E7D-7D4D-4A57-A3F2-6FA4A4A39439}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eAuto.Data", "src\eAuto.Data\eAuto.Data.csproj", "{28105E7D-7D4D-4A57-A3F2-6FA4A4A39439}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eAuto.Data.Interfaces", "eAuto.Data.Interfaces\eAuto.Data.Interfaces.csproj", "{F0B90D67-E70D-4925-B71B-FEC227809BCB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eAuto.Data.Interfaces", "src\eAuto.Data.Interfaces\eAuto.Data.Interfaces.csproj", "{F0B90D67-E70D-4925-B71B-FEC227809BCB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
