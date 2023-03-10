@@ -1,10 +1,11 @@
 ﻿using eAuto.Data.Interfaces.DataModels;
 using Microsoft.EntityFrameworkCore;
 
-namespace eAuto.Data
+namespace eAuto.Data.Context
 {
     public class eAutoContext : DbContext
     {
+        private readonly string _connectionString;
         //configure OnModelCreating modelbuilder?
         public DbSet<BodyTypeDataModel> BodyTypes { get; set; }
         public DbSet<BrandDataModel> Brands { get; set; }
@@ -14,8 +15,9 @@ namespace eAuto.Data
         public DbSet<ModelDataModel> Models { get; set; }
         public DbSet<TransmissionDataModel> Transmissions { get; set; }
 
-        public eAutoContext(DbContextOptions<eAutoContext> options) : base(options)
+        public eAutoContext(string connectionString)
         {
+            _connectionString = connectionString;
         }
     }
 }
