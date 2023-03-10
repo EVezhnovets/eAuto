@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eAuto.Data", "src\eAuto.Dat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eAuto.Data.Interfaces", "src\eAuto.Data.Interfaces\eAuto.Data.Interfaces.csproj", "{F0B90D67-E70D-4925-B71B-FEC227809BCB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiConfigurator", "src\DiConfigurator\DiConfigurator.csproj", "{5B249BEF-1BC6-4DF0-89FB-7760C7155DE2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiConfiguration", "src\DiConfigurator\DiConfiguration.csproj", "{5B249BEF-1BC6-4DF0-89FB-7760C7155DE2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

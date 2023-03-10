@@ -1,7 +1,13 @@
+using DiConfiguration;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//Add services in DiConfiguration to the container
+var catalogConnectionString = builder.Configuration.GetConnectionString("eAutoCatalogConnection");
+var diConfigurator = new DiConfigurator(catalogConnectionString, builder.Configuration);
+diConfigurator.ConfigureServices(builder.Services);
 
 var app = builder.Build();
 
