@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DiConfigurator
+namespace DiConfiguration
 {
     public sealed class DiConfigurator
     {
