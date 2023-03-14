@@ -19,5 +19,34 @@ namespace eAuto.Data.Context
         {
             _connectionString = connectionString;
         }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) 
+        {
+            optionsBuilder.UseSqlServer(_connectionString);
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<BodyTypeDataModel>()
+                .HasKey(bt => bt.BodyTypeId);
+
+            modelBuilder.Entity<BrandDataModel>()
+                .HasKey(b => b.BrandId);
+
+            modelBuilder.Entity<CarDataModel>()
+                .HasKey(c => c.CarId);
+
+            modelBuilder.Entity<DriveTypeDataModel>()
+                .HasKey(dt => dt.DriveTypeId);
+
+            modelBuilder.Entity<EngineTypeDataModel>()
+                .HasKey(e => e.EngineTypeId);
+
+            modelBuilder.Entity<ModelDataModel>()
+                .HasKey(m => m.ModelId);
+
+            modelBuilder.Entity<TransmissionDataModel>()
+                .HasKey(t => t.TransmissionId);
+        }
     }
 }
