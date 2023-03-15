@@ -11,7 +11,7 @@ using eAuto.Data.Context;
 
 namespace eAuto.Data.Migrations
 {
-    [DbContext(typeof(eAutoContext))]
+    [DbContext(typeof(EAutoContext))]
     [Migration("20230314075358_AddInitialToDb")]
     partial class AddInitialToDb
     {

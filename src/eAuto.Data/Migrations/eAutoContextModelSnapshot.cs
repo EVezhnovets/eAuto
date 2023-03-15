@@ -10,8 +10,8 @@ using eAuto.Data.Context;
 
 namespace eAuto.Data.Migrations
 {
-    [DbContext(typeof(eAutoContext))]
-    partial class eAutoContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(EAutoContext))]
+    partial class EAutoContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {

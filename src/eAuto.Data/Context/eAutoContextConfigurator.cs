@@ -3,11 +3,11 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace eAuto.Data.Context
 {
-    public class eAutoContextConfigurator
+    public class EAutoContextConfigurator
     {
         public static void RegisterContext(IServiceCollection services, string connectionString)
         {
-            services.AddDbContext<eAutoContext>(options =>
+            services.AddDbContext<EAutoContext>(options =>
                 options.UseSqlServer(connectionString));
         }
     }

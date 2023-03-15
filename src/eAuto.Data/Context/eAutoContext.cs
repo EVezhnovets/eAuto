@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace eAuto.Data.Context
 {
-    public class eAutoContext : DbContext
+    public class EAutoContext : DbContext
     {
         private readonly string _connectionString;
         //configure OnModelCreating modelbuilder?
@@ -15,7 +15,7 @@ namespace eAuto.Data.Context
         public DbSet<ModelDataModel> Models { get; set; }
         public DbSet<TransmissionDataModel> Transmissions { get; set; }
 
-        public eAutoContext(string connectionString)
+        public EAutoContext(string connectionString)
         {
             _connectionString = connectionString;
         }

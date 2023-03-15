@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -12,7 +12,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\eAuto.Data\eAuto.Data.csproj" />
+    <ProjectReference Include="..\eAuto.Data\EAuto.Data.csproj" />
+    <ProjectReference Include="..\eAuto.Domain.Interfaces\eAuto.Domain.Interfaces.csproj" />
+    <ProjectReference Include="..\eAuto.Domain\eAuto.Domain.csproj" />
   </ItemGroup>
 
 </Project>
