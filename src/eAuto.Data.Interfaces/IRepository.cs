@@ -1,11 +1,12 @@
 ﻿namespace eAuto.Data.Interfaces
 {
     public interface IRepository<T> where T : class
-    {
+    {        
+        Task<List<T>> GetAllAsync();
         Task<T> GetByIdAsync<Tid>(Tid id);
-        Task<T> GetAsync<Tid>(T obj);
-        Task<T> AddAsync(T obj);
-        Task UpdateAsync(T obj);
-        Task DeleteAsync(T obj);
+        //Task<T> GetAsync<Tid>(T obj);
+        //Task<T> AddAsync(T obj);
+        //Task UpdateAsync(T obj);
+        //Task DeleteAsync(T obj);
     }
 }

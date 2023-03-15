@@ -1,4 +1,8 @@
 ﻿using eAuto.Data.Context;
+using eAuto.Data.Interfaces;
+using eAuto.Domain.Interfaces;
+using eAuto.Domain.Services;
+using eAuto.Storage;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -17,13 +21,23 @@ namespace DiConfiguration
 
         public void ConfigureServices(IServiceCollection services)
         {
+            RegisterBuisnessPart(services);
             RegisterDataPart(services);
+        }
+
+        private void RegisterBuisnessPart(IServiceCollection services)
+        {
+            services.AddTransient<IBodyTypeService, BodyTypeService>();
         }
         
         private void RegisterDataPart(IServiceCollection services)
         {
-            services.AddTransient(s => new eAutoContext(_connectionString));
-            eAutoContextConfigurator.RegisterContext(services, _connectionString);
+            services.AddTransient(s => new EAutoContext(_connectionString));
+            EAutoContextConfigurator.RegisterContext(services, _connectionString);
+
+            services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
         }
+
+
     }
 }

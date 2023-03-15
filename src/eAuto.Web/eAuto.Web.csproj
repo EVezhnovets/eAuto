@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DiConfigurator\DiConfiguration.csproj" />
+    <ProjectReference Include="..\eAuto.Domain.Interfaces\eAuto.Domain.Interfaces.csproj" />
   </ItemGroup>
 
 </Project>

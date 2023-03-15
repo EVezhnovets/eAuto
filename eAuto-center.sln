@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eAuto.Data", "src\eAuto.Dat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eAuto.Data.Interfaces", "src\eAuto.Data.Interfaces\eAuto.Data.Interfaces.csproj", "{F0B90D67-E70D-4925-B71B-FEC227809BCB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiConfiguration", "src\DiConfigurator\DiConfiguration.csproj", "{5B249BEF-1BC6-4DF0-89FB-7760C7155DE2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiConfiguration", "src\DiConfigurator\DiConfiguration.csproj", "{5B249BEF-1BC6-4DF0-89FB-7760C7155DE2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eAuto.Domain.Interfaces", "src\eAuto.Domain.Interfaces\eAuto.Domain.Interfaces.csproj", "{DE1B23C8-AB08-4943-A345-8B1B1A1A55DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,10 @@ Global
 		{5B249BEF-1BC6-4DF0-89FB-7760C7155DE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B249BEF-1BC6-4DF0-89FB-7760C7155DE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B249BEF-1BC6-4DF0-89FB-7760C7155DE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE1B23C8-AB08-4943-A345-8B1B1A1A55DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE1B23C8-AB08-4943-A345-8B1B1A1A55DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE1B23C8-AB08-4943-A345-8B1B1A1A55DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE1B23C8-AB08-4943-A345-8B1B1A1A55DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -51,6 +57,7 @@ Global
 		{28105E7D-7D4D-4A57-A3F2-6FA4A4A39439} = {9C81F387-7768-4185-8910-9CC9CE6CF39B}
 		{F0B90D67-E70D-4925-B71B-FEC227809BCB} = {9C81F387-7768-4185-8910-9CC9CE6CF39B}
 		{5B249BEF-1BC6-4DF0-89FB-7760C7155DE2} = {9C81F387-7768-4185-8910-9CC9CE6CF39B}
+		{DE1B23C8-AB08-4943-A345-8B1B1A1A55DB} = {9C81F387-7768-4185-8910-9CC9CE6CF39B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {37188887-6E07-49D7-B6F5-7EE74CE02706}
