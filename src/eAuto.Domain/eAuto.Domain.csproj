@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\eAuto.Data.Interfaces\eAuto.Data.Interfaces.csproj" />
+    <ProjectReference Include="..\eAuto.Data\eAuto.Data.csproj" />
     <ProjectReference Include="..\eAuto.Domain.Interfaces\eAuto.Domain.Interfaces.csproj" />
   </ItemGroup>
 

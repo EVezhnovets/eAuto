@@ -1,24 +1,29 @@
-﻿using eAuto.Data.Interfaces;
+﻿using eAuto.Data.Context;
+using eAuto.Data.Interfaces;
 using eAuto.Data.Interfaces.DataModels;
 using eAuto.Domain.DomainModels;
 using eAuto.Domain.Interfaces;
 using eAuto.Domain.Interfaces.Exceptions;
+using Microsoft.EntityFrameworkCore;
 
 namespace eAuto.Domain.Services
 {
     public sealed class BodyTypeService : IBodyTypeService
     {
         private readonly IRepository<BodyTypeDataModel> _bodyTypeRepository;
+        private readonly EAutoContext _eAutoContext;
 
-        public BodyTypeService(IRepository<BodyTypeDataModel> bodyTypeRepository)
+        public BodyTypeService(IRepository<BodyTypeDataModel> bodyTypeRepository, EAutoContext eAutoContext)
         {
             _bodyTypeRepository = bodyTypeRepository;
+            _eAutoContext = eAutoContext;
         }
 
-        public async Task<IBodyType> GetBodyTypeViewModelAsync(int id)
+        public async Task<IBodyType> GetBodyTypeModelAsync(int id)
         {
-            var bodyTypeDataModel = await _bodyTypeRepository.GetByIdAsync(id);
-            if(bodyTypeDataModel == null)
+            var bodyTypeDataModel = GetBodyType(id);
+            //var bodyTypeDataModel = await _bodyTypeRepository.GetBodyType(id);
+            if (bodyTypeDataModel == null)
             {
                 throw new BodyTypeNotFoundException();
             }
@@ -27,7 +32,7 @@ namespace eAuto.Domain.Services
             return bodyTypeViewModel;
         }
 
-        public async Task<IEnumerable<IBodyType>?> GetBodyTypeViewModelsAsync()
+        public async Task<IEnumerable<IBodyType>?> GetBodyTypeModelsAsync()
         {
             var bodyTypeEntities = await _bodyTypeRepository.GetAllAsync();
 
@@ -45,5 +50,30 @@ namespace eAuto.Domain.Services
             var iBodyTypeModels = bodyTypeViewModels.Cast<IBodyType>();
             return iBodyTypeModels;
         }
-    }
+
+        public async Task<IBodyType?> CreateBodyTypeModelAsync(IBodyType bodyType)
+        {
+            var bodyTypeDataModel = new BodyTypeDataModel()
+            {
+                BodyTypeId = bodyType.BodyTypeId,
+                Name = bodyType.Name,
+            };
+            _bodyTypeRepository.Create(bodyTypeDataModel);
+            return bodyType;
+        }
+
+        public async Task<IBodyType> CreateBodyTypeModelAsync(string name)
+        {
+            var bodyType = new BodyTypeDomainModel(_bodyTypeRepository, name);
+            return bodyType;
+        }
+
+        public BodyTypeDataModel GetBodyType(int bodyTypeId)
+        {
+            var bodyType = _eAutoContext.BodyTypes
+                .AsNoTracking()
+                .FirstOrDefault(bt => bt.BodyTypeId == bodyTypeId);
+            return bodyType;
+        }
+	}
 }
