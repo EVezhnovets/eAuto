@@ -57,6 +57,7 @@ namespace eAuto.Web.Controllers
                 {
                     bodyType = await _bodyTypeService.CreateBodyTypeModelAsync(viewModel.Name);
                     bodyType.Save();
+                    TempData["Success"] = "Body Type created successfully";
                     return RedirectToAction("Index");
                 }
                 return View(viewModel);
@@ -68,13 +69,68 @@ namespace eAuto.Web.Controllers
         }
         #endregion
 
+        #region Edit
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            try
+            {
+                var viewModel = _bodyTypeService.GetBodyTypeModel(id);
+
+                var bodyTypeViewModel = new BodyTypeViewModel
+                {
+                    BodyTypeId = id,
+                    Name = viewModel.Name
+                };
+                return View(bodyTypeViewModel);
+            }
+
+            catch (BodyTypeNotFoundException ex)
+            {
+                _logger!.LogError(ex.Message);
+                return NotFound(ex.Message);
+            }
+
+            catch (Exception ex)
+            {
+                _logger!.LogError(ex.Message);
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(BodyTypeViewModel viewModel)
+        {
+            IBodyType bodyType;
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    bodyType = _bodyTypeService.GetBodyTypeModel(viewModel.BodyTypeId);
+                    bodyType.Name = viewModel.Name;
+                    bodyType.Save();
+                    TempData["Success"] = "Body Type edited successfully";
+                    return RedirectToAction("Index");
+                }
+                return View(viewModel);
+            }
+            catch (BodyTypeNotFoundException)
+            {
+                return RedirectToAction("Index");
+            }
+        }
+        #endregion
+
         #region Delete
         public async Task<IActionResult> Delete(int id)
         {
             try
             {
-                var bodyType = await _bodyTypeService.GetBodyTypeModelAsync(id);
+                var bodyType = _bodyTypeService.GetBodyTypeModel(id);
                 bodyType.Delete();
+                TempData["Success"] = "Body Type deleted successfully";
                 return RedirectToAction("Index");
             }
 
@@ -90,6 +146,7 @@ namespace eAuto.Web.Controllers
                 return BadRequest(ex.Message);
             }
             #endregion
+
         }
     }
 }

@@ -9,7 +9,12 @@ namespace eAuto.Web.Models
 		public string Name { get; set; }
 		public BodyTypeViewModel()
 		{
+		}
 
+		public BodyTypeViewModel(int bodyTypeId, string name)
+		{
+			BodyTypeId = bodyTypeId;
+			Name = name;
 		}
 	}
 }
