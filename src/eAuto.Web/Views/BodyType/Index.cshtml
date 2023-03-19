@@ -1,7 +1,4 @@
 ﻿@model IEnumerable<IBodyType>
-@{
-    ViewData["Title"] = "Index";
-}
 
 <div class="container p-3" />
 <div class="row pt-4">
@@ -34,23 +31,23 @@ else
         <thead>
             <tr>
                 <th>Body Type Name</th>
-                <th width="110px"></th>
+                <th width="110px">Actions</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var obj in Model)
             {
                 <tr>
-                    <td>
+                    <td width="95%">
                         @obj.Name
                     </td>
-                    <td align="center">
-                        <div class="btn-toolbar justify-content-between" role="toolbar">
+                    <td width="10%" align="center">
+                        <div class="btn-toolbar justify-content-between" role="toolbar" style="width:5rem">
                             <a asp-controller="BodyType" asp-action="Edit" asp-route-id="@obj.BodyTypeId" class="btn btn-outline-primary">
                                 <i class="bi bi-wrench"></i>
                             </a>
 
-                            <form method="post" asp-controller="Color" asp-action="Delete" asp-route-id="@obj.BodyTypeId">
+                            <form method="post" asp-controller="BodyType" asp-action="Delete" asp-route-id="@obj.BodyTypeId">
                                 <button type="submit" class="btn btn-outline-danger">
                                     <i class="bi bi-trash3"></i>
                                 </button>
