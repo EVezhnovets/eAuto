@@ -1,4 +1,4 @@
-namespace eAutoApp.Web.Models
+namespace eAuto.Web.Models
 {
     public class ErrorViewModel
     {
