@@ -12,13 +12,28 @@ namespace eAuto.Storage
             _eAutoContext = eAutoContext;
         }
 
+        public T Create(T obj)
+        {
+            var result = _eAutoContext.Add(obj).Entity;
+            _eAutoContext.SaveChangesAsync();
+            return result;
+        }
+
         public async Task<List<T>> GetAllAsync()
         {
             return await _eAutoContext.Set<T>().ToListAsync();
         }
-        public async Task<T> GetByIdAsync<Tid>(Tid id)
+
+		public async Task UpdateAsync(T obj)
+		{
+            _eAutoContext.Set<T>().Update(obj);
+            await _eAutoContext.SaveChangesAsync();
+        }
+
+        public void Delete(T obj)
         {
-            return await _eAutoContext.Set<T>().FindAsync(id);
+            _eAutoContext.Set<T>().Remove(obj);
+            _eAutoContext.SaveChanges();
         }
     }
 }

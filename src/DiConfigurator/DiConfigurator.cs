@@ -3,7 +3,6 @@ using eAuto.Data.Interfaces;
 using eAuto.Domain.Interfaces;
 using eAuto.Domain.Services;
 using eAuto.Storage;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DiConfiguration
@@ -11,12 +10,10 @@ namespace DiConfiguration
     public sealed class DiConfigurator
     {
         private readonly string _connectionString;
-        private readonly IConfiguration _configuration;
 
-        public DiConfigurator(string connectionString, IConfiguration configuration)
+        public DiConfigurator(string connectionString)
         {
             _connectionString = connectionString;
-            _configuration = configuration;
         }
 
         public void ConfigureServices(IServiceCollection services)
@@ -37,7 +34,5 @@ namespace DiConfiguration
 
             services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
         }
-
-
     }
 }
