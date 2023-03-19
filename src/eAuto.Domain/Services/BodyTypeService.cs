@@ -19,10 +19,10 @@ namespace eAuto.Domain.Services
             _eAutoContext = eAutoContext;
         }
 
-        public async Task<IBodyType> GetBodyTypeModelAsync(int id)
+        public IBodyType GetBodyTypeModel(int id)
         {
             var bodyTypeDataModel = GetBodyType(id);
-            //var bodyTypeDataModel = await _bodyTypeRepository.GetBodyType(id);
+
             if (bodyTypeDataModel == null)
             {
                 throw new BodyTypeNotFoundException();

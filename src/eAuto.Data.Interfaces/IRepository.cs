@@ -4,7 +4,7 @@
     {        
         Task<List<T>> GetAllAsync();
         T Create(T obj);
-        Task UpdateAsync(T obj);
+        void Update(T obj);
         void Delete(T obj);
     }
 }

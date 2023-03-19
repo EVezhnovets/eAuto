@@ -26,11 +26,7 @@ namespace eAuto.Domain.DomainModels
         {
 
         }
-        //public BodyTypeDomainModel(int bodyTypeId, string name)
-        //{
-        //    BodyTypeId = bodyTypeId;
-        //    Name = name;
-        //}
+
         internal BodyTypeDomainModel(
             BodyTypeDataM bodyTypeDataModel,
             IRepository<BodyTypeDataM> bodyTypeRepository)
@@ -63,7 +59,7 @@ namespace eAuto.Domain.DomainModels
             }
             else
             {
-                _bodyTypeRepository.UpdateAsync(bodyTypeDataModel);
+                _bodyTypeRepository.Update(bodyTypeDataModel);
             }
         }
 

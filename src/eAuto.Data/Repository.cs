@@ -15,7 +15,7 @@ namespace eAuto.Storage
         public T Create(T obj)
         {
             var result = _eAutoContext.Add(obj).Entity;
-            _eAutoContext.SaveChangesAsync();
+            _eAutoContext.SaveChanges();
             return result;
         }
 
@@ -24,10 +24,10 @@ namespace eAuto.Storage
             return await _eAutoContext.Set<T>().ToListAsync();
         }
 
-		public async Task UpdateAsync(T obj)
+		public void Update(T obj)
 		{
             _eAutoContext.Set<T>().Update(obj);
-            await _eAutoContext.SaveChangesAsync();
+            _eAutoContext.SaveChanges();
         }
 
         public void Delete(T obj)
