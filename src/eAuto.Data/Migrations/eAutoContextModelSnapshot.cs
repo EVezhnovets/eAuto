@@ -248,13 +248,13 @@ namespace eAuto.Data.Migrations
                     b.HasOne("eAuto.Data.Interfaces.DataModels.BrandDataModel", "Brand")
                         .WithMany()
                         .HasForeignKey("BrandId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("eAuto.Data.Interfaces.DataModels.ModelDataModel", "Model")
                         .WithMany()
                         .HasForeignKey("ModelId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Brand");
@@ -267,7 +267,7 @@ namespace eAuto.Data.Migrations
                     b.HasOne("eAuto.Data.Interfaces.DataModels.BrandDataModel", "Brand")
                         .WithMany()
                         .HasForeignKey("BrandId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Brand");

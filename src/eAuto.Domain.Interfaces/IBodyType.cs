@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace eAuto.Domain.Interfaces
+﻿namespace eAuto.Domain.Interfaces
 {
     public interface IBodyType
     {
