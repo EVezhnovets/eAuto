@@ -1,8 +1,8 @@
-﻿using eAutoApp.Web.Models;
+﻿using eAuto.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace eAutoApp.Web.Controllers
+namespace eAuto.Web.Controllers
 {
     public class HomeController : Controller
     {
