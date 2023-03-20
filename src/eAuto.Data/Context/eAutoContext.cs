@@ -46,7 +46,10 @@ namespace eAuto.Data.Context
                 .HasKey(m => m.ModelId);
 
             modelBuilder.Entity<TransmissionDataModel>()
-                .HasKey(t => t.TransmissionId);
+                .HasKey(t => t.TransmissionId);            
+
+            modelBuilder.Entity<GenerationDataModel>()
+                .HasKey(g => g.GenerationId);
         }
     }
 }

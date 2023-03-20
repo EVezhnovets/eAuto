@@ -171,6 +171,35 @@ namespace eAuto.Data.Migrations
                     b.ToTable("EngineTypes");
                 });
 
+            modelBuilder.Entity("eAuto.Data.Interfaces.DataModels.GenerationDataModel", b =>
+                {
+                    b.Property<int>("GenerationId")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(50)
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GenerationId"));
+
+                    b.Property<int>("BrandId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ModelId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("GenerationId");
+
+                    b.HasIndex("BrandId");
+
+                    b.HasIndex("ModelId");
+
+                    b.ToTable("GenerationDataModel");
+                });
+
             modelBuilder.Entity("eAuto.Data.Interfaces.DataModels.ModelDataModel", b =>
                 {
                     b.Property<int>("ModelId")
@@ -180,12 +209,17 @@ namespace eAuto.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ModelId"));
 
+                    b.Property<int>("BrandId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("ModelId");
+
+                    b.HasIndex("BrandId");
 
                     b.ToTable("Models");
                 });
@@ -207,6 +241,36 @@ namespace eAuto.Data.Migrations
                     b.HasKey("TransmissionId");
 
                     b.ToTable("Transmissions");
+                });
+
+            modelBuilder.Entity("eAuto.Data.Interfaces.DataModels.GenerationDataModel", b =>
+                {
+                    b.HasOne("eAuto.Data.Interfaces.DataModels.BrandDataModel", "Brand")
+                        .WithMany()
+                        .HasForeignKey("BrandId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("eAuto.Data.Interfaces.DataModels.ModelDataModel", "Model")
+                        .WithMany()
+                        .HasForeignKey("ModelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Brand");
+
+                    b.Navigation("Model");
+                });
+
+            modelBuilder.Entity("eAuto.Data.Interfaces.DataModels.ModelDataModel", b =>
+                {
+                    b.HasOne("eAuto.Data.Interfaces.DataModels.BrandDataModel", "Brand")
+                        .WithMany()
+                        .HasForeignKey("BrandId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Brand");
                 });
 #pragma warning restore 612, 618
         }

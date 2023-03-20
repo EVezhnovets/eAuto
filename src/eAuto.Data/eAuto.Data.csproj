@@ -19,4 +19,8 @@
     <ProjectReference Include="..\eAuto.Data.Interfaces\eAuto.Data.Interfaces.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>
