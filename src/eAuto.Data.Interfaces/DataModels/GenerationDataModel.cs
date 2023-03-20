@@ -3,11 +3,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace eAuto.Data.Interfaces.DataModels
 {
-    public sealed class ModelDataModel
+    public sealed class GenerationDataModel
     {
         [Required]
         [MaxLength(50)]
-        public int ModelId { get; set; }
+        public int GenerationId { get; set; }
         [Required]
         [MaxLength(50)]
         public string Name { get; set; }
@@ -15,5 +15,9 @@ namespace eAuto.Data.Interfaces.DataModels
         [Required]
         public int BrandId { get; set; }
         [ForeignKey("BrandId")] public BrandDataModel Brand { get; set; }
+
+        [Required]
+        public int ModelId { get; set; }
+        [ForeignKey("ModelId")] public ModelDataModel Model { get; set; }
     }
 }

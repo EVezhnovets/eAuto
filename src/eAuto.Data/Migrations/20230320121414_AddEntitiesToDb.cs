@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace eAuto.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class AddInitialToDb : Migration
+    public partial class AddEntitiesToDb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -89,19 +89,6 @@ namespace eAuto.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Models",
-                columns: table => new
-                {
-                    ModelId = table.Column<int>(type: "int", maxLength: 50, nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Models", x => x.ModelId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Transmissions",
                 columns: table => new
                 {
@@ -113,6 +100,68 @@ namespace eAuto.Data.Migrations
                 {
                     table.PrimaryKey("PK_Transmissions", x => x.TransmissionId);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Models",
+                columns: table => new
+                {
+                    ModelId = table.Column<int>(type: "int", maxLength: 50, nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    BrandId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Models", x => x.ModelId);
+                    table.ForeignKey(
+                        name: "FK_Models_Brands_BrandId",
+                        column: x => x.BrandId,
+                        principalTable: "Brands",
+                        principalColumn: "BrandId",
+                        onDelete: ReferentialAction.NoAction);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "GenerationDataModel",
+                columns: table => new
+                {
+                    GenerationId = table.Column<int>(type: "int", maxLength: 50, nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    BrandId = table.Column<int>(type: "int", nullable: false),
+                    ModelId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GenerationDataModel", x => x.GenerationId);
+                    table.ForeignKey(
+                        name: "FK_GenerationDataModel_Brands_BrandId",
+                        column: x => x.BrandId,
+                        principalTable: "Brands",
+                        principalColumn: "BrandId",
+                        onDelete: ReferentialAction.NoAction);
+                    table.ForeignKey(
+                        name: "FK_GenerationDataModel_Models_ModelId",
+                        column: x => x.ModelId,
+                        principalTable: "Models",
+                        principalColumn: "ModelId",
+                        onDelete: ReferentialAction.NoAction);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_GenerationDataModel_BrandId",
+                table: "GenerationDataModel",
+                column: "BrandId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_GenerationDataModel_ModelId",
+                table: "GenerationDataModel",
+                column: "ModelId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Models_BrandId",
+                table: "Models",
+                column: "BrandId");
         }
 
         /// <inheritdoc />
@@ -120,9 +169,6 @@ namespace eAuto.Data.Migrations
         {
             migrationBuilder.DropTable(
                 name: "BodyTypes");
-
-            migrationBuilder.DropTable(
-                name: "Brands");
 
             migrationBuilder.DropTable(
                 name: "Cars");
@@ -134,10 +180,16 @@ namespace eAuto.Data.Migrations
                 name: "EngineTypes");
 
             migrationBuilder.DropTable(
-                name: "Models");
+                name: "GenerationDataModel");
 
             migrationBuilder.DropTable(
                 name: "Transmissions");
+
+            migrationBuilder.DropTable(
+                name: "Models");
+
+            migrationBuilder.DropTable(
+                name: "Brands");
         }
     }
 }

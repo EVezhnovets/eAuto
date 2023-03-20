@@ -5,15 +5,15 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace eAuto.Web.Controllers
 {
-    public class BodyTypeController : Controller
+    public class BrandController : Controller
     {
-        private readonly ILogger<BodyTypeController> _logger;
-        private readonly IBodyTypeService _bodyTypeService;
+        private readonly ILogger<BrandController> _logger;
+        private readonly IBrandService _brandService;
 
-        public BodyTypeController(IBodyTypeService bodyTypeService ,ILogger<BodyTypeController> logger)
+        public BrandController(IBrandService brandService ,ILogger<BrandController> logger)
         {
             _logger = logger;
-            _bodyTypeService = bodyTypeService;
+            _brandService = brandService;
         }
 
         [HttpGet]
@@ -21,10 +21,10 @@ namespace eAuto.Web.Controllers
         {
 			try
 			{
-				var result = await _bodyTypeService.GetBodyTypeModelsAsync();
+				var result = await _brandService.GetBrandModelsAsync();
 				return View(result);
 			}
-			catch (BodyTypeNotFoundException ex)
+			catch (BrandNotFoundException ex)
 			{
 				//TODO logger
 				return NotFound(ex.Message);
@@ -47,21 +47,21 @@ namespace eAuto.Web.Controllers
 
 		[HttpPost]
         [ValidateAntiForgeryToken]
-		public async Task<IActionResult> Create(BodyTypeViewModel viewModel)
+		public IActionResult Create(BrandViewModel viewModel)
 		{
-			IBodyType bodyType;
+			IBrand brand;
 			try
 			{
                 if (ModelState.IsValid)
                 {
-                    bodyType = _bodyTypeService.CreateBodyTypeModel(viewModel.Name);
-                    bodyType.Save();
-                    TempData["Success"] = "Body Type created successfully";
+                    brand = _brandService.CreateBrandModel(viewModel.Name);
+                    brand.Save();
+                    TempData["Success"] = "Brand created successfully";
                     return RedirectToAction("Index");
                 }
                 return View(viewModel);
             }
-			catch (BodyTypeNotFoundException)
+			catch (BrandNotFoundException)
 			{
 				return RedirectToAction("Index");
 			}
@@ -75,17 +75,17 @@ namespace eAuto.Web.Controllers
         {
             try
             {
-                var viewModel = _bodyTypeService.GetBodyTypeModel(id);
+                var viewModel = _brandService.GetBrandModel(id);
 
-                var bodyTypeViewModel = new BodyTypeViewModel
+                var brandViewModel = new BrandViewModel
                 {
-                    BodyTypeId = id,
+                    BrandId = id,
                     Name = viewModel.Name
                 };
-                return View(bodyTypeViewModel);
+                return View(brandViewModel);
             }
 
-            catch (BodyTypeNotFoundException ex)
+            catch (BrandNotFoundException ex)
             {
                 _logger!.LogError(ex.Message);
                 return NotFound(ex.Message);
@@ -100,22 +100,22 @@ namespace eAuto.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(BodyTypeViewModel viewModel)
+        public IActionResult Edit(BrandViewModel viewModel)
         {
-            IBodyType bodyType;
+            IBrand brand;
             try
             {
                 if (ModelState.IsValid)
                 {
-                    bodyType = _bodyTypeService.GetBodyTypeModel(viewModel.BodyTypeId);
-                    bodyType.Name = viewModel.Name;
-                    bodyType.Save();
-                    TempData["Success"] = "Body Type edited successfully";
+                    brand = _brandService.GetBrandModel(viewModel.BrandId);
+                    brand.Name = viewModel.Name;
+                    brand.Save();
+                    TempData["Success"] = "Brand edited successfully";
                     return RedirectToAction("Index");
                 }
                 return View(viewModel);
             }
-            catch (BodyTypeNotFoundException)
+            catch (BrandNotFoundException)
             {
                 return RedirectToAction("Index");
             }
@@ -123,17 +123,17 @@ namespace eAuto.Web.Controllers
         #endregion
 
         #region Delete
-        public async Task<IActionResult> Delete(int id)
+        public IActionResult Delete(int id)
         {
             try
             {
-                var bodyType = _bodyTypeService.GetBodyTypeModel(id);
-                bodyType.Delete();
-                TempData["Success"] = "Body Type deleted successfully";
+                var brand = _brandService.GetBrandModel(id);
+                brand.Delete();
+                TempData["Success"] = "Brand deleted successfully";
                 return RedirectToAction("Index");
             }
 
-            catch (BodyTypeNotFoundException ex)
+            catch (BrandNotFoundException ex)
             {
                 _logger!.LogError(ex.Message);
                 return NotFound(ex.Message);

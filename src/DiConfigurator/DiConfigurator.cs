@@ -25,6 +25,7 @@ namespace DiConfiguration
         private void RegisterBuisnessPart(IServiceCollection services)
         {
             services.AddTransient<IBodyTypeService, BodyTypeService>();
+            services.AddTransient<IBrandService, BrandService>();
         }
         
         private void RegisterDataPart(IServiceCollection services)

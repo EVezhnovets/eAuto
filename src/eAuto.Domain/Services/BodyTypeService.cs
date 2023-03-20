@@ -28,7 +28,7 @@ namespace eAuto.Domain.Services
             return bodyTypeViewModel;
         }
 
-        public async Task<IEnumerable<IBodyType>?> GetBodyTypeModelsAsync()
+        public async Task<IEnumerable<IBodyType>> GetBodyTypeModelsAsync()
         {
             var bodyTypeEntities = await _bodyTypeRepository.GetAllAsync();
 
@@ -47,18 +47,18 @@ namespace eAuto.Domain.Services
             return iBodyTypeModels;
         }
 
-        public async Task<IBodyType?> CreateBodyTypeModelAsync(IBodyType bodyType)
-        {
-            var bodyTypeDataModel = new BodyTypeDataModel()
-            {
-                BodyTypeId = bodyType.BodyTypeId,
-                Name = bodyType.Name,
-            };
-            _bodyTypeRepository.Create(bodyTypeDataModel);
-            return bodyType;
-        }
+        //public async Task<IBodyType?> CreateBodyTypeModel(IBodyType bodyType)
+        //{
+        //    var bodyTypeDataModel = new BodyTypeDataModel()
+        //    {
+        //        BodyTypeId = bodyType.BodyTypeId,
+        //        Name = bodyType.Name,
+        //    };
+        //    _bodyTypeRepository.Create(bodyTypeDataModel);
+        //    return bodyType;
+        //}
 
-        public async Task<IBodyType> CreateBodyTypeModelAsync(string name)
+        public IBodyType CreateBodyTypeModel(string name)
         {
             var bodyType = new BodyTypeDomainModel(_bodyTypeRepository, name);
             return bodyType;
@@ -68,6 +68,12 @@ namespace eAuto.Domain.Services
         {
             var bodyType = _bodyTypeRepository
                 .Get(bt => bt.BodyTypeId == bodyTypeId);
+
+            if(bodyType == null)
+            {
+                throw new BodyTypeNotFoundException();
+            }
+
             return bodyType;
         }
 	}

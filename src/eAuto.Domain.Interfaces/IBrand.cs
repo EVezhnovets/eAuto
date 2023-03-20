@@ -1,8 +1,8 @@
 ﻿namespace eAuto.Domain.Interfaces
 {
-    public interface IBodyType
+    public interface IBrand
     {
-        int BodyTypeId { get; set; }
+        int BrandId { get; set; }
         string Name { get; set; }
         void Save();
         void Delete();
