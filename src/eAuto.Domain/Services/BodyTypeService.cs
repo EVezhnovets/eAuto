@@ -1,22 +1,18 @@
-﻿using eAuto.Data.Context;
-using eAuto.Data.Interfaces;
+﻿using eAuto.Data.Interfaces;
 using eAuto.Data.Interfaces.DataModels;
 using eAuto.Domain.DomainModels;
 using eAuto.Domain.Interfaces;
 using eAuto.Domain.Interfaces.Exceptions;
-using Microsoft.EntityFrameworkCore;
 
 namespace eAuto.Domain.Services
 {
     public sealed class BodyTypeService : IBodyTypeService
     {
         private readonly IRepository<BodyTypeDataModel> _bodyTypeRepository;
-        private readonly EAutoContext _eAutoContext;
 
-        public BodyTypeService(IRepository<BodyTypeDataModel> bodyTypeRepository, EAutoContext eAutoContext)
+        public BodyTypeService(IRepository<BodyTypeDataModel> bodyTypeRepository)
         {
             _bodyTypeRepository = bodyTypeRepository;
-            _eAutoContext = eAutoContext;
         }
 
         public IBodyType GetBodyTypeModel(int id)
@@ -70,9 +66,8 @@ namespace eAuto.Domain.Services
 
         public BodyTypeDataModel GetBodyType(int bodyTypeId)
         {
-            var bodyType = _eAutoContext.BodyTypes
-                .AsNoTracking()
-                .FirstOrDefault(bt => bt.BodyTypeId == bodyTypeId);
+            var bodyType = _bodyTypeRepository
+                .Get(bt => bt.BodyTypeId == bodyTypeId);
             return bodyType;
         }
 	}

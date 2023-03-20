@@ -35,5 +35,13 @@ namespace eAuto.Storage
             _eAutoContext.Set<T>().Remove(obj);
             _eAutoContext.SaveChanges();
         }
+
+        public T? Get(Func<T, bool> func)
+        {
+            var result = _eAutoContext.Set<T>()
+                .AsNoTracking()
+                .FirstOrDefault(func);
+            return result;
+        }
     }
 }
