@@ -1,5 +1,4 @@
-﻿using eAuto.Data.Interfaces.DataModels;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace eAuto.Web.Models
 {
