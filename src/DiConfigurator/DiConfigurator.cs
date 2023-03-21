@@ -28,6 +28,7 @@ namespace DiConfiguration
             services.AddTransient<IBrandService, BrandService>();
             services.AddTransient<IModelService, ModelService>();
             services.AddTransient<IGenerationService, GenerationService>();
+            services.AddTransient<ITransmissionService, TransmissionService>();
         }
 
         private void RegisterDataPart(IServiceCollection services)
