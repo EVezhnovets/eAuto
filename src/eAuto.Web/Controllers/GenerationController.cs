@@ -187,7 +187,7 @@ namespace eAuto.Web.Controllers
                     generation.BrandId = viewModel.GenerationVModel.BrandId;
                     generation.Brand = _brandService.GetBrandModel(viewModel.GenerationVModel.BrandId).Name.ToString();
                     generation.ModelId = viewModel.GenerationVModel.ModelId;
-                    generation.Brand = _modelService.GetModelModel(viewModel.GenerationVModel.ModelId).Name.ToString();
+                    generation.Model = _modelService.GetModelModel(viewModel.GenerationVModel.ModelId).Name.ToString();
                     generation.Save();
                     TempData["Success"] = "Generation edited successfully";
                     return RedirectToAction("Index");
