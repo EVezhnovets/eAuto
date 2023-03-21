@@ -3,24 +3,28 @@ using System.ComponentModel;
 
 namespace eAuto.Web.Models
 {
-	public sealed class ModelViewModel
+	public sealed class GenerationViewModel
 	{
-		public int ModelId { get; set; }
-		[DisplayName("Model")]
+		public int GenerationId { get; set; }
+		[DisplayName("Generation")]
 		public string Name { get; set; }
 
         public int BrandId { get; set; }
         [ValidateNever] public string Brand { get; set; }
+
+        public int ModelId { get; set; }
+        [ValidateNever] public string Model { get; set; }
         #region Ctor
-        public ModelViewModel()
+        public GenerationViewModel()
         {
         }
 
-        public ModelViewModel(int modelId, string name, string brand)
+        public GenerationViewModel(int generationId, string name, string brand, string model)
         {
-            ModelId = modelId;
+            GenerationId = generationId;
             Name = name;
             Brand = brand;
+            Model = model;
         }
         #endregion
         //TODO PagedOptions(int skip, int take)

@@ -133,16 +133,6 @@ namespace eAuto.Web.Controllers
                     Brands = brandsList.Select(b => new SelectListItem { Value = b.BrandId.ToString(), Text = b.Name })
                 };
 
-                var createModelVModel = new ModelCreateViewModel
-                {
-                    ModelVModel = new ModelViewModel
-                    {
-                        ModelId = id,
-                        Name = viewModel.Name,
-                        BrandId = viewModel.BrandId,
-                        Brand = viewModel.Brand,
-                    }
-                };
                 return View(createViewModel);
             }
 

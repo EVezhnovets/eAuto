@@ -47,15 +47,6 @@ namespace eAuto.Domain.DomainModels
             Brand = modelDataModel.Brand.Name.ToString();
         }
 
-        internal ModelDomainModel(
-             IRepository<ModelDataM> modelRepository,string name)
-        {
-            _modelRepository = modelRepository;
-            _isNew = true;
-
-            Name = name;
-        }
-
 		public void Save()
 		{
 			var modelDataModel = GetModelDataModel();
