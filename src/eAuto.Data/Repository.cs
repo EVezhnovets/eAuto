@@ -1,15 +1,20 @@
 ﻿using eAuto.Data.Context;
 using eAuto.Data.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
+using System.Linq.Expressions;
 
 namespace eAuto.Storage
 {
     public class Repository<T> : IRepository<T> where T : class
     {
         private readonly EAutoContext _eAutoContext;
+        private readonly DbSet<T> _dbSet;
+
         public Repository(EAutoContext eAutoContext)
         {
             _eAutoContext = eAutoContext;
+            _dbSet = _eAutoContext.Set<T>();
         }
 
         public T Create(T obj)
@@ -42,6 +47,32 @@ namespace eAuto.Storage
                 .AsNoTracking()
                 .FirstOrDefault(func);
             return result;
+        }
+
+        //TODO remove proj reference
+        public T? Get(
+            Expression<Func<T, bool>>? predicate = null,
+            Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null)
+        {
+            IQueryable<T> query = _dbSet;
+
+            query = query.AsNoTracking();
+            query = query.Where(predicate);
+            query = include(query);
+
+            return query.FirstOrDefault();
+        }
+
+        //TODO remove proj reference
+        public async Task<IList<T>> GetAllAsync(
+            Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null)
+        {
+            IQueryable<T> query = _dbSet;
+
+            query = query.AsNoTracking();
+            query = include(query);
+
+            return await query.ToListAsync();
         }
     }
 }
