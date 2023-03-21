@@ -54,12 +54,6 @@ namespace eAuto.Domain.Services
             return modelModels;
         }
 
-        public IModel CreateModelModel(string name)
-        {
-            var model = new ModelDomainModel(_modelRepository, name);
-            return model;
-        }
-
         public IModel CreateModelDomainModel()
         {
             var model = new ModelDomainModel(_modelRepository);
