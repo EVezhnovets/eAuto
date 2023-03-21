@@ -1,13 +1,13 @@
-﻿@model IEnumerable<IBodyType>
+﻿@model IEnumerable<TransmissionViewModel>
 
 <partial name="_Notification" />
 <div class="container p-3" />
 <div class="row pt-4">
     <div class="col-6">
-        <h2 class="text-primary text-black-50">Body Types</h2>
+        <h2 class="text-primary text-black-50">Transmissions</h2>
     </div>
     <div class="col-6 text-end">
-        <a asp-controller="BodyType" asp-action="Create" class="btn btn-outline-success">
+        <a asp-controller="Transmission" asp-action="Create" class="btn btn-outline-success">
             <i class="bi bi-pen">Add</i>
         </a>
     </div>
@@ -20,7 +20,7 @@
         <thead>
             <tr>
                 <th>
-                    Body Type
+                    Transmissions
                 </th>
             </tr>
         </thead>
@@ -31,7 +31,7 @@ else
     <table class="table table-bordered table-striped" style="width:100%">
         <thead>
             <tr>
-                <th>Body Type</th>
+                <th>Transmission</th>
                 <th width="110px">Actions</th>
             </tr>
         </thead>
@@ -39,16 +39,16 @@ else
             @foreach (var obj in Model)
             {
                 <tr>
-                    <td width="95%">
+                    <td width="90%">
                         @obj.Name
                     </td>
                     <td width="10%" align="center">
                         <div class="btn-toolbar justify-content-between" role="toolbar" style="width:5rem">
-                            <a asp-controller="BodyType" asp-action="Edit" asp-route-id="@obj.BodyTypeId" class="btn btn-outline-primary">
+                            <a asp-controller="Transmission" asp-action="Edit" asp-route-id="@obj.TransmissionId" class="btn btn-outline-primary">
                                 <i class="bi bi-wrench"></i>
                             </a>
 
-                            <form method="post" asp-controller="BodyType" asp-action="Delete" asp-route-id="@obj.BodyTypeId">
+                            <form method="post" asp-controller="Transmission" asp-action="Delete" asp-route-id="@obj.TransmissionId">
                                 <button type="submit" class="btn btn-outline-danger">
                                     <i class="bi bi-trash3"></i>
                                 </button>
