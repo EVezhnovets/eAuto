@@ -25,17 +25,14 @@ namespace eAuto.Web.Controllers
 			try
 			{
 				var iModelsList = await _modelService.GetModelModelsAsync();
-                List<ModelViewModel> modelsList = new();
-                foreach (var iModel in iModelsList)
-                {
-                    modelsList.Add(new ModelViewModel
+                var modelsList = iModelsList
+                    .Select(i => new ModelViewModel
                     {
-                        ModelId = iModel.ModelId,
-                        Name = iModel.Name,
-                        BrandId = iModel.BrandId,
-                        Brand = iModel.Brand
+                        ModelId = i.ModelId,
+                        Name = i.Name,
+                        BrandId = i.BrandId,
+                        Brand = i.Brand
                     });
-                }
  
                 return View(modelsList);
 			}
@@ -110,18 +107,43 @@ namespace eAuto.Web.Controllers
         #region Edit
 
         [HttpGet]
-        public IActionResult Edit(int id)
+        public async Task <IActionResult> Edit(int id)
         {
             try
             {
+                var brandsIList = await _brandService.GetBrandModelsAsync();
+                var brandsList = brandsIList
+                    .Select(b => new BrandViewModel()
+                    {
+                        BrandId = b.BrandId,
+                        Name = b.Name
+                    }).ToList();
+
                 var viewModel = _modelService.GetModelModel(id);
 
-                var modelViewModel = new ModelViewModel
+                ModelCreateViewModel createViewModel = new()
                 {
-                    ModelId = id,
-                    Name = viewModel.Name
+                    ModelVModel = new ModelViewModel
+                    {
+                        ModelId = viewModel.ModelId,
+                        BrandId = viewModel.BrandId,
+                        Name = viewModel.Name,
+                        Brand = viewModel.Brand,
+                    },
+                    Brands = brandsList.Select(b => new SelectListItem { Value = b.BrandId.ToString(), Text = b.Name })
                 };
-                return View(modelViewModel);
+
+                var createModelVModel = new ModelCreateViewModel
+                {
+                    ModelVModel = new ModelViewModel
+                    {
+                        ModelId = id,
+                        Name = viewModel.Name,
+                        BrandId = viewModel.BrandId,
+                        Brand = viewModel.Brand,
+                    }
+                };
+                return View(createViewModel);
             }
 
             catch (ModelNotFoundException ex)
@@ -139,15 +161,17 @@ namespace eAuto.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(ModelViewModel viewModel)
+        public IActionResult Edit(ModelCreateViewModel viewModel)
         {
-            IModel model;
+			IModel model;
             try
             {
                 if (ModelState.IsValid)
                 {
-                    model = _modelService.GetModelModel(viewModel.ModelId);
-                    model.Name = viewModel.Name;
+                    model = _modelService.GetModelModel(viewModel.ModelVModel.ModelId);
+                    model.Name = viewModel.ModelVModel.Name;
+                    model.BrandId = viewModel.ModelVModel.BrandId;
+                    model.Brand = _brandService.GetBrandModel(viewModel.ModelVModel.BrandId).Name.ToString();
                     model.Save();
                     TempData["Success"] = "Model edited successfully";
                     return RedirectToAction("Index");

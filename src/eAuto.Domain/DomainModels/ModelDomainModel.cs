@@ -24,9 +24,11 @@ namespace eAuto.Domain.DomainModels
         }
         public int BrandId { get; set; }
         public string Brand { get; set; }
+
         public ModelDomainModel()
         {
         }
+
         public ModelDomainModel(IRepository<ModelDataM> modelRepository)
         {
             _modelRepository = modelRepository;
@@ -42,7 +44,7 @@ namespace eAuto.Domain.DomainModels
             ModelId = modelDataModel.ModelId;
             _name = modelDataModel.Name;
             BrandId = modelDataModel.BrandId;
-
+            Brand = modelDataModel.Brand.Name.ToString();
         }
 
         internal ModelDomainModel(
