@@ -118,7 +118,7 @@ namespace eAuto.Data.Migrations
                         column: x => x.BrandId,
                         principalTable: "Brands",
                         principalColumn: "BrandId",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(

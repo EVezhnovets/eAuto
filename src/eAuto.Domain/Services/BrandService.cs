@@ -43,8 +43,8 @@ namespace eAuto.Domain.Services
                     BrandId = i.BrandId,
                     Name = i.Name,
                 }).ToList();
-            var iBrandModels = brandViewModels.Cast<IBrand>();
-            return iBrandModels;
+            var BrandModels = brandViewModels.Cast<IBrand>();
+            return BrandModels;
         }
 
         public IBrand CreateBrandModel(string name)

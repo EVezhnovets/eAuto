@@ -26,8 +26,9 @@ namespace DiConfiguration
         {
             services.AddTransient<IBodyTypeService, BodyTypeService>();
             services.AddTransient<IBrandService, BrandService>();
+            services.AddTransient<IModelService, ModelService>();
         }
-        
+
         private void RegisterDataPart(IServiceCollection services)
         {
             services.AddTransient(s => new EAutoContext(_connectionString));

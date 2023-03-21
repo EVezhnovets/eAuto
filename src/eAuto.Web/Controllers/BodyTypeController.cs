@@ -47,7 +47,7 @@ namespace eAuto.Web.Controllers
 
 		[HttpPost]
         [ValidateAntiForgeryToken]
-		public async Task<IActionResult> Create(BodyTypeViewModel viewModel)
+		public IActionResult Create(BodyTypeViewModel viewModel)
 		{
 			IBodyType bodyType;
 			try
@@ -100,7 +100,7 @@ namespace eAuto.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(BodyTypeViewModel viewModel)
+        public IActionResult Edit(BodyTypeViewModel viewModel)
         {
             IBodyType bodyType;
             try
@@ -123,7 +123,7 @@ namespace eAuto.Web.Controllers
         #endregion
 
         #region Delete
-        public async Task<IActionResult> Delete(int id)
+        public IActionResult Delete(int id)
         {
             try
             {

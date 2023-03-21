@@ -43,8 +43,8 @@ namespace eAuto.Domain.Services
                     BodyTypeId = i.BodyTypeId,
                     Name = i.Name,
                 }).ToList();
-            var iBodyTypeModels = bodyTypeViewModels.Cast<IBodyType>();
-            return iBodyTypeModels;
+            var BodyTypeModels = bodyTypeViewModels.Cast<IBodyType>();
+            return BodyTypeModels;
         }
 
         //public async Task<IBodyType?> CreateBodyTypeModel(IBodyType bodyType)
