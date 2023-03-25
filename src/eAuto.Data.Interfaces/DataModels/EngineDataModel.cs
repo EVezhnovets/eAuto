@@ -7,7 +7,7 @@ namespace eAuto.Data.Interfaces.DataModels
     {
         [Required]
         [MaxLength(50)]
-        public int EngineTypeId { get; set; }
+        public int EngineId { get; set; }
 
         [Required]
         [MaxLength(50)]

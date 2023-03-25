@@ -157,12 +157,12 @@ namespace eAuto.Data.Migrations
 
             modelBuilder.Entity("eAuto.Data.Interfaces.DataModels.EngineDataModel", b =>
                 {
-                    b.Property<int>("EngineTypeId")
+                    b.Property<int>("EngineId")
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(50)
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EngineTypeId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EngineId"));
 
                     b.Property<int>("BrandId")
                         .HasMaxLength(50)
@@ -199,7 +199,7 @@ namespace eAuto.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.HasKey("EngineTypeId");
+                    b.HasKey("EngineId");
 
                     b.HasIndex("BrandId");
 
@@ -207,7 +207,7 @@ namespace eAuto.Data.Migrations
 
                     b.HasIndex("ModelId");
 
-                    b.ToTable("EngineTypes");
+                    b.ToTable("Engines");
                 });
 
             modelBuilder.Entity("eAuto.Data.Interfaces.DataModels.GenerationDataModel", b =>

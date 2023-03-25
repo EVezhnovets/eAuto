@@ -35,7 +35,7 @@ namespace eAuto.Data.Migrations
                 table: "Cars");
 
             migrationBuilder.DropColumn(
-                name: "EngineType",
+                name: "Engine",
                 table: "Cars");
 
             migrationBuilder.DropColumn(
@@ -52,7 +52,7 @@ namespace eAuto.Data.Migrations
 
             migrationBuilder.RenameColumn(
                 name: "Name",
-                table: "EngineTypes",
+                table: "Engines",
                 newName: "Type");
 
             migrationBuilder.RenameColumn(
@@ -62,7 +62,7 @@ namespace eAuto.Data.Migrations
 
             migrationBuilder.AddColumn<int>(
                 name: "BrandId",
-                table: "EngineTypes",
+                table: "Engines",
                 type: "int",
                 maxLength: 50,
                 nullable: false,
@@ -70,7 +70,7 @@ namespace eAuto.Data.Migrations
 
             migrationBuilder.AddColumn<int>(
                 name: "Capacity",
-                table: "EngineTypes",
+                table: "Engines",
                 type: "int",
                 maxLength: 50,
                 nullable: false,
@@ -78,7 +78,7 @@ namespace eAuto.Data.Migrations
 
             migrationBuilder.AddColumn<string>(
                 name: "Description",
-                table: "EngineTypes",
+                table: "Engines",
                 type: "nvarchar(200)",
                 maxLength: 200,
                 nullable: false,
@@ -86,7 +86,7 @@ namespace eAuto.Data.Migrations
 
             migrationBuilder.AddColumn<int>(
                 name: "GenerationId",
-                table: "EngineTypes",
+                table: "Engines",
                 type: "int",
                 maxLength: 50,
                 nullable: false,
@@ -94,7 +94,7 @@ namespace eAuto.Data.Migrations
 
             migrationBuilder.AddColumn<string>(
                 name: "IdentificationName",
-                table: "EngineTypes",
+                table: "Engines",
                 type: "nvarchar(50)",
                 maxLength: 50,
                 nullable: false,
@@ -102,7 +102,7 @@ namespace eAuto.Data.Migrations
 
             migrationBuilder.AddColumn<int>(
                 name: "ModelId",
-                table: "EngineTypes",
+                table: "Engines",
                 type: "int",
                 maxLength: 50,
                 nullable: false,
@@ -110,7 +110,7 @@ namespace eAuto.Data.Migrations
 
             migrationBuilder.AddColumn<int>(
                 name: "Power",
-                table: "EngineTypes",
+                table: "Engines",
                 type: "int",
                 maxLength: 50,
                 nullable: false,
@@ -165,18 +165,18 @@ namespace eAuto.Data.Migrations
                 defaultValue: 0);
 
             migrationBuilder.CreateIndex(
-                name: "IX_EngineTypes_BrandId",
-                table: "EngineTypes",
+                name: "IX_Engines_BrandId",
+                table: "Engines",
                 column: "BrandId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EngineTypes_GenerationId",
-                table: "EngineTypes",
+                name: "IX_Engines_GenerationId",
+                table: "Engines",
                 column: "GenerationId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EngineTypes_ModelId",
-                table: "EngineTypes",
+                name: "IX_Engines_ModelId",
+                table: "Engines",
                 column: "ModelId");
 
             migrationBuilder.CreateIndex(
@@ -239,11 +239,11 @@ namespace eAuto.Data.Migrations
                 onDelete: ReferentialAction.NoAction);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Cars_EngineTypes_EngineId",
+                name: "FK_Cars_Engines_EngineId",
                 table: "Cars",
                 column: "EngineId",
-                principalTable: "EngineTypes",
-                principalColumn: "EngineTypeId",
+                principalTable: "Engines",
+                principalColumn: "EngineId",
                 onDelete: ReferentialAction.NoAction);
 
             migrationBuilder.AddForeignKey(
@@ -271,24 +271,24 @@ namespace eAuto.Data.Migrations
                 onDelete: ReferentialAction.NoAction);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_EngineTypes_Brands_BrandId",
-                table: "EngineTypes",
+                name: "FK_Engines_Brands_BrandId",
+                table: "Engines",
                 column: "BrandId",
                 principalTable: "Brands",
                 principalColumn: "BrandId",
                 onDelete: ReferentialAction.NoAction);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_EngineTypes_GenerationDataModel_GenerationId",
-                table: "EngineTypes",
+                name: "FK_Engines_GenerationDataModel_GenerationId",
+                table: "Engines",
                 column: "GenerationId",
                 principalTable: "GenerationDataModel",
                 principalColumn: "GenerationId",
                 onDelete: ReferentialAction.NoAction);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_EngineTypes_Models_ModelId",
-                table: "EngineTypes",
+                name: "FK_Engines_Models_ModelId",
+                table: "Engines",
                 column: "ModelId",
                 principalTable: "Models",
                 principalColumn: "ModelId",
@@ -335,7 +335,7 @@ namespace eAuto.Data.Migrations
                 table: "Cars");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_Cars_EngineTypes_EngineId",
+                name: "FK_Cars_Engines_EngineId",
                 table: "Cars");
 
             migrationBuilder.DropForeignKey(
@@ -351,16 +351,16 @@ namespace eAuto.Data.Migrations
                 table: "Cars");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_EngineTypes_Brands_BrandId",
-                table: "EngineTypes");
+                name: "FK_Engines_Brands_BrandId",
+                table: "Engines");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_EngineTypes_GenerationDataModel_GenerationId",
-                table: "EngineTypes");
+                name: "FK_Engines_GenerationDataModel_GenerationId",
+                table: "Engines");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_EngineTypes_Models_ModelId",
-                table: "EngineTypes");
+                name: "FK_Engines_Models_ModelId",
+                table: "Engines");
 
             migrationBuilder.DropForeignKey(
                 name: "FK_GenerationDataModel_Brands_BrandId",
@@ -375,16 +375,16 @@ namespace eAuto.Data.Migrations
                 table: "Models");
 
             migrationBuilder.DropIndex(
-                name: "IX_EngineTypes_BrandId",
-                table: "EngineTypes");
+                name: "IX_Engines_BrandId",
+                table: "Engines");
 
             migrationBuilder.DropIndex(
-                name: "IX_EngineTypes_GenerationId",
-                table: "EngineTypes");
+                name: "IX_Engines_GenerationId",
+                table: "Engines");
 
             migrationBuilder.DropIndex(
-                name: "IX_EngineTypes_ModelId",
-                table: "EngineTypes");
+                name: "IX_Engines_ModelId",
+                table: "Engines");
 
             migrationBuilder.DropIndex(
                 name: "IX_Cars_BodyTypeId",
@@ -416,31 +416,31 @@ namespace eAuto.Data.Migrations
 
             migrationBuilder.DropColumn(
                 name: "BrandId",
-                table: "EngineTypes");
+                table: "Engines");
 
             migrationBuilder.DropColumn(
                 name: "Capacity",
-                table: "EngineTypes");
+                table: "Engines");
 
             migrationBuilder.DropColumn(
                 name: "Description",
-                table: "EngineTypes");
+                table: "Engines");
 
             migrationBuilder.DropColumn(
                 name: "GenerationId",
-                table: "EngineTypes");
+                table: "Engines");
 
             migrationBuilder.DropColumn(
                 name: "IdentificationName",
-                table: "EngineTypes");
+                table: "Engines");
 
             migrationBuilder.DropColumn(
                 name: "ModelId",
-                table: "EngineTypes");
+                table: "Engines");
 
             migrationBuilder.DropColumn(
                 name: "Power",
-                table: "EngineTypes");
+                table: "Engines");
 
             migrationBuilder.DropColumn(
                 name: "BodyTypeId",
@@ -468,7 +468,7 @@ namespace eAuto.Data.Migrations
 
             migrationBuilder.RenameColumn(
                 name: "Type",
-                table: "EngineTypes",
+                table: "Engines",
                 newName: "Name");
 
             migrationBuilder.RenameColumn(
@@ -501,7 +501,7 @@ namespace eAuto.Data.Migrations
                 defaultValue: "");
 
             migrationBuilder.AddColumn<string>(
-                name: "EngineType",
+                name: "Engine",
                 table: "Cars",
                 type: "nvarchar(50)",
                 maxLength: 50,
