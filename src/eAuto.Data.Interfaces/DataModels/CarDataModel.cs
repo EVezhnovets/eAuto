@@ -28,6 +28,10 @@ namespace eAuto.Data.Interfaces.DataModels
         [Required]
         [MaxLength(50)]
         public int Odometer { get; set; }
+        
+        [Required]
+        [MaxLength(50)]
+        public string Description { get; set; }
 
         [Required]
         [MaxLength(50)]
