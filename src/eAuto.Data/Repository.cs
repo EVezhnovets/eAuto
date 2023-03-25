@@ -31,7 +31,8 @@ namespace eAuto.Storage
 
 		public void Update(T obj)
 		{
-            _eAutoContext.Set<T>().Update(obj);
+            _eAutoContext.Set<T>().AsNoTracking();
+			_eAutoContext.Set<T>().Update(obj);
             _eAutoContext.SaveChanges();
         }
 
