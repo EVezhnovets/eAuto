@@ -11,7 +11,7 @@ namespace eAuto.Data.Context
         public DbSet<BrandDataModel> Brands { get; set; }
         public DbSet<CarDataModel> Cars { get; set; }
         public DbSet<DriveTypeDataModel> DriveTypes { get; set; }
-        public DbSet<EngineTypeDataModel> EngineTypes { get; set; }
+        public DbSet<EngineDataModel> Engines { get; set; }
         public DbSet<ModelDataModel> Models { get; set; }
         public DbSet<TransmissionDataModel> Transmissions { get; set; }
 
@@ -39,8 +39,8 @@ namespace eAuto.Data.Context
             modelBuilder.Entity<DriveTypeDataModel>()
                 .HasKey(dt => dt.DriveTypeId);
 
-            modelBuilder.Entity<EngineTypeDataModel>()
-                .HasKey(e => e.EngineTypeId);
+            modelBuilder.Entity<EngineDataModel>()
+                .HasKey(e => e.EngineId);
 
             modelBuilder.Entity<ModelDataModel>()
                 .HasKey(m => m.ModelId);

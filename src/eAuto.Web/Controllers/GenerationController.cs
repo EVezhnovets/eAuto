@@ -146,7 +146,7 @@ namespace eAuto.Web.Controllers
                 {
                     GenerationVModel = new GenerationViewModel
 					{
-                        GenerationId = viewModel.ModelId,
+                        GenerationId = viewModel.GenerationId,
 						Name = viewModel.Name,
 						BrandId = viewModel.BrandId,
                         Brand = viewModel.Brand,

@@ -51,7 +51,7 @@ namespace eAuto.Data.Migrations
                     Year = table.Column<DateTime>(type: "datetime2", maxLength: 50, nullable: false),
                     DateArrival = table.Column<DateTime>(type: "datetime2", maxLength: 50, nullable: false),
                     BodyType = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    EngineType = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Engine = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     EngineCapacity = table.Column<int>(type: "int", maxLength: 50, nullable: false),
                     DriveType = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Transmission = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
@@ -76,16 +76,16 @@ namespace eAuto.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EngineTypes",
+                name: "Engines",
                 columns: table => new
                 {
-                    EngineTypeId = table.Column<int>(type: "int", maxLength: 50, nullable: false)
+                    EngineId = table.Column<int>(type: "int", maxLength: 50, nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EngineTypes", x => x.EngineTypeId);
+                    table.PrimaryKey("PK_Engines", x => x.EngineId);
                 });
 
             migrationBuilder.CreateTable(
@@ -177,7 +177,7 @@ namespace eAuto.Data.Migrations
                 name: "DriveTypes");
 
             migrationBuilder.DropTable(
-                name: "EngineTypes");
+                name: "Engines");
 
             migrationBuilder.DropTable(
                 name: "GenerationDataModel");
