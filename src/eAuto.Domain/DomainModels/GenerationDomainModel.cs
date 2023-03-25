@@ -51,15 +51,6 @@ namespace eAuto.Domain.DomainModels
             Model = generationDataModel.Model.Name.ToString();
         }
 
-        internal GenerationDomainModel(
-             IRepository<GenerationDataM> generationRepository, string name)
-        {
-			_generationRepository = generationRepository;
-            _isNew = true;
-
-            Name = name;
-        }
-
 		public void Save()
 		{
 			var generationDataModel = GetGenerationDataModel();

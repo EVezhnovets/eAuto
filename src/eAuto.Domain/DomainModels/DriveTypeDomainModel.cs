@@ -43,15 +43,6 @@ namespace eAuto.Domain.DomainModels
             DriveTypeId = driveTypeDataModel.DriveTypeId;
         }
 
-        internal DriveTypeDomainModel(
-             IRepository<DriveTypeDataM> driveTypeRepository, string name)
-        {
-			_driveTypeRepository = driveTypeRepository;
-            _isNew = true;
-
-            Name = name;
-        }
-
 		public void Save()
 		{
 			var driveTypeDataModel = GetDriveTypeDataModel();

@@ -43,14 +43,6 @@ namespace eAuto.Domain.DomainModels
             TransmissionId = transmissionDataModel.TransmissionId;
         }
 
-        internal TransmissionDomainModel(
-             IRepository<TransmissionDataM> transmissionRepository, string name)
-        {
-			_transmissionRepository = transmissionRepository;
-            _isNew = true;
-
-            Name = name;
-        }
 
 		public void Save()
 		{
