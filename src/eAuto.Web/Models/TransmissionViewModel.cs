@@ -3,7 +3,7 @@
 namespace eAuto.Web.Models
 {
 	public sealed class TransmissionViewModel
-    {
+	{
 		public int TransmissionId { get; set; }
 		[DisplayName("Transmission")]
 		public string Name { get; set; }
@@ -13,8 +13,8 @@ namespace eAuto.Web.Models
 
 		public TransmissionViewModel(int transmissionId, string name)
 		{
-            TransmissionId = transmissionId;
+			TransmissionId = transmissionId;
 			Name = name;
 		}
-		//TODO PagedOptions(int skip, int take)}
+	}
 }

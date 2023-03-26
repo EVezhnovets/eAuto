@@ -4,8 +4,9 @@ using eAuto.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace eAuto.Web.Controllers
+namespace eAuto.Web.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class ModelController : Controller
     {
         private readonly ILogger<ModelController> _logger;

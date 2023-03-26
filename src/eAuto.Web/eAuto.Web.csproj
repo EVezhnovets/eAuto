@@ -18,7 +18,14 @@
     <ProjectReference Include="..\eAuto.Domain.Interfaces\eAuto.Domain.Interfaces.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
+	<ItemGroup>
+		<Folder Include="Areas\Admin\Controllers\" />
+		<Folder Include="Areas\Admin\Views\" />
+		<Folder Include="Areas\Customer\Controllers\" />
+		<Folder Include="Areas\Customer\Views\" />
+	</ItemGroup>
+
+	<ItemGroup>
     <Content Update="wwwroot\favicon.ico">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>

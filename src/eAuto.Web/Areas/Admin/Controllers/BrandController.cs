@@ -3,8 +3,9 @@ using eAuto.Domain.Interfaces.Exceptions;
 using eAuto.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace eAuto.Web.Controllers
+namespace eAuto.Web.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class BrandController : Controller
     {
         private readonly ILogger<BrandController> _logger;
