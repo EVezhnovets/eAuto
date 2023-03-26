@@ -1,6 +1,7 @@
 ﻿using eAuto.Domain.Interfaces;
 using eAuto.Domain.Interfaces.Exceptions;
 using eAuto.Web.Models;
+using eAuto.Web.Utilities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -10,6 +11,8 @@ namespace eAuto.Web.Areas.Admin.Controllers
     public class CarController : Controller
     {
         private readonly ILogger<CarController> _logger;
+        private readonly IImageManager _imageManager;
+
         private readonly ICarService _carService;
         private readonly IBrandService _brandService;
         private readonly IModelService _modelService;
@@ -20,7 +23,8 @@ namespace eAuto.Web.Areas.Admin.Controllers
         private readonly ITransmissionService _transmissionService;
 
         public CarController(
-            ICarService carService, 
+            ICarService carService,
+            IImageManager imageManager,
             IBrandService brandService, 
             IModelService modelService, 
             IGenerationService generationService,
@@ -31,6 +35,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
             ILogger<CarController> logger)
         {
             _carService = carService;
+            _imageManager = imageManager;
 			_brandService = brandService;
 			_modelService = modelService;
 			_generationService = generationService;
@@ -133,8 +138,15 @@ namespace eAuto.Web.Areas.Admin.Controllers
 		public IActionResult Create(CarCreateViewModel viewModel)
 		{
 			ICar car;
-			try
+            var files = HttpContext.Request.Form.Files;
+
+            try
 			{
+                if(files.Count > 0)
+                {
+                    _imageManager.UploadFiles(files, WebConstants.CarsImages);
+                    viewModel.CarVModel.PictureUrl = string.Concat(WebConstants.CarsImages, _imageManager.FilesName.FirstOrDefault());
+                }
                 if (ModelState.IsValid)
                 {
 					car = _carService.CreateCarDomainModel();
@@ -296,6 +308,15 @@ namespace eAuto.Web.Areas.Admin.Controllers
 			ICar car;
             try
             {
+                var files = HttpContext.Request.Form.Files;
+
+                if (files.Count > 0)
+                {
+                    _imageManager.RemoveFile(WebConstants.CarsImages, viewModel.CarVModel.PictureUrl);
+                    _imageManager.UploadFiles(files, WebConstants.CarsImages);
+                    viewModel.CarVModel.PictureUrl = string.Concat(WebConstants.CarsImages, _imageManager.FilesName.FirstOrDefault());
+                }
+
                 if (ModelState.IsValid)
                 {
 					car = _carService.GetCarModel(viewModel.CarVModel.CarId);
@@ -341,6 +362,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
             try
             {
                 var car = _carService.GetCarModel(id);
+                _imageManager.RemoveFile(WebConstants.CarsImages, car.PictureUrl);
                 car.Delete();
                 TempData["Success"] = "Car deleted successfully";
                 return RedirectToAction("Index");

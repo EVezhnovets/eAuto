@@ -1,15 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
 
 namespace eAuto.Web.Models
 {
-	public sealed class CarViewModel
-	{
-		public int CarId { get; set; }
+    public sealed class CarViewModel
+    {
+        public int CarId { get; set; }
         public decimal PriceInitial { get; set; }
-        public string PictureUrl { get; set; }
-        public DateTime Year { get; set; }
-        public DateTime DateArrival { get; set; }
-        public int Odometer { get; set; }
+        public string? PictureUrl { get; set; }
+		[DataType("month")] public DateTime Year { get; set; } = DateTime.Now;
+        [DataType("month")] public DateTime DateArrival { get; set; } = DateTime.Now;
+		public int Odometer { get; set; }
         public string Description { get; set; }
 
 		public int BrandId { get; set; }
