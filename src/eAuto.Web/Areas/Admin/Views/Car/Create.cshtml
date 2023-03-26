@@ -1,6 +1,6 @@
 ﻿@model CarCreateViewModel
 
-<form method="post" asp-controller="Car" asp-action="Create">
+<form method="post" asp-controller="Car" asp-action="Create" enctype="multipart/form-data" novalidate>
 	<div class="border p-3 mt-4">
 		<div class="row pb-2">
 			<h3 class="text-black-50">Create new Car</h3>
@@ -66,8 +66,7 @@
 			</div>
 			<div class="col mb-3">
 				<label asp-for="@Model.CarVModel.PictureUrl"></label>
-				<input asp-for="@Model.CarVModel.PictureUrl" class="form-control">
-				<span asp-validation-for="@Model.CarVModel.PictureUrl" class="text-danger"></span>
+				<input asp-for="@Model.CarVModel.PictureUrl" class="form-control" name="files" type="file" id="formFile">
 			</div>
 			<div class="col mb-3">
 				<label asp-for="@Model.CarVModel.Year"></label>

@@ -1,4 +1,6 @@
 using DiConfiguration;
+using eAuto.Domain.Interfaces;
+using eAuto.Web.Utilities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +10,7 @@ builder.Services.AddControllersWithViews();
 var catalogConnectionString = builder.Configuration.GetConnectionString("eAutoCatalogConnection");
 var diConfigurator = new DiConfigurator(catalogConnectionString);
 diConfigurator.ConfigureServices(builder.Services);
+builder.Services.AddTransient<IImageManager, ImageManager>();
 
 var app = builder.Build();
 
