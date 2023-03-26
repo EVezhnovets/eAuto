@@ -47,17 +47,6 @@ namespace eAuto.Domain.Services
             return BodyTypeModels;
         }
 
-        //public async Task<IBodyType?> CreateBodyTypeModel(IBodyType bodyType)
-        //{
-        //    var bodyTypeDataModel = new BodyTypeDataModel()
-        //    {
-        //        BodyTypeId = bodyType.BodyTypeId,
-        //        Name = bodyType.Name,
-        //    };
-        //    _bodyTypeRepository.Create(bodyTypeDataModel);
-        //    return bodyType;
-        //}
-
         public IBodyType CreateBodyTypeModel(string name)
         {
             var bodyType = new BodyTypeDomainModel(_bodyTypeRepository, name);
