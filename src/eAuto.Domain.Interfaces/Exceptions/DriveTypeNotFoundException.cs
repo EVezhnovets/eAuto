@@ -2,5 +2,6 @@
 {
     public class DriveTypeNotFoundException : Exception
     {
+        public DriveTypeNotFoundException(string message) : base(message) { }
     }
 }

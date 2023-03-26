@@ -9,10 +9,14 @@ namespace eAuto.Domain.Services
     public sealed class BodyTypeService : IBodyTypeService
     {
         private readonly IRepository<BodyTypeDataModel> _bodyTypeRepository;
+        private readonly IAppLogger<BodyTypeService> _logger;
 
-        public BodyTypeService(IRepository<BodyTypeDataModel> bodyTypeRepository)
+        public BodyTypeService(
+            IRepository<BodyTypeDataModel> bodyTypeRepository,
+            IAppLogger<BodyTypeService> logger)
         {
             _bodyTypeRepository = bodyTypeRepository;
+            _logger = logger;
         }
 
         public IBodyType GetBodyTypeModel(int id)
@@ -21,7 +25,8 @@ namespace eAuto.Domain.Services
 
             if (bodyTypeDataModel == null)
             {
-                throw new BodyTypeNotFoundException();
+                var exception = new BodyTypeNotFoundException("BodyType not found");
+                _logger.LogError(exception, exception.Message);
             }
 
             var bodyTypeViewModel = new BodyTypeDomainModel(bodyTypeDataModel, _bodyTypeRepository);
@@ -34,8 +39,9 @@ namespace eAuto.Domain.Services
 
             if(bodyTypeEntities == null)
             {
-                throw new BodyTypeNotFoundException();
-            }
+				var exception = new BodyTypeNotFoundException("BodyType not found");
+				_logger.LogError(exception, exception.Message);
+			}
 
             var bodyTypeViewModels = bodyTypeEntities
                 .Select(i => new BodyTypeDomainModel()
@@ -60,8 +66,9 @@ namespace eAuto.Domain.Services
 
             if(bodyType == null)
             {
-                throw new BodyTypeNotFoundException();
-            }
+				var exception = new BodyTypeNotFoundException("BodyType not found");
+				_logger.LogError(exception, exception.Message);
+			}
 
             return bodyType;
         }

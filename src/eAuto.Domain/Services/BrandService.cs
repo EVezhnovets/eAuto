@@ -9,20 +9,25 @@ namespace eAuto.Domain.Services
     public sealed class BrandService : IBrandService
     {
         private readonly IRepository<BrandDataModel> _brandRepository;
+		private readonly IAppLogger<BrandService> _logger;
 
-        public BrandService(IRepository<BrandDataModel> brandRepository)
-        {
-            _brandRepository = brandRepository;
-        }
+		public BrandService(
+            IRepository<BrandDataModel> brandRepository, 
+            IAppLogger<BrandService> logger)
+		{
+			_brandRepository = brandRepository;
+			_logger = logger;
+		}
 
-        public IBrand GetBrandModel(int id)
+		public IBrand GetBrandModel(int id)
         {
             var brandDataModel = GetBrand(id);
 
             if (brandDataModel == null)
             {
-                throw new BrandNotFoundException();
-            }
+				var exception = new BrandNotFoundException("Brand not found");
+				_logger.LogError(exception, exception.Message);
+			}
 
             var brandViewModel = new BrandDomainModel(brandDataModel, _brandRepository);
             return brandViewModel;
@@ -34,8 +39,9 @@ namespace eAuto.Domain.Services
 
             if(brandEntities == null)
             {
-                throw new BrandNotFoundException();
-            }
+				var exception = new BrandNotFoundException("Brand not found");
+				_logger.LogError(exception, exception.Message);
+			}
 
             var brandViewModels = brandEntities
                 .Select(i => new BrandDomainModel()
@@ -60,8 +66,9 @@ namespace eAuto.Domain.Services
 
             if(brand == null)
             {
-                throw new BrandNotFoundException();
-            }
+				var exception = new BrandNotFoundException("Brand not found");
+				_logger.LogError(exception, exception.Message);
+			}
             return brand;
         }
 	}

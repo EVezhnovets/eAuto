@@ -2,5 +2,6 @@
 {
     public class GenerationNotFoundException : Exception
     {
+        public GenerationNotFoundException(string message) : base(message) { }
     }
 }

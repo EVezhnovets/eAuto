@@ -10,10 +10,14 @@ namespace eAuto.Domain.Services
     public sealed class CarService : ICarService
 	{
         private readonly IRepository<CarDataModel> _carRepository;
+        private readonly IAppLogger<CarService> _logger;
 
-        public CarService(IRepository<CarDataModel> carRepository)
+        public CarService(
+            IRepository<CarDataModel> carRepository,
+            IAppLogger<CarService> logger)
         {
             _carRepository = carRepository;
+            _logger = logger;
         }
 
         public ICar GetCarModel(int id)
@@ -22,8 +26,9 @@ namespace eAuto.Domain.Services
 
             if (carDataModel == null)
             {
-                throw new CarNotFoundException();
-            }
+				var exception = new CarNotFoundException("Car not found");
+				_logger.LogError(exception, exception.Message);
+			}
 
             var carViewModel = new CarDomainModel(carDataModel, _carRepository);
             return carViewModel;
@@ -45,8 +50,9 @@ namespace eAuto.Domain.Services
 
             if (carEntities == null)
             {
-                throw new CarNotFoundException();
-            }
+				var exception = new CarNotFoundException("Car not found");
+				_logger.LogError(exception, exception.Message);
+			}
 
             var carViewModels = carEntities
                 .Select(i => new CarDomainModel()
@@ -99,8 +105,9 @@ namespace eAuto.Domain.Services
 
             if (car == null)
             {
-                throw new CarNotFoundException();
-            }
+				var exception = new CarNotFoundException("Car not found");
+				_logger.LogError(exception, exception.Message);
+			}
             return car;
         }
     }

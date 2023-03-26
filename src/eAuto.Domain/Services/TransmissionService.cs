@@ -10,10 +10,14 @@ namespace eAuto.Domain.Services
     public sealed class TransmissionService : ITransmissionService
 	{
         private readonly IRepository<TransmissionDataModel> _transmissionRepository;
+        private readonly IAppLogger<TransmissionService> _logger;
 
-        public TransmissionService(IRepository<TransmissionDataModel> transmissionRepository)
+        public TransmissionService(
+            IRepository<TransmissionDataModel> transmissionRepository,
+            IAppLogger<TransmissionService> logger)
         {
             _transmissionRepository = transmissionRepository;
+            _logger = logger;
         }
 
         public ITransmission GetTransmissionModel(int id)
@@ -22,10 +26,12 @@ namespace eAuto.Domain.Services
 
             if (transmissionDataModel == null)
             {
-                throw new TransmissionNotFoundException();
-            }
+				var exception = new TransmissionNotFoundException("Transmission not found");
+				_logger.LogError(exception, exception.Message);
+			}
 
-            var transmissionViewModel = new TransmissionDomainModel(transmissionDataModel, _transmissionRepository);
+            var transmissionViewModel = 
+                new TransmissionDomainModel(transmissionDataModel, _transmissionRepository);
             return transmissionViewModel;
         }
 
@@ -35,8 +41,9 @@ namespace eAuto.Domain.Services
 
             if (transmissionEntities == null)
             {
-                throw new TransmissionNotFoundException();
-            }
+				var exception = new TransmissionNotFoundException("Transmission not found");
+				_logger.LogError(exception, exception.Message);
+			}
 
             var transmissionViewModels = transmissionEntities
                 .Select(i => new TransmissionDomainModel()
@@ -62,8 +69,10 @@ namespace eAuto.Domain.Services
 
             if (transmission == null)
             {
-                throw new TransmissionNotFoundException();
-            }
+				var exception = new TransmissionNotFoundException("Transmission not found");
+				_logger.LogError(exception, exception.Message);
+			}
+
             return transmission;
         }
     }
