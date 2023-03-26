@@ -88,7 +88,7 @@
 		<div class="row">
 			<div class="col mb-3">
 				<label asp-for="@Model.CarVModel.Description"></label>
-				<input asp-for="@Model.CarVModel.Description" class="form-control">
+				<textarea asp-for="@Model.CarVModel.Description" class="form-control"></textarea>
 				<span asp-validation-for="@Model.CarVModel.Description" class="text-danger"></span>
 			</div>
 		</div>
@@ -106,4 +106,11 @@
 	@{
 		<partial name="_ValidationScriptsPartial" />
 	}
+	<script>
+		tinymce.init({
+			selector: 'textarea',
+			plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+			toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+		});
+	</script>
 }
