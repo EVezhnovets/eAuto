@@ -12250,6 +12250,7 @@ th {
 .table th,
 .table td {
     padding: 1.5rem;
+    text-align: center;
 }
 
 .table-sm th,

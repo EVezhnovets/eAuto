@@ -31,8 +31,9 @@ else
     <table class="table table-bordered table-striped" style="width:100%">
         <thead>
             <tr>
-                <th>Brand</th>
-                <th>Model</th>
+                <th>Id</th>
+                <th>Picture</th>
+                <th>Brand & Model</th>
                 <th>Generation</th>
                 <th>Engine </th>
                 <th>Transmission</th>
@@ -45,26 +46,34 @@ else
             @foreach (var obj in Model)
             {
                 <tr>
-                    <td width="30%">
-                        @obj.Brand
+                    <td width="5%">
+                        @obj.CarId
                     </td>
-                    <td width="30%">
-                        @obj.Model
+                    <td width="15%" style="padding:0.3rem">
+                      <div>
+                        <a asp-controller="Car" asp-action="Index" asp-route-id="@obj.CarId">
+                            <img src=@obj.PictureUrl class="float-start" style="width:100%" />
+                        </a>
+                    </div>
                     </td>
-                    <td width="30%">
+                    <td width="10%">
+                        <p>@obj.Brand</p>
+                        <p>@obj.Model</p>
+                    </td>
+                    <td width="20%">
                         @obj.Generation
                     </td>
-                    <td width="30%">
+                    <td width="10%">
                         @obj.Engine
                     </td>
-                    <td width="30%">
+                    <td width="15%">
                         @obj.Transmission
                     </td>
-                    <td width="30%">
+                    <td width="10%">
                         @obj.PriceInitial
                     </td>
-                    <td width="30%">
-                        @obj.Year
+                    <td width="5%">
+                        @obj.Year.Year.ToString()
                     </td>
                     <td width="10%" align="center">
                         <div class="btn-toolbar justify-content-between" role="toolbar" style="width:5rem">
@@ -73,6 +82,7 @@ else
                             </a>
 
                             <form method="post" asp-controller="Car" asp-action="Delete" asp-route-id="@obj.CarId">
+                                <input asp-for="@obj.PictureUrl" hidden />
                                 <button type="submit" class="btn btn-outline-danger">
                                     <i class="bi bi-trash3"></i>
                                 </button>

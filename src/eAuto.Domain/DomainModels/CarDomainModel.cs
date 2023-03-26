@@ -9,7 +9,6 @@ namespace eAuto.Domain.DomainModels
         private readonly IRepository<CarDataM> _carRepository;
         private readonly bool _isNew;
         
-        ///TODO null check
         public int CarId { get; set; }
         public decimal PriceInitial { get; set; }
         public string PictureUrl { get; set; }
