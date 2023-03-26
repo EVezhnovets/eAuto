@@ -72,8 +72,9 @@ namespace eAuto.Domain.DomainModels
             {
                 var result = _engineRepository.Create(engineDataModel);
                 EngineId = result.EngineId;
-                ModelId = result.ModelId;
                 BrandId = result.BrandId;
+                ModelId = result.ModelId;
+                GenerationId = result.GenerationId;
             }
             else
             {

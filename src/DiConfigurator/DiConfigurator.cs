@@ -31,6 +31,7 @@ namespace DiConfiguration
             services.AddTransient<ITransmissionService, TransmissionService>();
             services.AddTransient<IDriveTypeService, DriveTypeService>();
             services.AddTransient<IEngineService, EngineService>();
+            services.AddTransient<ICarService, CarService>();
         }
 
         private void RegisterDataPart(IServiceCollection services)

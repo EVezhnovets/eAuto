@@ -11,11 +11,10 @@ namespace eAuto.Web.Models
 		{
 		}
 
-		public DriveTypeViewModel(int DriveTypeId, string name)
+		public DriveTypeViewModel(int driveTypeId, string name)
 		{
-            DriveTypeId = DriveTypeId;
+            DriveTypeId = driveTypeId;
 			Name = name;
 		}
-		//TODO PagedOptions(int skip, int take)
 	}
 }

@@ -13,9 +13,8 @@ namespace eAuto.Web.Models
 
 		public TransmissionViewModel(int transmissionId, string name)
 		{
-            TransmissionId = TransmissionId;
+            TransmissionId = transmissionId;
 			Name = name;
 		}
-		//TODO PagedOptions(int skip, int take)
-	}
+		//TODO PagedOptions(int skip, int take)}
 }

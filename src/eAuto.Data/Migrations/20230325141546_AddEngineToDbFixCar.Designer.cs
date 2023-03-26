@@ -290,43 +290,43 @@ namespace eAuto.Data.Migrations
                     b.HasOne("eAuto.Data.Interfaces.DataModels.BodyTypeDataModel", "BodyType")
                         .WithMany()
                         .HasForeignKey("BodyTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("eAuto.Data.Interfaces.DataModels.BrandDataModel", "Brand")
                         .WithMany()
                         .HasForeignKey("BrandId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("eAuto.Data.Interfaces.DataModels.DriveTypeDataModel", "DriveType")
                         .WithMany()
                         .HasForeignKey("DriveTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();  
 
                     b.HasOne("eAuto.Data.Interfaces.DataModels.EngineDataModel", "Engine")
                         .WithMany()
                         .HasForeignKey("EngineId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("eAuto.Data.Interfaces.DataModels.GenerationDataModel", "Generation")
                         .WithMany()
                         .HasForeignKey("GenerationId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("eAuto.Data.Interfaces.DataModels.ModelDataModel", "Model")
                         .WithMany()
                         .HasForeignKey("ModelId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("eAuto.Data.Interfaces.DataModels.TransmissionDataModel", "Transmission")
                         .WithMany()
                         .HasForeignKey("TransmissionId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("BodyType");
@@ -376,13 +376,13 @@ namespace eAuto.Data.Migrations
                     b.HasOne("eAuto.Data.Interfaces.DataModels.BrandDataModel", "Brand")
                         .WithMany()
                         .HasForeignKey("BrandId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("eAuto.Data.Interfaces.DataModels.ModelDataModel", "Model")
                         .WithMany()
                         .HasForeignKey("ModelId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Brand");
@@ -395,7 +395,7 @@ namespace eAuto.Data.Migrations
                     b.HasOne("eAuto.Data.Interfaces.DataModels.BrandDataModel", "Brand")
                         .WithMany()
                         .HasForeignKey("BrandId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Brand");
