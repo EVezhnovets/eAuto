@@ -1,4 +1,5 @@
-﻿using eAuto.Data.Context;
+﻿using eAuto.Data;
+using eAuto.Data.Context;
 using eAuto.Data.Interfaces;
 using eAuto.Domain.Interfaces;
 using eAuto.Domain.Services;
@@ -40,6 +41,7 @@ namespace DiConfiguration
             EAutoContextConfigurator.RegisterContext(services, _connectionString);
 
             services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped(typeof(IAppLogger<>), typeof(LoggerAdapter<>));
         }
     }
 }
