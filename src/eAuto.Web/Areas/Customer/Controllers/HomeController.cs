@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace eAuto.Web.Controllers
+namespace eAuto.Web.Areas.Customer.Controllers
 {
     public class HomeController : Controller
     {
