@@ -9,10 +9,14 @@ namespace eAuto.Domain.Services
     public sealed class DriveTypeService : IDriveTypeService
 	{
         private readonly IRepository<DriveTypeDataModel> _driveTypeRepository;
+        private readonly IAppLogger<DriveTypeService> _logger ;
 
-        public DriveTypeService(IRepository<DriveTypeDataModel> driveTypeRepository)
+        public DriveTypeService(
+            IRepository<DriveTypeDataModel> driveTypeRepository,
+            IAppLogger<DriveTypeService> logger)
         {
             _driveTypeRepository = driveTypeRepository;
+            _logger = logger;
         }
 
         public IDriveType GetDriveTypeModel(int id)
@@ -21,8 +25,9 @@ namespace eAuto.Domain.Services
 
             if (driveTypeDataModel == null)
             {
-                throw new DriveTypeNotFoundException();
-            }
+				var exception = new DriveTypeNotFoundException("Drive Type not found");
+				_logger.LogError(exception, exception.Message);
+			}
 
             var driveTypeViewModel = new DriveTypeDomainModel(driveTypeDataModel, _driveTypeRepository);
             return driveTypeViewModel;
@@ -34,8 +39,9 @@ namespace eAuto.Domain.Services
 
             if (driveTypeEntities == null)
             {
-                throw new DriveTypeNotFoundException();
-            }
+				var exception = new DriveTypeNotFoundException("Drive Type not found");
+				_logger.LogError(exception, exception.Message);
+			}
 
             var driveTypeViewModels = driveTypeEntities
                 .Select(i => new DriveTypeDomainModel()
@@ -61,8 +67,9 @@ namespace eAuto.Domain.Services
 
             if (driveType == null)
             {
-                throw new DriveTypeNotFoundException();
-            }
+				var exception = new DriveTypeNotFoundException("Drive Type not found");
+				_logger.LogError(exception, exception.Message);
+			}
             return driveType;
         }
     }

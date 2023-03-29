@@ -10,10 +10,14 @@ namespace eAuto.Domain.Services
     public sealed class GenerationService : IGenerationService
 	{
         private readonly IRepository<GenerationDataModel> _generationRepository;
+        private readonly IAppLogger<GenerationService> _logger;
 
-        public GenerationService(IRepository<GenerationDataModel> generationRepository)
+        public GenerationService(
+            IRepository<GenerationDataModel> generationRepository,
+            IAppLogger<GenerationService> logger)
         {
             _generationRepository = generationRepository;
+            _logger = logger;
         }
 
         public IGeneration GetGenerationModel(int id)
@@ -22,8 +26,9 @@ namespace eAuto.Domain.Services
 
             if (generationDataModel == null)
             {
-                throw new GenerationNotFoundException();
-            }
+				var exception = new GenerationNotFoundException("Generation not found");
+				_logger.LogError(exception, exception.Message);
+			}
 
             var generationViewModel = new GenerationDomainModel(generationDataModel, _generationRepository);
             return generationViewModel;
@@ -40,8 +45,9 @@ namespace eAuto.Domain.Services
 
             if (generationEntities == null)
             {
-                throw new GenerationNotFoundException();
-            }
+				var exception = new GenerationNotFoundException("Generation not found");
+				_logger.LogError(exception, exception.Message);
+			}
 
             var generationViewModels = generationEntities
                 .Select(i => new GenerationDomainModel()
@@ -74,8 +80,9 @@ namespace eAuto.Domain.Services
 
             if (generation == null)
             {
-                throw new GenerationNotFoundException();
-            }
+				var exception = new GenerationNotFoundException("Generation not found");
+				_logger.LogError(exception, exception.Message);
+			}
             return generation;
         }
     }

@@ -1,4 +1,5 @@
-﻿using eAuto.Domain.Interfaces;
+﻿using eAuto.Data.Interfaces;
+using eAuto.Domain.Interfaces;
 using eAuto.Domain.Interfaces.Exceptions;
 using eAuto.Web.Models;
 using eAuto.Web.Utilities;
@@ -10,7 +11,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
     [Area("Admin")]
     public class CarController : Controller
     {
-        private readonly ILogger<CarController> _logger;
+        private readonly IAppLogger<CarController> _logger;
         private readonly IImageManager _imageManager;
 
         private readonly ICarService _carService;
@@ -32,7 +33,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
             IEngineService engineService,
             IDriveTypeService driveTypeService,
             ITransmissionService transmissionService,
-            ILogger<CarController> logger)
+            IAppLogger<CarController> logger)
         {
             _carService = carService;
             _imageManager = imageManager;
@@ -82,12 +83,12 @@ namespace eAuto.Web.Areas.Admin.Controllers
 			}
 			catch (CarNotFoundException ex)
 			{
-				//TODO logger
+				_logger.LogError(ex, ex.Message);
 				return NotFound(ex.Message);
 			}
 			catch(Exception ex)
 			{
-				//TODO logger
+				_logger.LogError(ex, ex.Message);
 				return BadRequest(ex.Message);
 			}
             
@@ -123,12 +124,12 @@ namespace eAuto.Web.Areas.Admin.Controllers
             }
             catch (CarNotFoundException ex)
             {
-				//TODO logger
+				_logger.LogError(ex, ex.Message);
 				return NotFound(ex.Message);
 			}
 			catch (Exception ex)
 			{
-				//TODO logger
+				_logger.LogError(ex, ex.Message);
 				return BadRequest(ex.Message);
 			}
 		}
@@ -172,8 +173,9 @@ namespace eAuto.Web.Areas.Admin.Controllers
                 }
                 return View(viewModel);
             }
-			catch (CarNotFoundException)
+			catch (CarNotFoundException ex)
 			{
+				_logger.LogError(ex, ex.Message);
 				return RedirectToAction("Index");
 			}
         }
@@ -290,14 +292,14 @@ namespace eAuto.Web.Areas.Admin.Controllers
 
             catch (CarNotFoundException ex)
             {
-                _logger!.LogError(ex.Message);
-                return NotFound(ex.Message);
+				_logger.LogError(ex, ex.Message);
+				return NotFound(ex.Message);
             }
 
             catch (Exception ex)
             {
-                _logger!.LogError(ex.Message);
-                return BadRequest(ex.Message);
+				_logger.LogError(ex, ex.Message);
+				return BadRequest(ex.Message);
             }
         }
 
@@ -349,9 +351,10 @@ namespace eAuto.Web.Areas.Admin.Controllers
                 }
                 return View(viewModel);
             }
-            catch (CarNotFoundException)
+            catch (CarNotFoundException ex)
             {
-                return RedirectToAction("Index");
+				_logger.LogError(ex, ex.Message);
+				return RedirectToAction("Index");
             }
         }
         #endregion
@@ -370,14 +373,14 @@ namespace eAuto.Web.Areas.Admin.Controllers
 
             catch (CarNotFoundException ex)
             {
-                _logger!.LogError(ex.Message);
-                return NotFound(ex.Message);
+				_logger.LogError(ex, ex.Message);
+				return NotFound(ex.Message);
             }
 
             catch (Exception ex)
             {
-                _logger!.LogError(ex.Message);
-                return BadRequest(ex.Message);
+				_logger.LogError(ex, ex.Message);
+				return BadRequest(ex.Message);
             }
             #endregion
         }

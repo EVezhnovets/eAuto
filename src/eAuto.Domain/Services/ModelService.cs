@@ -10,10 +10,14 @@ namespace eAuto.Domain.Services
     public sealed class ModelService : IModelService
     {
         private readonly IRepository<ModelDataModel> _modelRepository;
+        private readonly IAppLogger<ModelService> _logger;
 
-        public ModelService(IRepository<ModelDataModel> modelRepository)
+        public ModelService(
+            IRepository<ModelDataModel> modelRepository,
+            IAppLogger<ModelService> logger)
         {
             _modelRepository = modelRepository;
+            _logger = logger;
         }
 
         public IModel GetModelModel(int id)
@@ -22,8 +26,9 @@ namespace eAuto.Domain.Services
 
             if (modelDataModel == null)
             {
-                throw new ModelNotFoundException();
-            }
+				var exception = new ModelNotFoundException("Model not found");
+				_logger.LogError(exception, exception.Message);
+			}
 
             var modelViewModel = new ModelDomainModel(modelDataModel, _modelRepository);
             return modelViewModel;
@@ -39,8 +44,9 @@ namespace eAuto.Domain.Services
 
             if (modelEntities == null)
             {
-                throw new ModelNotFoundException();
-            }
+				var exception = new ModelNotFoundException("Model not found");
+				_logger.LogError(exception, exception.Message);
+			}
 
             var modelViewModels = modelEntities
                 .Select(i => new ModelDomainModel()
@@ -70,8 +76,9 @@ namespace eAuto.Domain.Services
 
             if (model == null)
             {
-                throw new ModelNotFoundException();
-            }
+				var exception = new ModelNotFoundException("Model not found");
+				_logger.LogError(exception, exception.Message);
+			}
             return model;
         }
     }

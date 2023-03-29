@@ -10,10 +10,14 @@ namespace eAuto.Domain.Services
     public sealed class EngineService : IEngineService
 	{
         private readonly IRepository<EngineDataModel> _engineRepository;
+        private readonly IAppLogger<EngineService> _logger;
 
-        public EngineService(IRepository<EngineDataModel> engineRepository)
+        public EngineService(
+            IRepository<EngineDataModel> engineRepository,
+            IAppLogger<EngineService> logger)
         {
             _engineRepository = engineRepository;
+            _logger = logger;
         }
 
         public IEngine GetEngineModel(int id)
@@ -22,8 +26,9 @@ namespace eAuto.Domain.Services
 
             if (engineDataModel == null)
             {
-                throw new EngineNameNotFoundException();
-            }
+				var exception = new EngineNameNotFoundException("Engine name not found");
+				_logger.LogError(exception, exception.Message);
+			}
 
             var engineViewModel = new EngineDomainModel(engineDataModel, _engineRepository);
             return engineViewModel;
@@ -41,8 +46,9 @@ namespace eAuto.Domain.Services
 
             if (engineEntities == null)
             {
-                throw new EngineNameNotFoundException();
-            }
+				var exception = new EngineNameNotFoundException("Engine name not found");
+				_logger.LogError(exception, exception.Message);
+			}
 
             var engineViewModels = engineEntities
                 .Select(i => new EngineDomainModel()
@@ -82,8 +88,9 @@ namespace eAuto.Domain.Services
 
             if (engine == null)
             {
-                throw new EngineNameNotFoundException();
-            }
+				var exception = new EngineNameNotFoundException("Engine name not found");
+				_logger.LogError(exception, exception.Message);
+			}
             return engine;
         }
     }

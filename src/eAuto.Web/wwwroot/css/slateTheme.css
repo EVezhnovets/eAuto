@@ -2017,7 +2017,7 @@ progress {
     }
 
     .table > tbody {
-        vertical-align: inherit;
+        vertical-align: middle;
     }
 
     .table > thead {
