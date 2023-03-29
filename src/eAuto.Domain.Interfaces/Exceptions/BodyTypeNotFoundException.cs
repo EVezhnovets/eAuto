@@ -2,8 +2,7 @@
 {
     public class BodyTypeNotFoundException : Exception 
     {
-        public BodyTypeNotFoundException(string message) : base(message) 
-        {       
-        }
+        public BodyTypeNotFoundException() { }
+        public BodyTypeNotFoundException(string message) : base(message) { }
     }
 }

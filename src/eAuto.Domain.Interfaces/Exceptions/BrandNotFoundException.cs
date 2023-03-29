@@ -2,8 +2,7 @@
 {
     public class BrandNotFoundException : Exception
     {
-        public BrandNotFoundException(string message) : base(message)
-        {
-        }
+        public BrandNotFoundException() { }
+        public BrandNotFoundException(string message) : base(message) { }
     }
 }

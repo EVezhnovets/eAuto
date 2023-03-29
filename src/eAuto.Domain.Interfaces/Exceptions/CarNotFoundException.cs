@@ -2,8 +2,7 @@
 {
     public class CarNotFoundException : Exception
     {
-        public CarNotFoundException(string message) : base(message) 
-        {
-        }
+        public CarNotFoundException() { }
+        public CarNotFoundException(string message) : base(message) { }
     }
 }
