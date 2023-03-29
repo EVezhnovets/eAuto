@@ -5,6 +5,7 @@ using eAuto.Domain.Interfaces;
 using eAuto.Domain.Services;
 using eAuto.Storage;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace DiConfiguration
 {
@@ -12,12 +13,12 @@ namespace DiConfiguration
     {
         private readonly string _connectionString;
 
-        public DiConfigurator(string connectionString)
+		public DiConfigurator(string connectionString)
         {
             _connectionString = connectionString;
         }
 
-        public void ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services, ILoggingBuilder loggingBuilder)
         {
             RegisterBuisnessPart(services);
             RegisterDataPart(services);
@@ -41,7 +42,7 @@ namespace DiConfiguration
             EAutoContextConfigurator.RegisterContext(services, _connectionString);
 
             services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
-            services.AddScoped(typeof(IAppLogger<>), typeof(LoggerAdapter<>));
+            services.AddSingleton(typeof(IAppLogger<>), typeof(LoggerAdapter<>));
         }
     }
 }

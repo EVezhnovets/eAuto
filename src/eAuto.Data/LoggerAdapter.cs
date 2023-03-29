@@ -1,5 +1,7 @@
 ﻿using eAuto.Data.Interfaces;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace eAuto.Data
 {
@@ -7,9 +9,14 @@ namespace eAuto.Data
 	{
 		private readonly ILogger<T> _logger;
 
-		public LoggerAdapter(ILoggerFactory loggerFactory)
+		public LoggerAdapter(ILoggerFactory loggerFactory, IConfiguration configuration)
 		{
-			_logger= loggerFactory.CreateLogger<T>();
+			var logger = new LoggerConfiguration()
+			.ReadFrom.Configuration(configuration)
+			.Enrich.FromLogContext()
+			.CreateLogger();
+
+			_logger = loggerFactory.AddSerilog(logger).CreateLogger<T>();
 		}
 
 		public void LogError(Exception exception, string message, params object[] args)

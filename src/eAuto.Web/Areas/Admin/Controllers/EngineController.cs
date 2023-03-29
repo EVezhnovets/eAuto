@@ -1,4 +1,5 @@
-﻿using eAuto.Domain.Interfaces;
+﻿using eAuto.Data.Interfaces;
+using eAuto.Domain.Interfaces;
 using eAuto.Domain.Interfaces.Exceptions;
 using eAuto.Web.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -9,7 +10,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
     [Area("Admin")]
     public class EngineController : Controller
     {
-        private readonly ILogger<EngineController> _logger;
+        private readonly IAppLogger<EngineController> _logger;
         private readonly IEngineService _engineService;
         private readonly IBrandService _brandService;
         private readonly IModelService _modelService;
@@ -20,7 +21,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
             IBrandService brandService, 
             IModelService modelService, 
             IGenerationService generationService, 
-            ILogger<EngineController> logger)
+            IAppLogger<EngineController> logger)
         {
             _engineService = engineService;
 			_brandService = brandService;
@@ -56,12 +57,12 @@ namespace eAuto.Web.Areas.Admin.Controllers
 			}
 			catch (EngineNameNotFoundException ex)
 			{
-				//TODO logger
+				_logger.LogError(ex, ex.Message);
 				return NotFound(ex.Message);
 			}
 			catch(Exception ex)
 			{
-				//TODO logger
+				_logger.LogError(ex, ex.Message);
 				return BadRequest(ex.Message);
 			}
             
@@ -89,12 +90,12 @@ namespace eAuto.Web.Areas.Admin.Controllers
             }
             catch (EngineNameNotFoundException ex)
             {
-				//TODO logger
+				_logger.LogError(ex, ex.Message);
 				return NotFound(ex.Message);
 			}
 			catch (Exception ex)
 			{
-				//TODO logger
+				_logger.LogError(ex, ex.Message);
 				return BadRequest(ex.Message);
 			}
 		}
@@ -126,8 +127,9 @@ namespace eAuto.Web.Areas.Admin.Controllers
                 }
                 return View(viewModel);
             }
-			catch (EngineNameNotFoundException)
+			catch (EngineNameNotFoundException ex)
 			{
+				_logger.LogError(ex, ex.Message);
 				return RedirectToAction("Index");
 			}
         }
@@ -196,14 +198,14 @@ namespace eAuto.Web.Areas.Admin.Controllers
 
             catch (EngineNameNotFoundException ex)
             {
-                _logger!.LogError(ex.Message);
-                return NotFound(ex.Message);
+				_logger.LogError(ex, ex.Message);
+				return NotFound(ex.Message);
             }
 
             catch (Exception ex)
             {
-                _logger!.LogError(ex.Message);
-                return BadRequest(ex.Message);
+				_logger.LogError(ex, ex.Message);
+				return BadRequest(ex.Message);
             }
         }
 
@@ -237,9 +239,10 @@ namespace eAuto.Web.Areas.Admin.Controllers
                 }
                 return View(viewModel);
             }
-            catch (EngineNameNotFoundException)
+            catch (EngineNameNotFoundException ex)
             {
-                return RedirectToAction("Index");
+				_logger.LogError(ex, ex.Message);
+				return RedirectToAction("Index");
             }
         }
         #endregion
@@ -257,14 +260,14 @@ namespace eAuto.Web.Areas.Admin.Controllers
 
             catch (EngineNameNotFoundException ex)
             {
-                _logger!.LogError(ex.Message);
-                return NotFound(ex.Message);
+				_logger.LogError(ex, ex.Message);
+				return NotFound(ex.Message);
             }
 
             catch (Exception ex)
             {
-                _logger!.LogError(ex.Message);
-                return BadRequest(ex.Message);
+				_logger.LogError(ex, ex.Message);
+				return BadRequest(ex.Message);
             }
             #endregion
         }

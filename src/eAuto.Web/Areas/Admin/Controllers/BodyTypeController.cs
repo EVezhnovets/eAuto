@@ -1,4 +1,5 @@
-﻿using eAuto.Domain.Interfaces;
+﻿using eAuto.Data.Interfaces;
+using eAuto.Domain.Interfaces;
 using eAuto.Domain.Interfaces.Exceptions;
 using eAuto.Web.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -8,10 +9,10 @@ namespace eAuto.Web.Areas.Admin.Controllers
     [Area("Admin")]
     public class BodyTypeController : Controller
     {
-        private readonly ILogger<BodyTypeController> _logger;
+        private readonly IAppLogger<BodyTypeController> _logger;
         private readonly IBodyTypeService _bodyTypeService;
 
-        public BodyTypeController(IBodyTypeService bodyTypeService ,ILogger<BodyTypeController> logger)
+        public BodyTypeController(IBodyTypeService bodyTypeService ,IAppLogger<BodyTypeController> logger)
         {
             _logger = logger;
             _bodyTypeService = bodyTypeService;
@@ -27,13 +28,13 @@ namespace eAuto.Web.Areas.Admin.Controllers
 			}
 			catch (BodyTypeNotFoundException ex)
 			{
-				//TODO logger
+				_logger.LogError(ex, ex.Message);
 				return NotFound(ex.Message);
 			}
 			catch(Exception ex)
 			{
-				//TODO logger
-				return BadRequest(ex.Message);
+				_logger.LogError(ex, ex.Message); 
+                return BadRequest(ex.Message);
 			}
             
         }
@@ -62,8 +63,9 @@ namespace eAuto.Web.Areas.Admin.Controllers
                 }
                 return View(viewModel);
             }
-			catch (BodyTypeNotFoundException)
+			catch (BodyTypeNotFoundException ex)
 			{
+				_logger.LogError(ex, ex.Message);
 				return RedirectToAction("Index");
 			}
         }
@@ -88,14 +90,14 @@ namespace eAuto.Web.Areas.Admin.Controllers
 
             catch (BodyTypeNotFoundException ex)
             {
-                _logger!.LogError(ex.Message);
-                return NotFound(ex.Message);
+				_logger.LogError(ex, ex.Message);
+				return NotFound(ex.Message);
             }
 
             catch (Exception ex)
             {
-                _logger!.LogError(ex.Message);
-                return BadRequest(ex.Message);
+				_logger.LogError(ex, ex.Message);
+				return BadRequest(ex.Message);
             }
         }
 
@@ -116,9 +118,10 @@ namespace eAuto.Web.Areas.Admin.Controllers
                 }
                 return View(viewModel);
             }
-            catch (BodyTypeNotFoundException)
+            catch (BodyTypeNotFoundException ex )
             {
-                return RedirectToAction("Index");
+				_logger.LogError(ex, ex.Message);
+				return RedirectToAction("Index");
             }
         }
         #endregion
@@ -136,14 +139,14 @@ namespace eAuto.Web.Areas.Admin.Controllers
 
             catch (BodyTypeNotFoundException ex)
             {
-                _logger!.LogError(ex.Message);
-                return NotFound(ex.Message);
+				_logger.LogError(ex, ex.Message);
+				return NotFound(ex.Message);
             }
 
             catch (Exception ex)
             {
-                _logger!.LogError(ex.Message);
-                return BadRequest(ex.Message);
+				_logger.LogError(ex, ex.Message);
+				return BadRequest(ex.Message);
             }
             #endregion
         }

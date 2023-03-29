@@ -1,4 +1,5 @@
-﻿using eAuto.Domain.Interfaces;
+﻿using eAuto.Data.Interfaces;
+using eAuto.Domain.Interfaces;
 using eAuto.Domain.Interfaces.Exceptions;
 using eAuto.Web.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -8,10 +9,11 @@ namespace eAuto.Web.Areas.Admin.Controllers
     [Area("Admin")]
     public class TransmissionController : Controller
     {
-        private readonly ILogger<TransmissionController> _logger;
+        private readonly IAppLogger<TransmissionController> _logger;
         private readonly ITransmissionService _transmissionService;
 
-        public TransmissionController(ITransmissionService transmissionService ,ILogger<TransmissionController> logger)
+        public TransmissionController(
+            ITransmissionService transmissionService ,IAppLogger<TransmissionController> logger)
         {
             _logger = logger;
             _transmissionService = transmissionService;
@@ -33,12 +35,12 @@ namespace eAuto.Web.Areas.Admin.Controllers
 			}
 			catch (TransmissionNotFoundException ex)
 			{
-				//TODO logger
+				_logger.LogError(ex, ex.Message);
 				return NotFound(ex.Message);
 			}
 			catch(Exception ex)
 			{
-				//TODO logger
+				_logger.LogError(ex, ex.Message);
 				return BadRequest(ex.Message);
 			}
             
@@ -72,8 +74,9 @@ namespace eAuto.Web.Areas.Admin.Controllers
                 }
                 return View(viewModel);
             }
-			catch (TransmissionNotFoundException)
+			catch (TransmissionNotFoundException ex)
 			{
+				_logger.LogError(ex, ex.Message);
 				return RedirectToAction("Index");
 			}
         }
@@ -98,14 +101,14 @@ namespace eAuto.Web.Areas.Admin.Controllers
 
             catch (TransmissionNotFoundException ex)
             {
-                _logger!.LogError(ex.Message);
-                return NotFound(ex.Message);
+				_logger.LogError(ex, ex.Message);
+				return NotFound(ex.Message);
             }
 
             catch (Exception ex)
             {
-                _logger!.LogError(ex.Message);
-                return BadRequest(ex.Message);
+				_logger.LogError(ex, ex.Message);
+				return BadRequest(ex.Message);
             }
         }
 
@@ -126,9 +129,10 @@ namespace eAuto.Web.Areas.Admin.Controllers
                 }
                 return View(viewModel);
             }
-            catch (TransmissionNotFoundException)
+            catch (TransmissionNotFoundException ex)
             {
-                return RedirectToAction("Index");
+				_logger.LogError(ex, ex.Message);
+				return RedirectToAction("Index");
             }
         }
         #endregion
@@ -146,14 +150,14 @@ namespace eAuto.Web.Areas.Admin.Controllers
 
             catch (TransmissionNotFoundException ex)
             {
-                _logger!.LogError(ex.Message);
-                return NotFound(ex.Message);
+				_logger.LogError(ex, ex.Message);
+				return NotFound(ex.Message);
             }
 
             catch (Exception ex)
             {
-                _logger!.LogError(ex.Message);
-                return BadRequest(ex.Message);
+				_logger.LogError(ex, ex.Message);
+				return BadRequest(ex.Message);
             }
             #endregion
         }
