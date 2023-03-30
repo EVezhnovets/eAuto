@@ -2,5 +2,7 @@
 {
     public class CarNotValidException : Exception
     {
-    }
+		public CarNotValidException() { }
+		public CarNotValidException(string message) : base(message) { }
+	}
 }

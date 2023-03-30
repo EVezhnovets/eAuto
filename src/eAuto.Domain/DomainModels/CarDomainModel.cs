@@ -61,19 +61,19 @@ namespace eAuto.Domain.DomainModels
             Odometer = carDataModel.Odometer;
             Description = carDataModel.Description;
             BrandId = carDataModel.BrandId;
-            Brand = carDataModel.Brand.Name.ToString();
+            Brand = carDataModel.Brand.Name;
             ModelId = carDataModel.ModelId;
-            Model = carDataModel.Model.Name.ToString();
+            Model = carDataModel.Model.Name;
             GenerationId = carDataModel.GenerationId;
-            Generation = carDataModel.Generation.ToString();
+            Generation = carDataModel.Generation.Name;
             BodyTypeId = carDataModel.BodyTypeId;
-            BodyType = carDataModel.BodyType.ToString();
+            BodyType = carDataModel.BodyType.Name;
             EngineId = carDataModel.EngineId;
-            Engine = carDataModel.Engine.ToString();
+            Engine = $"{carDataModel.Engine.IdentificationName} | {carDataModel.Engine.Type}" ;
             DriveTypeId = carDataModel.DriveTypeId;
-            DriveType = carDataModel.DriveType.ToString();
+            DriveType = carDataModel.DriveType.Name;
             TransmissionId = carDataModel.TransmissionId;
-            Transmission = carDataModel.Transmission.ToString();
+            Transmission = carDataModel.Transmission.Name;
         }
 
 		public void Save()

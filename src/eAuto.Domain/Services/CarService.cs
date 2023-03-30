@@ -65,19 +65,19 @@ namespace eAuto.Domain.Services
                     Odometer = i.Odometer,
                     Description = i.Description,
                     BrandId = i.BrandId,
-                    Brand = i.Brand.Name.ToString(),
+                    Brand = i.Brand.Name,
                     ModelId = i.ModelId,
-                    Model = i.Model.Name.ToString(),
+                    Model = i.Model.Name,
                     GenerationId = i.GenerationId,
-                    Generation = i.Generation.Name.ToString(),
+                    Generation = i.Generation.Name,
                     BodyTypeId = i.BodyTypeId,
-                    BodyType = i.BodyType.Name.ToString(),
+                    BodyType = i.BodyType.Name,
                     EngineId = i.EngineId,
-                    Engine = i.Engine.IdentificationName.ToString(),
+                    Engine = $"{i.Engine.Type} | {i.Engine.IdentificationName} ",
                     DriveTypeId = i.DriveTypeId,
-                    DriveType = i.DriveType.Name.ToString(),
+                    DriveType = i.DriveType.Name,
                     TransmissionId = i.TransmissionId,
-                    Transmission = i.Transmission.Name.ToString()
+                    Transmission = i.Transmission.Name
                 }).ToList();
             var carModels = carViewModels.Cast<ICar>();
             return carModels;
