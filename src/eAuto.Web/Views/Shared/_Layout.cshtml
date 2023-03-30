@@ -27,34 +27,55 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Car" asp-action="Index">Cars</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Brand" asp-action="Index">Brands</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Model" asp-action="Index">Models</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Generation" asp-action="Index">Generations</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Engine" asp-action="Index">Engines</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Transmission" asp-action="Index">Transmissions</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="BodyType" asp-action="Index">Body Types</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="DriveType" asp-action="Index">Drive Types</a>
-                        </li>
+                            <button class="btn btn-outline-warning" style="width:10rem" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                                Admin Panel
+                                <span class="bi bi-gear-fill"></span>
+                            </button>
+                        </li> 
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
+    <div class="offcanvas offcanvas-start text-bg-dark" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header">
+            <h4 class="offcanvas-title text-white mt-2" id="offcanvasBottomLabel" style="text-align:center">
+                Admin Panel
+            </h4>
+            <button type="button" class="btn btn-outline-warning" style="font-size: 0.75rem;">
+                <a class="nav-link" asp-area="Identity" asp-page="/Account/Register">Create admin user</a>
+            </button>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
+                <li class="nav-item">
+                    <a class="nav-link text-light" asp-area="Admin" asp-controller="Car" asp-action="Index">Cars</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" asp-area="Admin" asp-controller="Brand" asp-action="Index">Brands</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" asp-area="Admin" asp-controller="Model" asp-action="Index">Models</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" asp-area="Admin" asp-controller="Generation" asp-action="Index">Generations</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" asp-area="Admin" asp-controller="Engine" asp-action="Index">Engines</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" asp-area="Admin" asp-controller="Transmission" asp-action="Index">Transmissions</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" asp-area="Admin" asp-controller="BodyType" asp-action="Index">Body Types</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" asp-area="Admin" asp-controller="DriveType" asp-action="Index">Drive Types</a>
+                </li>
+            </ul>
+        </div>
+    </div>
     <div class="container-fluid">
         <main role="main" class="pb-3">
             @RenderBody()

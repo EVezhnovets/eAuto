@@ -1,0 +1,46 @@
+﻿@model CarBasketItem
+
+<form method="post" class="pt-4">
+    <div class="card container">
+        <div class="card-header bg-primary text-light ml-0  row ">
+            <div class="col-12 col-md-6">
+                <h1 class="text-white">@Model.Car.Brand | @Model.Car.Model</h1>
+                <p class="text-white">@Model.Car.Generation</p>
+            </div>
+            <div class="col-12 col-md-6 text-end pt-4">
+                <span class="badge bg-light pt-2" style="height:30px;">@Model.Car.Year.Year.ToString()</span>
+                <span class="badge bg-warning pt-2" style="height:30px;">@Model.Car.DriveType</span>
+            </div>
+        </div>
+        <div class="card-body row container" style="justify-content: center">
+            <div class="row" style="margin-top: 2rem">
+                <div class="col-lg-6">
+                    <img src="@Model.Car.PictureUrl" width="100%" class="rounded" />
+                </div>
+                <div class="col-lg-6" style="text-align: center; margin-top:1rem">
+                    <h5 class="text-primary pb-2"> @Model.Car.Brand</h5>
+                    <h5 class="text-primary pb-2"> @Model.Car.Model</h5>
+                    <h5 class="text-primary pb-2"> @Model.Car.Generation</h5>
+                    <h5 class="text-primary pb-2"> @Model.Car.Year.Year.ToString()</h5>
+                    <h5 class="text-primary pb-2"> @Model.Car.BodyType</h5>
+                    <h5 class="text-primary pb-2"> @Model.Car.DateArrival.ToString("MM.yyyy")</h5>
+                    <h5 class="text-primary pb-2"> @Model.Car.Engine</h5>
+                    <h5 class="text-primary pb-2"> @Model.Car.Odometer</h5>
+                    <h5 class="text-primary pb-2"> @Model.Car.Transmission</h5>
+                    <p class="text-secondary">@Html.Raw(Model.Car.Description)</p>
+                    <h5 class="text-primary pb-2">auction Price: <strike>@Model.Car.PriceInitial.ToString("c")</strike></h5>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="row">
+                <div class="col-12 col-md-6 pb-1">
+                    <a class="btn btn-outline-dark form-control " style="height:50px; border:none" asp-action="Index">Back to Home</a>
+                </div>
+                <div class="col-12 col-md-6 pb-1">
+                    <button type="submit" value="Order" class="btn btn-success form-control" style="height:50px;">Order</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
