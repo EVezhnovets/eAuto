@@ -4660,7 +4660,7 @@ textarea.form-control-lg {
         }
 
 .card-body {
-    text-align:right;
+    text-align:center;
     flex: 1 1 auto;
     padding: var(--bs-card-spacer-y) var(--bs-card-spacer-x);
     color: var(--bs-card-color);
@@ -4693,7 +4693,7 @@ textarea.form-control-lg {
 
 .card-footer {
     padding: var(--bs-card-cap-padding-y) var(--bs-card-cap-padding-x);
-    color: var(--bs-card-cap-color);
+    /*color: var(--bs-card-cap-color);*/
     border-top: var(--bs-card-border-width) solid var(--bs-card-border-color);
 }
 

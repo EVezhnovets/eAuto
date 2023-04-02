@@ -19,20 +19,19 @@ builder.Host.UseSerilog((context, services, configuration) => configuration
 builder.Host.UseSerilog();
 builder.Services.AddControllersWithViews();
 
-//Add services in DiConfiguration to the container
-var catalogConnectionString = builder.Configuration.GetConnectionString("eAutoCatalogConnection");
-var diConfigurator = new DiConfigurator(catalogConnectionString);
+var appConnection= builder.Configuration.GetConnectionString("eAutoCatalogConnection");
+var identityConnection= builder.Configuration.GetConnectionString("eAutoIdentityConnection");
+
+var diConfigurator = new DiConfigurator(identityConnection, appConnection, builder.Configuration);
 diConfigurator.ConfigureServices(builder.Services, builder.Logging);
 builder.Services.AddTransient<IImageManager, ImageManager>();
 
 var app = builder.Build();
 app.UseSerilogRequestLogging();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -43,6 +42,7 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+app.MapRazorPages();
 app.MapControllerRoute(
     name: "default",
     pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}");
