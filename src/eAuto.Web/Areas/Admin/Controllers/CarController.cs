@@ -3,12 +3,14 @@ using eAuto.Domain.Interfaces;
 using eAuto.Domain.Interfaces.Exceptions;
 using eAuto.Web.Models;
 using eAuto.Web.Utilities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace eAuto.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class CarController : Controller
     {
         private readonly IAppLogger<CarController> _logger;
