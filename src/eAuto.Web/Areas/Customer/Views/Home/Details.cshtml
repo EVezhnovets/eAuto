@@ -1,8 +1,8 @@
 ﻿@model CarBasketItem
 
 <form method="post" class="pt-4">
-    <div class="card container">
-        <div class="card-header bg-primary text-light ml-0  row ">
+    <div class="card container" style="border: solid 1px; margin:auto">
+        <div class="card-header bg-dark text-light ml-0  row ">
             <div class="col-12 col-md-6">
                 <h1 class="text-white">@Model.Car.Brand | @Model.Car.Model</h1>
                 <p class="text-white">@Model.Car.Generation</p>
@@ -32,12 +32,13 @@
                 </div>
             </div>
         </div>
-        <div class="card-footer">
-            <div class="row">
-                <div class="col-12 col-md-6 pb-1">
+        <div>
+            <div class="row" style="margin: 2rem">
+                <hr/>
+                <div class="col-md-6 pb-1">
                     <a class="btn btn-outline-dark form-control " style="height:50px; border:none" asp-action="Index">Back to Home</a>
                 </div>
-                <div class="col-12 col-md-6 pb-1">
+                <div class="col-md-6 pb-1">
                     <button type="submit" value="Order" class="btn btn-success form-control" style="height:50px;">Order</button>
                 </div>
             </div>

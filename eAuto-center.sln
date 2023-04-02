@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiConfiguration", "src\DiCo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eAuto.Domain.Interfaces", "src\eAuto.Domain.Interfaces\eAuto.Domain.Interfaces.csproj", "{DE1B23C8-AB08-4943-A345-8B1B1A1A55DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountManager", "src\AccountManager\AccountManager.csproj", "{DAAE6B56-0CCF-411F-9631-C51E4628277E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountManager", "src\AccountManager\AccountManager.csproj", "{DAAE6B56-0CCF-411F-9631-C51E4628277E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountManager.Interfaces", "src\AccountManager.Interfaces\AccountManager.Interfaces.csproj", "{135B1FFF-D88B-493F-BE8C-F234AD30B433}"
 EndProject

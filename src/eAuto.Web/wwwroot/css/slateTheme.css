@@ -4693,7 +4693,7 @@ textarea.form-control-lg {
 
 .card-footer {
     padding: var(--bs-card-cap-padding-y) var(--bs-card-cap-padding-x);
-    color: var(--bs-card-cap-color);
+    /*color: var(--bs-card-cap-color);*/
     border-top: var(--bs-card-border-width) solid var(--bs-card-border-color);
 }
 
