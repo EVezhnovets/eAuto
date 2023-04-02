@@ -8,9 +8,7 @@ namespace AccountManager.Models
 	{
 		[Required]
 		public string FirstName { get; set; }
-		[Required]
-		public string LastName { get; set; }
-		[Required]
-		public string Phone { get; set; }
+		public string? LastName { get; set; }
+		public string? Phone { get; set; }
 	}
 }

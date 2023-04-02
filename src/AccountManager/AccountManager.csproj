@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AccountManager.Interfaces\AccountManager.Interfaces.csproj" />
+    <ProjectReference Include="..\eAuto.Data.Interfaces\eAuto.Data.Interfaces.csproj" />
   </ItemGroup>
 
 </Project>
