@@ -1,7 +1,45 @@
-﻿@model IEnumerable<CarViewModel>
-<div style="width:90%; margin: auto">
+﻿@model CarsIndexViewModel
+
+<div class="">
+	<div class="container mt-4">
+		<form method="get">
+			<div class="row justify-content-center">
+				<div class="col-lg-3">
+					<select asp-for="@Model.BrandFilterApplied" asp-items="@Model.Brands" class="form-select" style="background-color:#fff"></select>
+				</div>
+				<div class="col-lg-3">
+					<select asp-for="@Model.ModelFilterApplied" asp-items="@Model.Models" class="form-select" style="background-color:#fff"></select>
+				</div>
+				<div class="col-lg-3">
+					<select asp-for="@Model.GenerationFilterApplied" asp-items="@Model.Generations" class="form-select" style="background-color:#fff"></select>
+				</div>
+				<div class="col-lg-3">
+					<select asp-for="@Model.BodyTypeFilterApplied" asp-items="@Model.BodyTypes" class="form-select" style="background-color:#fff"></select>
+				</div>
+			</div>
+			<div class="row justify-content-center mt-2">
+				<div class="col-lg-3">
+					<select asp-for="@Model.EngineFilterApplied" asp-items="@Model.Engines" class="form-select" style="background-color:#fff"></select>
+				</div>
+				<div class="col-lg-3">
+					<select asp-for="@Model.DriveTypeFilterApplied" asp-items="@Model.DriveTypes" class="form-select" style="background-color:#fff"></select>
+				</div>
+				<div class="col-lg-3">
+					<select asp-for="@Model.TransmissionFilterApplied" asp-items="@Model.Transmissions" class="form-select" style="background-color:#fff"></select>
+				</div>
+				<div class="col-lg-1 mt-1">
+					<button type="submit" class="btn btn-outline-dark" style="width:12rem">
+						@*<i class="bi bi-caret-right-fill"></i>*@Apply
+					</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<div class="mt-5" style="width:90%; margin: auto">
 	<div class="row  pb-3">
-		@foreach (var product in Model)
+		@foreach (var product in Model.CarVModels)
 		{
 			<div class="col-lg-3 col-md-6">
 				<div class="row p-2">

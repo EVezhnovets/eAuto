@@ -14,6 +14,18 @@
  */
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600&display=swap");
 
+.esh-catalog-send {
+    background-color: white;
+    color: white;
+    cursor: pointer;
+    height:2rem;
+    transition: all 0.35s;
+}
+
+.esh-catalog-send:hover {
+    background-color: #8e5bcd;
+    border-radius:3px;
+}
 :root {
     --bs-blue: #007bff;
     --bs-indigo: #6610f2;
