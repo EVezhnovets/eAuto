@@ -1,6 +1,8 @@
 using DiConfiguration;
+using eAuto.Data.Context;
 using eAuto.Domain.Interfaces;
 using eAuto.Web.Utilities;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Serilog.Events;
 
@@ -27,6 +29,22 @@ diConfigurator.ConfigureServices(builder.Services, builder.Logging);
 builder.Services.AddTransient<IImageManager, ImageManager>();
 
 var app = builder.Build();
+
+#region Auto Migration
+try
+{
+	var context = app.Services.GetRequiredService<EAutoContext>();
+	if (context.Database.IsSqlServer())
+	{
+		context.Database.Migrate();
+	}
+	await EntityContextSeed.SeedAsync(context);
+}
+catch (Exception ex)
+{
+	app.Logger.LogError(ex, "An error occurred adding migrations to DatabBase.");
+}
+#endregion
 app.UseSerilogRequestLogging();
 
 if (!app.Environment.IsDevelopment())
