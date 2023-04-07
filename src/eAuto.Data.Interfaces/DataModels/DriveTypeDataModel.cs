@@ -10,5 +10,14 @@ namespace eAuto.Data.Interfaces.DataModels
         [Required]
         [MaxLength(50)]
         public string Name { get;set;}
-    }
+
+        #region Ctor
+        public DriveTypeDataModel() { }
+
+        public DriveTypeDataModel(string name)
+        {
+            Name = name;
+        }
+		#endregion
+	}
 }

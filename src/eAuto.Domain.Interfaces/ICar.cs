@@ -8,7 +8,11 @@
         DateTime Year { get; set; }
         DateTime DateArrival { get; set; }
         int Odometer { get; set; }
-        public string Description { get; set; }
+        string Description { get; set; }
+		string? EngineIdentificationName { get; set; }
+		string EngineFuelType { get; set; }
+		int EngineCapacity { get; set; }
+		int EnginePower { get; set; }
 
 		int BrandId { get; set; }
         string Brand { get; set; }
@@ -21,9 +25,6 @@
 
         int BodyTypeId { get; set; }
         string BodyType { get; set; }
-
-        int EngineId { get; set; }
-        string Engine { get; set; }
 
         int DriveTypeId { get; set; }
         string DriveType { get; set; }

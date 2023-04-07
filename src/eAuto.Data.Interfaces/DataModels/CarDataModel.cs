@@ -33,7 +33,23 @@ namespace eAuto.Data.Interfaces.DataModels
         [MaxLength(50)]
         public string Description { get; set; }
 
-        [Required]
+		[Required]
+		[MaxLength(50)]
+        public string? EngineIdentificationName { get; set; }
+
+		[Required]
+		[MaxLength(50)]
+        public string EngineFuelType { get; set; }
+
+		[Required]
+		[MaxLength(50)]
+        public int EngineCapacity { get; set; }
+
+		[Required]
+		[MaxLength(50)]
+        public int EnginePower { get; set; }
+
+		[Required]
         [MaxLength(50)]
         public int BrandId { get; set; }
         [ForeignKey("BrandId")]public BrandDataModel Brand { get; set; }
@@ -52,11 +68,6 @@ namespace eAuto.Data.Interfaces.DataModels
         [MaxLength(50)]
         public int BodyTypeId { get; set; }
         [ForeignKey("BodyTypeId")] public BodyTypeDataModel BodyType { get; set; }
-
-        [Required]
-        [MaxLength(50)]
-        public int EngineId { get; set; }
-        [ForeignKey("EngineId")]public EngineDataModel Engine { get; set; }
 
         [Required] 
         [MaxLength(50)]
