@@ -40,7 +40,6 @@ namespace DiConfiguration
             services.AddTransient<IGenerationService, GenerationService>();
             services.AddTransient<ITransmissionService, TransmissionService>();
             services.AddTransient<IDriveTypeService, DriveTypeService>();
-            services.AddTransient<IEngineService, EngineService>();
             services.AddTransient<ICarService, CarService>();
         }
 
