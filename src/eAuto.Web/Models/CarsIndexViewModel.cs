@@ -10,6 +10,7 @@ namespace eAuto.Web.Models
 		public int? BrandFilterApplied { get; set; }
 
 		public IEnumerable<SelectListItem>? Models { get; set; }
+		public int? ModelId { get; set; }
 		public int? ModelFilterApplied { get; set; }
 
 		public IEnumerable<SelectListItem>? Generations { get; set; }

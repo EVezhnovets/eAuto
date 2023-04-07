@@ -5,22 +5,19 @@
 		<form method="get">
 			<div class="row justify-content-center">
 				<div class="col-lg-3">
-					<select asp-for="@Model.BrandFilterApplied" asp-items="@Model.Brands" class="form-select" style="background-color:#fff"></select>
+					<select asp-for="BrandFilterApplied" asp-items="@Model.Brands" class="form-select" style="background-color:#fff"></select>
 				</div>
 				<div class="col-lg-3">
-					<select asp-for="@Model.ModelFilterApplied" asp-items="@Model.Models" class="form-select" style="background-color:#fff"></select>
+					<select asp-for="ModelFilterApplied" asp-items="@Model.Models" class="form-select" style="background-color:#fff"></select>
 				</div>
 				<div class="col-lg-3">
-					<select asp-for="@Model.GenerationFilterApplied" asp-items="@Model.Generations" class="form-select" style="background-color:#fff"></select>
+					<select asp-for="GenerationFilterApplied" asp-items="@Model.Generations" class="form-select" style="background-color:#fff"></select>
 				</div>
 				<div class="col-lg-3">
 					<select asp-for="@Model.BodyTypeFilterApplied" asp-items="@Model.BodyTypes" class="form-select" style="background-color:#fff"></select>
 				</div>
 			</div>
 			<div class="row justify-content-center mt-2">
-				<div class="col-lg-3">
-					<select asp-for="@Model.EngineFilterApplied" asp-items="@Model.Engines" class="form-select" style="background-color:#fff"></select>
-				</div>
 				<div class="col-lg-3">
 					<select asp-for="@Model.DriveTypeFilterApplied" asp-items="@Model.DriveTypes" class="form-select" style="background-color:#fff"></select>
 				</div>
@@ -29,7 +26,7 @@
 				</div>
 				<div class="col-lg-1 mt-1">
 					<button type="submit" class="btn btn-outline-dark" style="width:12rem">
-						@*<i class="bi bi-caret-right-fill"></i>*@Apply
+						Apply
 					</button>
 				</div>
 			</div>
@@ -52,7 +49,7 @@
 									<p class="card-title h5 text-primary">@product.Brand | @product.Model </p>
 									<p class="card-title text-secondary"><b>@product.Generation</b></p>
 									<p class="card-title text-primary"><b>@product.Year.Year.ToString()</b></p>
-									<p class="card-title text-muted"><b>@product.Engine</b></p>
+									<p class="card-title text-muted"><b>@product.EngineFuelType</b></p>
 								</div>
 								<div class="pl-1">
 									<p><sub>auction</sub> Price: from <b><span class="text-success">$</span>@product.PriceInitial.ToString("0.00")</b></p>
@@ -70,3 +67,20 @@
 		}
 	</div>
 </div>
+
+@*@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+	<script>
+		$(document).ready(function(){
+			$('#BrandFilterApplied').change(function () {
+				var selection = $('#BrandFilterApplied Option:Selected').text();
+				if(selection!='All Brands'){
+					$('#ModelFilterApplied').show();
+				}
+				else{
+					$('#ModelFilterApplied').hide();
+				}
+			})
+		})
+	</script>
+}*@

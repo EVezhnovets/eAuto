@@ -19,7 +19,6 @@ namespace eAuto.Web.Areas.Customer.Controllers
 		private readonly IModelService _modelService;
 		private readonly IGenerationService _generationService;
 		private readonly IBodyTypeService _bodyTypeService;
-		private readonly IEngineService _engineService;
 		private readonly IDriveTypeService _driveTypeService;
 		private readonly ITransmissionService _transmissionService;
 
@@ -29,7 +28,6 @@ namespace eAuto.Web.Areas.Customer.Controllers
 			IModelService modelService,
 			IGenerationService generationService,
 			IBodyTypeService bodyTypeService,
-			IEngineService engineService,
 			IDriveTypeService driveTypeService,
 			ITransmissionService transmissionService,
 			IAppLogger<HomeController> logger)
@@ -39,7 +37,6 @@ namespace eAuto.Web.Areas.Customer.Controllers
 			_modelService = modelService;
 			_generationService = generationService;
 			_bodyTypeService = bodyTypeService;
-			_engineService = engineService;
 			_driveTypeService = driveTypeService;
 			_transmissionService = transmissionService;
 			_logger = logger;
@@ -62,6 +59,10 @@ namespace eAuto.Web.Areas.Customer.Controllers
 						Odometer = i.Odometer,
 						Description = i.Description,
 						BrandId = i.BrandId,
+						EngineIdentificationName = i.EngineIdentificationName,
+						EngineCapacity = i.EngineCapacity,
+						EngineFuelType = i.EngineFuelType,
+						EnginePower = i.EnginePower,
 						Brand = i.Brand,
 						ModelId = i.ModelId,
 						Model = i.Model,
@@ -69,8 +70,6 @@ namespace eAuto.Web.Areas.Customer.Controllers
 						Generation = i.Generation,
 						BodyTypeId = i.BodyTypeId,
 						BodyType = i.BodyType,
-						EngineId = i.EngineId,
-						Engine = i.Engine,
 						DriveTypeId = i.DriveTypeId,
 						DriveType = i.DriveType,
 						TransmissionId = i.TransmissionId,
@@ -81,7 +80,6 @@ namespace eAuto.Web.Areas.Customer.Controllers
 								&& (!carsIndex.ModelFilterApplied.HasValue || i.ModelId == carsIndex.ModelFilterApplied)
 								&& (!carsIndex.GenerationFilterApplied.HasValue || i.GenerationId == carsIndex.GenerationFilterApplied)
 								&& (!carsIndex.BodyTypeFilterApplied.HasValue || i.BodyTypeId == carsIndex.BodyTypeFilterApplied)
-								&& (!carsIndex.EngineFilterApplied.HasValue || i.EngineId == carsIndex.EngineFilterApplied)
 								&& (!carsIndex.DriveTypeFilterApplied.HasValue || i.DriveTypeId == carsIndex.DriveTypeFilterApplied)
 								&& (!carsIndex.TransmissionFilterApplied.HasValue || i.TransmissionId == carsIndex.TransmissionFilterApplied))
 					.Select(i =>
@@ -93,11 +91,14 @@ namespace eAuto.Web.Areas.Customer.Controllers
 							i.DateArrival,
 							i.Odometer,
 							i.Description,
+							i.EngineIdentificationName,
+							i.EngineCapacity,
+							i.EngineFuelType,
+							i.EnginePower,
 							i.Brand,
 							i.Model,
 							i.Generation,
 							i.BodyType,
-							i.Engine,
 							i.DriveType,
 							i.Transmission
 					)).ToList();
@@ -109,7 +110,6 @@ namespace eAuto.Web.Areas.Customer.Controllers
 					Models = (await GetModels()).ToList(),
 					Generations = (await GetGenerations()).ToList(),
 					BodyTypes = (await GetBodyTypes()).ToList(),
-					Engines = (await GetEngines()).ToList(),
 					DriveTypes = (await GetDriveTypes()).ToList(),
 					Transmissions = (await GetTransmissions()).ToList(),
 
@@ -145,11 +145,14 @@ namespace eAuto.Web.Areas.Customer.Controllers
 					queryCar.DateArrival,
 					queryCar.Odometer,
 					queryCar.Description,
+					queryCar.EngineIdentificationName,
+					queryCar.EngineCapacity,
+					queryCar.EngineFuelType,
+					queryCar.EnginePower,
 					queryCar.Brand,
 					queryCar.Model,
 					queryCar.Generation,
 					queryCar.BodyType,
-					queryCar.Engine,
 					queryCar.DriveType,
 					queryCar.Transmission)
 			};
@@ -168,11 +171,11 @@ namespace eAuto.Web.Areas.Customer.Controllers
 			IEnumerable<BrandViewModel> brandsVM = brands.Select(i => new BrandViewModel(i.BrandId, i.Name));
 
 			var items = brandsVM
-				.Select(brand => new SelectListItem() { Value = brand.BrandId.ToString(), Text = brand.Name })
+				.Select(brand => new SelectListItem() { Value = brand.Name, Text = brand.Name })
 				.OrderBy(brand => brand.Text)
 				.ToList();
 
-			var allItems = new SelectListItem() { Value = null, Text = "All Brands", Selected = true };
+			var allItems = new SelectListItem() { Value = "All Brands", Text = "All Brands", Selected = true };
 			items.Insert(0, allItems);
 
 			return items;
@@ -221,32 +224,6 @@ namespace eAuto.Web.Areas.Customer.Controllers
 				.ToList();
 
 			var allItems = new SelectListItem() { Value = null, Text = "All Body Types", Selected = true };
-			items.Insert(0, allItems);
-
-			return items;
-		}
-
-		private async Task<IEnumerable<SelectListItem>> GetEngines()
-		{
-			var engines = await _engineService.GetEngineModelsAsync();
-			IEnumerable<EngineViewModel> enginesVM = engines.Select(
-				i => new EngineViewModel(
-					i.EngineId, 
-					i.IdentificationName,
-					i.Type,
-					i.Capacity,
-					i.Power,
-					i.Description,
-					i.Brand,
-					i.Model,
-					i.Generation));
-
-			var items = enginesVM
-				.Select(engine => new SelectListItem { Value = engine.EngineId.ToString(), Text = engine.IdentificationName})
-				.OrderBy(engine => engine.Text)
-				.ToList();
-
-			var allItems = new SelectListItem() { Value = null, Text = "All Engines", Selected = true };
 			items.Insert(0, allItems);
 
 			return items;

@@ -41,13 +41,6 @@
 				<span asp-validation-for="@Model.CarVModel.BodyTypeId" class="text-danger"></span>
 			</div>
 			<div class="col mb-3">
-				<label asp-for="@Model.CarVModel.Engine"></label>
-				<select asp-for="@Model.CarVModel.EngineId" asp-items="@Model.Engines" class="form-select">
-					<option disabled selected>--Select Category--</option>
-				</select>
-				<span asp-validation-for="@Model.CarVModel.EngineId" class="text-danger"></span>
-			</div>
-			<div class="col mb-3">
 				<label asp-for="@Model.CarVModel.DriveType"></label>
 				<select asp-for="@Model.CarVModel.DriveTypeId" asp-items="@Model.DriveTypes" class="form-select">
 					<option disabled selected>--Select Category--</option>
@@ -63,6 +56,11 @@
 			</div>
 		</div>
 		<div class="row">
+			<div class="col mb-3">
+				<label asp-for="@Model.CarVModel.EngineFuelType"></label>
+				<input asp-for="@Model.CarVModel.EngineFuelType" class="form-control">
+				<span asp-validation-for="@Model.CarVModel.EngineFuelType" class="text-danger"></span>
+			</div>
 			<div class="col mb-3">
 				<label asp-for="@Model.CarVModel.PriceInitial"></label>
 				<input asp-for="@Model.CarVModel.PriceInitial" class="form-control">
