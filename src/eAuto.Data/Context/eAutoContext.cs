@@ -12,6 +12,7 @@ namespace eAuto.Data.Context
         public DbSet<DriveTypeDataModel> DriveTypes { get; set; }
         public DbSet<ModelDataModel> Models { get; set; }
         public DbSet<TransmissionDataModel> Transmissions { get; set; }
+        public DbSet<GenerationDataModel> Generations{ get; set; }
 
         public EAutoContext(string connectionString)
         {

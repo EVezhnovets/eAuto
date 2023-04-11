@@ -27,7 +27,7 @@ namespace eAuto.Data.Migrations
                 table: "Cars");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_Cars_GenerationDataModel_GenerationId",
+                name: "FK_Cars_Generations_GenerationId",
                 table: "Cars");
 
             migrationBuilder.DropForeignKey(
@@ -39,12 +39,12 @@ namespace eAuto.Data.Migrations
                 table: "Cars");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_GenerationDataModel_Brands_BrandId",
-                table: "GenerationDataModel");
+                name: "FK_Generations_Brands_BrandId",
+                table: "Generations");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_GenerationDataModel_Models_ModelId",
-                table: "GenerationDataModel");
+                name: "FK_Generations_Models_ModelId",
+                table: "Generations");
 
             migrationBuilder.DropForeignKey(
                 name: "FK_Models_Brands_BrandId",
@@ -67,7 +67,7 @@ namespace eAuto.Data.Migrations
                 table: "Cars",
                 type: "int",
                 maxLength: 50,
-                nullable: false,
+                nullable: true,
                 defaultValue: 0);
 
             migrationBuilder.AddColumn<string>(
@@ -83,7 +83,7 @@ namespace eAuto.Data.Migrations
                 table: "Cars",
                 type: "nvarchar(50)",
                 maxLength: 50,
-                nullable: false,
+                nullable: true,
                 defaultValue: "");
 
             migrationBuilder.AddForeignKey(
@@ -111,10 +111,10 @@ namespace eAuto.Data.Migrations
                 onDelete: ReferentialAction.NoAction);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Cars_GenerationDataModel_GenerationId",
+                name: "FK_Cars_Generations_GenerationId",
                 table: "Cars",
                 column: "GenerationId",
-                principalTable: "GenerationDataModel",
+                principalTable: "Generations",
                 principalColumn: "GenerationId",
                 onDelete: ReferentialAction.NoAction);
 
@@ -135,16 +135,16 @@ namespace eAuto.Data.Migrations
                 onDelete: ReferentialAction.NoAction);
                 
             migrationBuilder.AddForeignKey(
-                name: "FK_GenerationDataModel_Brands_BrandId",
-                table: "GenerationDataModel",
+                name: "FK_Generations_Brands_BrandId",
+                table: "Generations",
                 column: "BrandId",
                 principalTable: "Brands",
                 principalColumn: "BrandId",
                 onDelete: ReferentialAction.NoAction);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_GenerationDataModel_Models_ModelId",
-                table: "GenerationDataModel",
+                name: "FK_Generations_Models_ModelId",
+                table: "Generations",
                 column: "ModelId",
                 principalTable: "Models",
                 principalColumn: "ModelId",
@@ -175,7 +175,7 @@ namespace eAuto.Data.Migrations
                 table: "Cars");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_Cars_GenerationDataModel_GenerationId",
+                name: "FK_Cars_Generations_GenerationId",
                 table: "Cars");
 
             migrationBuilder.DropForeignKey(
@@ -187,12 +187,12 @@ namespace eAuto.Data.Migrations
                 table: "Cars");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_GenerationDataModel_Brands_BrandId",
-                table: "GenerationDataModel");
+                name: "FK_Generations_Brands_BrandId",
+                table: "Generations");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_GenerationDataModel_Models_ModelId",
-                table: "GenerationDataModel");
+                name: "FK_Generations_Models_ModelId",
+                table: "Generations");
 
             migrationBuilder.DropForeignKey(
                 name: "FK_Models_Brands_BrandId",
@@ -239,9 +239,9 @@ namespace eAuto.Data.Migrations
                         principalTable: "Brands",
                         principalColumn: "BrandId");
                     table.ForeignKey(
-                        name: "FK_Engines_GenerationDataModel_GenerationId",
+                        name: "FK_Engines_Generations_GenerationId",
                         column: x => x.GenerationId,
-                        principalTable: "GenerationDataModel",
+                        principalTable: "Generations",
                         principalColumn: "GenerationId");
                     table.ForeignKey(
                         name: "FK_Engines_Models_ModelId",
@@ -299,10 +299,10 @@ namespace eAuto.Data.Migrations
                 principalColumn: "EngineId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Cars_GenerationDataModel_GenerationId",
+                name: "FK_Cars_Generations_GenerationId",
                 table: "Cars",
                 column: "GenerationId",
-                principalTable: "GenerationDataModel",
+                principalTable: "Generations",
                 principalColumn: "GenerationId");
 
             migrationBuilder.AddForeignKey(
@@ -320,15 +320,15 @@ namespace eAuto.Data.Migrations
                 principalColumn: "TransmissionId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_GenerationDataModel_Brands_BrandId",
-                table: "GenerationDataModel",
+                name: "FK_Generations_Brands_BrandId",
+                table: "Generations",
                 column: "BrandId",
                 principalTable: "Brands",
                 principalColumn: "BrandId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_GenerationDataModel_Models_ModelId",
-                table: "GenerationDataModel",
+                name: "FK_Generations_Models_ModelId",
+                table: "Generations",
                 column: "ModelId",
                 principalTable: "Models",
                 principalColumn: "ModelId");

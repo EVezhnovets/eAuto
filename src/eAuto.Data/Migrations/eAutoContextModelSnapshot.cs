@@ -83,16 +83,16 @@ namespace eAuto.Data.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<int>("DriveTypeId")
                         .HasMaxLength(50)
                         .HasColumnType("int");
 
-                    b.Property<int>("EngineCapacity")
+                    b.Property<string>("EngineCapacity")
                         .HasMaxLength(50)
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("EngineFuelType")
                         .IsRequired()
@@ -100,11 +100,10 @@ namespace eAuto.Data.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("EngineIdentificationName")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("EnginePower")
+                    b.Property<int?>("EnginePower")
                         .HasMaxLength(50)
                         .HasColumnType("int");
 
@@ -198,7 +197,7 @@ namespace eAuto.Data.Migrations
 
                     b.HasIndex("ModelId");
 
-                    b.ToTable("GenerationDataModel");
+                    b.ToTable("Generations");
                 });
 
             modelBuilder.Entity("eAuto.Data.Interfaces.DataModels.ModelDataModel", b =>

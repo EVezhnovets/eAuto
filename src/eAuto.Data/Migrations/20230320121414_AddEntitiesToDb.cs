@@ -122,7 +122,7 @@ namespace eAuto.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "GenerationDataModel",
+                name: "Generations",
                 columns: table => new
                 {
                     GenerationId = table.Column<int>(type: "int", maxLength: 50, nullable: false)
@@ -133,15 +133,15 @@ namespace eAuto.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GenerationDataModel", x => x.GenerationId);
+                    table.PrimaryKey("PK_Generations", x => x.GenerationId);
                     table.ForeignKey(
-                        name: "FK_GenerationDataModel_Brands_BrandId",
+                        name: "FK_Generations_Brands_BrandId",
                         column: x => x.BrandId,
                         principalTable: "Brands",
                         principalColumn: "BrandId",
                         onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
-                        name: "FK_GenerationDataModel_Models_ModelId",
+                        name: "FK_Generations_Models_ModelId",
                         column: x => x.ModelId,
                         principalTable: "Models",
                         principalColumn: "ModelId",
@@ -149,13 +149,13 @@ namespace eAuto.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_GenerationDataModel_BrandId",
-                table: "GenerationDataModel",
+                name: "IX_Generations_BrandId",
+                table: "Generations",
                 column: "BrandId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_GenerationDataModel_ModelId",
-                table: "GenerationDataModel",
+                name: "IX_Generations_ModelId",
+                table: "Generations",
                 column: "ModelId");
 
             migrationBuilder.CreateIndex(
@@ -180,7 +180,7 @@ namespace eAuto.Data.Migrations
                 name: "Engines");
 
             migrationBuilder.DropTable(
-                name: "GenerationDataModel");
+                name: "Generations");
 
             migrationBuilder.DropTable(
                 name: "Transmissions");
