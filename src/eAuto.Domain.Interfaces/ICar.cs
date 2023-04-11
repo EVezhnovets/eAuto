@@ -11,8 +11,8 @@
         string Description { get; set; }
 		string? EngineIdentificationName { get; set; }
 		string EngineFuelType { get; set; }
-		int EngineCapacity { get; set; }
-		int EnginePower { get; set; }
+		string? EngineCapacity { get; set; }
+		int? EnginePower { get; set; }
 
 		int BrandId { get; set; }
         string Brand { get; set; }

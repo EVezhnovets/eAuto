@@ -18,8 +18,8 @@ namespace eAuto.Domain.DomainModels
         public string Description { get; set; }
 		public string? EngineIdentificationName { get; set; }
 		public string EngineFuelType { get; set; }
-		public int EngineCapacity { get; set; }
-		public int EnginePower { get; set; }
+		public string? EngineCapacity { get; set; }
+		public int? EnginePower { get; set; }
 
 		public int BrandId { get; set; }
 		public string Brand { get; set; }

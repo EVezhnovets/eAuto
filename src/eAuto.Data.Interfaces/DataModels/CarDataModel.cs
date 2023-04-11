@@ -30,10 +30,9 @@ namespace eAuto.Data.Interfaces.DataModels
         public int Odometer { get; set; }
         
         [Required]
-        [MaxLength(50)]
+        [MaxLength(500)]
         public string Description { get; set; }
 
-		[Required]
 		[MaxLength(50)]
         public string? EngineIdentificationName { get; set; }
 
@@ -41,13 +40,11 @@ namespace eAuto.Data.Interfaces.DataModels
 		[MaxLength(50)]
         public string EngineFuelType { get; set; }
 
-		[Required]
 		[MaxLength(50)]
-        public int EngineCapacity { get; set; }
+        public string? EngineCapacity { get; set; }
 
-		[Required]
 		[MaxLength(50)]
-        public int EnginePower { get; set; }
+        public int? EnginePower { get; set; }
 
 		[Required]
         [MaxLength(50)]
@@ -78,5 +75,46 @@ namespace eAuto.Data.Interfaces.DataModels
         [MaxLength(50)]
         public int TransmissionId { get; set; }
         [ForeignKey("TransmissionId")]public TransmissionDataModel Transmission { get; set; }
-    }
+
+        #region Ctor
+        public CarDataModel() { }
+
+        public CarDataModel(
+            decimal price,
+            string pictureUrl,
+            DateTime year,
+            DateTime dateArrival,
+            int odometer,
+            string desrciption,
+			string? engineIdentificationName,
+			string engineFuelType,
+			string? engineCapacity,
+			int? enginePower,
+			int brandId,
+			int modelId,
+			int generationId,
+			int bodyTypeId,
+			int driveTypeId,
+			int transmissionId
+			)
+        {
+            PriceInitial = price;
+            PictureUrl = pictureUrl;
+            Year = year;
+            DateArrival = dateArrival;
+            Odometer = odometer;
+            Description = desrciption;
+            EngineIdentificationName = engineIdentificationName;
+            EngineFuelType = engineFuelType;
+            EngineCapacity = engineCapacity;
+            EnginePower = enginePower;
+            BrandId = brandId;
+            ModelId = modelId;
+            GenerationId = generationId;
+            BodyTypeId = bodyTypeId;
+            DriveTypeId = driveTypeId;
+            TransmissionId = transmissionId;
+        }
+		#endregion
+	}
 }
