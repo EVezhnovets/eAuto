@@ -171,7 +171,7 @@ namespace eAuto.Web.Areas.Customer.Controllers
 			IEnumerable<BrandViewModel> brandsVM = brands.Select(i => new BrandViewModel(i.BrandId, i.Name));
 
 			var items = brandsVM
-				.Select(brand => new SelectListItem() { Value = brand.Name, Text = brand.Name })
+				.Select(brand => new SelectListItem() { Value = brand.BrandId.ToString(), Text = brand.Name })
 				.OrderBy(brand => brand.Text)
 				.ToList();
 
