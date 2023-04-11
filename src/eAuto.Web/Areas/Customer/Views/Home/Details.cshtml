@@ -18,21 +18,21 @@
                     <img src="@Model.Car.PictureUrl" width="100%" class="rounded" />
                 </div>
                 <div class="col-lg-6" style="text-align: center; margin-top:1rem">
-                    <h5 class="text-primary pb-2"> @Model.Car.Brand</h5>
-                    <h5 class="text-primary pb-2"> @Model.Car.Model</h5>
-                    <h5 class="text-primary pb-2"> @Model.Car.Generation</h5>
-                    <h5 class="text-primary pb-2"> @Model.Car.Year.Year.ToString()</h5>
-                    <h5 class="text-primary pb-2"> @Model.Car.BodyType</h5>
-                    <h5 class="text-primary pb-2"> @Model.Car.DateArrival.ToString("MM.yyyy")</h5>
-                    <h5 class="text-primary pb-2"> @Model.Car.EngineFuelType | @Model.Car.EngineCapacity</h5>
-                    <h5 class="text-primary pb-2"> @Model.Car.Odometer</h5>
-                    <h5 class="text-primary pb-2"> @Model.Car.Transmission</h5>
+                    <h5 class="text-primary pb-2">Brand: <span>@Model.Car.Brand</span></h5>
+                    <h5 class="text-primary pb-2">Model: <span>@Model.Car.Model</span></h5>
+                    <h5 class="text-primary pb-2">Generation: <span>@Model.Car.Generation</span></h5>
+                    <h5 class="text-primary pb-2">Year: <span>@Model.Car.Year.Year.ToString()</span></h5>
+                    <h5 class="text-primary pb-2">Bodytype: <span>@Model.Car.BodyType</span></h5>
+                    <h5 class="text-primary pb-2">Date of arrival: <span>@Model.Car.DateArrival.ToString("MM.yyyy")</span></h5>
+                    <h5 class="text-primary pb-2">Capacity: <span>@Model.Car.EngineFuelType</span> | <span>@Model.Car.EngineCapacity</span></h5>
+                    <h5 class="text-primary pb-2">Odometer: <span>@Model.Car.Odometer</span></h5>
+                    <h5 class="text-primary pb-2">Transmission: <span>@Model.Car.Transmission</span></h5>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
-                    <p class="text-secondary">@Html.Raw(Model.Car.Description)</p>
-                    <h3 class="text-primary pb-2">Price: @Model.Car.PriceInitial.ToString("c")</h3>
+                    <p class="text-secondary mt-5">@Html.Raw(Model.Car.Description)</p>
+                    <h3 class="text-primary pb-2 mt-5">Price: @Model.Car.PriceInitial.ToString("c", WebConstants.CultureInfoEN_US)</h3>
                 </div>
             </div>
         </div>

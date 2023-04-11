@@ -98,7 +98,7 @@ else
                         @obj.Transmission
                     </td>
                     <td width="10%">
-                        @obj.PriceInitial
+                        @obj.PriceInitial.ToString("C",WebConstants.CultureInfoEN_US)
                     </td>
                     <td width="5%">
                         @obj.Year.Year.ToString()

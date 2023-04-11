@@ -170,6 +170,9 @@ h4, .h4 {
     font-size: 1.25rem;
 }
 
+h5 span {
+    font-size:1.15rem;
+}
 h5, .h5 {
     font-size: 1rem;
 }
@@ -356,6 +359,7 @@ th {
 
 label {
     display: inline-block;
+    font-size: x-large;
 }
 
 button {
