@@ -30,7 +30,8 @@ namespace eAuto.Web.Areas.Admin.Controllers
                     {
                         DriveTypeId = i.DriveTypeId,
                         Name = i.Name
-                    });
+                    })
+                    .OrderBy(i => i.Name);
 				return View(viewModelList);
 			}
 			catch (DriveTypeNotFoundException ex)

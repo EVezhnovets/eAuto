@@ -19,9 +19,6 @@ namespace eAuto.Web.Models
 		public IEnumerable<SelectListItem>? BodyTypes { get; set; }
 		public int? BodyTypeFilterApplied { get; set; }
 
-		public IEnumerable<SelectListItem>? Engines { get; set; }
-		public int? EngineFilterApplied { get; set; }
-
 		public IEnumerable<SelectListItem>? DriveTypes { get; set; }
 		public int? DriveTypeFilterApplied { get; set; }
 

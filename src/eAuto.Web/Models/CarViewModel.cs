@@ -14,8 +14,8 @@ namespace eAuto.Web.Models
         public string Description { get; set; }
 		public string? EngineIdentificationName { get; set; }
 		public string EngineFuelType { get; set; }
-		public int EngineCapacity { get; set; }
-		public int EnginePower { get; set; }
+		public string? EngineCapacity { get; set; }
+		public int? EnginePower { get; set; }
 
 		public int BrandId { get; set; }
         [ValidateNever] public string Brand { get; set; }
@@ -47,10 +47,10 @@ namespace eAuto.Web.Models
             DateTime dateArrival,
             int odometer,
             string description,
-			string engineIdentificationName,
-			int engineCapacity,
+			string? engineIdentificationName,
+			string? engineCapacity,
 			string engineFuelType,
-			int enginePower,
+			int? enginePower,
 			string brand, 
             string model,
             string generation,

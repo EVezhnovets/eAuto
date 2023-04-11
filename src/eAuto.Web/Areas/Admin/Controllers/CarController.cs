@@ -151,13 +151,13 @@ namespace eAuto.Web.Areas.Admin.Controllers
                 CarCreateViewModel createViewModel = new()
                 {
                     CarVModel = new(),
-                    Brands = brandsList.Select(s => new SelectListItem { Value = s.BrandId.ToString(), Text = s.Name}),
-                    Models = modelsList.Select(s => new SelectListItem { Value = s.ModelId.ToString(), Text = s.Name}),
-                    Generations = generationsList.Select(s => new SelectListItem { Value = s.GenerationId.ToString(), Text = s.Name}),
-                    BodyTypes = bodyTypesList.Select(s => new SelectListItem { Value = s.BodyTypeId.ToString(), Text = s.Name}),
-                    DriveTypes= driveTypesList.Select(s => new SelectListItem { Value = s.DriveTypeId.ToString(), Text = s.Name}),
-                    Transmissions = transmissionsList.Select(s => new SelectListItem { Value = s.TransmissionId.ToString(), Text = s.Name})
-                };
+                    Brands = brandsList.Select(s => new SelectListItem { Value = s.BrandId.ToString(), Text = s.Name}).OrderBy(s=>s.Text),
+                    Models = modelsList.Select(s => new SelectListItem { Value = s.ModelId.ToString(), Text = s.Name}).OrderBy(s => s.Text),
+                    Generations = generationsList.Select(s => new SelectListItem { Value = s.GenerationId.ToString(), Text = s.Name}).OrderBy(s => s.Text),
+                    BodyTypes = bodyTypesList.Select(s => new SelectListItem { Value = s.BodyTypeId.ToString(), Text = s.Name}).OrderBy(s => s.Text),
+                    DriveTypes= driveTypesList.Select(s => new SelectListItem { Value = s.DriveTypeId.ToString(), Text = s.Name}).OrderBy(s => s.Text),
+                    Transmissions = transmissionsList.Select(s => new SelectListItem { Value = s.TransmissionId.ToString(), Text = s.Name}).OrderBy(s => s.Text)
+				};
                 return View(createViewModel);
             }
             catch (CarNotFoundException ex)
@@ -307,13 +307,13 @@ namespace eAuto.Web.Areas.Admin.Controllers
                         DriveTypeId = viewModel.DriveTypeId,
                         TransmissionId = viewModel.TransmissionId
             },
-                    Brands = brandsList.Select(b => new SelectListItem { Value = b.BrandId.ToString(), Text = b.Name }),
-                    Models = modelsList.Select(b => new SelectListItem { Value = b.ModelId.ToString(), Text = b.Name }),
-                    Generations = generationsList.Select(b => new SelectListItem { Value = b.GenerationId.ToString(), Text = b.Name }),
-                    BodyTypes = bodyTypesList.Select(b => new SelectListItem { Value = b.BodyTypeId.ToString(), Text = b.Name }),
-                    DriveTypes = driveTypesList.Select(b => new SelectListItem { Value = b.DriveTypeId.ToString(), Text = b.Name }),
-                    Transmissions = transmissionsList.Select(b => new SelectListItem { Value = b.TransmissionId.ToString(), Text = b.Name })
-                };
+                    Brands = brandsList.Select(b => new SelectListItem { Value = b.BrandId.ToString(), Text = b.Name }).OrderBy(b => b.Text),
+                    Models = modelsList.Select(b => new SelectListItem { Value = b.ModelId.ToString(), Text = b.Name }).OrderBy(b => b.Text),
+                    Generations = generationsList.Select(b => new SelectListItem { Value = b.GenerationId.ToString(), Text = b.Name }).OrderBy(b => b.Text),
+                    BodyTypes = bodyTypesList.Select(b => new SelectListItem { Value = b.BodyTypeId.ToString(), Text = b.Name }).OrderBy(b => b.Text),
+                    DriveTypes = driveTypesList.Select(b => new SelectListItem { Value = b.DriveTypeId.ToString(), Text = b.Name }).OrderBy(b => b.Text),
+                    Transmissions = transmissionsList.Select(b => new SelectListItem { Value = b.TransmissionId.ToString(), Text = b.Name }).OrderBy(b => b.Text)
+				};
 
                 return View(createViewModel);
             }

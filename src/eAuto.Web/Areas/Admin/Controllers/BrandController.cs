@@ -24,7 +24,12 @@ namespace eAuto.Web.Areas.Admin.Controllers
 			try
 			{
 				var result = await _brandService.GetBrandModelsAsync();
-				return View(result);
+                var orderedResult = result.Select(i => new BrandViewModel
+                {
+                    BrandId = i.BrandId,
+                    Name = i.Name,
+                }).OrderBy(i => i.Name);
+				return View(orderedResult);
 			}
 			catch (BrandNotFoundException ex)
 			{
