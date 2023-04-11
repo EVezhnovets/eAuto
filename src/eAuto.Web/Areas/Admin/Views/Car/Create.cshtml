@@ -58,6 +58,11 @@
 				<span asp-validation-for="@Model.CarVModel.EngineFuelType" class="text-danger"></span>
 			</div>
 			<div class="col mb-3">
+				<label asp-for="@Model.CarVModel.EngineCapacity"></label>
+				<input asp-for="@Model.CarVModel.EngineCapacity" class="form-control">
+				<span asp-validation-for="@Model.CarVModel.EngineCapacity" class="text-danger"></span>
+			</div>
+			<div class="col mb-3">
 				<label asp-for="@Model.CarVModel.PriceInitial"></label>
 				<input asp-for="@Model.CarVModel.PriceInitial" class="form-control">
 				<span asp-validation-for="@Model.CarVModel.PriceInitial" class="text-danger"></span>
@@ -66,18 +71,19 @@
 				<label asp-for="@Model.CarVModel.PictureUrl"></label>
 				<input asp-for="@Model.CarVModel.PictureUrl" class="form-control" name="files" type="file" id="formFile">
 			</div>
+		</div>
+		<div class="row">
 			<div class="col mb-3">
 				<label asp-for="@Model.CarVModel.Year"></label>
 				<input asp-for="@Model.CarVModel.Year" class="form-control">
 				<span asp-validation-for="@Model.CarVModel.Year" class="text-danger"></span>
 			</div>
-		</div>
-		<div class="row">
 			<div class="col mb-3">
 				<label asp-for="@Model.CarVModel.DateArrival"></label>
 				<input asp-for="@Model.CarVModel.DateArrival" class="form-control">
 				<span asp-validation-for="@Model.CarVModel.DateArrival" class="text-danger"></span>
-			</div><div class="col mb-3">
+			</div>
+			<div class="col mb-3">
 				<label asp-for="@Model.CarVModel.Odometer"></label>
 				<input asp-for="@Model.CarVModel.Odometer" class="form-control">
 				<span asp-validation-for="@Model.CarVModel.Odometer" class="text-danger"></span>

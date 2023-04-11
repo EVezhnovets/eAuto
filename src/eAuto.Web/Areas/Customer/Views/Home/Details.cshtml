@@ -24,11 +24,15 @@
                     <h5 class="text-primary pb-2"> @Model.Car.Year.Year.ToString()</h5>
                     <h5 class="text-primary pb-2"> @Model.Car.BodyType</h5>
                     <h5 class="text-primary pb-2"> @Model.Car.DateArrival.ToString("MM.yyyy")</h5>
-                    <h5 class="text-primary pb-2"> @Model.Car.EngineFuelType</h5>
+                    <h5 class="text-primary pb-2"> @Model.Car.EngineFuelType | @Model.Car.EngineCapacity</h5>
                     <h5 class="text-primary pb-2"> @Model.Car.Odometer</h5>
                     <h5 class="text-primary pb-2"> @Model.Car.Transmission</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
                     <p class="text-secondary">@Html.Raw(Model.Car.Description)</p>
-                    <h5 class="text-primary pb-2">auction Price: <strike>@Model.Car.PriceInitial.ToString("c")</strike></h5>
+                    <h3 class="text-primary pb-2">Price: @Model.Car.PriceInitial.ToString("c")</h3>
                 </div>
             </div>
         </div>

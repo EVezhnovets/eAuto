@@ -34,11 +34,11 @@
 	</div>
 </div>
 
-<div class="mt-5" style="width:90%; margin: auto">
-	<div class="row  pb-3">
+<div style="width:90%; margin: auto">
+	<div class="row pb-3">
 		@foreach (var product in Model.CarVModels)
 		{
-			<div class="col-lg-3 col-md-6">
+			<div class="col-lg-3 col-md-6 mt-5">
 				<div class="row p-2">
 					<div class="col-12 p-1">
 						<div class="card" style="border: solid #343a40 1px;border-radius: unset">
@@ -46,13 +46,13 @@
 
 							<div class="card-body">
 								<div class="pl-1">
-									<p class="card-title h5 text-primary">@product.Brand | @product.Model </p>
+									<p class="card-title h5 text-primary" style="height:3rem">@product.Brand | @product.Model </p>
 									<p class="card-title text-secondary"><b>@product.Generation</b></p>
 									<p class="card-title text-primary"><b>@product.Year.Year.ToString()</b></p>
-									<p class="card-title text-muted"><b>@product.EngineFuelType</b></p>
+									<p class="card-title text-muted"><b>@product.EngineFuelType | @product.EngineCapacity</b></p>
 								</div>
 								<div class="pl-1">
-									<p><sub>auction</sub> Price: from <b><span class="text-success">$</span>@product.PriceInitial.ToString("0.00")</b></p>
+									<p>Price: from <b><span class="text-success">$</span>@product.PriceInitial.ToString("0.00")</b></p>
 								</div>
 							</div>
 						</div>
