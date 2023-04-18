@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eAuto.Data.Context;
 
@@ -11,9 +12,11 @@ using eAuto.Data.Context;
 namespace eAuto.Data.Migrations
 {
     [DbContext(typeof(EAutoContext))]
-    partial class EAutoContextModelSnapshot : ModelSnapshot
+    [Migration("20230415141408_AddEngineTypeToDb")]
+    partial class AddEngineTypeToDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -98,10 +101,6 @@ namespace eAuto.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
-
-                    b.Property<int>("EngineFuelTypeId")
-                        .HasMaxLength(50)
-                        .HasColumnType("int");
 
                     b.Property<string>("EngineIdentificationName")
                         .HasMaxLength(50)
