@@ -30,7 +30,8 @@ namespace eAuto.Web.Areas.Admin.Controllers
                     {
                         TransmissionId = i.TransmissionId,
                         Name = i.Name
-                    });
+                    })
+                    .OrderBy(i => i.Name);
 				return View(viewModelList);
 			}
 			catch (TransmissionNotFoundException ex)

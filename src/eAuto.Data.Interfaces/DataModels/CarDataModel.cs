@@ -30,10 +30,27 @@ namespace eAuto.Data.Interfaces.DataModels
         public int Odometer { get; set; }
         
         [Required]
-        [MaxLength(50)]
+        [MaxLength(500)]
         public string Description { get; set; }
 
-        [Required]
+		[MaxLength(50)]
+        public string? EngineIdentificationName { get; set; }
+
+		[Required]
+		[MaxLength(50)]
+        public string EngineFuelType { get; set; }
+
+		[Required]
+		[MaxLength(50)]
+		public int EngineFuelTypeId { get; set; }
+
+		[MaxLength(50)]
+        public string? EngineCapacity { get; set; }
+
+		[MaxLength(50)]
+        public int? EnginePower { get; set; }
+
+		[Required]
         [MaxLength(50)]
         public int BrandId { get; set; }
         [ForeignKey("BrandId")]public BrandDataModel Brand { get; set; }
@@ -53,11 +70,6 @@ namespace eAuto.Data.Interfaces.DataModels
         public int BodyTypeId { get; set; }
         [ForeignKey("BodyTypeId")] public BodyTypeDataModel BodyType { get; set; }
 
-        [Required]
-        [MaxLength(50)]
-        public int EngineId { get; set; }
-        [ForeignKey("EngineId")]public EngineDataModel Engine { get; set; }
-
         [Required] 
         [MaxLength(50)]
         public int DriveTypeId { get; set; }
@@ -67,5 +79,48 @@ namespace eAuto.Data.Interfaces.DataModels
         [MaxLength(50)]
         public int TransmissionId { get; set; }
         [ForeignKey("TransmissionId")]public TransmissionDataModel Transmission { get; set; }
-    }
+
+        #region Ctor
+        public CarDataModel() { }
+
+        public CarDataModel(
+            decimal price,
+            string pictureUrl,
+            DateTime year,
+            DateTime dateArrival,
+            int odometer,
+            string desrciption,
+			string? engineIdentificationName,
+			string engineFuelType,
+			int engineFuelTypeId,
+			string? engineCapacity,
+			int? enginePower,
+			int brandId,
+			int modelId,
+			int generationId,
+			int bodyTypeId,
+			int driveTypeId,
+			int transmissionId
+			)
+        {
+            PriceInitial = price;
+            PictureUrl = pictureUrl;
+            Year = year;
+            DateArrival = dateArrival;
+            Odometer = odometer;
+            Description = desrciption;
+            EngineIdentificationName = engineIdentificationName;
+            EngineFuelType = engineFuelType;
+            EngineFuelTypeId = engineFuelTypeId;
+            EngineCapacity = engineCapacity;
+            EnginePower = enginePower;
+            BrandId = brandId;
+            ModelId = modelId;
+            GenerationId = generationId;
+            BodyTypeId = bodyTypeId;
+            DriveTypeId = driveTypeId;
+            TransmissionId = transmissionId;
+        }
+		#endregion
+	}
 }

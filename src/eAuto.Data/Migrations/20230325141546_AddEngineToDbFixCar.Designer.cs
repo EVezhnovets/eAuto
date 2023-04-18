@@ -239,7 +239,7 @@ namespace eAuto.Data.Migrations
 
                     b.HasIndex("ModelId");
 
-                    b.ToTable("GenerationDataModel");
+                    b.ToTable("Generations");
                 });
 
             modelBuilder.Entity("eAuto.Data.Interfaces.DataModels.ModelDataModel", b =>

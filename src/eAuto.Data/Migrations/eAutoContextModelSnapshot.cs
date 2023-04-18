@@ -17,7 +17,7 @@ namespace eAuto.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.3")
+                .HasAnnotation("ProductVersion", "7.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -83,14 +83,31 @@ namespace eAuto.Data.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<int>("DriveTypeId")
                         .HasMaxLength(50)
                         .HasColumnType("int");
 
-                    b.Property<int>("EngineId")
+                    b.Property<string>("EngineCapacity")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("EngineFuelType")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("EngineFuelTypeId")
+                        .HasMaxLength(50)
+                        .HasColumnType("int");
+
+                    b.Property<string>("EngineIdentificationName")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int?>("EnginePower")
                         .HasMaxLength(50)
                         .HasColumnType("int");
 
@@ -130,8 +147,6 @@ namespace eAuto.Data.Migrations
 
                     b.HasIndex("DriveTypeId");
 
-                    b.HasIndex("EngineId");
-
                     b.HasIndex("GenerationId");
 
                     b.HasIndex("ModelId");
@@ -160,59 +175,23 @@ namespace eAuto.Data.Migrations
                     b.ToTable("DriveTypes");
                 });
 
-            modelBuilder.Entity("eAuto.Data.Interfaces.DataModels.EngineDataModel", b =>
+            modelBuilder.Entity("eAuto.Data.Interfaces.DataModels.EngineTypeDataModel", b =>
                 {
-                    b.Property<int>("EngineId")
+                    b.Property<int>("EngineTypeId")
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(50)
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EngineId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EngineTypeId"));
 
-                    b.Property<int>("BrandId")
-                        .HasMaxLength(50)
-                        .HasColumnType("int");
-
-                    b.Property<int>("Capacity")
-                        .HasMaxLength(50)
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<int>("GenerationId")
-                        .HasMaxLength(50)
-                        .HasColumnType("int");
-
-                    b.Property<string>("IdentificationName")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("ModelId")
-                        .HasMaxLength(50)
-                        .HasColumnType("int");
+                    b.HasKey("EngineTypeId");
 
-                    b.Property<int>("Power")
-                        .HasMaxLength(50)
-                        .HasColumnType("int");
-
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("EngineId");
-
-                    b.HasIndex("BrandId");
-
-                    b.HasIndex("GenerationId");
-
-                    b.HasIndex("ModelId");
-
-                    b.ToTable("Engines");
+                    b.ToTable("EngineTypes");
                 });
 
             modelBuilder.Entity("eAuto.Data.Interfaces.DataModels.GenerationDataModel", b =>
@@ -241,7 +220,7 @@ namespace eAuto.Data.Migrations
 
                     b.HasIndex("ModelId");
 
-                    b.ToTable("GenerationDataModel");
+                    b.ToTable("Generations");
                 });
 
             modelBuilder.Entity("eAuto.Data.Interfaces.DataModels.ModelDataModel", b =>
@@ -292,43 +271,37 @@ namespace eAuto.Data.Migrations
                     b.HasOne("eAuto.Data.Interfaces.DataModels.BodyTypeDataModel", "BodyType")
                         .WithMany()
                         .HasForeignKey("BodyTypeId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("eAuto.Data.Interfaces.DataModels.BrandDataModel", "Brand")
                         .WithMany()
                         .HasForeignKey("BrandId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("eAuto.Data.Interfaces.DataModels.DriveTypeDataModel", "DriveType")
                         .WithMany()
                         .HasForeignKey("DriveTypeId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("eAuto.Data.Interfaces.DataModels.EngineDataModel", "Engine")
-                        .WithMany()
-                        .HasForeignKey("EngineId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("eAuto.Data.Interfaces.DataModels.GenerationDataModel", "Generation")
                         .WithMany()
                         .HasForeignKey("GenerationId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("eAuto.Data.Interfaces.DataModels.ModelDataModel", "Model")
                         .WithMany()
                         .HasForeignKey("ModelId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("eAuto.Data.Interfaces.DataModels.TransmissionDataModel", "Transmission")
                         .WithMany()
                         .HasForeignKey("TransmissionId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("BodyType");
@@ -337,8 +310,6 @@ namespace eAuto.Data.Migrations
 
                     b.Navigation("DriveType");
 
-                    b.Navigation("Engine");
-
                     b.Navigation("Generation");
 
                     b.Navigation("Model");
@@ -346,45 +317,18 @@ namespace eAuto.Data.Migrations
                     b.Navigation("Transmission");
                 });
 
-            modelBuilder.Entity("eAuto.Data.Interfaces.DataModels.EngineDataModel", b =>
-                {
-                    b.HasOne("eAuto.Data.Interfaces.DataModels.BrandDataModel", "Brand")
-                        .WithMany()
-                        .HasForeignKey("BrandId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("eAuto.Data.Interfaces.DataModels.GenerationDataModel", "Generation")
-                        .WithMany()
-                        .HasForeignKey("GenerationId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("eAuto.Data.Interfaces.DataModels.ModelDataModel", "Model")
-                        .WithMany()
-                        .HasForeignKey("ModelId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Brand");
-
-                    b.Navigation("Generation");
-
-                    b.Navigation("Model");
-                });
-
             modelBuilder.Entity("eAuto.Data.Interfaces.DataModels.GenerationDataModel", b =>
                 {
                     b.HasOne("eAuto.Data.Interfaces.DataModels.BrandDataModel", "Brand")
                         .WithMany()
                         .HasForeignKey("BrandId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("eAuto.Data.Interfaces.DataModels.ModelDataModel", "Model")
                         .WithMany()
                         .HasForeignKey("ModelId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Brand");
@@ -397,7 +341,7 @@ namespace eAuto.Data.Migrations
                     b.HasOne("eAuto.Data.Interfaces.DataModels.BrandDataModel", "Brand")
                         .WithMany()
                         .HasForeignKey("BrandId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Brand");

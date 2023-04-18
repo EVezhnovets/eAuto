@@ -2,7 +2,6 @@
 using eAuto.Domain.Interfaces;
 using eAuto.Domain.Interfaces.Exceptions;
 using eAuto.Web.Models;
-using eAuto.Web.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -21,7 +20,6 @@ namespace eAuto.Web.Areas.Admin.Controllers
         private readonly IModelService _modelService;
         private readonly IGenerationService _generationService;
         private readonly IBodyTypeService _bodyTypeService;
-        private readonly IEngineService _engineService;
         private readonly IDriveTypeService _driveTypeService;
         private readonly ITransmissionService _transmissionService;
 
@@ -32,7 +30,6 @@ namespace eAuto.Web.Areas.Admin.Controllers
             IModelService modelService, 
             IGenerationService generationService,
             IBodyTypeService bodyTypeService,
-            IEngineService engineService,
             IDriveTypeService driveTypeService,
             ITransmissionService transmissionService,
             IAppLogger<CarController> logger)
@@ -43,14 +40,13 @@ namespace eAuto.Web.Areas.Admin.Controllers
 			_modelService = modelService;
 			_generationService = generationService;
             _bodyTypeService = bodyTypeService;
-            _engineService = engineService;
             _driveTypeService = driveTypeService;
             _transmissionService = transmissionService;
 			_logger = logger;
 		}
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(CarsIndexViewModel carsIndex, int? pageId)
         {
 			try
 			{
@@ -65,6 +61,10 @@ namespace eAuto.Web.Areas.Admin.Controllers
                         DateArrival = i.DateArrival,
                         Odometer = i.Odometer,
                         Description = i.Description,
+                        EngineIdentificationName = i.EngineIdentificationName,
+                        EngineCapacity = i.EngineCapacity,
+                        EngineFuelType = i.EngineFuelType,
+                        EnginePower = i.EnginePower,
                         BrandId = i.BrandId,
                         Brand = i.Brand,
                         ModelId = i.ModelId,
@@ -73,15 +73,53 @@ namespace eAuto.Web.Areas.Admin.Controllers
                         Generation = i.Generation,
                         BodyTypeId = i.BodyTypeId,
                         BodyType = i.BodyType,
-                        EngineId = i.EngineId,
-                        Engine = i.Engine,
                         DriveTypeId = i.DriveTypeId,
                         DriveType = i.DriveType,
                         TransmissionId = i.TransmissionId,
                         Transmission = i.Transmission
 					});
- 
-                return View(carsList);
+
+				var carsQuery = carsList
+					.Where(i => (!carsIndex.BrandFilterApplied.HasValue || i.BrandId == carsIndex.BrandFilterApplied)
+								&& (!carsIndex.ModelFilterApplied.HasValue || i.ModelId == carsIndex.ModelFilterApplied)
+								&& (!carsIndex.GenerationFilterApplied.HasValue || i.GenerationId == carsIndex.GenerationFilterApplied)
+								&& (!carsIndex.BodyTypeFilterApplied.HasValue || i.BodyTypeId == carsIndex.BodyTypeFilterApplied)
+								&& (!carsIndex.DriveTypeFilterApplied.HasValue || i.DriveTypeId == carsIndex.DriveTypeFilterApplied)
+								&& (!carsIndex.TransmissionFilterApplied.HasValue || i.TransmissionId == carsIndex.TransmissionFilterApplied))
+					.Select(i =>
+						new CarViewModel(
+							i.CarId,
+							i.PriceInitial,
+							i.PictureUrl,
+							i.Year,
+							i.DateArrival,
+							i.Odometer,
+							i.Description,
+                            i.EngineIdentificationName,
+                            i.EngineCapacity,
+                            i.EngineFuelType,
+                            i.EngineFuelTypeId,
+                            i.EnginePower,
+							i.Brand,
+							i.Model,
+							i.Generation,
+							i.BodyType,
+							i.DriveType,
+							i.Transmission
+					)).ToList();
+
+				var carsResult = new CarsIndexViewModel()
+				{
+					CarVModels = carsQuery,
+					Brands = (await GetBrands()).ToList(),
+					Models = (await GetModels()).ToList(),
+					Generations = (await GetGenerations()).ToList(),
+					BodyTypes = (await GetBodyTypes()).ToList(),
+					DriveTypes = (await GetDriveTypes()).ToList(),
+					Transmissions = (await GetTransmissions()).ToList(),
+
+				};
+				return View(carsResult);
 			}
 			catch (CarNotFoundException ex)
 			{
@@ -107,21 +145,19 @@ namespace eAuto.Web.Areas.Admin.Controllers
                 var modelsList = await _modelService.GetModelModelsAsync();
                 var generationsList = await _generationService.GetGenerationModelsAsync();
                 var bodyTypesList = await _bodyTypeService.GetBodyTypeModelsAsync();
-                var enginessList = await _engineService.GetEngineModelsAsync();
                 var driveTypesList = await _driveTypeService.GetDriveTypeModelsAsync();
                 var transmissionsList = await _transmissionService.GetTransmissionModelsAsync();
 
                 CarCreateViewModel createViewModel = new()
                 {
                     CarVModel = new(),
-                    Brands = brandsList.Select(s => new SelectListItem { Value = s.BrandId.ToString(), Text = s.Name}),
-                    Models = modelsList.Select(s => new SelectListItem { Value = s.ModelId.ToString(), Text = s.Name}),
-                    Generations = generationsList.Select(s => new SelectListItem { Value = s.GenerationId.ToString(), Text = s.Name}),
-                    BodyTypes = bodyTypesList.Select(s => new SelectListItem { Value = s.BodyTypeId.ToString(), Text = s.Name}),
-                    Engines = enginessList.Select(s => new SelectListItem { Value = s.EngineId.ToString(), Text = s.IdentificationName}),
-                    DriveTypes= driveTypesList.Select(s => new SelectListItem { Value = s.DriveTypeId.ToString(), Text = s.Name}),
-                    Transmissions = transmissionsList.Select(s => new SelectListItem { Value = s.TransmissionId.ToString(), Text = s.Name})
-                };
+                    Brands = brandsList.Select(s => new SelectListItem { Value = s.BrandId.ToString(), Text = s.Name}).OrderBy(s=>s.Text),
+                    Models = modelsList.Select(s => new SelectListItem { Value = s.ModelId.ToString(), Text = s.Name}).OrderBy(s => s.Text),
+                    Generations = generationsList.Select(s => new SelectListItem { Value = s.GenerationId.ToString(), Text = s.Name}).OrderBy(s => s.Text),
+                    BodyTypes = bodyTypesList.Select(s => new SelectListItem { Value = s.BodyTypeId.ToString(), Text = s.Name}).OrderBy(s => s.Text),
+                    DriveTypes= driveTypesList.Select(s => new SelectListItem { Value = s.DriveTypeId.ToString(), Text = s.Name}).OrderBy(s => s.Text),
+                    Transmissions = transmissionsList.Select(s => new SelectListItem { Value = s.TransmissionId.ToString(), Text = s.Name}).OrderBy(s => s.Text)
+				};
                 return View(createViewModel);
             }
             catch (CarNotFoundException ex)
@@ -161,11 +197,14 @@ namespace eAuto.Web.Areas.Admin.Controllers
                     car.DateArrival = viewModel.CarVModel.DateArrival;
                     car.Odometer = viewModel.CarVModel.Odometer;
 					car.Description = viewModel.CarVModel.Description;
+                    car.EngineIdentificationName = viewModel.CarVModel.EngineIdentificationName;
+                    car.EngineCapacity = viewModel.CarVModel.EngineCapacity;
+                    car.EngineFuelType = viewModel.CarVModel.EngineFuelType;
+                    car.EnginePower = viewModel.CarVModel.EnginePower;
 					car.BrandId = viewModel.CarVModel.BrandId;
 					car.ModelId = viewModel.CarVModel.ModelId;
                     car.GenerationId = viewModel.CarVModel.GenerationId;
                     car.BodyTypeId = viewModel.CarVModel.BodyTypeId;
-                    car.EngineId = viewModel.CarVModel.EngineId;
                     car.DriveTypeId = viewModel.CarVModel.DriveTypeId;
                     car.TransmissionId = viewModel.CarVModel.TransmissionId;
                     
@@ -225,21 +264,6 @@ namespace eAuto.Web.Areas.Admin.Controllers
                         Name = bd.Name
                     }).ToList();
 
-                var enginesIList = await _engineService.GetEngineModelsAsync();
-                var enginesList = enginesIList
-                    .Select(e => new EngineViewModel()
-                    {
-                        EngineId = e.EngineId,
-                        IdentificationName = e.IdentificationName,
-                        Type = e.Type,
-                        Capacity = e.Capacity,
-                        Power = e.Power,
-                        Description = e.Description,
-                        Brand = e.Brand,
-                        Model = e.Model,
-                        Generation = e.Generation
-                    }).ToList();
-
                 var driveTypesIList = await _driveTypeService.GetDriveTypeModelsAsync();
                 var driveTypesList = driveTypesIList
                     .Select(d => new DriveTypeViewModel()
@@ -269,6 +293,10 @@ namespace eAuto.Web.Areas.Admin.Controllers
                         DateArrival = viewModel.DateArrival,
                         Odometer = viewModel.Odometer,
                         Description = viewModel.Description,
+                        EngineIdentificationName = viewModel.EngineIdentificationName,
+                        EngineCapacity = viewModel.EngineCapacity,
+                        EngineFuelType = viewModel.EngineFuelType,
+                        EnginePower = viewModel.EnginePower,
 						BrandId = viewModel.BrandId,
                         Brand = viewModel.Brand,
 						ModelId = viewModel.ModelId,
@@ -276,18 +304,16 @@ namespace eAuto.Web.Areas.Admin.Controllers
                         GenerationId = viewModel.GenerationId,
                         Generation = viewModel.Generation,
                         BodyTypeId = viewModel.BodyTypeId,
-                        EngineId = viewModel.EngineId,
                         DriveTypeId = viewModel.DriveTypeId,
                         TransmissionId = viewModel.TransmissionId
             },
-                    Brands = brandsList.Select(b => new SelectListItem { Value = b.BrandId.ToString(), Text = b.Name }),
-                    Models = modelsList.Select(b => new SelectListItem { Value = b.ModelId.ToString(), Text = b.Name }),
-                    Generations = generationsList.Select(b => new SelectListItem { Value = b.GenerationId.ToString(), Text = b.Name }),
-                    BodyTypes = bodyTypesList.Select(b => new SelectListItem { Value = b.BodyTypeId.ToString(), Text = b.Name }),
-                    Engines = enginesList.Select(b => new SelectListItem { Value = b.EngineId.ToString(), Text = b.IdentificationName }),
-                    DriveTypes = driveTypesList.Select(b => new SelectListItem { Value = b.DriveTypeId.ToString(), Text = b.Name }),
-                    Transmissions = transmissionsList.Select(b => new SelectListItem { Value = b.TransmissionId.ToString(), Text = b.Name })
-                };
+                    Brands = brandsList.Select(b => new SelectListItem { Value = b.BrandId.ToString(), Text = b.Name }).OrderBy(b => b.Text),
+                    Models = modelsList.Select(b => new SelectListItem { Value = b.ModelId.ToString(), Text = b.Name }).OrderBy(b => b.Text),
+                    Generations = generationsList.Select(b => new SelectListItem { Value = b.GenerationId.ToString(), Text = b.Name }).OrderBy(b => b.Text),
+                    BodyTypes = bodyTypesList.Select(b => new SelectListItem { Value = b.BodyTypeId.ToString(), Text = b.Name }).OrderBy(b => b.Text),
+                    DriveTypes = driveTypesList.Select(b => new SelectListItem { Value = b.DriveTypeId.ToString(), Text = b.Name }).OrderBy(b => b.Text),
+                    Transmissions = transmissionsList.Select(b => new SelectListItem { Value = b.TransmissionId.ToString(), Text = b.Name }).OrderBy(b => b.Text)
+				};
 
                 return View(createViewModel);
             }
@@ -330,7 +356,11 @@ namespace eAuto.Web.Areas.Admin.Controllers
                     car.Year = viewModel.CarVModel.Year;
                     car.DateArrival = viewModel.CarVModel.DateArrival;
                     car.Odometer = viewModel.CarVModel.Odometer;
-                    car.Description = viewModel.CarVModel.Description; 
+                    car.Description = viewModel.CarVModel.Description;
+                    car.EngineIdentificationName = viewModel.CarVModel.EngineIdentificationName;
+                    car.EngineCapacity = viewModel.CarVModel.EngineCapacity;
+                    car.EngineFuelType = viewModel.CarVModel.EngineFuelType;
+                    car.EnginePower = viewModel.CarVModel.EnginePower;
                     car.BrandId = viewModel.CarVModel.BrandId;
                     car.Brand = _brandService.GetBrandModel(viewModel.CarVModel.BrandId).Name.ToString();
                     car.ModelId = viewModel.CarVModel.ModelId;
@@ -339,8 +369,6 @@ namespace eAuto.Web.Areas.Admin.Controllers
                     car.Generation = _generationService.GetGenerationModel(viewModel.CarVModel.GenerationId).Name.ToString();
                     car.BodyTypeId = viewModel.CarVModel.BodyTypeId;
                     car.BodyType = _bodyTypeService.GetBodyTypeModel(viewModel.CarVModel.BodyTypeId).Name.ToString();
-                    car.EngineId = viewModel.CarVModel.EngineId;
-                    car.Engine = _engineService.GetEngineModel(viewModel.CarVModel.EngineId).IdentificationName.ToString();
                     car.DriveTypeId = viewModel.CarVModel.DriveTypeId;
                     car.DriveType = _driveTypeService.GetDriveTypeModel(viewModel.CarVModel.DriveTypeId).Name.ToString();
                     car.TransmissionId = viewModel.CarVModel.TransmissionId;
@@ -386,5 +414,103 @@ namespace eAuto.Web.Areas.Admin.Controllers
             }
             #endregion
         }
-    }
+
+		private async Task<IEnumerable<SelectListItem>> GetBrands()
+		{
+			var brands = await _brandService.GetBrandModelsAsync();
+			IEnumerable<BrandViewModel> brandsVM = brands.Select(i => new BrandViewModel(i.BrandId, i.Name));
+
+			var items = brandsVM
+				.Select(brand => new SelectListItem() { Value = brand.BrandId.ToString(), Text = brand.Name })
+				.OrderBy(brand => brand.Text)
+				.ToList();
+
+			var allItems = new SelectListItem() { Value = null, Text = "All Brands", Selected = true };
+			items.Insert(0, allItems);
+
+			return items;
+		}
+
+		private async Task<IEnumerable<SelectListItem>> GetModels()
+		{
+			var models = await _modelService.GetModelModelsAsync();
+			IEnumerable<ModelViewModel> modelsVM = models.Select(i => new ModelViewModel(i.ModelId, i.Name, i.Brand));
+
+			var items = modelsVM
+				.Select(model => new SelectListItem { Value = model.ModelId.ToString(), Text = model.Name })
+				.OrderBy(model => model.Text)
+				.ToList();
+
+			var allItems = new SelectListItem() { Value = null, Text = "All Models", Selected = true };
+			items.Insert(0, allItems);
+
+			return items;
+		}
+
+		private async Task<IEnumerable<SelectListItem>> GetGenerations()
+		{
+			var generations = await _generationService.GetGenerationModelsAsync();
+			IEnumerable<GenerationViewModel> generationsVM = generations.Select(i => new GenerationViewModel(i.GenerationId, i.Name, i.Brand, i.Model));
+
+			var items = generationsVM
+				.Select(generation => new SelectListItem { Value = generation.GenerationId.ToString(), Text = generation.Name })
+				.OrderBy(generation => generation.Text)
+				.ToList();
+
+			var allItems = new SelectListItem() { Value = null, Text = "All Generations", Selected = true };
+			items.Insert(0, allItems);
+
+			return items;
+		}
+
+		private async Task<IEnumerable<SelectListItem>> GetBodyTypes()
+		{
+			var bodyTypes = await _bodyTypeService.GetBodyTypeModelsAsync();
+			IEnumerable<BodyTypeViewModel> bodyTypesVM = bodyTypes.Select(i => new BodyTypeViewModel(i.BodyTypeId, i.Name));
+
+			var items = bodyTypesVM
+				.Select(bodyType => new SelectListItem { Value = bodyType.BodyTypeId.ToString(), Text = bodyType.Name })
+				.OrderBy(bodyType => bodyType.Text)
+				.ToList();
+
+			var allItems = new SelectListItem() { Value = null, Text = "All Body Types", Selected = true };
+			items.Insert(0, allItems);
+
+			return items;
+		}
+
+		private async Task<IEnumerable<SelectListItem>> GetDriveTypes()
+		{
+			var driveTypes = await _driveTypeService.GetDriveTypeModelsAsync();
+			IEnumerable<DriveTypeViewModel> driveTypesVM = driveTypes.Select(
+				i => new DriveTypeViewModel(i.DriveTypeId, i.Name));
+
+			var items = driveTypesVM
+				.Select(driveType => new SelectListItem { Value = driveType.DriveTypeId.ToString(), Text = driveType.Name })
+				.OrderBy(driveType => driveType.Text)
+				.ToList();
+
+			var allItems = new SelectListItem() { Value = null, Text = "All Drive Types", Selected = true };
+			items.Insert(0, allItems);
+
+			return items;
+		}
+
+		private async Task<IEnumerable<SelectListItem>> GetTransmissions()
+		{
+			var transmissions = await _transmissionService.GetTransmissionModelsAsync();
+			IEnumerable<TransmissionViewModel> transmissionsVM = transmissions.Select(
+				i => new TransmissionViewModel(i.TransmissionId, i.Name));
+
+			var items = transmissionsVM
+				.Select(transmission => new SelectListItem { Value = transmission.TransmissionId.ToString(), Text = transmission.Name })
+				.OrderBy(transmission => transmission.Text)
+				.ToList();
+
+			var allItems = new SelectListItem() { Value = null, Text = "All Transmissions", Selected = true };
+			items.Insert(0, allItems);
+
+			return items;
+		}
+	}
 }

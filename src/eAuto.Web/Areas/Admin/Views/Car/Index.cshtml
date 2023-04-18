@@ -1,23 +1,52 @@
-﻿@model IEnumerable<CarViewModel>
+﻿@model CarsIndexViewModel
 
 <partial name="_Notification" />
-<div class="container-fluid p-3" />
-<div class="row pt-4">
-    <div class="col-6">
-        <h2 class="text-primary text-black-50">Cars</h2>
+<div class="row mt-5 justify-content-center">
+    <div class="col-3">
+        <h1 class="text-primary text-black-50">Cars in stock</h1>
     </div>
-    <div class="col-6 text-end">
+    <div class="col-2" style="margin-top:-0.25rem">
         <a asp-controller="Car" asp-action="Create" class="btn btn-outline-success">
-            <i class="bi bi-pen">Add</i>
+            Add New Car
         </a>
     </div>
 </div>
+<div class="container my-4">
+    <form method="get">
+        <div class="row justify-content-center">
+            <div class="col-lg-3">
+                <select asp-for="@Model.BrandFilterApplied" asp-items="@Model.Brands" class="form-select" style="background-color:#fff"></select>
+            </div>
+            <div class="col-lg-3">
+                <select asp-for="@Model.ModelFilterApplied" asp-items="@Model.Models" class="form-select" style="background-color:#fff"></select>
+            </div>
+            <div class="col-lg-3">
+                <select asp-for="@Model.GenerationFilterApplied" asp-items="@Model.Generations" class="form-select" style="background-color:#fff"></select>
+            </div>
+            <div class="col-lg-3">
+                <select asp-for="@Model.BodyTypeFilterApplied" asp-items="@Model.BodyTypes" class="form-select" style="background-color:#fff"></select>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-2">
+            <div class="col-lg-3">
+                <select asp-for="@Model.DriveTypeFilterApplied" asp-items="@Model.DriveTypes" class="form-select" style="background-color:#fff"></select>
+            </div>
+            <div class="col-lg-3">
+                <select asp-for="@Model.TransmissionFilterApplied" asp-items="@Model.Transmissions" class="form-select" style="background-color:#fff"></select>
+            </div>
+            <div class="col-lg-2 mt-1">
+                <button type="submit" class="btn btn-outline-dark" style="width:12rem">
+                    Apply
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
 
-
-@if (Model.Count() == 0)
+@if (Model.CarVModels.Count() == 0)
 {
-    <table class="table table-bordered table-striped" style="width:100%">
-        <thead>
+    <table class="table table-striped" style="width:95%; margin: 3rem auto">
+        <thead style="border-top: solid 1px; border-bottom: solid 2px; vertical-align: middle; margin-top: 1rem">
             <tr>
                 <th>
                     Car Name
@@ -28,8 +57,8 @@
 }
 else
 {
-    <table class="table table-bordered table-striped" style="width:100%">
-        <thead>
+    <table class="table table-striped" style="width:95%; margin: 3rem auto">
+        <thead style="border-top: solid 1px; border-bottom: solid 2px; vertical-align: middle; margin-top: 1rem">
             <tr>
                 <th>Id</th>
                 <th>Picture</th>
@@ -43,7 +72,7 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var obj in Model)
+            @foreach (var obj in Model.CarVModels)
             {
                 <tr>
                     <td width="5%">
@@ -51,26 +80,25 @@ else
                     </td>
                     <td width="15%" style="padding:0.3rem">
                       <div>
-                        <a asp-controller="Car" asp-action="Index" asp-route-id="@obj.CarId">
+                        <a asp-controller="Car" asp-action="Edit" asp-route-id="@obj.CarId">
                             <img src=@obj.PictureUrl class="float-start" style="width:100%" />
                         </a>
                     </div>
                     </td>
-                    <td width="10%">
-                        <p>@obj.Brand</p>
-                        <p>@obj.Model</p>
-                    </td>
                     <td width="20%">
+                        <p>@obj.Brand @obj.Model</p>
+                    </td>
+                    <td width="15%">
                         @obj.Generation
                     </td>
                     <td width="10%">
-                        @obj.Engine
+                        @obj.EngineFuelType
                     </td>
-                    <td width="15%">
+                    <td width="10%">
                         @obj.Transmission
                     </td>
                     <td width="10%">
-                        @obj.PriceInitial
+                        @obj.PriceInitial.ToString("C",WebConstants.CultureInfoEN_US)
                     </td>
                     <td width="5%">
                         @obj.Year.Year.ToString()

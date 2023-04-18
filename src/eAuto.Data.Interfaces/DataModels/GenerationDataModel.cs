@@ -19,5 +19,16 @@ namespace eAuto.Data.Interfaces.DataModels
         [Required]
         public int ModelId { get; set; }
         [ForeignKey("ModelId")] public ModelDataModel Model { get; set; }
-    }
+
+        #region Ctor
+        public GenerationDataModel() { }
+
+        public GenerationDataModel(string name, int brandId, int modelId)
+        {
+            Name = name;
+            BrandId = brandId;
+            ModelId = modelId;
+        }
+		#endregion
+	}
 }

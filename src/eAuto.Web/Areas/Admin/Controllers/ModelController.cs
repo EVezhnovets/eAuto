@@ -37,8 +37,8 @@ namespace eAuto.Web.Areas.Admin.Controllers
                         Name = i.Name,
                         BrandId = i.BrandId,
                         Brand = i.Brand
-                    });
- 
+                    })
+                    .OrderBy(i => i.Brand).ThenBy(i => i.Name);
                 return View(modelsList);
 			}
 			catch (ModelNotFoundException ex)
@@ -67,6 +67,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
                 {
                     ViewModel = new(),
                     ModelFK = brandsList.Select(s => new SelectListItem { Value = s.BrandId.ToString(), Text = s.Name})
+                                        .OrderBy(s => s.Text)
                 };
                 return View(viewModel);
             }

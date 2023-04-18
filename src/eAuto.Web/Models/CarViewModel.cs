@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
 
 namespace eAuto.Web.Models
@@ -13,6 +12,11 @@ namespace eAuto.Web.Models
         [DataType("month")] public DateTime DateArrival { get; set; } = DateTime.Now;
 		public int Odometer { get; set; }
         public string Description { get; set; }
+		public string? EngineIdentificationName { get; set; }
+		public int EngineFuelTypeId { get; set; }
+		public string EngineFuelType { get; set; }
+		public string? EngineCapacity { get; set; }
+		public int? EnginePower { get; set; }
 
 		public int BrandId { get; set; }
         [ValidateNever] public string Brand { get; set; }
@@ -24,9 +28,6 @@ namespace eAuto.Web.Models
 		[ValidateNever] public string Generation { get; set; }
         public int BodyTypeId { get; set; }
         [ValidateNever] public string BodyType { get; set; }
-
-        public int EngineId { get; set; }
-        [ValidateNever] public string Engine { get; set; }
 
         public int DriveTypeId { get; set; }
         [ValidateNever] public string DriveType { get; set; }
@@ -47,11 +48,15 @@ namespace eAuto.Web.Models
             DateTime dateArrival,
             int odometer,
             string description,
-            string brand, 
+			string? engineIdentificationName,
+			string? engineCapacity,
+			string engineFuelType,
+			int engineFuelTypeId,
+			int? enginePower,
+			string brand, 
             string model,
             string generation,
             string bodyType,
-            string engine,
             string driveType,
             string transmission)
         {
@@ -62,11 +67,15 @@ namespace eAuto.Web.Models
             DateArrival = dateArrival;
             Odometer = odometer;
             Description = description;
+            EngineIdentificationName = engineIdentificationName;
+            EngineFuelType = engineFuelType;
+            EngineFuelTypeId = engineFuelTypeId;
+            EngineCapacity = engineCapacity;
+            EnginePower = enginePower;
             Brand = brand;
             Model = model;
             Generation = generation;
             BodyType = bodyType;
-            Engine = engine;
             DriveType = driveType;
             Transmission = transmission;
         }

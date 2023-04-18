@@ -1,23 +1,73 @@
-﻿@model IEnumerable<CarViewModel>
+﻿@model CarsIndexViewModel
+
+<div style="margin-left: 3rem">
+	<div class="container mt-5">
+		<form method="get">
+			<div class="row">
+				<div class="col-lg-3">
+					<label asp-for="Brands" class="control-label" style="font"></label>
+					<select id="1stBrand" asp-for="BrandFilterApplied" asp-items="@Model.Brands" class="form-select" style="background-color:#fff"></select>
+				</div>
+				<div class="col-lg-3">
+					<label asp-for="Models" class="control-label"></label>
+					<select id="1stModel" asp-for="ModelFilterApplied" asp-items="@Model.Models" class="form-select" style="background-color:#fff"></select>
+				</div>
+				<div class="col-lg-3">
+					<label asp-for="Generations" class="control-label"></label>
+					<select id="1stGeneration" asp-for="GenerationFilterApplied" asp-items="@Model.Generations" class="form-select" style="background-color:#fff">	</select>
+				</div>
+				<div class="col-lg-3">
+					<label asp-for="BodyTypes" class="control-label"></label>
+					<select id="1stBodyType" asp-for="@Model.BodyTypeFilterApplied" asp-items="@Model.BodyTypes" class="form-select" style="background-color:#fff"></select>
+				</div>
+			</div>
+			<div class="row mt-2">
+				<div class="col-lg-3">
+					<label asp-for="DriveTypes" class="control-label"></label>
+					<select id="1stDriveType" asp-for="@Model.DriveTypeFilterApplied" asp-items="@Model.DriveTypes" class="form-select" style="background-color:#fff"></select>
+				</div>
+				<div class="col-lg-3">
+					<label asp-for="Transmissions" class="control-label"></label>
+					<select id="1stTransmission" asp-for="@Model.TransmissionFilterApplied" asp-items="@Model.Transmissions" class="form-select" style="background-color:#fff"></select>
+				</div>
+				<div class="col-lg-3">
+					<label asp-for="EngineTypes" class="control-label"></label>
+					<select id="1stEngineType" asp-for="@Model.EngineTypeFilterApplied" asp-items="@Model.EngineTypes" class="form-select" style="background-color:#fff"></select>
+				</div>
+			</div>
+			<div class="row mt-2" >
+				<div class="mt-4" style="text-align:center">
+					<button asp-action="Index" type="submit" class="btn btn-outline-secondary" style="width:14rem">
+						Reset
+					</button>
+					<button type="submit" class="btn btn-outline-dark" style="width:14rem; margin-right:3rem">
+						Apply
+					</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
 <div style="width:90%; margin: auto">
-	<div class="row  pb-3">
-		@foreach (var product in Model)
+	<div class="row pb-3">
+		@foreach (var product in Model.CarVModels)
 		{
-			<div class="col-lg-3 col-md-6">
+			<div class="col-lg-3 col-md-6 mt-5">
 				<div class="row p-2">
 					<div class="col-12 p-1">
 						<div class="card" style="border: solid #343a40 1px;border-radius: unset">
-							<img src="@product.PictureUrl" class="card-img-top" style="border-radius:unset"/>
-
+							<a asp-controller="Home" asp-action="Details" asp-route-id="@product.CarId">
+								<img src=@product.PictureUrl class="card-img-top" style="border-radius:unset" />
+							</a>
 							<div class="card-body">
 								<div class="pl-1">
-									<p class="card-title h5 text-primary">@product.Brand | @product.Model </p>
+									<p class="card-title h5 text-primary" style="height:3rem">@product.Brand | @product.Model </p>
 									<p class="card-title text-secondary"><b>@product.Generation</b></p>
 									<p class="card-title text-primary"><b>@product.Year.Year.ToString()</b></p>
-									<p class="card-title text-muted"><b>@product.Engine</b></p>
+									<p class="card-title text-muted"><b>@product.EngineFuelType | @product.EngineCapacity</b></p>
 								</div>
 								<div class="pl-1">
-									<p><sub>auction</sub> Price: from <b><span class="text-success">$</span>@product.PriceInitial.ToString("0.00")</b></p>
+									<p>Price: <b><span class="text-success"></span>@product.PriceInitial.ToString("C", WebConstants.CultureInfoEN_US)</b></p>
 								</div>
 							</div>
 						</div>
@@ -32,3 +82,191 @@
 		}
 	</div>
 </div>
+
+
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+
+	<script type="text/javascript">
+		$(document).ready(function (){
+			var selectedBrand = $('#1stBrand');
+			var selectedModel = $('#1stModel');
+			var selectedGeneration = $('#1stGeneration');
+			var selectedBodyType = $('#1stBodyType');
+			var selectedDriveType = $('#1stDriveType');
+			var selectedTransmission = $('#1stTransmission');
+			var selectedEngineType = $('#1stEngineType');
+			
+			selectedBrand.append($('<option/>', {
+				value: null,
+				text: 'All Brands',
+			}));
+
+			selectedModel.append($('<option/>', {
+				value: null,
+				text: 'Select Brand',
+			}));
+
+			selectedGeneration.append($('<option/>', {
+				value: null,
+				text: 'Select Model',
+			}));
+
+			selectedBodyType.append($('<option/>', {
+				value: null,
+				text: 'All Body Types',
+			}));
+
+			selectedDriveType.append($('<option/>', {
+				value: null,
+				text: 'All Drive Types',
+			}));
+
+			selectedTransmission.append($('<option/>', {
+				value: null,
+				text: 'All Transmissions',
+			}));
+
+			selectedEngineType.append($('<option/>', {
+				value: null,
+				text: 'All Engine Types',
+			}));
+
+			$.getJSON('@Url.Action("GetBrands")', function (brands){
+				if (brands != null && !jQuery.isEmptyObject(brands)) {
+					$.each(brands, function (index, brand) {
+						selectedBrand.append($('<option/>', {
+							value: brand.value,
+							text: brand.text,
+						}));
+					});
+				};
+			});
+
+			$.getJSON('@Url.Action("GetBodyTypes")', function (bodyTypes) {
+				if (bodyTypes != null && !jQuery.isEmptyObject(bodyTypes)) {
+					$.each(bodyTypes, function (index, bodyType) {
+						selectedBodyType.append($('<option/>', {
+							value: bodyType.value,
+							text: bodyType.text,
+						}));
+					});
+				};
+			});
+
+			$.getJSON('@Url.Action("GetDriveTypes")', function (driveTypes) {
+				if (driveTypes != null && !jQuery.isEmptyObject(driveTypes)) {
+					$.each(driveTypes, function (index, driveType) {
+						selectedDriveType.append($('<option/>', {
+							value: driveType.value,
+							text: driveType.text,
+						}));
+					});
+				};
+			});
+
+			$.getJSON('@Url.Action("GetTransmissions")', function (transmissions) {
+				if (transmissions != null && !jQuery.isEmptyObject(transmissions)) {
+					$.each(transmissions, function (index, transmission) {
+						selectedTransmission.append($('<option/>', {
+							value: transmission.value,
+							text: transmission.text,
+						}));
+					});
+				};
+			});
+
+			$.getJSON('@Url.Action("GetEngineTypes")', function (engineTypes) {
+				if (engineTypes != null && !jQuery.isEmptyObject(engineTypes)) {
+					$.each(engineTypes, function (index, engineType) {
+						selectedEngineType.append($('<option/>', {
+							value: engineType.value,
+							text: engineType.text,
+						}));
+					});
+				};
+			});
+		});
+	</script>
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('#1stBrand').change(function () {
+				var selectedBrand = $('#1stBrand').val();
+				var modelSelect = $('#1stModel');
+				modelSelect.empty();
+
+				if (selectedBrand != null && selectedBrand != '') {
+					$.getJSON('@Url.Action("GetModels")', { BrandFilterApplied: selectedBrand }, function (models) {
+						if (models != null && !jQuery.isEmptyObject(models)) {
+							modelSelect.append($('<option/>', {
+								value: null,
+								text: "Select Model"
+							}));
+							$.each(models, function (index, model) {
+								modelSelect.append($('<option/>', {
+									value: model.value,
+									text: model.text,
+								}));
+							});
+						} else {
+							modelSelect.append($('<option/>', {
+								value: null,
+								text: "Select Model"
+							}));
+						};
+					});
+				};
+			});
+		});
+	</script>
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+
+			$('#1stBrand').change(function () {
+				var selectedBrand = $('#1stBrand').val();
+				var generationSelect = $('#1stGeneration');
+				generationSelect.empty();
+
+				if (selectedBrand != null && selectedBrand != '') {
+					generationSelect.append($('<option/>', {
+						value: null,
+						text: "Select Generation"
+					}));
+				};
+			});
+
+			$('#1stModel').change(function () {
+				var selectedModel = $('#1stModel').val();
+				var generationSelect = $('#1stGeneration');
+				generationSelect.empty();
+
+				if (selectedModel != null && selectedModel != '') {
+					$.getJSON('@Url.Action("GetGenerations")', { ModelFilterApplied: selectedModel }, function (generations) {
+						if (generations != null && !jQuery.isEmptyObject(generations)) {
+							generationSelect.append($('<option/>', {
+								value: null,
+								text: "Select Generation"
+							}));
+							$.each(generations, function (index, generation) {
+								generationSelect.append($('<option/>', {
+									value: generation.value,
+									text: generation.text,
+								}));
+							});
+						} else {
+							generationSelect.append($('<option/>', {
+								value: null,
+								text: "Select Generation"
+							}));
+						};
+					});
+				};
+			});
+		});
+	</script>
+}

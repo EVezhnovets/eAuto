@@ -42,7 +42,10 @@ namespace eAuto.Web.Areas.Admin.Controllers
                         Brand = i.Brand,
 						ModelId = i.ModelId,
                         Model = i.Model,
-					});
+					})
+                    .OrderBy( i=> i.Brand)
+                    .ThenBy(i => i.Model)
+                    .ThenBy(i => i.Name);
  
                 return View(generationsList);
 			}
@@ -72,10 +75,12 @@ namespace eAuto.Web.Areas.Admin.Controllers
                 GenerationCreateViewModel createViewModel = new()
                 {
                     GenerationVModel = new(),
-                    Brands = brandsList.Select(s => new SelectListItem { Value = s.BrandId.ToString(), Text = s.Name }),
+                    Brands = brandsList.Select(s => new SelectListItem { Value = s.BrandId.ToString(), Text = s.Name })
+                                       .OrderBy(s => s.Text),
                     Models = modelsList.Select(s => new SelectListItem { Value = s.ModelId.ToString(), Text = s.Name})
-                };
-                return View(createViewModel);
+                                     .OrderBy(s => s.Text)
+				};
+				return View(createViewModel);
             }
             catch (GenerationNotFoundException ex)
             {

@@ -16,7 +16,12 @@ namespace eAuto.Domain.DomainModels
         public DateTime DateArrival { get; set; }
         public int Odometer { get; set; }
         public string Description { get; set; }
-		
+		public string? EngineIdentificationName { get; set; }
+		public string EngineFuelType { get; set; }
+		public int EngineFuelTypeId { get; set; }
+		public string? EngineCapacity { get; set; }
+		public int? EnginePower { get; set; }
+
 		public int BrandId { get; set; }
 		public string Brand { get; set; }
 
@@ -28,9 +33,6 @@ namespace eAuto.Domain.DomainModels
 
         public int BodyTypeId { get; set; }
         public string BodyType { get; set; }
-
-        public int EngineId { get; set; }
-        public string Engine { get; set; }
 
         public int DriveTypeId { get; set; }
         public string DriveType { get; set; }
@@ -60,7 +62,12 @@ namespace eAuto.Domain.DomainModels
             DateArrival = carDataModel.DateArrival;
             Odometer = carDataModel.Odometer;
             Description = carDataModel.Description;
-            BrandId = carDataModel.BrandId;
+            EngineIdentificationName = carDataModel.EngineIdentificationName;
+            EngineFuelType = carDataModel.EngineFuelType;
+            EngineFuelTypeId = carDataModel.EngineFuelTypeId;
+            EngineCapacity = carDataModel.EngineCapacity;
+            EnginePower = carDataModel.EnginePower;
+			BrandId = carDataModel.BrandId;
             Brand = carDataModel.Brand.Name;
             ModelId = carDataModel.ModelId;
             Model = carDataModel.Model.Name;
@@ -68,8 +75,6 @@ namespace eAuto.Domain.DomainModels
             Generation = carDataModel.Generation.Name;
             BodyTypeId = carDataModel.BodyTypeId;
             BodyType = carDataModel.BodyType.Name;
-            EngineId = carDataModel.EngineId;
-            Engine = $"{carDataModel.Engine.IdentificationName} | {carDataModel.Engine.Type}" ;
             DriveTypeId = carDataModel.DriveTypeId;
             DriveType = carDataModel.DriveType.Name;
             TransmissionId = carDataModel.TransmissionId;
@@ -88,9 +93,9 @@ namespace eAuto.Domain.DomainModels
                 ModelId = result.ModelId;
                 GenerationId = result.GenerationId;
                 BodyTypeId = result.BodyTypeId;
-                EngineId = result.EngineId;
                 DriveTypeId = result.DriveTypeId;
                 TransmissionId = result.TransmissionId;
+                EngineFuelTypeId = result.EngineFuelTypeId;
             }
             else
             {
@@ -118,11 +123,15 @@ namespace eAuto.Domain.DomainModels
                 DateArrival = DateArrival,
                 Odometer = Odometer,
                 Description = Description,
+                EngineIdentificationName = EngineIdentificationName,
+                EngineCapacity = EngineCapacity,
+                EngineFuelType = EngineFuelType,
+                EngineFuelTypeId = EngineFuelTypeId,
+                EnginePower = EnginePower,
                 BrandId = BrandId,
 				ModelId = ModelId,
                 GenerationId = GenerationId,
                 BodyTypeId = BodyTypeId,
-                EngineId = EngineId,
                 DriveTypeId = DriveTypeId,
                 TransmissionId = TransmissionId
             };

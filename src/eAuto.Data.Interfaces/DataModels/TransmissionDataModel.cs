@@ -9,6 +9,14 @@ namespace eAuto.Data.Interfaces.DataModels
         public int TransmissionId { get; set; }
         [Required]
         [MaxLength(50)]
-        public string Name { get;set;}
-    }
+        public string Name { get; set; }
+
+        #region Ctor
+        public TransmissionDataModel() { }
+        public TransmissionDataModel(string name)
+        {
+            Name = name;
+        }
+		#endregion
+	}
 }

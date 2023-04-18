@@ -9,7 +9,6 @@ namespace eAuto.Web.Models
 		public IEnumerable<SelectListItem>? Models { get; set; }
 		public IEnumerable<SelectListItem>? Generations { get; set; }
 		public IEnumerable<SelectListItem>? BodyTypes { get; set; }
-		public IEnumerable<SelectListItem>? Engines { get; set; }
 		public IEnumerable<SelectListItem>? DriveTypes { get; set; }
 		public IEnumerable<SelectListItem>? Transmissions { get; set; }
     }

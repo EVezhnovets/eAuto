@@ -43,7 +43,6 @@ namespace eAuto.Domain.Services
                 .Include(e => e.Model)
                 .Include(e => e.Generation)
                 .Include(e => e.BodyType)
-                .Include(e => e.Engine)
                 .Include(e => e.DriveType)
                 .Include(e => e.Transmission)
                 );
@@ -64,6 +63,11 @@ namespace eAuto.Domain.Services
                     DateArrival = i.DateArrival,
                     Odometer = i.Odometer,
                     Description = i.Description,
+                    EngineIdentificationName = i.EngineIdentificationName,
+                    EngineCapacity = i.EngineCapacity,
+                    EngineFuelType = i.EngineFuelType,
+                    EngineFuelTypeId = i.EngineFuelTypeId,
+                    EnginePower = i.EnginePower,
                     BrandId = i.BrandId,
                     Brand = i.Brand.Name,
                     ModelId = i.ModelId,
@@ -72,8 +76,6 @@ namespace eAuto.Domain.Services
                     Generation = i.Generation.Name,
                     BodyTypeId = i.BodyTypeId,
                     BodyType = i.BodyType.Name,
-                    EngineId = i.EngineId,
-                    Engine = $"{i.Engine.Type} | {i.Engine.IdentificationName} ",
                     DriveTypeId = i.DriveTypeId,
                     DriveType = i.DriveType.Name,
                     TransmissionId = i.TransmissionId,
@@ -98,7 +100,6 @@ namespace eAuto.Domain.Services
                         .Include(g => g.Model)
                         .Include(g => g.Generation)
                         .Include(g => g.BodyType)
-                        .Include(g => g.Engine)
                         .Include(g => g.DriveType)
                         .Include(g => g.Transmission)
                 );

@@ -24,7 +24,14 @@ namespace eAuto.Web.Areas.Admin.Controllers
 			try
 			{
 				var result = await _bodyTypeService.GetBodyTypeModelsAsync();
-				return View(result);
+                var orderedResult = result
+                    .Select(i => new BodyTypeViewModel
+                {
+                    BodyTypeId = i.BodyTypeId,
+                    Name = i.Name
+                })
+                    .OrderBy(i => i.Name);
+				return View(orderedResult);
 			}
 			catch (BodyTypeNotFoundException ex)
 			{
