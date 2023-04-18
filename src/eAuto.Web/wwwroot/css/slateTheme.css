@@ -359,6 +359,10 @@ th {
 
 label {
     display: inline-block;
+    font-size: unset;
+}
+
+.control-label {
     font-size: x-large;
 }
 
@@ -366,9 +370,9 @@ button {
     border-radius: 0;
 }
 
-    button:focus:not(:focus-visible) {
-        outline: 0;
-    }
+button:focus:not(:focus-visible) {
+    outline: 0;
+}
 
 input,
 button,

@@ -1,11 +1,9 @@
 ﻿using eAuto.Data.Interfaces;
 using eAuto.Domain.Interfaces;
 using eAuto.Domain.Interfaces.Exceptions;
-using eAuto.Domain.Services;
 using eAuto.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.IdentityModel.Tokens;
 using System.Diagnostics;
 
 namespace eAuto.Web.Areas.Customer.Controllers
@@ -226,91 +224,32 @@ namespace eAuto.Web.Areas.Customer.Controllers
 		[HttpGet]
 		public async Task<ActionResult> GetModels(int BrandFilterApplied)
 		{
-			if (BrandFilterApplied != null)
-			{
-				var modelsSel = await _modelService.GetModelModelsAsync();
-				var query = modelsSel
-					.Where(m => m.BrandId == BrandFilterApplied)
-					.OrderBy(m => m.Name)
-					.Select(m => new SelectListItem
-					{
-						Value = m.ModelId.ToString(),
-						Text = m.Name
-					});
-				return Json(query);
-			}
-			return null;
+			var modelsSel = await _modelService.GetModelModelsAsync();
+			var query = modelsSel
+				.Where(m => m.BrandId == BrandFilterApplied)
+				.OrderBy(m => m.Name)
+				.Select(m => new SelectListItem
+				{
+					Value = m.ModelId.ToString(),
+					Text = m.Name
+				});
+			return Json(query);
 		}
 
 		[HttpGet]
 		public async Task<ActionResult> GetGenerations(int ModelFilterApplied)
 		{
-			if (ModelFilterApplied != null)
-			{
-				var generationsSel = await _generationService.GetGenerationModelsAsync();
-				var query = generationsSel
-					.Where(m => m.ModelId == ModelFilterApplied)
-					.OrderBy(m => m.Name)
-					.Select(m => new SelectListItem
-					{
-						Value = m.GenerationId.ToString(),
-						Text = m.Name
-					});
-				return Json(query);
-			}
-			return null;
+			var generationsSel = await _generationService.GetGenerationModelsAsync();
+			var query = generationsSel
+				.Where(m => m.ModelId == ModelFilterApplied)
+				.OrderBy(m => m.Name)
+				.Select(m => new SelectListItem
+				{
+					Value = m.GenerationId.ToString(),
+					Text = m.Name
+				});
+			return Json(query);
 		}
 		#endregion
-
-
-		//private async Task<IEnumerable<SelectListItem>> GetBodyTypes()
-		//{
-		//	var bodyTypes = await _bodyTypeService.GetBodyTypeModelsAsync();
-		//	IEnumerable<BodyTypeViewModel> bodyTypesVM = bodyTypes.Select(i => new BodyTypeViewModel(i.BodyTypeId, i.Name));
-
-		//	var items = bodyTypesVM
-		//		.Select(bodyType => new SelectListItem { Value = bodyType.BodyTypeId.ToString(), Text = bodyType.Name })
-		//		.OrderBy(bodyType => bodyType.Text)
-		//		.ToList();
-
-		//	var allItems = new SelectListItem() { Value = null, Text = "All Body Types", Selected = true };
-		//	items.Insert(0, allItems);
-
-		//	return items;
-		//}
-
-		//private async Task<IEnumerable<SelectListItem>> GetDriveTypes()
-		//{
-		//	var driveTypes = await _driveTypeService.GetDriveTypeModelsAsync();
-		//	IEnumerable<DriveTypeViewModel> driveTypesVM = driveTypes.Select(
-		//		i => new DriveTypeViewModel(i.DriveTypeId, i.Name));
-
-		//	var items = driveTypesVM
-		//		.Select(driveType => new SelectListItem { Value = driveType.DriveTypeId.ToString(), Text = driveType.Name})
-		//		.OrderBy(driveType => driveType.Text)
-		//		.ToList();
-
-		//	var allItems = new SelectListItem() { Value = null, Text = "All Drive Types", Selected = true };
-		//	items.Insert(0, allItems);
-
-		//	return items;
-		//}
-
-		//private async Task<IEnumerable<SelectListItem>> GetTransmissions()
-		//{
-		//	var transmissions = await _transmissionService.GetTransmissionModelsAsync();
-		//	IEnumerable<TransmissionViewModel> transmissionsVM = transmissions.Select(
-		//		i => new TransmissionViewModel(i.TransmissionId, i.Name));
-
-		//	var items = transmissionsVM
-		//		.Select(transmission => new SelectListItem { Value = transmission.TransmissionId.ToString(), Text = transmission.Name})
-		//		.OrderBy(transmission => transmission.Text)
-		//		.ToList();
-
-		//	var allItems = new SelectListItem() { Value = null, Text = "All Transmissions", Selected = true };
-		//	items.Insert(0, allItems);
-
-		//	return items;
-		//}
 	}
 }

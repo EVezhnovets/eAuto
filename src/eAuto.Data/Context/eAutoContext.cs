@@ -13,6 +13,7 @@ namespace eAuto.Data.Context
         public DbSet<ModelDataModel> Models { get; set; }
         public DbSet<TransmissionDataModel> Transmissions { get; set; }
         public DbSet<GenerationDataModel> Generations{ get; set; }
+        public DbSet<EngineTypeDataModel> EngineTypes{ get; set; }
 
         public EAutoContext(string connectionString)
         {
@@ -46,6 +47,9 @@ namespace eAuto.Data.Context
 
             modelBuilder.Entity<GenerationDataModel>()
                 .HasKey(g => g.GenerationId);
+
+            modelBuilder.Entity<EngineTypeDataModel>()
+                .HasKey(e => e.EngineTypeId);
         }
     }
 }
