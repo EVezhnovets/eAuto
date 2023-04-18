@@ -40,6 +40,10 @@ namespace eAuto.Data.Interfaces.DataModels
 		[MaxLength(50)]
         public string EngineFuelType { get; set; }
 
+		[Required]
+		[MaxLength(50)]
+		public int EngineFuelTypeId { get; set; }
+
 		[MaxLength(50)]
         public string? EngineCapacity { get; set; }
 
@@ -88,6 +92,7 @@ namespace eAuto.Data.Interfaces.DataModels
             string desrciption,
 			string? engineIdentificationName,
 			string engineFuelType,
+			int engineFuelTypeId,
 			string? engineCapacity,
 			int? enginePower,
 			int brandId,
@@ -106,6 +111,7 @@ namespace eAuto.Data.Interfaces.DataModels
             Description = desrciption;
             EngineIdentificationName = engineIdentificationName;
             EngineFuelType = engineFuelType;
+            EngineFuelTypeId = engineFuelTypeId;
             EngineCapacity = engineCapacity;
             EnginePower = enginePower;
             BrandId = brandId;

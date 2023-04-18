@@ -18,6 +18,7 @@ namespace eAuto.Domain.DomainModels
         public string Description { get; set; }
 		public string? EngineIdentificationName { get; set; }
 		public string EngineFuelType { get; set; }
+		public int EngineFuelTypeId { get; set; }
 		public string? EngineCapacity { get; set; }
 		public int? EnginePower { get; set; }
 
@@ -63,6 +64,7 @@ namespace eAuto.Domain.DomainModels
             Description = carDataModel.Description;
             EngineIdentificationName = carDataModel.EngineIdentificationName;
             EngineFuelType = carDataModel.EngineFuelType;
+            EngineFuelTypeId = carDataModel.EngineFuelTypeId;
             EngineCapacity = carDataModel.EngineCapacity;
             EnginePower = carDataModel.EnginePower;
 			BrandId = carDataModel.BrandId;
@@ -93,6 +95,7 @@ namespace eAuto.Domain.DomainModels
                 BodyTypeId = result.BodyTypeId;
                 DriveTypeId = result.DriveTypeId;
                 TransmissionId = result.TransmissionId;
+                EngineFuelTypeId = result.EngineFuelTypeId;
             }
             else
             {
@@ -123,6 +126,7 @@ namespace eAuto.Domain.DomainModels
                 EngineIdentificationName = EngineIdentificationName,
                 EngineCapacity = EngineCapacity,
                 EngineFuelType = EngineFuelType,
+                EngineFuelTypeId = EngineFuelTypeId,
                 EnginePower = EnginePower,
                 BrandId = BrandId,
 				ModelId = ModelId,
