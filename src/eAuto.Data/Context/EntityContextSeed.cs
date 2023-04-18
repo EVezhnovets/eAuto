@@ -64,6 +64,20 @@ namespace eAuto.Data.Context
 					await context.SaveChangesAsync();
 				}
 
+				if (!await context.ProductBrands.AnyAsync())
+				{
+					await context.AddRangeAsync(GetPreConfiguredProductBrands());
+
+					await context.SaveChangesAsync();
+				}
+
+				if (!await context.MotorOils.AnyAsync())
+				{
+					await context.AddRangeAsync(GetPreConfiguredMotorOils());
+
+					await context.SaveChangesAsync();
+				}
+
 				if (!await context.Cars.AnyAsync())
 				{
 					await context.AddRangeAsync(GetPreConfiguredCars());
@@ -208,6 +222,31 @@ namespace eAuto.Data.Context
 				new(EngineTypesEnumConverter.ConvertToDbValue(EngineTypesEnum.Gas)),
 				new(EngineTypesEnumConverter.ConvertToDbValue(EngineTypesEnum.GasolineGibrid)),
 				new(EngineTypesEnumConverter.ConvertToDbValue(EngineTypesEnum.DieselGibrid))
+			};
+		}
+
+		private static IEnumerable<ProductBrandDataModel> GetPreConfiguredProductBrands()
+		{
+			return new List<ProductBrandDataModel>()
+			{
+				new("Elf"),
+				new("Shell"),
+				new("Mannol"),
+				new("Castrol"),
+				new("LIQUI MOLY")
+			};
+		}
+
+		private static IEnumerable<MotorOilDataModel> GetPreConfiguredMotorOils()
+		{
+			return new List<MotorOilDataModel>()
+			{
+				new("ELF 214120", "10W-40", "Semi-synthetic", 4, 1),
+				new("ELF 213909_ELF", "5W-40", "Synthetic", 4, 1),
+				new("ELF 194957", "10W-40", "Synthetic", 4, 1),
+				new("CASTROL CASTROL 10W40 MAGNATEC A3/B4/4", "10W-40", "Semi-synthetic", 4, 4),
+				new("CASTROL 1535BA", "5W-40", "Synthetic", 4, 4),
+				new("CASTROL CASTROL 5W30 EDGE M/4","5W-30", "Synthetic", 4, 4)
 			};
 		}
 		private static IEnumerable<CarDataModel> GetPreConfiguredCars()
