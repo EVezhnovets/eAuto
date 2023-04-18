@@ -3,7 +3,7 @@
 <div style="margin-left: 3rem">
 	<div class="container mt-5">
 		<form method="get">
-			<div class="row justify-content-center">
+			<div class="row">
 				<div class="col-lg-3">
 					<label asp-for="Brands" class="control-label" style="font"></label>
 					<select id="1stBrand" asp-for="BrandFilterApplied" asp-items="@Model.Brands" class="form-select" style="background-color:#fff"></select>
@@ -21,7 +21,7 @@
 					<select id="1stBodyType" asp-for="@Model.BodyTypeFilterApplied" asp-items="@Model.BodyTypes" class="form-select" style="background-color:#fff"></select>
 				</div>
 			</div>
-			<div class="row justify-content-lg-evenly mt-2">
+			<div class="row mt-2">
 				<div class="col-lg-3">
 					<label asp-for="DriveTypes" class="control-label"></label>
 					<select id="1stDriveType" asp-for="@Model.DriveTypeFilterApplied" asp-items="@Model.DriveTypes" class="form-select" style="background-color:#fff"></select>
@@ -30,8 +30,17 @@
 					<label asp-for="Transmissions" class="control-label"></label>
 					<select id="1stTransmission" asp-for="@Model.TransmissionFilterApplied" asp-items="@Model.Transmissions" class="form-select" style="background-color:#fff"></select>
 				</div>
-				<div class="col-lg-3 mt-4">
-					<button type="submit" class="btn btn-outline-dark" style="width:12rem">
+				<div class="col-lg-3">
+					<label asp-for="EngineTypes" class="control-label"></label>
+					<select id="1stEngineType" asp-for="@Model.EngineTypeFilterApplied" asp-items="@Model.EngineTypes" class="form-select" style="background-color:#fff"></select>
+				</div>
+			</div>
+			<div class="row mt-2" >
+				<div class="mt-4" style="text-align:center">
+					<button asp-action="Index" type="submit" class="btn btn-outline-secondary" style="width:14rem">
+						Reset
+					</button>
+					<button type="submit" class="btn btn-outline-dark" style="width:14rem; margin-right:3rem">
 						Apply
 					</button>
 				</div>
@@ -89,6 +98,7 @@
 			var selectedBodyType = $('#1stBodyType');
 			var selectedDriveType = $('#1stDriveType');
 			var selectedTransmission = $('#1stTransmission');
+			var selectedEngineType = $('#1stEngineType');
 			
 			selectedBrand.append($('<option/>', {
 				value: null,
@@ -120,6 +130,10 @@
 				text: 'All Transmissions',
 			}));
 
+			selectedEngineType.append($('<option/>', {
+				value: null,
+				text: 'All Engine Types',
+			}));
 
 			$.getJSON('@Url.Action("GetBrands")', function (brands){
 				if (brands != null && !jQuery.isEmptyObject(brands)) {
@@ -160,6 +174,17 @@
 						selectedTransmission.append($('<option/>', {
 							value: transmission.value,
 							text: transmission.text,
+						}));
+					});
+				};
+			});
+
+			$.getJSON('@Url.Action("GetEngineTypes")', function (engineTypes) {
+				if (engineTypes != null && !jQuery.isEmptyObject(engineTypes)) {
+					$.each(engineTypes, function (index, engineType) {
+						selectedEngineType.append($('<option/>', {
+							value: engineType.value,
+							text: engineType.text,
 						}));
 					});
 				};

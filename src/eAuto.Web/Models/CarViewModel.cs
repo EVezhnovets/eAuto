@@ -13,6 +13,7 @@ namespace eAuto.Web.Models
 		public int Odometer { get; set; }
         public string Description { get; set; }
 		public string? EngineIdentificationName { get; set; }
+		public int EngineFuelTypeId { get; set; }
 		public string EngineFuelType { get; set; }
 		public string? EngineCapacity { get; set; }
 		public int? EnginePower { get; set; }
@@ -50,6 +51,7 @@ namespace eAuto.Web.Models
 			string? engineIdentificationName,
 			string? engineCapacity,
 			string engineFuelType,
+			int engineFuelTypeId,
 			int? enginePower,
 			string brand, 
             string model,
@@ -67,6 +69,7 @@ namespace eAuto.Web.Models
             Description = description;
             EngineIdentificationName = engineIdentificationName;
             EngineFuelType = engineFuelType;
+            EngineFuelTypeId = engineFuelTypeId;
             EngineCapacity = engineCapacity;
             EnginePower = enginePower;
             Brand = brand;

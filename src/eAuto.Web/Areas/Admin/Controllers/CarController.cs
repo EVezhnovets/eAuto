@@ -2,7 +2,6 @@
 using eAuto.Domain.Interfaces;
 using eAuto.Domain.Interfaces.Exceptions;
 using eAuto.Web.Models;
-using eAuto.Web.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -99,6 +98,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
                             i.EngineIdentificationName,
                             i.EngineCapacity,
                             i.EngineFuelType,
+                            i.EngineFuelTypeId,
                             i.EnginePower,
 							i.Brand,
 							i.Model,

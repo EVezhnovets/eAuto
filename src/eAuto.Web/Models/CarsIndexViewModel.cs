@@ -24,5 +24,8 @@ namespace eAuto.Web.Models
 
 		public IEnumerable<SelectListItem>? Transmissions { get; set; }
 		public int? TransmissionFilterApplied { get; set; }
+
+		public IEnumerable<SelectListItem>? EngineTypes{ get; set; }
+		public int? EngineTypeFilterApplied { get; set; }
 	}
 }
