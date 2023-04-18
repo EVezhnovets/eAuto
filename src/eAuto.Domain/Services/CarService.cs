@@ -66,6 +66,7 @@ namespace eAuto.Domain.Services
                     EngineIdentificationName = i.EngineIdentificationName,
                     EngineCapacity = i.EngineCapacity,
                     EngineFuelType = i.EngineFuelType,
+                    EngineFuelTypeId = i.EngineFuelTypeId,
                     EnginePower = i.EnginePower,
                     BrandId = i.BrandId,
                     Brand = i.Brand.Name,
