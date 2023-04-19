@@ -12,26 +12,16 @@ namespace eAuto.Domain.DomainModels
         private readonly bool _isNew;
 
         public int MotorOilId { get; set; }
-        public string Name { get => _name;
-            set
-            {
-                if (string.IsNullOrEmpty(value))
-                {
-                    throw new MotorOilNotFoundException();
-                }
-                _name = value;
-            } 
-        }
-		public string Viscosity { get; set; }
+        public string Name { get; set; }
+        public string PictureUrl { get; set; }
+        public decimal Price { get; set; }
+        public string Viscosity { get; set; }
 		public string Composition { get; set; }
 		public int Volume { get; set; }
-		public int ProductBrandDataModelId { get; set; }
+		public int ProductBrandId { get; set; }
 		public string ProductBrand { get; set; }
 
-		public MotorOilDomainModel()
-        {
-
-        }
+		public MotorOilDomainModel() { }
 
         internal MotorOilDomainModel(
             MotorOilDataM motorOilDataModel,
@@ -40,11 +30,13 @@ namespace eAuto.Domain.DomainModels
             _motorOilRepository = motorOilRepository;
 
             MotorOilId = motorOilDataModel.MotorOilDataModelId;
-            _name = motorOilDataModel.Name;
+            Name = motorOilDataModel.Name;
+            PictureUrl = motorOilDataModel.PictureUrl;
+            Price = motorOilDataModel.Price;
 			Viscosity = motorOilDataModel.Viscosity;
             Composition = motorOilDataModel.Composition;
             Volume = motorOilDataModel.Volume;
-            ProductBrandDataModelId = motorOilDataModel.ProductBrandDataModelId;
+            ProductBrandId = motorOilDataModel.ProductBrandId;
             ProductBrand = motorOilDataModel.ProductBrand.ToString();
 		}
 
@@ -63,7 +55,7 @@ namespace eAuto.Domain.DomainModels
             {
                 var result = _motorOilRepository.Create(motorOilDataModel);
                 MotorOilId = result.MotorOilDataModelId;
-                ProductBrandDataModelId = result.ProductBrandDataModelId;
+                ProductBrandId = result.ProductBrandId;
             }
             else
             {
@@ -86,10 +78,12 @@ namespace eAuto.Domain.DomainModels
             {
 				MotorOilDataModelId = MotorOilId,
                 Name = Name,
+                PictureUrl = PictureUrl,
+                Price = Price,
                 Viscosity = Viscosity,
                 Composition = Composition,
                 Volume = Volume,
-                ProductBrandDataModelId = ProductBrandDataModelId
+                ProductBrandId = ProductBrandId
             };
             return MotorOilDataM;
 		}

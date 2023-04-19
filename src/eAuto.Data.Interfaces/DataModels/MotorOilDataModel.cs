@@ -12,8 +12,14 @@ namespace eAuto.Data.Interfaces.DataModels
 		[Required]
 		[MaxLength(50)]
 		public string Name { get; set; }
-		
-		[Required]
+
+        [MaxLength(200)]
+        public string? PictureUrl { get; set; }
+
+        [Required]
+        [MaxLength(50)]
+        public decimal Price { get; set; }
+        [Required]
 		[MaxLength(50)]
 		public string Viscosity { get; set; }
 
@@ -26,23 +32,28 @@ namespace eAuto.Data.Interfaces.DataModels
 		public int Volume { get; set;}
 
 		[Required]
-		public int ProductBrandDataModelId { get; set; }
-		[ForeignKey("ProductBrandDataModelId")] public ProductBrandDataModel ProductBrand { get; set; }
+		public int ProductBrandId { get; set; }
+		[ForeignKey("ProductBrandId")] 
+		public ProductBrandDataModel ProductBrand { get; set; }
 
 		#region Ctor
 		public MotorOilDataModel() { }
 		public MotorOilDataModel(
 			string name,
+			string? pictureUrl,
+			decimal price,
 			string viscosity, 
 			string composition, 
 			int volume,
-			int productBrandDataModelId)
+			int productBrandId)
 		{
 			Name = name;
+			PictureUrl = pictureUrl;
+			Price = price;
 			Viscosity = viscosity;
 			Composition = composition;
 			Volume = volume;
-			ProductBrandDataModelId = productBrandDataModelId;
+			ProductBrandId = productBrandId;
 		}
 		#endregion
 	}

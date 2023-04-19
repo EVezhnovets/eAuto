@@ -53,11 +53,13 @@ namespace eAuto.Domain.Services
                 {
                     MotorOilId = i.MotorOilDataModelId,
                     Name = i.Name,
+                    PictureUrl = i.PictureUrl,
+                    Price = i.Price,
                     Viscosity = i.Viscosity,
                     Composition = i.Composition,
                     Volume = i.Volume,
-                    ProductBrandDataModelId = i.ProductBrandDataModelId,
-                    ProductBrand = i.ProductBrand.ToString(),
+                    ProductBrandId = i.ProductBrandId,
+                    ProductBrand = i.ProductBrand.Name.ToString(),
 				}).ToList();
             var motorOilModels = motorOilViewModels.Cast<IMotorOil>();
             return motorOilModels;
