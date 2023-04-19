@@ -241,12 +241,12 @@ namespace eAuto.Data.Context
 		{
 			return new List<MotorOilDataModel>()
 			{
-				new("ELF 214120", "10W-40", "Semi-synthetic", 4, 1),
-				new("ELF 213909_ELF", "5W-40", "Synthetic", 4, 1),
-				new("ELF 194957", "10W-40", "Synthetic", 4, 1),
-				new("CASTROL CASTROL 10W40 MAGNATEC A3/B4/4", "10W-40", "Semi-synthetic", 4, 4),
-				new("CASTROL 1535BA", "5W-40", "Synthetic", 4, 4),
-				new("CASTROL CASTROL 5W30 EDGE M/4","5W-30", "Synthetic", 4, 4)
+				new("ELF 214120","\\images\\motorOils\\ELF214120.png", 53, "10W-40", "Semi-synthetic", 4, 1),
+				new("ELF 213909_ELF", "\\images\\motorOils\\ELF213909_ELF.png", 80, "5W-40", "Synthetic", 4, 1),
+				new("ELF 194957", "\\images\\motorOils\\ELF194957.png", 113, "10W-40", "Synthetic", 4, 1),
+				new("CASTROL CASTROL 10W40 MAGNATEC A3/B4/4", "\\images\\motorOils\\CASTROLCASTROL10W40MAGNATECDIESELB4.png", 48, "10W-40", "Semi-synthetic", 4, 4),
+				new("CASTROL 1535BA", "\\images\\motorOils\\CASTROL1535BA.png", 59, "5W-40", "Synthetic", 4, 4),
+				new("CASTROL CASTROL 5W30 EDGE M/4", "\\images\\motorOils\\CASTROLCASTRL5W30EDGEM.png", 42, "5W-30", "Synthetic", 4, 4)
 			};
 		}
 		private static IEnumerable<CarDataModel> GetPreConfiguredCars()

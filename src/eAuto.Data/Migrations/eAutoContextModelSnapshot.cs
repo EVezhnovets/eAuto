@@ -266,7 +266,15 @@ namespace eAuto.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("ProductBrandDataModelId")
+                    b.Property<string>("PictureUrl")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<decimal>("Price")
+                        .HasMaxLength(50)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("ProductBrandId")
                         .HasColumnType("int");
 
                     b.Property<string>("Viscosity")
@@ -280,7 +288,7 @@ namespace eAuto.Data.Migrations
 
                     b.HasKey("MotorOilDataModelId");
 
-                    b.HasIndex("ProductBrandDataModelId");
+                    b.HasIndex("ProductBrandId");
 
                     b.ToTable("MotorOils");
                 });
@@ -408,7 +416,7 @@ namespace eAuto.Data.Migrations
                 {
                     b.HasOne("eAuto.Data.Interfaces.DataModels.ProductBrandDataModel", "ProductBrand")
                         .WithMany()
-                        .HasForeignKey("ProductBrandDataModelId")
+                        .HasForeignKey("ProductBrandId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
