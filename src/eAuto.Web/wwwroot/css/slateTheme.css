@@ -186,6 +186,10 @@ p {
     margin-bottom: 1rem;
 }
 
+.motor-index{
+    height:16rem;
+}
+
 abbr[title] {
     -webkit-text-decoration: underline dotted;
     text-decoration: underline dotted;
@@ -2479,11 +2483,13 @@ textarea.form-control-lg {
     .form-control-color.form-control-lg {
         height: calc(1.5em + 4rem);
     }
-
+.home .form-select{
+    padding: unset;
+}
 .form-select {
     display: block;
     width: 100%;
-    padding: unset;
+    padding: 0.75rem 4.5rem 0.75rem 1.5rem;
     -moz-padding-start: calc(1.5rem - 3px);
     font-size: 1rem;
     font-weight: 400;

@@ -32,6 +32,7 @@
 		<Folder Include="Areas\Customer\Controllers\" />
 		<Folder Include="Areas\Customer\Views\" />
 		<Folder Include="wwwroot\images\cars\" />
+		<Folder Include="wwwroot\images\motorOils\" />
 	</ItemGroup>
 
 	<ItemGroup>
