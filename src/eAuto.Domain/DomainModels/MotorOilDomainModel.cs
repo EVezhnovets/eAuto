@@ -37,7 +37,7 @@ namespace eAuto.Domain.DomainModels
             Composition = motorOilDataModel.Composition;
             Volume = motorOilDataModel.Volume;
             ProductBrandId = motorOilDataModel.ProductBrandId;
-            ProductBrand = motorOilDataModel.ProductBrand.ToString();
+            ProductBrand = motorOilDataModel.ProductBrand.Name;
 		}
 
         internal MotorOilDomainModel(
