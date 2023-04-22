@@ -37,7 +37,7 @@
 			</div>
 			<div class="row mt-2" >
 				<div class="mt-4" style="text-align:center">
-					<button asp-action="Index" type="submit" class="btn btn-outline-secondary" style="width:14rem">
+					<button asp-action="Index" class="btn btn-outline-secondary" style="width:14rem">
 						Reset
 					</button>
 					<button type="submit" class="btn btn-outline-dark" style="width:14rem; margin-right:3rem">
@@ -56,7 +56,7 @@
 				<div class="row p-2">
 					<div class="col-12 p-1">
 						<div class="card" style="border: solid #343a40 1px;border-radius: unset">
-							<a asp-controller="Home" asp-action="Details" asp-route-id="@product.CarId">
+							<a asp-controller="CarsCatalog" asp-action="Details" asp-route-id="@product.CarId">
 								<img src=@product.PictureUrl class="card-img-top" style="border-radius:unset" />
 							</a>
 							<div class="card-body">

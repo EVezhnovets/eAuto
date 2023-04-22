@@ -44,33 +44,33 @@ else
         <tbody>
             @foreach (var obj in Model)
             {
-                <tr>
-                    <td class="motor-index" width="5%">
+                <tr class="motor-index">
+                    <td width="5%">
                         @obj.MotorOilId
                     </td>
-                    <td class="motor-index" width="15%" style="padding:0.3rem" >
+                    <td width="15%" style="padding:0.3rem" >
                         <div>
                             <a asp-controller="MotorOil" asp-action="Edit" asp-route-id="@obj.MotorOilId">
                                 <img src=@obj.PictureUrl class="float-start" style="width:100%" />
                             </a>
                         </div>
                     </td>
-                    <td class="motor-index" width="5%">
+                    <td width="5%">
                         <p>@obj.ProductBrand</p>
                     </td>
-                    <td class="motor-index" width="15%">
+                    <td width="15%">
                         @obj.Viscosity
                     </td>
-                    <td class="motor-index" width="10%">
+                    <td width="10%">
                         @obj.Composition
                     </td>
-                    <td class="motor-index" width="10%">
+                    <td width="10%">
                         @obj.Volume
                     </td>
-                    <td class="motor-index" width="10%">
+                    <td width="10%">
                         @obj.Price.ToString("C",WebConstants.CultureInfoEN_US)
                     </td>
-                    <td class="motor-index" width="10%" align="center">
+                    <td width="10%" align="center">
                         <div class="btn-toolbar justify-content-between" role="toolbar" style="width:6rem">
                             <a asp-controller="MotorOil" asp-action="Edit" asp-route-id="@obj.MotorOilId" class="btn btn-outline-primary">
                                 <i class="bi bi-wrench"></i>
