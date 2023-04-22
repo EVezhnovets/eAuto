@@ -24,6 +24,8 @@ namespace eAuto.Web.Models
         public MotorOilViewModel(
             int motorOilId, 
             string name, 
+            string? pictureUrl,
+            decimal price,
             string viscosity, 
             string composition, 
             int volume, 
@@ -31,6 +33,8 @@ namespace eAuto.Web.Models
         {
 			MotorOilId = motorOilId;
             Name = name;
+            PictureUrl = pictureUrl;
+            Price = price; 
             Viscosity = viscosity;
             Composition = composition;
             Volume = volume;
