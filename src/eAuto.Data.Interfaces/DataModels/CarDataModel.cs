@@ -13,7 +13,6 @@ namespace eAuto.Data.Interfaces.DataModels
         [MaxLength(50)]
         public decimal PriceInitial{ get; set; }
 
-        //TODO make List of pictures
         [MaxLength(200)]
         public string? PictureUrl { get; set; }
 

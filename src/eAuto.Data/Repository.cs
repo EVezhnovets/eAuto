@@ -50,7 +50,6 @@ namespace eAuto.Storage
             return result;
         }
 
-        //TODO remove proj reference
         public T? Get(
             Expression<Func<T, bool>>? predicate = null,
             Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null)
@@ -64,7 +63,6 @@ namespace eAuto.Storage
             return query.FirstOrDefault();
         }
 
-        //TODO remove proj reference
         public async Task<IList<T>> GetAllAsync(
             Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null)
         {

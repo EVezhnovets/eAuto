@@ -9,9 +9,9 @@ using System.Diagnostics;
 namespace eAuto.Web.Areas.Customer.Controllers
 {
 	[Area("Customer")]
-	public class HomeController : Controller
+	public class CarsCatalogController : Controller
 	{
-		private readonly IAppLogger<HomeController> _logger;
+		private readonly IAppLogger<CarsCatalogController> _logger;
 
 		private readonly ICarService _carService;
 		private readonly IBrandService _brandService;
@@ -22,7 +22,7 @@ namespace eAuto.Web.Areas.Customer.Controllers
 		private readonly ITransmissionService _transmissionService;
 		private readonly IEngineTypeService _engineTypeService;
 
-		public HomeController(
+		public CarsCatalogController(
 			ICarService carService,
 			IBrandService brandService,
 			IModelService modelService,
@@ -31,7 +31,7 @@ namespace eAuto.Web.Areas.Customer.Controllers
 			IDriveTypeService driveTypeService,
 			ITransmissionService transmissionService,
 			IEngineTypeService engineTypeService,
-			IAppLogger<HomeController> logger)
+			IAppLogger<CarsCatalogController> logger)
 		{
 			_carService = carService;
 			_brandService = brandService;

@@ -49,7 +49,7 @@ app.UseSerilogRequestLogging();
 
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
+    app.UseExceptionHandler("/CarsCatalog/Error");
     app.UseHsts();
 }
 
@@ -63,6 +63,6 @@ app.UseAuthorization();
 app.MapRazorPages();
 app.MapControllerRoute(
     name: "default",
-    pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}");
+    pattern: "{area=Customer}/{controller=CarsCatalog}/{action=Index}/{id?}");
 
 app.Run();

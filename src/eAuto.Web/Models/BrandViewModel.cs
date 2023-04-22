@@ -16,6 +16,5 @@ namespace eAuto.Web.Models
 			BrandId = brandId;
 			Name = name;
 		}
-		//TODO PagedOptions(int skip, int take)
 	}
 }

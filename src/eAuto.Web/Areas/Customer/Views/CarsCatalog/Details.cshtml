@@ -2,7 +2,7 @@
 
 <form method="post" class="pt-4">
     <div class="card container" style="border: solid 1px; margin:auto">
-        <div class="card-header bg-dark text-light ml-0  row ">
+        <div class="card-header bg-dark text-light ml-0 row" style="padding:2rem">
             <div class="col-12 col-md-6">
                 <h1 class="text-white">@Model.Car.Brand | @Model.Car.Model</h1>
                 <p class="text-white">@Model.Car.Generation</p>
@@ -40,10 +40,10 @@
             <div class="row" style="margin: 2rem">
                 <hr/>
                 <div class="col-md-6 pb-1">
-                    <a class="btn btn-outline-dark form-control " style="height:50px; border:none" asp-action="Index">Back to Home</a>
+                    <a class="btn btn-outline-dark form-control " style="height:50px; border:none" asp-action="Index">Back to Catalog</a>
                 </div>
                 <div class="col-md-6 pb-1">
-                    <button type="submit" value="Order" class="btn btn-success form-control" style="height:50px;">Order</button>
+                    <button type="submit" value="Order" class="btn btn-success form-control" style="height:50px;">Order Now</button>
                 </div>
             </div>
         </div>

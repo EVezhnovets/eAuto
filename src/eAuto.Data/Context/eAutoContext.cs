@@ -14,6 +14,8 @@ namespace eAuto.Data.Context
         public DbSet<TransmissionDataModel> Transmissions { get; set; }
         public DbSet<GenerationDataModel> Generations{ get; set; }
         public DbSet<EngineTypeDataModel> EngineTypes{ get; set; }
+        public DbSet<MotorOilDataModel> MotorOils{ get; set; }
+        public DbSet<ProductBrandDataModel> ProductBrands{ get; set; }
 
         public EAutoContext(string connectionString)
         {
@@ -50,6 +52,12 @@ namespace eAuto.Data.Context
 
             modelBuilder.Entity<EngineTypeDataModel>()
                 .HasKey(e => e.EngineTypeId);
-        }
+
+            modelBuilder.Entity<MotorOilDataModel>()
+                .HasKey(e => e.MotorOilDataModelId);
+
+			modelBuilder.Entity<ProductBrandDataModel>()
+				.HasKey(e => e.ProductBrandDataModelId);
+		}
     }
 }
