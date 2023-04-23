@@ -12,7 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AccountManager\AccountManager.csproj" />
     <ProjectReference Include="..\eAuto.Data\eAuto.Data.csproj" />
     <ProjectReference Include="..\eAuto.Domain.Interfaces\eAuto.Domain.Interfaces.csproj" />
     <ProjectReference Include="..\eAuto.Domain\eAuto.Domain.csproj" />
