@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using AccountManager.Models;
+using eAuto.Data.Interfaces.DataModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;

@@ -16,6 +16,7 @@ namespace eAuto.Data.Context
         public DbSet<EngineTypeDataModel> EngineTypes{ get; set; }
         public DbSet<MotorOilDataModel> MotorOils{ get; set; }
         public DbSet<ProductBrandDataModel> ProductBrands{ get; set; }
+        public DbSet<ShoppingCartDataModel> ShoppingCarts{ get; set; }
 
         public EAutoContext(string connectionString)
         {
@@ -58,6 +59,9 @@ namespace eAuto.Data.Context
 
 			modelBuilder.Entity<ProductBrandDataModel>()
 				.HasKey(e => e.ProductBrandDataModelId);
-		}
+
+            modelBuilder.Entity<ShoppingCartDataModel>()
+                .HasKey(e => e.ShoppingCartId);
+        }
     }
 }
