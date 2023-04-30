@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using eAuto.Data.Context;
 
-
 namespace eAuto.Data.Migrations
 {
     [DbContext(typeof(EAutoContext))]
@@ -16,68 +15,6 @@ namespace eAuto.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("eAuto.Data.Interfaces.DataModels.ApplicationUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ApplicationUser");
-                });
 
             modelBuilder.Entity("eAuto.Data.Interfaces.DataModels.BodyTypeDataModel", b =>
                 {
@@ -327,9 +264,9 @@ namespace eAuto.Data.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<decimal>("Price")
+                    b.Property<double>("Price")
                         .HasMaxLength(50)
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("float");
 
                     b.Property<int>("ProductBrandId")
                         .HasColumnType("int");
@@ -379,7 +316,7 @@ namespace eAuto.Data.Migrations
 
                     b.Property<string>("ApplicationUserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Count")
                         .HasColumnType("int");
@@ -388,8 +325,6 @@ namespace eAuto.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("ShoppingCartId");
-
-                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("ProductId");
 
@@ -509,19 +444,11 @@ namespace eAuto.Data.Migrations
 
             modelBuilder.Entity("eAuto.Data.Interfaces.DataModels.ShoppingCartDataModel", b =>
                 {
-                    b.HasOne("eAuto.Data.Interfaces.DataModels.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("eAuto.Data.Interfaces.DataModels.MotorOilDataModel", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("ApplicationUser");
 
                     b.Navigation("Product");
                 });
