@@ -31,7 +31,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
                 }).OrderBy(i => i.Name);
 				return View(orderedResult);
 			}
-			catch (BrandNotFoundException ex)
+			catch (GenericNotFoundException<BrandController> ex)
 			{
 				_logger.LogError(ex, ex.Message);
 				return NotFound(ex.Message);
@@ -68,7 +68,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
                 }
                 return View(viewModel);
             }
-			catch (BrandNotFoundException ex)
+			catch (GenericNotFoundException<BrandController> ex)
 			{
 				_logger.LogError(ex, ex.Message);
 				return RedirectToAction("Index");
@@ -93,7 +93,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
                 return View(brandViewModel);
             }
 
-            catch (BrandNotFoundException ex)
+            catch (GenericNotFoundException<BrandController> ex)
             {
 				_logger.LogError(ex, ex.Message);
 				return NotFound(ex.Message);
@@ -123,7 +123,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
                 }
                 return View(viewModel);
             }
-            catch (BrandNotFoundException ex)
+            catch (GenericNotFoundException<BrandController> ex)
             {
 				_logger.LogError(ex, ex.Message);
 				return RedirectToAction("Index");
@@ -142,7 +142,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
-            catch (BrandNotFoundException ex)
+            catch (GenericNotFoundException<BrandController> ex)
             {
 				_logger.LogError(ex, ex.Message);
 				return NotFound(ex.Message);

@@ -121,7 +121,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
 				};
 				return View(carsResult);
 			}
-			catch (CarNotFoundException ex)
+			catch (GenericNotFoundException<CarController> ex)
 			{
 				_logger.LogError(ex, ex.Message);
 				return NotFound(ex.Message);
@@ -160,7 +160,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
 				};
                 return View(createViewModel);
             }
-            catch (CarNotFoundException ex)
+            catch (GenericNotFoundException<CarController> ex)
             {
 				_logger.LogError(ex, ex.Message);
 				return NotFound(ex.Message);
@@ -214,7 +214,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
                 }
                 return View(viewModel);
             }
-			catch (CarNotFoundException ex)
+			catch (GenericNotFoundException<CarController> ex)
 			{
 				_logger.LogError(ex, ex.Message);
 				return RedirectToAction("Index");
@@ -318,7 +318,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
                 return View(createViewModel);
             }
 
-            catch (CarNotFoundException ex)
+            catch (GenericNotFoundException<CarController> ex)
             {
 				_logger.LogError(ex, ex.Message);
 				return NotFound(ex.Message);
@@ -381,7 +381,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
                 }
                 return View(viewModel);
             }
-            catch (CarNotFoundException ex)
+            catch (GenericNotFoundException<CarController> ex)
             {
 				_logger.LogError(ex, ex.Message);
 				return RedirectToAction("Index");
@@ -401,7 +401,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
-            catch (CarNotFoundException ex)
+            catch (GenericNotFoundException<CarController> ex)
             {
 				_logger.LogError(ex, ex.Message);
 				return NotFound(ex.Message);

@@ -54,7 +54,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
  
                 return View(motorOilsList);
 			}
-			catch (MotorOilNotFoundException ex)
+			catch (GenericNotFoundException<MotorOilController> ex)
 			{
 				_logger.LogError(ex, ex.Message);
 				return NotFound(ex.Message);
@@ -84,7 +84,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
 				};
 				return View(createViewModel);
             }
-            catch (MotorOilNotFoundException ex)
+            catch (GenericNotFoundException<MotorOilController> ex)
             {
 				_logger.LogError(ex, ex.Message);
 				return NotFound(ex.Message);
@@ -128,7 +128,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
                 }
                 return View(viewModel);
             }
-			catch (MotorOilNotFoundException ex)
+			catch (GenericNotFoundException<MotorOilController> ex)
 			{
 				_logger.LogError(ex, ex.Message);
 				return RedirectToAction("Index");
@@ -173,7 +173,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
                 return View(createViewModel);
             }
 
-            catch (MotorOilNotFoundException ex)
+            catch (GenericNotFoundException<MotorOilController> ex)
             {
 				_logger.LogError(ex, ex.Message);
 				return NotFound(ex.Message);
@@ -219,7 +219,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
                 }
                 return View(viewModel);
             }
-            catch (MotorOilNotFoundException ex)
+            catch (GenericNotFoundException<MotorOilController> ex)
             {
 				_logger.LogError(ex, ex.Message);
 				return RedirectToAction("Index");
@@ -239,7 +239,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
-            catch (MotorOilNotFoundException ex)
+            catch (GenericNotFoundException<MotorOilController> ex)
             {
 				_logger.LogError(ex, ex.Message);
 				return NotFound(ex.Message);

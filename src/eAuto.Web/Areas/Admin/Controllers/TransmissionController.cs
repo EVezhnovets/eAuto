@@ -34,7 +34,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
                     .OrderBy(i => i.Name);
 				return View(viewModelList);
 			}
-			catch (TransmissionNotFoundException ex)
+			catch (GenericNotFoundException<TransmissionController> ex)
 			{
 				_logger.LogError(ex, ex.Message);
 				return NotFound(ex.Message);
@@ -75,7 +75,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
                 }
                 return View(viewModel);
             }
-			catch (TransmissionNotFoundException ex)
+			catch (GenericNotFoundException<TransmissionController> ex)
 			{
 				_logger.LogError(ex, ex.Message);
 				return RedirectToAction("Index");
@@ -100,7 +100,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
                 return View(transmissionViewModel);
             }
 
-            catch (TransmissionNotFoundException ex)
+            catch (GenericNotFoundException<TransmissionController> ex)
             {
 				_logger.LogError(ex, ex.Message);
 				return NotFound(ex.Message);
@@ -130,7 +130,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
                 }
                 return View(viewModel);
             }
-            catch (TransmissionNotFoundException ex)
+            catch (GenericNotFoundException<TransmissionController> ex)
             {
 				_logger.LogError(ex, ex.Message);
 				return RedirectToAction("Index");
@@ -149,7 +149,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
-            catch (TransmissionNotFoundException ex)
+            catch (GenericNotFoundException<TransmissionController> ex)
             {
 				_logger.LogError(ex, ex.Message);
 				return NotFound(ex.Message);

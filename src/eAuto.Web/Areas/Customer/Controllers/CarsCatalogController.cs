@@ -123,7 +123,7 @@ namespace eAuto.Web.Areas.Customer.Controllers
 
 				return View(carsResult);
 			}
-			catch (CarNotFoundException ex)
+			catch (GenericNotFoundException<CarsCatalogController> ex)
 			{
 				_logger.LogError(ex, ex.Message);
 				return NotFound(ex.Message);
