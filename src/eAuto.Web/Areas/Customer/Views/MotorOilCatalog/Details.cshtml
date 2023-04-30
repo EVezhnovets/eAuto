@@ -1,33 +1,42 @@
-﻿@model MotorOilBasketItemViewModel
+﻿@model ShoppingCartViewModel
 
 <form method="post" class="pt-4">
+    <input hidden asp-for="ProductId" />
+    <input hidden asp-for="Product.Price" />
     <div class="card container" style="border: solid 1px; margin:auto; max-width:1000px">
         <div class="card-header bg-dark text-light ml-0 row" style="padding:2rem">
             <div class="col-12 col-md-6">
-                <h1 class="text-white">@Model.MotorOil.ProductBrand</h1>
-                <p class="text-white">@Model.MotorOil.Name</p>
+                <h1 class="text-white">@Model.Product.ProductBrand</h1>
+                <p class="text-white">@Model.Product.Name</p>
             </div>
             <div class="col-12 col-md-6 text-end pt-4">
-                <span class="badge bg-light pt-2" style="height:30px;">@Model.MotorOil.Viscosity</span>
-                <span class="badge bg-warning pt-2" style="height:30px;">@Model.MotorOil.Composition</span>
+                <span class="badge bg-light pt-2" style="height:30px;">@Model.Product.Viscosity</span>
+                <span class="badge bg-warning pt-2" style="height:30px;">@Model.Product.Composition</span>
             </div>
         </div>
         <div class="card-body row container" style="justify-content: center">
             <div class="row">
                 <div class="col-lg-6">
-                    <img src="@Model.MotorOil.PictureUrl" width="100%" class="rounded" />
+                    <img src="@Model.Product.PictureUrl" width="100%" class="rounded" />
                 </div>
                 <div class="col-lg-6" style="text-align: center; margin-top:6rem">
-                    <h5 class="text-primary pb-2">Brand: <span>@Model.MotorOil.ProductBrand</span></h5>
-                    <h5 class="text-primary pb-2">Name: <span>@Model.MotorOil.Name</span></h5>
-                    <h5 class="text-primary pb-2">Viscosity: <span>@Model.MotorOil.Viscosity</h5>
-                    <h5 class="text-primary pb-2">Composition: <span>@Model.MotorOil.Composition</h5>
-                    <h5 class="text-primary pb-2">Volume: <span>@Model.MotorOil.Volume L</span></h5>
+                    <h5 class="text-primary pb-2">Brand: <span>@Model.Product.ProductBrand</span></h5>
+                    <h5 class="text-primary pb-2">Name: <span>@Model.Product.Name</span></h5>
+                    <h5 class="text-primary pb-2">Viscosity: <span>@Model.Product.Viscosity</span></h5>
+                    <h5 class="text-primary pb-2">Composition: <span>@Model.Product.Composition</span></h5>
+                    <h5 class="text-primary pb-2">Volume: <span>@Model.Product.Volume L</span></h5>
+                    <div class="col-3 text-primary">
+                        <h4>Count</h4>
+                    </div>
+                    <div class="col-10">
+                        <input asp-for="Count" class="form-control"  />
+                        <span asp-validation-for="Count" class="text-danger"></span>
+                    </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
-                    <h3 class="text-primary pb-2 mt-2">Price: @Model.MotorOil.Price.ToString("c", WebConstants.CultureInfoEN_US)</h3>
+                    <h3 class="text-primary pb-2 mt-2">Price: @Model.Product.Price.ToString("c", WebConstants.CultureInfoEN_US)</h3>
                 </div>
             </div>
         </div>
@@ -44,3 +53,9 @@
         </div>
     </div>
 </form>
+
+@section Scripts {
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+}

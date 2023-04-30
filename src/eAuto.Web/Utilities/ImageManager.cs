@@ -62,7 +62,7 @@ namespace eAuto.Web.Utilities
                     }
                 }
             }
-            catch (ImageNotFoundException ex)
+            catch (GenericNotFoundException<ImageManager> ex)
             {
                 _logger.LogError(ex, "File not found");
             }
