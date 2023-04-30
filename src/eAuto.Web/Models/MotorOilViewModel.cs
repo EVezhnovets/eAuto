@@ -8,7 +8,7 @@ namespace eAuto.Web.Models
 		public int MotorOilId { get; set; }
 		[DisplayName("Picture Url")]
 		public string? PictureUrl { get; set; }
-        public decimal Price { get; set; }
+        public double Price { get; set; }
 		[DisplayName("Name")]
 		public string Name { get; set; }
 		public string Viscosity { get; set; }
@@ -25,7 +25,7 @@ namespace eAuto.Web.Models
             int motorOilId, 
             string name, 
             string? pictureUrl,
-            decimal price,
+            double price,
             string viscosity, 
             string composition, 
             int volume, 
