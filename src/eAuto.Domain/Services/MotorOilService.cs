@@ -26,7 +26,7 @@ namespace eAuto.Domain.Services
 
             if (motorOilDataModel == null)
             {
-				var exception = new MotorOilNotFoundException("MotorOil not found");
+				var exception = new GenericNotFoundException<MotorOilService>("MotorOil not found");
 				_logger.LogError(exception, exception.Message);
 			}
 
@@ -44,7 +44,7 @@ namespace eAuto.Domain.Services
 
             if (motorOilEntities == null)
             {
-				var exception = new MotorOilNotFoundException("MotorOil not found");
+				var exception = new GenericNotFoundException<MotorOilService>("MotorOil not found");
 				_logger.LogError(exception, exception.Message);
 			}
 
@@ -81,7 +81,7 @@ namespace eAuto.Domain.Services
 
             if (motorOil == null)
             {
-				var exception = new MotorOilNotFoundException("MotorOil not found");
+				var exception = new GenericNotFoundException<MotorOilService>("MotorOil not found");
 				_logger.LogError(exception, exception.Message);
 			}
             return motorOil;

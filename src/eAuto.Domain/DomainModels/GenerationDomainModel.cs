@@ -17,7 +17,7 @@ namespace eAuto.Domain.DomainModels
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                    throw new GenerationNotFoundException();
+                    throw new GenericNotFoundException<GenerationDomainModel>();
                 }
                 _name = value;
             } 

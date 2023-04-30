@@ -25,7 +25,7 @@ namespace eAuto.Domain.Services
 
             if (engineTypeDataModel == null)
             {
-				var exception = new EngineTypeNotFoundException("EngineType not found");
+				var exception = new GenericNotFoundException<EngineTypeService>("EngineType not found");
 				_logger.LogError(exception, exception.Message);
 			}
 
@@ -40,7 +40,7 @@ namespace eAuto.Domain.Services
 
             if (engineTypeEntities == null)
             {
-				var exception = new EngineTypeNotFoundException("EngineType not found");
+				var exception = new GenericNotFoundException<EngineTypeService>("EngineType not found");
 				_logger.LogError(exception, exception.Message);
 			}
 
@@ -62,7 +62,7 @@ namespace eAuto.Domain.Services
 
             if (engineType == null)
             {
-				var exception = new EngineTypeNotFoundException("EngineType not found");
+				var exception = new GenericNotFoundException<EngineTypeService>("EngineType not found");
 				_logger.LogError(exception, exception.Message);
 			}
 

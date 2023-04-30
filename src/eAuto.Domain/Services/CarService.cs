@@ -26,7 +26,7 @@ namespace eAuto.Domain.Services
 
             if (carDataModel == null)
             {
-				var exception = new CarNotFoundException("Car not found");
+				var exception = new GenericNotFoundException<CarService>("Car not found");
 				_logger.LogError(exception, exception.Message);
 			}
 
@@ -49,7 +49,7 @@ namespace eAuto.Domain.Services
 
             if (carEntities == null)
             {
-				var exception = new CarNotFoundException("Car not found");
+				var exception = new GenericNotFoundException<CarService>("Car not found");
 				_logger.LogError(exception, exception.Message);
 			}
 
@@ -106,7 +106,7 @@ namespace eAuto.Domain.Services
 
             if (car == null)
             {
-				var exception = new CarNotFoundException("Car not found");
+				var exception = new GenericNotFoundException<CarService>("Car not found");
 				_logger.LogError(exception, exception.Message);
 			}
             return car;

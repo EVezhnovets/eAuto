@@ -3,7 +3,6 @@ using eAuto.Data.Interfaces.DataModels;
 using eAuto.Domain.DomainModels;
 using eAuto.Domain.Interfaces;
 using eAuto.Domain.Interfaces.Exceptions;
-using Microsoft.EntityFrameworkCore;
 
 namespace eAuto.Domain.Services
 {
@@ -26,7 +25,7 @@ namespace eAuto.Domain.Services
 
             if (transmissionDataModel == null)
             {
-				var exception = new TransmissionNotFoundException("Transmission not found");
+				var exception = new GenericNotFoundException<TransmissionService>("Transmission not found");
 				_logger.LogError(exception, exception.Message);
 			}
 
@@ -41,7 +40,7 @@ namespace eAuto.Domain.Services
 
             if (transmissionEntities == null)
             {
-				var exception = new TransmissionNotFoundException("Transmission not found");
+				var exception = new GenericNotFoundException<TransmissionService>("Transmission not found");
 				_logger.LogError(exception, exception.Message);
 			}
 
@@ -69,7 +68,7 @@ namespace eAuto.Domain.Services
 
             if (transmission == null)
             {
-				var exception = new TransmissionNotFoundException("Transmission not found");
+				var exception = new GenericNotFoundException<TransmissionService>("Transmission not found");
 				_logger.LogError(exception, exception.Message);
 			}
 

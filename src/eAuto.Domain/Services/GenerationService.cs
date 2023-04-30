@@ -26,7 +26,7 @@ namespace eAuto.Domain.Services
 
             if (generationDataModel == null)
             {
-				var exception = new GenerationNotFoundException("Generation not found");
+				var exception = new GenericNotFoundException<GenerationService>("Generation not found");
 				_logger.LogError(exception, exception.Message);
 			}
 
@@ -45,7 +45,7 @@ namespace eAuto.Domain.Services
 
             if (generationEntities == null)
             {
-				var exception = new GenerationNotFoundException("Generation not found");
+				var exception = new GenericNotFoundException<GenerationService>("Generation not found");
 				_logger.LogError(exception, exception.Message);
 			}
 
@@ -80,7 +80,7 @@ namespace eAuto.Domain.Services
 
             if (generation == null)
             {
-				var exception = new GenerationNotFoundException("Generation not found");
+				var exception = new GenericNotFoundException<GenerationService>("Generation not found");
 				_logger.LogError(exception, exception.Message);
 			}
             return generation;
