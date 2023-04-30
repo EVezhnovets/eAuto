@@ -26,7 +26,7 @@ namespace eAuto.Domain.Services
 
             if (modelDataModel == null)
             {
-				var exception = new ModelNotFoundException("Model not found");
+				var exception = new GenericNotFoundException<ModelService>("Model not found");
 				_logger.LogError(exception, exception.Message);
 			}
 
@@ -44,7 +44,7 @@ namespace eAuto.Domain.Services
 
             if (modelEntities == null)
             {
-				var exception = new ModelNotFoundException("Model not found");
+				var exception = new GenericNotFoundException<ModelService>("Model not found");
 				_logger.LogError(exception, exception.Message);
 			}
 
@@ -76,7 +76,7 @@ namespace eAuto.Domain.Services
 
             if (model == null)
             {
-				var exception = new ModelNotFoundException("Model not found");
+				var exception = new GenericNotFoundException<ModelService>("Model not found");
 				_logger.LogError(exception, exception.Message);
 			}
             return model;

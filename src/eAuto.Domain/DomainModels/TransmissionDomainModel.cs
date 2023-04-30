@@ -17,7 +17,7 @@ namespace eAuto.Domain.DomainModels
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                    throw new TransmissionNotFoundException();
+                    throw new GenericNotFoundException<TransmissionDomainModel>();
                 }
                 _name = value;
             } 

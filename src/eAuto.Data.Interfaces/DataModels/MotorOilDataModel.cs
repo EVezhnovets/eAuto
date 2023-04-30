@@ -18,7 +18,7 @@ namespace eAuto.Data.Interfaces.DataModels
 
         [Required]
         [MaxLength(50)]
-        public decimal Price { get; set; }
+        public double Price { get; set; }
         [Required]
 		[MaxLength(50)]
 		public string Viscosity { get; set; }
@@ -41,7 +41,7 @@ namespace eAuto.Data.Interfaces.DataModels
 		public MotorOilDataModel(
 			string name,
 			string? pictureUrl,
-			decimal price,
+			double price,
 			string viscosity, 
 			string composition, 
 			int volume,

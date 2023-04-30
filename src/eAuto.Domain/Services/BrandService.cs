@@ -25,7 +25,7 @@ namespace eAuto.Domain.Services
 
             if (brandDataModel == null)
             {
-				var exception = new BrandNotFoundException("Brand not found");
+				var exception = new GenericNotFoundException<BrandService>("Brand not found");
 				_logger.LogError(exception, exception.Message);
 			}
 
@@ -39,7 +39,7 @@ namespace eAuto.Domain.Services
 
             if(brandEntities == null)
             {
-				var exception = new BrandNotFoundException("Brand not found");
+				var exception = new GenericNotFoundException<BrandService>("Brand not found");
 				_logger.LogError(exception, exception.Message);
 			}
 
@@ -66,7 +66,7 @@ namespace eAuto.Domain.Services
 
             if(brand == null)
             {
-				var exception = new BrandNotFoundException("Brand not found");
+				var exception = new GenericNotFoundException<BrandService>("Brand not found");
 				_logger.LogError(exception, exception.Message);
 			}
             return brand;

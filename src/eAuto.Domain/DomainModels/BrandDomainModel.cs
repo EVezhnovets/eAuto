@@ -17,15 +17,12 @@ namespace eAuto.Domain.DomainModels
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                    throw new BrandNotFoundException();
+                    throw new GenericNotFoundException<BrandDomainModel>();
                 }
                 _name = value;
             } 
         }
-        public BrandDomainModel()
-        {
-
-        }
+        public BrandDomainModel() { }
 
         internal BrandDomainModel(
             BrandDataM brandDataModel,

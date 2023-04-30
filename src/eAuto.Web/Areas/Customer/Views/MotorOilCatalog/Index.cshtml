@@ -57,12 +57,9 @@ else
                     <td width="20%" align="center">
                         <div class="row">
                             <div class="col mt-2" role="toolbar">
-                                <a asp-controller="MotorOilCatalog" asp-action="Details" asp-route-id="@obj.MotorOilId" class="btn btn-outline-dark" style="width:7rem">Details</a>
+                                <a asp-controller="MotorOilCatalog" asp-action="Details" asp-route-productId="@obj.MotorOilId" class="btn btn-outline-success" style="width:7rem">Details</a>
                             </div>
-                            <div class="col mt-2" role="toolbar">
-                                <a asp-controller="MotorOilCatalog" asp-action="Details" asp-route-id="@obj.MotorOilId" class="btn btn-outline-success" style="width:7rem">Add to cart</a>
-                            </div>
-                        </div>
+                       </div>
                     </td>
                 </tr>
             }

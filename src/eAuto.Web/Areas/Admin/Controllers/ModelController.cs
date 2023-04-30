@@ -41,7 +41,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
                     .OrderBy(i => i.Brand).ThenBy(i => i.Name);
                 return View(modelsList);
 			}
-			catch (ModelNotFoundException ex)
+			catch (GenericNotFoundException<ModelController> ex)
 			{
 				_logger.LogError(ex, ex.Message);
 				return NotFound(ex.Message);
@@ -71,7 +71,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
                 };
                 return View(viewModel);
             }
-            catch (ModelNotFoundException ex)
+            catch (GenericNotFoundException<ModelController> ex)
             {
 				_logger.LogError(ex, ex.Message);
 				return NotFound(ex.Message);
@@ -103,7 +103,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
                 }
                 return View(viewModel);
             }
-			catch (ModelNotFoundException ex)
+			catch (GenericNotFoundException<ModelController> ex)
 			{
 				_logger.LogError(ex, ex.Message);
 				return RedirectToAction("Index");
@@ -143,7 +143,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
                 return View(createViewModel);
             }
 
-            catch (ModelNotFoundException ex)
+            catch (GenericNotFoundException<ModelController> ex)
             {
 				_logger.LogError(ex, ex.Message);
 				return NotFound(ex.Message);
@@ -175,7 +175,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
                 }
                 return View(viewModel);
             }
-            catch (ModelNotFoundException ex)
+            catch (GenericNotFoundException<ModelController> ex)
             {
 				_logger.LogError(ex, ex.Message);
 				return RedirectToAction("Index");
@@ -194,7 +194,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
-            catch (ModelNotFoundException ex)
+            catch (GenericNotFoundException<ModelController> ex)
             {
 				_logger.LogError(ex, ex.Message);
 				return NotFound(ex.Message);

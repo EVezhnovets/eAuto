@@ -17,7 +17,7 @@ namespace eAuto.Domain.DomainModels
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                    throw new ModelNotFoundException();
+                    throw new GenericNotFoundException<ModelDomainModel>();
                 }
                 _name = value;
             } 

@@ -25,7 +25,7 @@ namespace eAuto.Domain.Services
 
             if (bodyTypeDataModel == null)
             {
-                var exception = new BodyTypeNotFoundException("BodyType not found");
+                var exception = new GenericNotFoundException<BodyTypeService>("BodyType not found");
                 _logger.LogError(exception, exception.Message);
             }
 
@@ -39,7 +39,7 @@ namespace eAuto.Domain.Services
 
             if(bodyTypeEntities == null)
             {
-				var exception = new BodyTypeNotFoundException("BodyType not found");
+				var exception = new GenericNotFoundException<BodyTypeService>("BodyType not found");
 				_logger.LogError(exception, exception.Message);
 			}
 
@@ -66,7 +66,7 @@ namespace eAuto.Domain.Services
 
             if(bodyType == null)
             {
-				var exception = new BodyTypeNotFoundException("BodyType not found");
+				var exception = new GenericNotFoundException<BodyTypeService>("BodyType not found");
 				_logger.LogError(exception, exception.Message);
 			}
 

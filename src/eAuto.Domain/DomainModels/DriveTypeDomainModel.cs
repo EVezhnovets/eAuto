@@ -17,7 +17,7 @@ namespace eAuto.Domain.DomainModels
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                    throw new DriveTypeNotFoundException();
+                    throw new GenericNotFoundException<DriveTypeDomainModel>();
                 }
                 _name = value;
             } 

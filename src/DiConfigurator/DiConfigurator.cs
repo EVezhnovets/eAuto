@@ -1,10 +1,9 @@
-﻿using AccountManager;
-using eAuto.Data;
+﻿using eAuto.Data;
 using eAuto.Data.Context;
+using eAuto.Data.Identity;
 using eAuto.Data.Interfaces;
 using eAuto.Domain.Interfaces;
 using eAuto.Domain.Services;
-using eAuto.Storage;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -44,6 +43,7 @@ namespace DiConfiguration
             services.AddTransient<IEngineTypeService, EngineTypeService>();
             services.AddTransient<IMotorOilService, MotorOilService>();
             services.AddTransient<IProductBrandService, ProductBrandService>();
+            services.AddTransient<IShoppingCartService, ShoppingCartService>();
         }
 
         private void RegisterDataPart(IServiceCollection services)

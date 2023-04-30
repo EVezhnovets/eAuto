@@ -25,7 +25,7 @@ namespace eAuto.Domain.Services
 
             if (driveTypeDataModel == null)
             {
-				var exception = new DriveTypeNotFoundException("Drive Type not found");
+				var exception = new GenericNotFoundException<DriveTypeService>("Drive Type not found");
 				_logger.LogError(exception, exception.Message);
 			}
 
@@ -39,7 +39,7 @@ namespace eAuto.Domain.Services
 
             if (driveTypeEntities == null)
             {
-				var exception = new DriveTypeNotFoundException("Drive Type not found");
+				var exception = new GenericNotFoundException<DriveTypeService>("Drive Type not found");
 				_logger.LogError(exception, exception.Message);
 			}
 
@@ -67,7 +67,7 @@ namespace eAuto.Domain.Services
 
             if (driveType == null)
             {
-				var exception = new DriveTypeNotFoundException("Drive Type not found");
+				var exception = new GenericNotFoundException<DriveTypeService>("Drive Type not found");
 				_logger.LogError(exception, exception.Message);
 			}
             return driveType;

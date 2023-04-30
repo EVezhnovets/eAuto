@@ -1,6 +1,6 @@
 ﻿@model CarsIndexViewModel
 
-<div style="margin-left: 3rem">
+<div>
 	<div class="container mt-5">
 		<form method="get">
 			<div class="row home">
@@ -21,7 +21,7 @@
 					<select id="1stBodyType" asp-for="@Model.BodyTypeFilterApplied" asp-items="@Model.BodyTypes" class="form-select" style="background-color:#fff"></select>
 				</div>
 			</div>
-			<div class="row mt-2">
+			<div class="row home mt-2">
 				<div class="col-lg-3">
 					<label asp-for="DriveTypes" class="control-label"></label>
 					<select id="1stDriveType" asp-for="@Model.DriveTypeFilterApplied" asp-items="@Model.DriveTypes" class="form-select" style="background-color:#fff"></select>
@@ -34,13 +34,8 @@
 					<label asp-for="EngineTypes" class="control-label"></label>
 					<select id="1stEngineType" asp-for="@Model.EngineTypeFilterApplied" asp-items="@Model.EngineTypes" class="form-select" style="background-color:#fff"></select>
 				</div>
-			</div>
-			<div class="row mt-2" >
-				<div class="mt-4" style="text-align:center">
-					<button asp-action="Index" class="btn btn-outline-secondary" style="width:14rem">
-						Reset
-					</button>
-					<button type="submit" class="btn btn-outline-dark" style="width:14rem; margin-right:3rem">
+				<div class="col-lg-3 mt-4" style="text-align:center">
+					<button type="submit" class="btn btn-outline-dark" style="width:14rem">
 						Apply
 					</button>
 				</div>

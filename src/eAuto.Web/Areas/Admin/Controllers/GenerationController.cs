@@ -49,7 +49,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
  
                 return View(generationsList);
 			}
-			catch (GenerationNotFoundException ex)
+			catch (GenericNotFoundException<GenerationController> ex)
 			{
 				_logger.LogError(ex, ex.Message);
 				return NotFound(ex.Message);
@@ -82,7 +82,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
 				};
 				return View(createViewModel);
             }
-            catch (GenerationNotFoundException ex)
+            catch (GenericNotFoundException<GenerationController> ex)
             {
 				_logger.LogError(ex, ex.Message);
 				return NotFound(ex.Message);
@@ -116,7 +116,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
                 }
                 return View(viewModel);
             }
-			catch (GenerationNotFoundException ex)
+			catch (GenericNotFoundException<GenerationController> ex)
 			{
 				_logger.LogError(ex, ex.Message);
 				return RedirectToAction("Index");
@@ -168,7 +168,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
                 return View(createViewModel);
             }
 
-            catch (GenerationNotFoundException ex)
+            catch (GenericNotFoundException<GenerationController> ex)
             {
 				_logger.LogError(ex, ex.Message);
 				return NotFound(ex.Message);
@@ -202,7 +202,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
                 }
                 return View(viewModel);
             }
-            catch (GenerationNotFoundException ex)
+            catch (GenericNotFoundException<GenerationController> ex)
             {
 				_logger.LogError(ex, ex.Message);
 				return RedirectToAction("Index");
@@ -221,7 +221,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
-            catch (GenerationNotFoundException ex)
+            catch (GenericNotFoundException<GenerationController> ex)
             {
 				_logger.LogError(ex, ex.Message);
 				return NotFound(ex.Message);

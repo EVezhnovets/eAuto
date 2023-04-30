@@ -14,7 +14,7 @@ namespace eAuto.Domain.DomainModels
         public int MotorOilId { get; set; }
         public string Name { get; set; }
         public string PictureUrl { get; set; }
-        public decimal Price { get; set; }
+        public double Price { get; set; }
         public string Viscosity { get; set; }
 		public string Composition { get; set; }
 		public int Volume { get; set; }

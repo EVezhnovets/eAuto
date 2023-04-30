@@ -28,6 +28,13 @@ var diConfigurator = new DiConfigurator(identityConnection, appConnection, build
 diConfigurator.ConfigureServices(builder.Services, builder.Logging);
 builder.Services.AddTransient<IImageManager, ImageManager>();
 
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = $"/Identity/Account/Login";
+    options.LogoutPath = $"/Identity/Account/Logout";
+    options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+});
+
 var app = builder.Build();
 
 #region Auto Migration

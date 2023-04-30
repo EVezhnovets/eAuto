@@ -10,14 +10,13 @@ namespace eAuto.Data.Interfaces
         void Update(T obj);
         void Delete(T obj);
         T? Get(Func<T, bool> func);
-
-
-        //TODO Remove EnttityFramework reference
-        public T? Get(
+       
+        T? Get(
             Expression<Func<T, bool>>? predicate = null,
             Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null);
 
         Task<IList<T>> GetAllAsync(
+            Expression<Func<T, bool>>? predicate = null,
             Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null);
     }
 }

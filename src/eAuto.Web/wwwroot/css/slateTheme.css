@@ -14,6 +14,10 @@
  */
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600&display=swap");
 
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: #fff;
+}
+
 .esh-catalog-send {
     background-color: white;
     color: white;

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using AccountManager.Models;
+using eAuto.Data.Interfaces.DataModels;
 
 namespace eAuto.Web.Areas.Identity.Pages.Account
 {

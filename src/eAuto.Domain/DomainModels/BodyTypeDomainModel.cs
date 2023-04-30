@@ -17,7 +17,7 @@ namespace eAuto.Domain.DomainModels
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                    throw new BodyTypeNotFoundException();
+                    throw new GenericNotFoundException<BodyTypeDomainModel>();
                 }
                 _name = value;
             } 
@@ -50,7 +50,6 @@ namespace eAuto.Domain.DomainModels
 		public void Save()
 		{
 			var bodyTypeDataModel = GetBodyTypeDataModel();
-            //TODO check unique
 
             if (_isNew)
             {

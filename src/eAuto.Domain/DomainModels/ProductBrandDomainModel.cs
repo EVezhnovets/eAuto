@@ -17,7 +17,7 @@ namespace eAuto.Domain.DomainModels
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                    throw new ProductBrandNotFoundException();
+                    throw new GenericNotFoundException<ProductBrandDomainModel>();
                 }
                 _name = value;
             } 
