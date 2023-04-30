@@ -5,7 +5,7 @@
         int MotorOilId { get; set; }
         string Name { get; set; }
         string PictureUrl { get; set; }
-        decimal Price { get; set; }
+        double Price { get; set; }
         string Viscosity { get; set; }
 		string Composition { get; set; }
 		int Volume { get; set; }
