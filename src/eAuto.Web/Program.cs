@@ -7,17 +7,16 @@ using Serilog;
 using Serilog.Events;
 
 Log.Logger = new LoggerConfiguration()
-				.MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+				.MinimumLevel.Override("Microsoft", LogEventLevel.Debug)
 				.Enrich.FromLogContext()
 				.WriteTo.Console()
-				.CreateBootstrapLogger();
+                .WriteTo.File("Logs/log.txt",
+					rollingInterval: RollingInterval.Day,
+					rollOnFileSizeLimit: true)
+                .CreateBootstrapLogger();
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Host.UseSerilog((context, services, configuration) => configuration
-	.ReadFrom.Configuration(context.Configuration)
-	.ReadFrom.Services(services)
-	.Enrich.FromLogContext()
-	.WriteTo.Console());
+
 builder.Host.UseSerilog();
 builder.Services.AddControllersWithViews();
 
