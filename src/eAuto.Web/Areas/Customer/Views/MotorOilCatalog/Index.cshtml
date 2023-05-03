@@ -1,0 +1,73 @@
+﻿@model MotorOilsIndexViewModel
+
+<h2 class="text-primary text-black-50 mt-5" style="text-align:center">Motor Oils</h2>
+
+@if (Model.MotorOilVModels.Count() == 0)
+{
+    <table class="table table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    MotorOil Name
+                </th>
+            </tr>
+        </thead>
+    </table>
+}
+else
+{
+    <table class="table table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>Motor Oil</th>
+                <th>Product Brand</th>
+                <th>Viscosity</th>
+                <th>Composition </th>
+                <th>Volume</th>
+                <th>Price</th>
+                <th width="110px">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model.MotorOilVModels)
+            {
+                <tr class="motor-index">
+                    <td width="25%" style="padding:0.3rem">
+                        <div>
+                            <a asp-controller="MotorOilCatalog" asp-action="Details" asp-route-id="@obj.MotorOilId">
+                                <img src=@obj.PictureUrl class="float-start" style="width:100%; max-width:10rem; margin-left: 4rem" />
+                            </a>
+                        </div>
+                    </td>
+                    <td width="10%">
+                        <h4>@obj.ProductBrand</h4>
+                    </td>
+                    <td width="15%">
+                        <h5>@obj.Viscosity</h5>
+                    </td>
+                    <td width="10%">
+                        <h5>@obj.Composition</h5>
+                    </td>
+                    <td width="10%">
+                        <h5>@obj.Volume L</h5>
+                    </td>
+                    <td width="10%">
+                        <h5>@obj.Price.ToString("C",WebConstants.CultureInfoEN_US)</h5>
+                    </td>
+                    <td width="20%" align="center">
+                        <div class="row">
+                            <div class="col mt-2" role="toolbar">
+                                <a asp-controller="MotorOilCatalog" asp-action="Details" asp-route-productId="@obj.MotorOilId" class="btn btn-outline-success" style="width:7rem">Details</a>
+                            </div>
+                       </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}

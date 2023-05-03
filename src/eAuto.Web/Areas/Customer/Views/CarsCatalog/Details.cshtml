@@ -1,0 +1,51 @@
+﻿@model CarBasketItem
+
+<form method="post" class="pt-4">
+    <div class="card container" style="border: solid 1px; margin:auto">
+        <div class="card-header bg-dark text-light ml-0 row" style="padding:2rem">
+            <div class="col-12 col-md-6">
+                <h1 class="text-white">@Model.Car.Brand | @Model.Car.Model</h1>
+                <p class="text-white">@Model.Car.Generation</p>
+            </div>
+            <div class="col-12 col-md-6 text-end pt-4">
+                <span class="badge bg-light pt-2" style="height:30px;">@Model.Car.Year.Year.ToString()</span>
+                <span class="badge bg-warning pt-2" style="height:30px;">@Model.Car.DriveType</span>
+            </div>
+        </div>
+        <div class="card-body row container" style="justify-content: center">
+            <div class="row" style="margin-top: 2rem">
+                <div class="col-lg-6">
+                    <img src="@Model.Car.PictureUrl" width="100%" class="rounded" />
+                </div>
+                <div class="col-lg-6" style="text-align: center; margin-top:1rem">
+                    <h5 class="text-primary pb-2">Brand: <span>@Model.Car.Brand</span></h5>
+                    <h5 class="text-primary pb-2">Model: <span>@Model.Car.Model</span></h5>
+                    <h5 class="text-primary pb-2">Generation: <span>@Model.Car.Generation</span></h5>
+                    <h5 class="text-primary pb-2">Year: <span>@Model.Car.Year.Year.ToString()</span></h5>
+                    <h5 class="text-primary pb-2">Bodytype: <span>@Model.Car.BodyType</span></h5>
+                    <h5 class="text-primary pb-2">Date of arrival: <span>@Model.Car.DateArrival.ToString("MM.yyyy")</span></h5>
+                    <h5 class="text-primary pb-2">Capacity: <span>@Model.Car.EngineFuelType</span> | <span>@Model.Car.EngineCapacity</span></h5>
+                    <h5 class="text-primary pb-2">Odometer: <span>@Model.Car.Odometer</span></h5>
+                    <h5 class="text-primary pb-2">Transmission: <span>@Model.Car.Transmission</span></h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <p class="text-secondary mt-5">@Html.Raw(Model.Car.Description)</p>
+                    <h3 class="text-primary pb-2 mt-5">Price: @Model.Car.PriceInitial.ToString("c", WebConstants.CultureInfoEN_US)</h3>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="row" style="margin: 2rem">
+                <hr/>
+                <div class="col-md-6 pb-1">
+                    <a class="btn btn-outline-dark form-control " style="height:50px; border:none" asp-action="Index">Back to Catalog</a>
+                </div>
+                <div class="col-md-6 pb-1">
+                    <button type="submit" value="Order" class="btn btn-success form-control" style="height:50px;">Order Now<sup>*  in progress</sup></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

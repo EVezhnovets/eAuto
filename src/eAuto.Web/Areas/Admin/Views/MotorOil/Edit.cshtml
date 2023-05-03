@@ -1,0 +1,66 @@
+﻿@model MotorOilCreateViewModel
+
+<form method="post" asp-controller="MotorOil" asp-action="Edit" enctype="multipart/form-data" novalidate>
+
+	<input asp-for="@Model.MotorOilVModel.MotorOilId" hidden />
+	<input asp-for="@Model.MotorOilVModel.PictureUrl" hidden />
+
+	<div class="border p-3 mt-4">
+		<div class="row pb-2">
+			<h2 class="text-black-50">Edit Motor Oil</h2>
+		</div>
+		<div class="row">
+			<div class="col mb-3">
+				<label asp-for="@Model.MotorOilVModel.ProductBrand"></label>
+				<select asp-for="@Model.MotorOilVModel.ProductBrandId" asp-items="@Model.ProductBrands" class="form-select">
+					<option disabled selected>--Select Category--</option>
+				</select>
+				<span asp-validation-for="@Model.MotorOilVModel.ProductBrandId" class="text-danger"></span>
+			</div>
+			<div class="col mb-3">
+				<label asp-for="@Model.MotorOilVModel.Name"></label>
+				<input asp-for="@Model.MotorOilVModel.Name" class="form-control">
+				<span asp-validation-for="@Model.MotorOilVModel.Name" class="text-danger"></span>
+			</div>
+			<div class="col mb-3">
+				<label asp-for="@Model.MotorOilVModel.PictureUrl"></label>
+				<input asp-for="@Model.MotorOilVModel.PictureUrl" class="form-control" name="files" type="file" id="formFile">
+			</div>
+			<div class="col mb-3">
+				<label asp-for="@Model.MotorOilVModel.Price"></label>
+				<input asp-for="@Model.MotorOilVModel.Price" class="form-control">
+				<span asp-validation-for="@Model.MotorOilVModel.Price" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col mb-3">
+				<label asp-for="@Model.MotorOilVModel.Viscosity"></label>
+				<input asp-for="@Model.MotorOilVModel.Viscosity" class="form-control">
+				<span asp-validation-for="@Model.MotorOilVModel.Viscosity" class="text-danger"></span>
+			</div>
+			<div class="col mb-3">
+				<label asp-for="@Model.MotorOilVModel.Composition"></label>
+				<input asp-for="@Model.MotorOilVModel.Composition" class="form-control">
+				<span asp-validation-for="@Model.MotorOilVModel.Composition" class="text-danger"></span>
+			</div>
+			<div class="col mb-3">
+				<label asp-for="@Model.MotorOilVModel.Volume"></label>
+				<input asp-for="@Model.MotorOilVModel.Volume" class="form-control">
+				<span asp-validation-for="@Model.MotorOilVModel.Volume" class="text-danger"></span>
+			</div>
+		</div>
+		<button type="submit" class="btn btn-success btn-sm" style="width:100px">
+			<i class="bi bi-check-lg"></i>
+			Update
+		</button>
+		<a asp-controller="MotorOil" asp-action="index" class="btn btn-primary btn-sm" style="width:100px">
+			<span class="bi bi-reply"> Back</span>
+		</a>
+	</div>
+</form>
+
+@section Scripts{
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+}

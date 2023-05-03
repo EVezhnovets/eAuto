@@ -1,0 +1,66 @@
+﻿@model IEnumerable<ModelViewModel>
+
+<partial name="_Notification" />
+<div class="container p-3" />
+<div class="row pt-4">
+    <div class="col-6">
+        <h2 class="text-primary text-black-50">Models</h2>
+    </div>
+    <div class="col-6 text-end">
+        <a asp-controller="Model" asp-action="Create" class="btn btn-outline-success">
+            <i class="bi bi-pen">Add</i>
+        </a>
+    </div>
+</div>
+
+
+@if (Model.Count() == 0)
+{
+    <table class="table table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    Model Name
+                </th>
+            </tr>
+        </thead>
+    </table>
+}
+else
+{
+    <table class="table table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>Brand</th>
+                <th>Model</th>
+                <th width="110px">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model)
+            {
+                <tr>
+                    <td width="45%">
+                        @obj.Brand
+                    </td>
+                    <td width="45%">
+                        @obj.Name
+                    </td>
+                    <td width="10%" align="center">
+                        <div class="btn-toolbar justify-content-between" role="toolbar" style="width:6rem">
+                            <a asp-controller="Model" asp-action="Edit" asp-route-id="@obj.ModelId" class="btn btn-outline-primary">
+                                <i class="bi bi-wrench"></i>
+                            </a>
+
+                            <form method="post" asp-controller="Model" asp-action="Delete" asp-route-id="@obj.ModelId">
+                                <button type="submit" class="btn btn-outline-danger">
+                                    <i class="bi bi-trash3"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

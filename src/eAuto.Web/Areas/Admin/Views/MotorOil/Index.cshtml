@@ -1,0 +1,91 @@
+﻿@model IEnumerable<MotorOilViewModel>
+
+<partial name="_Notification" />
+<div class="container p-3" />
+<div class="row pt-4">
+    <div class="col-6">
+        <h2 class="text-primary text-black-50">Motor Oils</h2>
+    </div>
+    <div class="col-6 text-end">
+        <a asp-controller="MotorOil" asp-action="Create" class="btn btn-outline-success">
+            <i class="bi bi-pen">Add</i>
+        </a>
+    </div>
+</div>
+
+
+@if (Model.Count() == 0)
+{
+    <table class="table table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    MotorOil Name
+                </th>
+            </tr>
+        </thead>
+    </table>
+}
+else
+{
+    <table class="table table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Picture</th>
+                <th>Product Brand</th>
+                <th>Viscosity</th>
+                <th>Composition </th>
+                <th>Volume</th>
+                <th>Price</th>
+                <th width="110px">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model)
+            {
+                <tr class="motor-index">
+                    <td width="5%">
+                        @obj.MotorOilId
+                    </td>
+                    <td width="15%" style="padding:0.3rem" >
+                        <div>
+                            <a asp-controller="MotorOil" asp-action="Edit" asp-route-id="@obj.MotorOilId">
+                                <img src=@obj.PictureUrl class="float-start" style="width:100%" />
+                            </a>
+                        </div>
+                    </td>
+                    <td width="5%">
+                        <p>@obj.ProductBrand</p>
+                    </td>
+                    <td width="15%">
+                        @obj.Viscosity
+                    </td>
+                    <td width="10%">
+                        @obj.Composition
+                    </td>
+                    <td width="10%">
+                        @obj.Volume
+                    </td>
+                    <td width="10%">
+                        @obj.Price.ToString("C",WebConstants.CultureInfoEN_US)
+                    </td>
+                    <td width="10%" align="center">
+                        <div class="btn-toolbar justify-content-between" role="toolbar" style="width:6rem">
+                            <a asp-controller="MotorOil" asp-action="Edit" asp-route-id="@obj.MotorOilId" class="btn btn-outline-primary">
+                                <i class="bi bi-wrench"></i>
+                            </a>
+
+                            <form method="post" asp-controller="MotorOil" asp-action="Delete" asp-route-id="@obj.MotorOilId">
+                                <input asp-for="@obj.PictureUrl" hidden />
+                                <button type="submit" class="btn btn-outline-danger">
+                                    <i class="bi bi-trash3"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

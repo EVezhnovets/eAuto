@@ -1,0 +1,46 @@
+﻿@model GenerationCreateViewModel
+
+<form method="post" asp-controller="Generation" asp-action="Edit"> 
+
+	<input asp-for="@Model.GenerationVModel.GenerationId" hidden />
+
+	<div class="border p-3 mt-4">
+		<div class="row pb-2">
+			<h2 class="text-black-50">Edit Generation</h2>
+		</div>
+		<div class="row">
+			<div class="col mb-3">
+				<label asp-for="@Model.GenerationVModel.Brand"></label>
+				<select asp-for="@Model.GenerationVModel.BrandId" asp-items="@Model.Brands" class="form-select">
+					<option disabled selected>--Select Category--</option>
+				</select>
+				<span asp-validation-for="@Model.GenerationVModel.BrandId" class="text-danger"></span>
+			</div>
+			<div class="col mb-3">
+				<label asp-for="@Model.GenerationVModel.Model"></label>
+				<select asp-for="@Model.GenerationVModel.ModelId" asp-items="@Model.Models" class="form-select">
+					<option disabled selected>--Select Category--</option>
+				</select>
+				<span asp-validation-for="@Model.GenerationVModel.ModelId" class="text-danger"></span>
+			</div>
+			<div class="mb-3">
+				<label asp-for="@Model.GenerationVModel.Name"></label>
+				<input asp-for="@Model.GenerationVModel.Name" class="form-control">
+				<span asp-validation-for="@Model.GenerationVModel.Name" class="text-danger"></span>
+			</div>
+		</div>
+		<button type="submit" class="btn btn-success btn-sm" style="width:100px">
+			<i class="bi bi-check-lg"></i>
+			Update
+		</button>
+		<a asp-controller="Generation" asp-action="index" class="btn btn-primary btn-sm" style="width:100px">
+			<span class="bi bi-reply"> Back</span>
+		</a>
+	</div>
+</form>
+
+@section Scripts{
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+}

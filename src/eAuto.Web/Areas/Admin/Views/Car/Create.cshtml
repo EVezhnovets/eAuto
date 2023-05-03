@@ -1,0 +1,120 @@
+﻿@model CarCreateViewModel
+
+<form method="post" asp-controller="Car" asp-action="Create" enctype="multipart/form-data" novalidate>
+	<div class="border p-3 mt-4">
+		<div class="row pb-2">
+			<h3 class="text-black-50">Create new Car</h3>
+		</div>
+		<div class="row">
+			<div class="col mb-3">
+				<label asp-for="@Model.CarVModel.Brand"></label>
+				<select asp-for="@Model.CarVModel.BrandId" asp-items="@Model.Brands" class="form-select">
+					<option disabled selected>--Select Category--</option>
+				</select>
+				<span asp-validation-for="@Model.CarVModel.BrandId" class="text-danger"></span>
+			</div>
+			<div class="col mb-3">
+				<label asp-for="@Model.CarVModel.Model"></label>
+				<select asp-for="@Model.CarVModel.ModelId" asp-items="@Model.Models" class="form-select">
+					<option disabled selected>--Select Category--</option>
+				</select>
+				<span asp-validation-for="@Model.CarVModel.ModelId" class="text-danger"></span>
+			</div>
+			<div class="col mb-3">
+				<label asp-for="@Model.CarVModel.Generation"></label>
+				<select asp-for="@Model.CarVModel.GenerationId" asp-items="@Model.Generations" class="form-select">
+					<option disabled selected>--Select Category--</option>
+				</select>
+				<span asp-validation-for="@Model.CarVModel.GenerationId" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col mb-3">
+				<label asp-for="@Model.CarVModel.BodyType"></label>
+				<select asp-for="@Model.CarVModel.BodyTypeId" asp-items="@Model.BodyTypes" class="form-select">
+					<option disabled selected>--Select Category--</option>
+				</select>
+				<span asp-validation-for="@Model.CarVModel.BodyTypeId" class="text-danger"></span>
+			</div>
+			<div class="col mb-3">
+				<label asp-for="@Model.CarVModel.DriveType"></label>
+				<select asp-for="@Model.CarVModel.DriveTypeId" asp-items="@Model.DriveTypes" class="form-select">
+					<option disabled selected>--Select Category--</option>
+				</select>
+				<span asp-validation-for="@Model.CarVModel.DriveTypeId" class="text-danger"></span>
+			</div>
+			<div class="col mb-3">
+				<label asp-for="@Model.CarVModel.Transmission"></label>
+				<select asp-for="@Model.CarVModel.TransmissionId" asp-items="@Model.Transmissions" class="form-select">
+					<option disabled selected>--Select Category--</option>
+				</select>
+				<span asp-validation-for="@Model.CarVModel.TransmissionId" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col mb-3">
+				<label asp-for="@Model.CarVModel.EngineFuelType"></label>
+				<input asp-for="@Model.CarVModel.EngineFuelType" class="form-control">
+				<span asp-validation-for="@Model.CarVModel.EngineFuelType" class="text-danger"></span>
+			</div>
+			<div class="col mb-3">
+				<label asp-for="@Model.CarVModel.EngineCapacity"></label>
+				<input asp-for="@Model.CarVModel.EngineCapacity" class="form-control">
+				<span asp-validation-for="@Model.CarVModel.EngineCapacity" class="text-danger"></span>
+			</div>
+			<div class="col mb-3">
+				<label asp-for="@Model.CarVModel.PriceInitial"></label>
+				<input asp-for="@Model.CarVModel.PriceInitial" class="form-control">
+				<span asp-validation-for="@Model.CarVModel.PriceInitial" class="text-danger"></span>
+			</div>
+			<div class="col mb-3">
+				<label asp-for="@Model.CarVModel.PictureUrl"></label>
+				<input asp-for="@Model.CarVModel.PictureUrl" class="form-control" name="files" type="file" id="formFile">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col mb-3">
+				<label asp-for="@Model.CarVModel.Year"></label>
+				<input asp-for="@Model.CarVModel.Year" class="form-control">
+				<span asp-validation-for="@Model.CarVModel.Year" class="text-danger"></span>
+			</div>
+			<div class="col mb-3">
+				<label asp-for="@Model.CarVModel.DateArrival"></label>
+				<input asp-for="@Model.CarVModel.DateArrival" class="form-control">
+				<span asp-validation-for="@Model.CarVModel.DateArrival" class="text-danger"></span>
+			</div>
+			<div class="col mb-3">
+				<label asp-for="@Model.CarVModel.Odometer"></label>
+				<input asp-for="@Model.CarVModel.Odometer" class="form-control">
+				<span asp-validation-for="@Model.CarVModel.Odometer" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col mb-3">
+				<label asp-for="@Model.CarVModel.Description"></label>
+				<textarea asp-for="@Model.CarVModel.Description" class="form-control"></textarea>
+				<span asp-validation-for="@Model.CarVModel.Description" class="text-danger"></span>
+			</div>
+		</div>
+		<button type="submit" class="btn btn-success btn-sm" style="width:100px">
+			<i class="bi bi-check-lg"></i>
+			Create
+		</button>
+		<a asp-controller="Car" asp-action="Index" class="btn btn-primary btn-sm" style="width:100px">
+			<span class="bi bi-reply"> Back</span>
+		</a>
+	</div>
+</form>
+
+@section Scripts{
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+	<script>
+		tinymce.init({
+			selector: 'textarea',
+			plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+			toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+		});
+	</script>
+}
