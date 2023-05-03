@@ -23,6 +23,5 @@ namespace eAuto.Web.Models
             Brand = brand;
         }
         #endregion
-        //TODO PagedOptions(int skip, int take)
     }
 }
