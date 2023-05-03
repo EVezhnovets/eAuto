@@ -48,7 +48,7 @@ namespace DiConfiguration
 
         private void RegisterDataPart(IServiceCollection services)
         {
-            services.AddTransient(s => new EAutoContext(_appDbConnection));
+            services.AddScoped(s => new EAutoContext(_appDbConnection));
             EAutoContextConfigurator.RegisterContext(services, _appDbConnection);
 
             services.AddTransient(typeof(IRepository<>), typeof(Repository<>));

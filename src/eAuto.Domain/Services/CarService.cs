@@ -36,7 +36,9 @@ namespace eAuto.Domain.Services
 
         public async Task<IEnumerable<ICar>> GetCarModelsAsync()
         {
-            var carEntities = await _carRepository
+            try
+            {
+                var carEntities = await _carRepository
                 .GetAllAsync(
                 include: query => query
                 .Include(e => e.Brand)
@@ -47,42 +49,49 @@ namespace eAuto.Domain.Services
                 .Include(e => e.Transmission)
                 );
 
-            if (carEntities == null)
-            {
-				var exception = new GenericNotFoundException<CarService>("Car not found");
-				_logger.LogError(exception, exception.Message);
-			}
-
-            var carViewModels = carEntities
-                .Select(i => new CarDomainModel()
+                if (carEntities == null)
                 {
-                    CarId = i.CarId,
-                    PriceInitial = i.PriceInitial,
-                    PictureUrl = i.PictureUrl,
-                    Year = i.Year,
-                    DateArrival = i.DateArrival,
-                    Odometer = i.Odometer,
-                    Description = i.Description,
-                    EngineIdentificationName = i.EngineIdentificationName,
-                    EngineCapacity = i.EngineCapacity,
-                    EngineFuelType = i.EngineFuelType,
-                    EngineFuelTypeId = i.EngineFuelTypeId,
-                    EnginePower = i.EnginePower,
-                    BrandId = i.BrandId,
-                    Brand = i.Brand.Name,
-                    ModelId = i.ModelId,
-                    Model = i.Model.Name,
-                    GenerationId = i.GenerationId,
-                    Generation = i.Generation.Name,
-                    BodyTypeId = i.BodyTypeId,
-                    BodyType = i.BodyType.Name,
-                    DriveTypeId = i.DriveTypeId,
-                    DriveType = i.DriveType.Name,
-                    TransmissionId = i.TransmissionId,
-                    Transmission = i.Transmission.Name
-                }).ToList();
-            var carModels = carViewModels.Cast<ICar>();
-            return carModels;
+                    var exception = new GenericNotFoundException<CarService>("Car not found");
+                    _logger.LogError(exception, exception.Message);
+                }
+
+                var carViewModels = carEntities
+                    .Select(i => new CarDomainModel()
+                    {
+                        CarId = i.CarId,
+                        PriceInitial = i.PriceInitial,
+                        PictureUrl = i.PictureUrl,
+                        Year = i.Year,
+                        DateArrival = i.DateArrival,
+                        Odometer = i.Odometer,
+                        Description = i.Description,
+                        EngineIdentificationName = i.EngineIdentificationName,
+                        EngineCapacity = i.EngineCapacity,
+                        EngineFuelType = i.EngineFuelType,
+                        EngineFuelTypeId = i.EngineFuelTypeId,
+                        EnginePower = i.EnginePower,
+                        BrandId = i.BrandId,
+                        Brand = i.Brand.Name,
+                        ModelId = i.ModelId,
+                        Model = i.Model.Name,
+                        GenerationId = i.GenerationId,
+                        Generation = i.Generation.Name,
+                        BodyTypeId = i.BodyTypeId,
+                        BodyType = i.BodyType.Name,
+                        DriveTypeId = i.DriveTypeId,
+                        DriveType = i.DriveType.Name,
+                        TransmissionId = i.TransmissionId,
+                        Transmission = i.Transmission.Name
+                    }).ToList();
+                var carModels = carViewModels.Cast<ICar>();
+                return carModels;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception("CarService GetCarModels exception");
+            }
+            
         }
  
         public ICar CreateCarDomainModel()

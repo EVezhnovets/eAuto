@@ -25,8 +25,11 @@ namespace eAuto.Data.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) 
         {
-            optionsBuilder.UseSqlServer(_connectionString);
-		}
+            optionsBuilder.UseSqlServer(_connectionString, builder =>
+            {
+                builder.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);
+            });
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

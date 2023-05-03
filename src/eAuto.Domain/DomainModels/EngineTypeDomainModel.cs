@@ -1,7 +1,5 @@
 ﻿using eAuto.Data.Interfaces;
-using eAuto.Data.Interfaces.DataModels;
 using eAuto.Domain.Interfaces;
-using eAuto.Domain.Interfaces.Exceptions;
 using EngineTypeDataM = eAuto.Data.Interfaces.DataModels.EngineTypeDataModel;
 
 namespace eAuto.Domain.DomainModels
@@ -25,15 +23,5 @@ namespace eAuto.Domain.DomainModels
 
 			EngineTypeId = engineTypeDataModel.EngineTypeId;
         }
-
-        private EngineTypeDataM GetEngineTypeDataModel()
-        {
-            var engineTypeDataM = new EngineTypeDataM
-			{
-                EngineTypeId = EngineTypeId,
-                Name = Name
-			};
-            return engineTypeDataM;
-		}
 	}
 }
