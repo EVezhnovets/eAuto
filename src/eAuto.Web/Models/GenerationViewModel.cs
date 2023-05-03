@@ -15,9 +15,7 @@ namespace eAuto.Web.Models
         public int ModelId { get; set; }
         [ValidateNever] public string Model { get; set; }
         #region Ctor
-        public GenerationViewModel()
-        {
-        }
+        public GenerationViewModel() { }
 
         public GenerationViewModel(int generationId, string name, string brand, string model)
         {
@@ -27,6 +25,5 @@ namespace eAuto.Web.Models
             Model = model;
         }
         #endregion
-        //TODO PagedOptions(int skip, int take)
     }
 }

@@ -8,7 +8,10 @@ namespace eAuto.Data.Context
         public static void RegisterContext(IServiceCollection services, string connectionString)
         {
             services.AddDbContext<EAutoContext>(options =>
-                options.UseSqlServer(connectionString));
+                options.UseSqlServer(connectionString, builder =>
+                {
+                    builder.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);
+                }));
         }
     }
 }

@@ -16,6 +16,5 @@ namespace eAuto.Web.Models
 			BodyTypeId = bodyTypeId;
 			Name = name;
 		}
-		//TODO PagedOptions(int skip, int take)
 	}
 }

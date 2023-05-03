@@ -1,5 +1,6 @@
 using DiConfiguration;
 using eAuto.Data.Context;
+using eAuto.Data.Identity;
 using eAuto.Domain.Interfaces;
 using eAuto.Web.Utilities;
 using Microsoft.EntityFrameworkCore;
@@ -37,20 +38,31 @@ builder.Services.ConfigureApplicationCookie(options =>
 var app = builder.Build();
 
 #region Auto Migration
-try
+using (var scope = app.Services.CreateScope())
 {
-	var context = app.Services.GetRequiredService<EAutoContext>();
-	if (context.Database.IsSqlServer())
-	{
-		context.Database.Migrate();
-	}
-	await EntityContextSeed.SeedAsync(context);
-}
-catch (Exception ex)
-{
-	app.Logger.LogError(ex, "An error occurred adding migrations to DatabBase.");
+    var scopedProvider = scope.ServiceProvider;
+    try
+    {
+        var context = scopedProvider.GetRequiredService<EAutoContext>();
+        if (context.Database.IsSqlServer())
+        {
+            context.Database.Migrate();
+        }
+        await EntityContextSeed.SeedAsync(context);
+
+        var identityContext = scopedProvider.GetRequiredService<IdentityContext>();
+        if (identityContext.Database.IsSqlServer())
+        {
+            identityContext.Database.Migrate();
+        }
+    }
+    catch (Exception ex)
+    {
+        app.Logger.LogError(ex, "An error occurred adding migrations to DatabBase.");
+    }
 }
 #endregion
+
 app.UseSerilogRequestLogging();
 
 if (!app.Environment.IsDevelopment())
