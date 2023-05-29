@@ -65,6 +65,9 @@ namespace eAuto.Web.Areas.Identity.Pages.Account
             [Required] public string FirstName { get; set; }
             public string LastName { get; set; }
             public string Phone { get; set; }
+            public string City { get; set; }
+            [Display(Name = "Street Address")]
+            public string StreetAddress{ get; set; }
         }
 
 
@@ -95,6 +98,8 @@ namespace eAuto.Web.Areas.Identity.Pages.Account
                 user.FirstName = Input.FirstName;
                 user.LastName = Input.LastName;
                 user.Phone = Input.Phone;
+                user.City = Input.City;
+                user.StreetAddress = Input.StreetAddress;
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
 

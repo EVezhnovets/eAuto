@@ -1,18 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using eAuto.Data.Interfaces.DataModels;
 
-namespace eAuto.Data.Interfaces.DataModels
+namespace eAuto.Web.Models
 {
-    public class OrderHeaderDataModel
+    public class OrderHeaderViewModel
     {
         public int Id { get; set; }
-
         public string ApplicationUserId { get; set; }
-
         public ApplicationUser ApplicationUser { get; set; }
-
-        [Required]
         public DateTime OrderDate { get; set; }
-        [Required]
         public DateTime ShippingDate { get; set; }
 
         public double OrderTotal { get; set; }
@@ -26,17 +21,9 @@ namespace eAuto.Data.Interfaces.DataModels
 
         public string? SessionId { get; set; }
         public string? PaymentIntentId { get; set; }
-
-        [Required]
         public string PhoneNumber { get; set; }
-
-        [Required]
         public string StreetAddress { get; set; }
-
-        [Required]
         public string City { get; set; }
-
-        [Required]
         public string Name { get; set; }
     }
 }
