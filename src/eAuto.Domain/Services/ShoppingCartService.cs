@@ -4,11 +4,13 @@ using eAuto.Domain.DomainModels;
 using eAuto.Domain.Interfaces;
 using eAuto.Domain.Interfaces.Exceptions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
+using System.Linq.Expressions;
 using System.Security.Claims;
 
 namespace eAuto.Domain.Services
 {
-    public sealed class ShoppingCartService : IShoppingCartService
+    public sealed class ShoppingCartService : IShoppingCartService<ShoppingCartDataModel>
 	{
         private readonly IRepository<ShoppingCartDataModel> _shoppingCartRepository;
         private readonly IRepository<MotorOilDataModel> _motorOilRepository;
@@ -159,7 +161,21 @@ namespace eAuto.Domain.Services
             _shoppingCartRepository.Delete(cartForDelete);
         }
 
-        public void IncrementCount(IShoppingCart cart)
+		public void RemoveRangeShoppingCart(IEnumerable<IShoppingCart> list)
+		{
+            var listForDelete = list.Select(i => new ShoppingCartDataModel()
+            {
+                ShoppingCartId = i.ShoppingCartId,
+                Count = i.Count,
+                ApplicationUserId = i.ApplicationUserId,
+                ProductId = i.ProductId,
+                Product = _motorOilRepository.Get(
+                    predicate: c => c.MotorOilDataModelId == i.ProductId),
+            });
+            _shoppingCartRepository.DeleteRange(listForDelete);
+		}
+
+		public void IncrementCount(IShoppingCart cart)
         {
             var cartIncluded = _shoppingCartRepository.Get(
                 predicate: c => c.ShoppingCartId == cart.ShoppingCartId,
@@ -210,5 +226,22 @@ namespace eAuto.Domain.Services
 
             return cart;
         }
-    }
+
+		public async Task<IEnumerable<IShoppingCart>> GetShoppingCartModelsAsync(string applicationUserId)
+		{
+            var list = await _shoppingCartRepository.GetAllAsync(
+                predicate: u => u.ApplicationUserId == applicationUserId);
+
+            var listDomain = list.Select(i => new ShoppingCartDomainModel()
+            {
+                ApplicationUserId = i.ApplicationUserId,
+                ShoppingCartId = i.ShoppingCartId,
+                ProductId = i.ProductId,
+                Count = i.Count,
+                Price = i.Price,
+            }).ToList();
+
+            return listDomain;
+		}
+	}
 }
