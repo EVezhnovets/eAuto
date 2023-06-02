@@ -2,6 +2,7 @@
 using eAuto.Data.Context;
 using eAuto.Data.Identity;
 using eAuto.Data.Interfaces;
+using eAuto.Data.Interfaces.DataModels;
 using eAuto.Domain.Interfaces;
 using eAuto.Domain.Services;
 using Microsoft.Extensions.Configuration;
@@ -43,7 +44,8 @@ namespace DiConfiguration
             services.AddTransient<IEngineTypeService, EngineTypeService>();
             services.AddTransient<IMotorOilService, MotorOilService>();
             services.AddTransient<IProductBrandService, ProductBrandService>();
-            services.AddTransient<IShoppingCartService, ShoppingCartService>();
+            services.AddTransient<IShoppingCartService<ShoppingCartDataModel>, ShoppingCartService>();
+            services.AddTransient<IOrderHeaderRepository, OrderHeaderRepository>();
         }
 
         private void RegisterDataPart(IServiceCollection services)
