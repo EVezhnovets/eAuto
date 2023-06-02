@@ -1,9 +1,10 @@
 ﻿using eAuto.Data.Context;
 using eAuto.Data.Interfaces;
+using eAuto.Data.Interfaces.DataModels;
 
 namespace eAuto.Data
 {
-    public class OrderHeaderRepository : Repository<OrderHeaderRepository>, IOrderHeaderRepository
+    public class OrderHeaderRepository : Repository<OrderHeaderDataModel>, IOrderHeaderRepository
     {
         private readonly EAutoContext _db;
         public OrderHeaderRepository(EAutoContext db) : base(db)
@@ -23,5 +24,13 @@ namespace eAuto.Data
                 }
             }
         }
-    }
+        public void UpdateStripePaymentId(int id, string sessionId, string paymentIntentId)
+        {
+			var orderFromDb = _db.OrderHeaders.FirstOrDefault(i => i.Id == id);
+
+			orderFromDb.SessionId = sessionId;
+			orderFromDb.PaymentIntentId = paymentIntentId;
+            _db.SaveChanges();
+		}
+	}
 }

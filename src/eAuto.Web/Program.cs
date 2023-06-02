@@ -6,6 +6,7 @@ using eAuto.Web.Utilities;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Serilog.Events;
+using Stripe;
 
 Log.Logger = new LoggerConfiguration()
 				.MinimumLevel.Override("Microsoft", LogEventLevel.Debug)
@@ -27,6 +28,7 @@ var identityConnection= builder.Configuration.GetConnectionString("eAutoIdentity
 var diConfigurator = new DiConfigurator(identityConnection, appConnection, builder.Configuration);
 diConfigurator.ConfigureServices(builder.Services, builder.Logging);
 builder.Services.AddTransient<IImageManager, ImageManager>();
+builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
@@ -75,6 +77,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe:SecretKey").Get<string>();
 
 app.UseAuthorization();
 
