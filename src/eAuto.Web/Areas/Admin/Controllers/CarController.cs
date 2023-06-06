@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 namespace eAuto.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
+    [Authorize(Roles = WebConstants.AdminRole)]
     public class CarController : Controller
     {
         private readonly IAppLogger<CarController> _logger;

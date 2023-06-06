@@ -3,6 +3,7 @@
     var status = Context.Request.Query["status"];
     var pending = "text-primary";
     var inprocess = "text-primary";
+    var approved = "text-primary";
     var completed = "text-primary";
     var all = "text-primary";
 
@@ -16,6 +17,9 @@
             break;
         case "completed":
             completed = "active text-white";
+            break;
+        case "approved":
+            approved = "active text-white";
             break;
         default:
             all = "active text-white";
@@ -37,6 +41,9 @@
                 </a>
                 <a style="text-decoration:none" asp-controller="Order" asp-action="Index" asp-route-status="completed">
                 <li class="list-group-item @completed">Completed</li>
+                </a>
+                <a style="text-decoration:none" asp-controller="Order" asp-action="Index" asp-route-status="approved">
+                    <li class="list-group-item @approved">Approved</li>
                 </a>
                 <a style="text-decoration:none" asp-controller="Order" asp-action="Index" asp-route-status="all">
                 <li class="list-group-item @all">All</li>
@@ -87,8 +94,8 @@
                         <td>@obj.OrderHeader.OrderStatus</td>
                         <td>@obj.OrderHeader.OrderTotal.ToString("c", WebConstants.CultureInfoEN_US)</td>
                         <td>
-                            <div class="btn-toolbar justify-content-between" role="toolbar" style="width:6rem">
-                                <a asp-controller="Order" asp-action="Details" asp-route-id="@obj.OrderHeader.Id" class="btn btn-outline-primary">
+                            <div class="btn-toolbar justify-content-center" role="toolbar">
+                                <a asp-controller="Order" asp-action="Details" asp-route-orderId="@obj.OrderHeader.Id" class="btn btn-outline-primary">
                                     <i class="bi bi-wrench"></i>
                                 </a>
                             </div>

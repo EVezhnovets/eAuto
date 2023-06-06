@@ -69,14 +69,23 @@
 								@foreach(var detail in Model.ShoppingCartList)
 								{
 									<li class="list-group-item d-flex justify-content-between">
-										<div>
-											<h6 class="my-0">@detail.Product.Name</h6>
-											<small class="text-muted">Quantity: @detail.Count</small>
+										<div class="row justify-content-between">
+											<div class="col-2">
+												<img src="@detail.Product.PictureUrl" class="rounded" width="100%">
+											</div>
+											<div class="col-3">
+												<h6 class="my-0">@detail.Product.Name</h6>
+											</div>
+											<div class="col-3">
+												<small class="text-muted">Quantity: @detail.Count</small>
+											</div>
+											<div class="col-3">
+												<span class="text-muted">@((detail.Price * detail.Count).ToString("c", WebConstants.CultureInfoEN_US))</span>
+											</div>
 										</div>
-										<span class="text-muted">@((detail.Price * detail.Count).ToString("c", WebConstants.CultureInfoEN_US))</span>
 									</li>
 								}
-								<li class="list-group-item d-flex justify-content-between bg-light">
+								<li class="list-group-item d-flex justify-content-around bg-light">
 									<small class="text-info">Total (USD)</small>
 									<strong class="text-info">@Model.OrderHeader.OrderTotal.ToString("c", WebConstants.CultureInfoEN_US)</strong>
 								</li>

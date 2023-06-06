@@ -55,7 +55,7 @@ namespace eAuto.Web.Areas.Customer.Controllers
             var claim = claimIdentity.FindFirst(ClaimTypes.NameIdentifier);
 
             var shoppingCartListDomain = await _shoppingCartService.GetShoppingCartModelsAsync(claim);
-
+            var orderHeader = _orderHeaderRepository.Get(u => u.ApplicationUserId == claim.Value);
             ShoppingCartIndex = new ShoppingCartIndexViewModel()
             {
                 ShoppingCartList = shoppingCartListDomain
@@ -86,7 +86,8 @@ namespace eAuto.Web.Areas.Customer.Controllers
                 cart.Price = cart.Product.Price;
                 ShoppingCartIndex.OrderHeader.OrderTotal += (cart.Price * cart.Count);
             }
-            return View(ShoppingCartIndex);
+
+		    return View(ShoppingCartIndex);
         }
 
         public async Task<IActionResult> Summary()
@@ -133,7 +134,15 @@ namespace eAuto.Web.Areas.Customer.Controllers
                 cart.Price = cart.Product.Price;
                 ShoppingCartIndex.OrderHeader.OrderTotal += (cart.Price * cart.Count);
             }
-            return View(ShoppingCartIndex);
+            if (ShoppingCartIndex.ShoppingCartList.Count() == 0)
+            {
+                return RedirectToAction("Index", "ShoppingCart");
+            }
+            else
+            {
+                return View(ShoppingCartIndex);
+
+            }
         }
 
         [HttpPost]
@@ -181,7 +190,7 @@ namespace eAuto.Web.Areas.Customer.Controllers
             {
                 ApplicationUserId = ShoppingCartIndex.OrderHeader.ApplicationUserId,
                 OrderDate = ShoppingCartIndex.OrderHeader.OrderDate,
-                ShippingDate = ShoppingCartIndex.OrderHeader.ShippingDate,
+                ShippingDate = ShoppingCartIndex.OrderHeader.OrderDate.AddDays(7),
                 OrderTotal = ShoppingCartIndex.OrderHeader.OrderTotal,
                 OrderStatus = ShoppingCartIndex.OrderHeader.OrderStatus,
                 PaymentStatus = ShoppingCartIndex.OrderHeader.PaymentStatus,
@@ -218,7 +227,11 @@ namespace eAuto.Web.Areas.Customer.Controllers
 			var domain = "https://localhost:7261/";
 			var options = new SessionCreateOptions
 			{
-				LineItems = new List<SessionLineItemOptions>(),
+                PaymentMethodTypes = new List<string>
+                    {
+                        "card",
+                    },
+                LineItems = new List<SessionLineItemOptions>(),
 				Mode = "payment",
 				SuccessUrl = domain + $"Customer/ShoppingCart/OrderConfirmation?id={ShoppingCartIndex.OrderHeader.Id}",
 				CancelUrl = domain + "Customer/ShoppingCart/Index",
@@ -262,6 +275,7 @@ namespace eAuto.Web.Areas.Customer.Controllers
 			//check the stripe status
 			if (session.PaymentStatus.ToLower() == "paid")
 			{
+                _orderHeaderRepository.UpdateStripePaymentId(id, orderHeader.SessionId, session.PaymentIntentId);
 				_orderHeaderRepository.UpdateStatus(id, WebConstants.StatusApproved, WebConstants.PaymentStatusApproved);
 			}
 

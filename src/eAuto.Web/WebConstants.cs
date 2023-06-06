@@ -7,9 +7,9 @@ namespace eAuto.Web
         public const string CarsImages = @"\images\cars\";
         public const string MotorOilsImages = @"\images\motorOils\";
 
-        public static string AdminRole = "Admin";
-        public static string CustomerRole = "Customer";
-        public static string EmployeeRole = "Employee";
+        public const string AdminRole = "Admin";
+        public const string CustomerRole = "Customer";
+        public const string EmployeeRole = "Employee";
 
         public static CultureInfo CultureInfoEN_US = new CultureInfo("en-US");
         public static CultureInfo CultureInfoBE_BY = new CultureInfo("be-BY");
