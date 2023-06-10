@@ -21,3 +21,8 @@ body {
 .offcanvas hr {
     margin:unset;
 }
+
+.offcanvas-body .nav-item {
+    margin:unset;
+    text-align:center;
+}
