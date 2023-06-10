@@ -6,6 +6,7 @@ using eAuto.Domain.Interfaces;
 using eAuto.Web.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Stripe;
 using Stripe.Checkout;
@@ -19,6 +20,7 @@ namespace eAuto.Web.Areas.Customer.Controllers
     {
         private readonly IAppLogger<ShoppingCartController> _logger;
         private readonly IMotorOilService _motorOilService;
+        private readonly IEmailSender _emailSender;
         private readonly IShoppingCartService<ShoppingCartDataModel> _shoppingCartService;
         private readonly IOrderHeaderRepository _orderHeaderRepository;
         private readonly IRepository<OrderDetailsDataModel> _orderDetailsRepository;
@@ -32,6 +34,7 @@ namespace eAuto.Web.Areas.Customer.Controllers
         public ShoppingCartController(
             IAppLogger<ShoppingCartController> logger,
             IMotorOilService motorOilService,
+            IEmailSender emailSender,
 			IShoppingCartService<ShoppingCartDataModel> shoppingCartService,
 			IOrderHeaderRepository orderHeaderRepository,
 			IRepository<OrderDetailsDataModel> orderDetailsRepository,
@@ -40,6 +43,7 @@ namespace eAuto.Web.Areas.Customer.Controllers
         {
             _logger = logger;
             _motorOilService = motorOilService;
+            _emailSender = emailSender;
             _shoppingCartService = shoppingCartService;
             _orderHeaderRepository = orderHeaderRepository;
             _orderDetailsRepository = orderDetailsRepository;
@@ -269,7 +273,8 @@ namespace eAuto.Web.Areas.Customer.Controllers
 		public async Task<IActionResult> OrderConfirmation(int id)
         {
 			OrderHeaderDataModel orderHeader = _orderHeaderRepository.Get(u => u.Id == id);
-			var service = new SessionService();
+            orderHeader.ApplicationUser = await _userRepository.GetUserAsync(User);
+            var service = new SessionService();
 			Session session = service.Get(orderHeader.SessionId);
 
 			//check the stripe status
@@ -278,6 +283,8 @@ namespace eAuto.Web.Areas.Customer.Controllers
                 _orderHeaderRepository.UpdateStripePaymentId(id, orderHeader.SessionId, session.PaymentIntentId);
 				_orderHeaderRepository.UpdateStatus(id, WebConstants.StatusApproved, WebConstants.PaymentStatusApproved);
 			}
+
+            _emailSender.SendEmailAsync(orderHeader.ApplicationUser.Email, "eAuto Center - New Order", $"<p>New Order {orderHeader.Id} Created</p>");
 
             var list = await _shoppingCartService.GetShoppingCartModelsAsync(orderHeader.ApplicationUserId);
 
