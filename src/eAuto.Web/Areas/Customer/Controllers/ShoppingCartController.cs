@@ -287,8 +287,8 @@ namespace eAuto.Web.Areas.Customer.Controllers
             _emailSender.SendEmailAsync(orderHeader.ApplicationUser.Email, "eAuto Center - New Order", $"<p>New Order {orderHeader.Id} Created</p>");
 
             var list = await _shoppingCartService.GetShoppingCartModelsAsync(orderHeader.ApplicationUserId);
-
-			_shoppingCartService.RemoveRangeShoppingCart(list);
+            HttpContext.Session.Clear();
+            _shoppingCartService.RemoveRangeShoppingCart(list);
 
 			return View(id);
 		}
@@ -304,10 +304,15 @@ namespace eAuto.Web.Areas.Customer.Controllers
 
         public IActionResult Minus(int cartId)
         {
+            var claimIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimIdentity.FindFirst(ClaimTypes.NameIdentifier);
+
             var cart = _shoppingCartService.GetShoppingCartModel(cartId);
             if(cart.Count <= 1)
             {
                 _shoppingCartService.RemoveShoppingCart(cart);
+                var count = _shoppingCartService.GetShoppingCartModelsAsync(claim).Result.ToList().Count - 1;
+                HttpContext.Session.SetInt32(WebConstants.SessionCart, count);
             }
             else
             {
@@ -318,9 +323,16 @@ namespace eAuto.Web.Areas.Customer.Controllers
 
         public IActionResult Remove(int cartId)
         {
+            var claimIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimIdentity.FindFirst(ClaimTypes.NameIdentifier);
+
             var cart = _shoppingCartService.GetShoppingCartModel(cartId);
 
             _shoppingCartService.RemoveShoppingCart(cart);
+
+            var count = _shoppingCartService.GetShoppingCartModelsAsync(claim).GetAwaiter().GetResult().ToList().Count;
+            HttpContext.Session.SetInt32(WebConstants.SessionCart, count);
+
             return RedirectToAction("Index");
         }
     }

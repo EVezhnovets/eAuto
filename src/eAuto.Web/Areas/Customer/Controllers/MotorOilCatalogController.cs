@@ -120,6 +120,7 @@ namespace eAuto.Web.Areas.Customer.Controllers
 			};
 
 			var cartFromDb = _shoppingCartService.GetFirstOrDefauttShoppingCart(claim, shoppingCartToService);
+            HttpContext.Session.SetInt32(WebConstants.SessionCart, _shoppingCartService.GetShoppingCartModelsAsync(claim).Result.ToList().Count);
 
             return RedirectToAction(nameof(Index));
         }
