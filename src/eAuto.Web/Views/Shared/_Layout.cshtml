@@ -38,18 +38,18 @@
                         }
 
                         <li class="nav-item">
-                            <a class="nav-link btn" asp-area="Customer" asp-controller="CarsCatalog" asp-action="Index">
+                            <a class="nav-link btn" asp-area="Customer" asp-controller="CarsCatalog" asp-action="Index" title="Cars catalog">
                                 Cars
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link btn" asp-area="Customer" asp-controller="MotorOilCatalog" asp-action="Index">
+                            <a class="nav-link btn" asp-area="Customer" asp-controller="MotorOilCatalog" asp-action="Index" title="Engine oils catalog">
                                 Engine Oils
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link btn" asp-area="Customer" asp-controller="ShoppingCart" asp-action="Index">
-                                <i class="bi bi-cart"></i>
+                            <a class="btn nav-link position-relative" asp-area="Customer" asp-controller="ShoppingCart" asp-action="Index" title="Shopping cart">
+                                @await Component.InvokeAsync("ShoppingCart")
                             </a>
                         </li>
                         @if (User.IsInRole(WebConstants.CustomerRole))
