@@ -48,6 +48,7 @@ namespace DiConfiguration
             services.AddTransient<IShoppingCartService<ShoppingCartDataModel>, ShoppingCartService>();
             services.AddTransient<IOrderHeaderRepository, OrderHeaderRepository>();
             services.AddSingleton<IEmailSender, EmailSender>();
+            services.AddScoped<IDbInitializer, DbInitializer>();
         }
 
         private void RegisterDataPart(IServiceCollection services)
