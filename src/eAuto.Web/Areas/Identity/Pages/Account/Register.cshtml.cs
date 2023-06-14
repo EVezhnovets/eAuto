@@ -73,14 +73,6 @@ namespace eAuto.Web.Areas.Identity.Pages.Account
 
         public async Task OnGetAsync(string returnUrl = null)
         {
-            //If roles don`t exist in database - create and seed AdminRole, CustomerRole, and Employee in table AspNetRoles
-            if (!await _roleManager.RoleExistsAsync(WebConstants.AdminRole))
-            {
-                await _roleManager.CreateAsync(new IdentityRole(WebConstants.AdminRole));
-                await _roleManager.CreateAsync(new IdentityRole(WebConstants.CustomerRole));
-                await _roleManager.CreateAsync(new IdentityRole(WebConstants.EmployeeRole));
-            }
-
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
