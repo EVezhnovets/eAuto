@@ -1,6 +1,7 @@
 using DiConfiguration;
 using eAuto.Data.Context;
 using eAuto.Data.Identity;
+using eAuto.Data.Interfaces;
 using eAuto.Domain.Interfaces;
 using eAuto.Web.Utilities;
 using Microsoft.EntityFrameworkCore;
@@ -29,6 +30,12 @@ var diConfigurator = new DiConfigurator(identityConnection, appConnection, build
 diConfigurator.ConfigureServices(builder.Services, builder.Logging);
 builder.Services.AddTransient<IImageManager, ImageManager>();
 builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
+
+builder.Services.AddAuthentication().AddFacebook(options =>
+{
+    //options.AppId = "";
+    //options.AppSecret = "";
+});
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
@@ -62,6 +69,8 @@ using (var scope = app.Services.CreateScope())
         if (identityContext.Database.IsSqlServer())
         {
             identityContext.Database.Migrate();
+            var dbinitializer = scopedProvider.GetRequiredService<IDbInitializer>();
+            dbinitializer.Initialize();
         }
     }
     catch (Exception ex)
