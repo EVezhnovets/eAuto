@@ -65,19 +65,14 @@ namespace eAuto.Web.Areas.Identity.Pages.Account
             [Required] public string FirstName { get; set; }
             public string LastName { get; set; }
             public string Phone { get; set; }
+            public string City { get; set; }
+            [Display(Name = "Street Address")]
+            public string StreetAddress{ get; set; }
         }
 
 
         public async Task OnGetAsync(string returnUrl = null)
         {
-            //If roles don`t exist in database - create and seed AdminRole, CustomerRole, and Employee in table AspNetRoles
-            if (!await _roleManager.RoleExistsAsync(WebConstants.AdminRole))
-            {
-                await _roleManager.CreateAsync(new IdentityRole(WebConstants.AdminRole));
-                await _roleManager.CreateAsync(new IdentityRole(WebConstants.CustomerRole));
-                await _roleManager.CreateAsync(new IdentityRole(WebConstants.EmployeeRole));
-            }
-
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
@@ -95,6 +90,8 @@ namespace eAuto.Web.Areas.Identity.Pages.Account
                 user.FirstName = Input.FirstName;
                 user.LastName = Input.LastName;
                 user.Phone = Input.Phone;
+                user.City = Input.City;
+                user.StreetAddress = Input.StreetAddress;
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
 

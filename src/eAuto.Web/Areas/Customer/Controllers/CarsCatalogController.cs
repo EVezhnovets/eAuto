@@ -140,30 +140,27 @@ namespace eAuto.Web.Areas.Customer.Controllers
 		{
 			var queryCar = _carService.GetCarModel(id);
 
-			CarBasketItem basket = new()
-			{
-				Count = 1,
-				Car = new CarViewModel(
-					id,
-					queryCar.PriceInitial,
-					queryCar.PictureUrl,
-					queryCar.Year,
-					queryCar.DateArrival,
-					queryCar.Odometer,
-					queryCar.Description,
-					queryCar.EngineIdentificationName,
-					queryCar.EngineCapacity,
-					queryCar.EngineFuelType,
-					queryCar.EngineFuelTypeId,
-					queryCar.EnginePower,
-					queryCar.Brand,
-					queryCar.Model,
-					queryCar.Generation,
-					queryCar.BodyType,
-					queryCar.DriveType,
-					queryCar.Transmission)
-			};
-			return View(basket);
+			var result = new CarViewModel(
+                    id,
+                    queryCar.PriceInitial,
+                    queryCar.PictureUrl,
+                    queryCar.Year,
+                    queryCar.DateArrival,
+                    queryCar.Odometer,
+                    queryCar.Description,
+                    queryCar.EngineIdentificationName,
+                    queryCar.EngineCapacity,
+                    queryCar.EngineFuelType,
+                    queryCar.EngineFuelTypeId,
+                    queryCar.EnginePower,
+                    queryCar.Brand,
+                    queryCar.Model,
+                    queryCar.Generation,
+                    queryCar.BodyType,
+                    queryCar.DriveType,
+                    queryCar.Transmission);
+       
+			return View(result);
 		}
 
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

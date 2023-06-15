@@ -17,6 +17,9 @@ namespace eAuto.Data.Context
         public DbSet<MotorOilDataModel> MotorOils{ get; set; }
         public DbSet<ProductBrandDataModel> ProductBrands{ get; set; }
         public DbSet<ShoppingCartDataModel> ShoppingCarts{ get; set; }
+        public DbSet<OrderHeaderDataModel> OrderHeaders { get; set; }
+        public DbSet<OrderDetailsDataModel> OrderDetails { get; set; }
+        public DbSet<OrderCarDataModel> OrderCarDataModels { get; set; }
 
         public EAutoContext(string connectionString)
         {

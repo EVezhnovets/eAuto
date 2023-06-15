@@ -1,4 +1,5 @@
 ﻿using eAuto.Data.Interfaces;
+using eAuto.Data.Interfaces.DataModels;
 using eAuto.Domain.DomainModels;
 using eAuto.Domain.Interfaces;
 using eAuto.Domain.Interfaces.Exceptions;
@@ -16,12 +17,12 @@ namespace eAuto.Web.Areas.Customer.Controllers
 
 		private readonly IMotorOilService _motorOilService;
 		private readonly IProductBrandService _productBrandService;
-		private readonly IShoppingCartService _shoppingCartService;
+		private readonly IShoppingCartService<ShoppingCartDataModel> _shoppingCartService;
 
 		public MotorOilCatalogController(
 			IMotorOilService motorOilService,
 			IProductBrandService productBrandService,
-            IShoppingCartService shoppingCartService,
+            IShoppingCartService<ShoppingCartDataModel> shoppingCartService,
 
             IAppLogger<MotorOilCatalogController> logger)
 		{
@@ -119,6 +120,7 @@ namespace eAuto.Web.Areas.Customer.Controllers
 			};
 
 			var cartFromDb = _shoppingCartService.GetFirstOrDefauttShoppingCart(claim, shoppingCartToService);
+            HttpContext.Session.SetInt32(WebConstants.SessionCart, _shoppingCartService.GetShoppingCartModelsAsync(claim).Result.ToList().Count);
 
             return RedirectToAction(nameof(Index));
         }

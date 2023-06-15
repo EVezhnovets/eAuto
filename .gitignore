@@ -350,3 +350,4 @@ MigrationBackup/
 .ionide/
 *.jpg
 *.png
+/src/eAuto.Web/appsettings.Development.json

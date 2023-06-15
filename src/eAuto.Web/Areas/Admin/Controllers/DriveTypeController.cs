@@ -2,11 +2,13 @@
 using eAuto.Domain.Interfaces;
 using eAuto.Domain.Interfaces.Exceptions;
 using eAuto.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eAuto.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = WebConstants.AdminRole)]
     public class DriveTypeController : Controller
     {
         private readonly IAppLogger<DriveTypeController> _logger;

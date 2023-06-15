@@ -1,6 +1,6 @@
 ﻿@model MotorOilsIndexViewModel
 
-<h2 class="text-primary text-black-50 mt-5" style="text-align:center">Motor Oils</h2>
+<h2 class="text-primary text-black-50 mt-5" style="text-align:center">Engine Oils</h2>
 
 @if (Model.MotorOilVModels.Count() == 0)
 {
@@ -8,7 +8,7 @@
         <thead>
             <tr>
                 <th>
-                    MotorOil Name
+                    Engine Oil Name
                 </th>
             </tr>
         </thead>
@@ -16,10 +16,10 @@
 }
 else
 {
-    <table class="table table-striped" style="width:100%">
+    <table class="table table-striped" style="width:80%; margin:auto">
         <thead>
             <tr>
-                <th>Motor Oil</th>
+                <th>Engine Oil</th>
                 <th>Product Brand</th>
                 <th>Viscosity</th>
                 <th>Composition </th>
@@ -35,7 +35,7 @@ else
                     <td width="25%" style="padding:0.3rem">
                         <div>
                             <a asp-controller="MotorOilCatalog" asp-action="Details" asp-route-id="@obj.MotorOilId">
-                                <img src=@obj.PictureUrl class="float-start" style="width:100%; max-width:10rem; margin-left: 4rem" />
+                                <img src=@obj.PictureUrl class="float-start" style="width:100%; max-width:10rem" />
                             </a>
                         </div>
                     </td>

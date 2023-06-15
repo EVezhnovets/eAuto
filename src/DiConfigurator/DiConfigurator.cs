@@ -2,8 +2,10 @@
 using eAuto.Data.Context;
 using eAuto.Data.Identity;
 using eAuto.Data.Interfaces;
+using eAuto.Data.Interfaces.DataModels;
 using eAuto.Domain.Interfaces;
 using eAuto.Domain.Services;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -43,7 +45,10 @@ namespace DiConfiguration
             services.AddTransient<IEngineTypeService, EngineTypeService>();
             services.AddTransient<IMotorOilService, MotorOilService>();
             services.AddTransient<IProductBrandService, ProductBrandService>();
-            services.AddTransient<IShoppingCartService, ShoppingCartService>();
+            services.AddTransient<IShoppingCartService<ShoppingCartDataModel>, ShoppingCartService>();
+            services.AddTransient<IOrderHeaderRepository, OrderHeaderRepository>();
+            services.AddSingleton<IEmailSender, EmailSender>();
+            services.AddScoped<IDbInitializer, DbInitializer>();
         }
 
         private void RegisterDataPart(IServiceCollection services)

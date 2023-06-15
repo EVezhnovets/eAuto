@@ -1,11 +1,13 @@
 using DiConfiguration;
 using eAuto.Data.Context;
 using eAuto.Data.Identity;
+using eAuto.Data.Interfaces;
 using eAuto.Domain.Interfaces;
 using eAuto.Web.Utilities;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Serilog.Events;
+using Stripe;
 
 Log.Logger = new LoggerConfiguration()
 				.MinimumLevel.Override("Microsoft", LogEventLevel.Debug)
@@ -27,6 +29,13 @@ var identityConnection= builder.Configuration.GetConnectionString("eAutoIdentity
 var diConfigurator = new DiConfigurator(identityConnection, appConnection, builder.Configuration);
 diConfigurator.ConfigureServices(builder.Services, builder.Logging);
 builder.Services.AddTransient<IImageManager, ImageManager>();
+builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
+
+builder.Services.AddAuthentication().AddFacebook(options =>
+{
+    //options.AppId = "";
+    //options.AppSecret = "";
+});
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
@@ -34,7 +43,13 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.LogoutPath = $"/Identity/Account/Logout";
     options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
 });
-
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(100);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 var app = builder.Build();
 
 #region Auto Migration
@@ -54,6 +69,8 @@ using (var scope = app.Services.CreateScope())
         if (identityContext.Database.IsSqlServer())
         {
             identityContext.Database.Migrate();
+            var dbinitializer = scopedProvider.GetRequiredService<IDbInitializer>();
+            dbinitializer.Initialize();
         }
     }
     catch (Exception ex)
@@ -76,8 +93,11 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthorization();
+StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe:SecretKey").Get<string>();
 
+app.UseAuthentication();
+app.UseAuthorization();
+app.UseSession();
 app.MapRazorPages();
 app.MapControllerRoute(
     name: "default",

@@ -43,6 +43,12 @@ namespace eAuto.Data
             _eAutoContext.SaveChanges();
         }
 
+        public void DeleteRange(IEnumerable<T> list)
+        {
+            _eAutoContext.Set<T>().RemoveRange(list);
+            _eAutoContext.SaveChanges();
+        }
+
         public T? Get(Func<T, bool> func)
         {
             var result = _eAutoContext.Set<T>()
