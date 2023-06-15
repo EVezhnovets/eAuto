@@ -39,7 +39,7 @@ namespace eAuto.Data.Identity
                 },
                    "Admin123*").GetAwaiter().GetResult();
 
-                ApplicationUser user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "admin@mail.com");
+                ApplicationUser user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "admin@gmail.com");
 
                 _userManager.AddToRoleAsync(user, DataConstants.AdminRole).GetAwaiter().GetResult();
             }

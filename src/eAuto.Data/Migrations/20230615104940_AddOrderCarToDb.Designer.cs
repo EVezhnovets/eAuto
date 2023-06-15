@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using eAuto.Data.Context;
 
 #nullable disable
@@ -7,9 +8,10 @@ using eAuto.Data.Context;
 namespace eAuto.Data.Migrations
 {
     [DbContext(typeof(EAutoContext))]
-    partial class EAutoContextModelSnapshot : ModelSnapshot
+    [Migration("20230615104940_AddOrderCarToDb")]
+    partial class AddOrderCarToDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -19,7 +19,7 @@ namespace eAuto.Data
             using (var emailClient = new SmtpClient())
             {
                 emailClient.Connect("smtp.gmail.com", 587, MailKit.Security.SecureSocketOptions.StartTls);
-                emailClient.Authenticate("eugene.vezhnavets@gmail.com", "{}"); //
+                emailClient.Authenticate("eugene.vezhnavets@gmail.com", "kmzjpvbgnfbihsiv"); //
                 
                 emailClient.Send(emailToSend);
                 emailClient.Disconnect(true);
