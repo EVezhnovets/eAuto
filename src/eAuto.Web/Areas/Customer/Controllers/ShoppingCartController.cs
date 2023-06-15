@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
-using Stripe;
 using Stripe.Checkout;
 using System.Security.Claims;
 
@@ -227,9 +226,11 @@ namespace eAuto.Web.Areas.Customer.Controllers
                 _orderDetailsRepository.Create(orderDetails);
             }
 
-			//stripe settings
-			var domain = "https://localhost:7261/";
-			var options = new SessionCreateOptions
+            //stripe settings
+
+            string httpPath = HttpContext.Request.Host.ToString().Contains("localhost") ? "https://" : "http://"; 
+            string domain = httpPath + HttpContext.Request.Host.ToString() + "/";
+            var options = new SessionCreateOptions
 			{
                 PaymentMethodTypes = new List<string>
                     {

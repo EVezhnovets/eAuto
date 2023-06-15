@@ -1,0 +1,133 @@
+﻿@model IEnumerable<OrderCarDataModel>
+@{
+    var status = Context.Request.Query["status"];
+    var inprocess = "text-primary";
+    var pending = "text-primary";
+    var completed = "text-primary";
+    var canceled = "text-primary";
+    var all = "text-primary";
+
+    switch (status)
+    {
+        case "pending":
+            pending = "active text-white";
+            break;
+        case "inprocess":
+            inprocess = "active text-white";
+            break;
+        case "completed":
+            completed = "active text-white";
+            break;
+        case "canceled":
+            canceled = "active text-white";
+            break;
+        default:
+            all = "active text-white";
+            break;
+    }
+}
+<form method="post">
+    <div class="p-3">
+        <div class="d-flex justify-content-between pt-4">
+            <div class="p-2">
+                <h2 class="text-primary">Order Car List</h2>
+            </div>
+            <div class="p-2">
+                <ul class="list-group list-group-horizontal-sm">
+                    <a style="text-decoration:none" asp-controller="OrderCar" asp-action="Index" asp-route-status="inprocess">
+                    <li class="list-group-item @inprocess">In Process</li>
+                    </a>
+                    <a style="text-decoration:none" asp-controller="OrderCar" asp-action="Index" asp-route-status="pending">
+                    <li class="list-group-item @pending">Call Pending</li>
+                    </a>
+                    <a style="text-decoration:none" asp-controller="OrderCar" asp-action="Index" asp-route-status="completed">
+                    <li class="list-group-item @completed">Completed</li>
+                    </a>
+                    <a style="text-decoration:none" asp-controller="OrderCar" asp-action="Index" asp-route-status="canceled">
+                    <li class="list-group-item @canceled">Rejected</li>
+                    </a>
+                    <a style="text-decoration:none" asp-controller="OrderCar" asp-action="Index" asp-route-status="all">
+                    <li class="list-group-item @all">All</li>
+                    </a>
+                </ul>
+            </div>
+        </div>
+        <br />
+        <br />
+        @if (Model == null)
+        {
+            <table class="table table-bordered table-striped" style="width:90%; margin: auto">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Phone Number</th>
+                        <th>Order Date</th>
+                        <th>Status</th>
+                        <th>Message</th>
+                        <th></th>
+                    </tr>
+                </thead>
+            </table>
+        }
+        else
+        {
+            <table class="table table-bordered table-striped" style="width:90%; margin: auto">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Phone Number</th>
+                        <th>Order Date</th>
+                        <th>Status</th>
+                        <th>Message</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var obj in Model)
+                    {
+                        <tr>
+                            <td>@obj.Id</td>
+                            <td>@obj.Name</td>
+                            <td>@obj.PhoneNumber</td>
+                            <td>@obj.OrderDate</td>
+                            <td>@obj.OrderStatus</td>
+                            <td>@obj.Message</td>
+                            <td>
+                                @if (User.IsInRole(WebConstants.AdminRole) || User.IsInRole(WebConstants.EmployeeRole))
+                                {
+                                    @if (@obj.OrderStatus == WebConstants.StatusPending)
+                                    {
+                                        <input type="submit" asp-action="StartProcessing" asp-route-id="@obj.Id" class="btn btn-warning form-control my-1" value="Start Processing" />
+                                    }
+                                    @if (@obj.OrderStatus == WebConstants.StatusProcessing)
+                                    {
+                                        <input type="submit" asp-action="CompleteCallProccessing" asp-route-id="@obj.Id" class="btn btn-outline-success form-control my-1" value="Finish processing" />
+                                    }
+                                    @if (@obj.OrderStatus == WebConstants.StatusCompleted)
+                                    {
+                                        <input class="btn btn-success disabled" value="Completed">
+                                    }
+                                    @if (@obj.OrderStatus != WebConstants.StatusCancelled &&
+                                         @obj.OrderStatus != WebConstants.StatusCompleted)
+                                    {
+                                        <input type="submit" asp-action="RejectCall" asp-route-id="@obj.Id" class="btn btn-danger form-control my-1" value="Reject" />
+                                    }
+                                    @if (@obj.OrderStatus == WebConstants.StatusCancelled)
+                                    {
+                                        <input class="btn btn-danger disabled" value="Rejected">
+                                    }
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial"></partial>
+}
