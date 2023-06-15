@@ -19,6 +19,7 @@ namespace eAuto.Web
         public const string StatusProcessing = "Processing";
         public const string StatusShipped = "Shipped";
         public const string StatusCancelled = "Cancelled";
+        public const string StatusCompleted = "Completed";
         public const string StatusRefunded = "Refunded";
 
         public const string PaymentStatusPending = "Pending";

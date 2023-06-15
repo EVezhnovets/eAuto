@@ -49,11 +49,6 @@
                                 Engine Oils
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="btn nav-link position-relative" asp-area="Customer" asp-controller="ShoppingCart" asp-action="Index" title="Shopping cart">
-                                @await Component.InvokeAsync("ShoppingCart")
-                            </a>
-                        </li>
                         @if (User.IsInRole(WebConstants.CustomerRole))
                         {
                             <li class="nav-item">
@@ -62,6 +57,16 @@
                                 </a>
                             </li>
                         }
+                        <li class="nav-item">
+                            <a type="button" class="nav-link btn" asp-area="Customer" asp-controller="CallRequest" asp-action="Index" title="Call Request">
+                                Call me
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn nav-link position-relative" asp-area="Customer" asp-controller="ShoppingCart" asp-action="Index" title="Shopping cart">
+                                @await Component.InvokeAsync("ShoppingCart")
+                            </a>
+                        </li>
                         <partial name="_LoginPartial" />
                     </ul>
                 </div>
@@ -85,6 +90,9 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" asp-area="Admin" asp-controller="Order" asp-action="Index">Manage Orders</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="Admin" asp-controller="OrderCar" asp-action="Index">Manage Car Orders</a>
                 </li>
             </ul>
             <h4 class="btn disabled" style="text-align: center; display: block; margin: 0.5rem 0">
