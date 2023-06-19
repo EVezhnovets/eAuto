@@ -30,7 +30,7 @@ namespace eAuto.Domain.Services
 				_logger.LogError(exception, exception.Message);
 			}
 
-            var carViewModel = new CarDomainModel(carDataModel, _carRepository);
+            var carViewModel = new CarDomainModel(carDataModel!, _carRepository);
             return carViewModel;
         }
 
@@ -41,12 +41,12 @@ namespace eAuto.Domain.Services
                 var carEntities = await _carRepository
                 .GetAllAsync(
                 include: query => query
-                .Include(e => e.Brand)
-                .Include(e => e.Model)
-                .Include(e => e.Generation)
-                .Include(e => e.BodyType)
-                .Include(e => e.DriveType)
-                .Include(e => e.Transmission)
+                .Include(e => e.Brand!)
+                .Include(e => e.Model!)
+                .Include(e => e.Generation!)
+                .Include(e => e.BodyType!)
+                .Include(e => e.DriveType!)
+                .Include(e => e.Transmission!)
                 );
 
                 if (carEntities == null)
@@ -55,7 +55,7 @@ namespace eAuto.Domain.Services
                     _logger.LogError(exception, exception.Message);
                 }
 
-                var carViewModels = carEntities
+                var carViewModels = carEntities!
                     .Select(i => new CarDomainModel()
                     {
                         CarId = i.CarId,
@@ -71,24 +71,23 @@ namespace eAuto.Domain.Services
                         EngineFuelTypeId = i.EngineFuelTypeId,
                         EnginePower = i.EnginePower,
                         BrandId = i.BrandId,
-                        Brand = i.Brand.Name,
+                        Brand = i.Brand!.Name,
                         ModelId = i.ModelId,
-                        Model = i.Model.Name,
+                        Model = i.Model!.Name,
                         GenerationId = i.GenerationId,
-                        Generation = i.Generation.Name,
+                        Generation = i.Generation!.Name,
                         BodyTypeId = i.BodyTypeId,
-                        BodyType = i.BodyType.Name,
+                        BodyType = i.BodyType!.Name,
                         DriveTypeId = i.DriveTypeId,
-                        DriveType = i.DriveType.Name,
+                        DriveType = i.DriveType!.Name,
                         TransmissionId = i.TransmissionId,
-                        Transmission = i.Transmission.Name
+                        Transmission = i.Transmission!.Name
                     }).ToList();
                 var carModels = carViewModels.Cast<ICar>();
                 return carModels;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-
                 throw new Exception("CarService GetCarModels exception");
             }
             
@@ -105,12 +104,12 @@ namespace eAuto.Domain.Services
             var car = _carRepository
                 .Get(
                     predicate: bt => bt.CarId == carId, include: query => query
-                        .Include(g => g.Brand)
-                        .Include(g => g.Model)
-                        .Include(g => g.Generation)
-                        .Include(g => g.BodyType)
-                        .Include(g => g.DriveType)
-                        .Include(g => g.Transmission)
+                        .Include(g => g.Brand!)
+                        .Include(g => g.Model!)
+                        .Include(g => g.Generation!)
+                        .Include(g => g.BodyType!)
+                        .Include(g => g.DriveType!)
+                        .Include(g => g.Transmission!)
                 );
 
             if (car == null)
@@ -118,7 +117,7 @@ namespace eAuto.Domain.Services
 				var exception = new GenericNotFoundException<CarService>("Car not found");
 				_logger.LogError(exception, exception.Message);
 			}
-            return car;
+            return car!;
         }
     }
 }

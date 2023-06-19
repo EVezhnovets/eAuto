@@ -29,7 +29,7 @@ namespace eAuto.Domain.Services
 				_logger.LogError(exception, exception.Message);
 			}
 
-            var brandViewModel = new BrandDomainModel(brandDataModel, _brandRepository);
+            var brandViewModel = new BrandDomainModel(brandDataModel!, _brandRepository);
             return brandViewModel;
         }
 
@@ -43,7 +43,7 @@ namespace eAuto.Domain.Services
 				_logger.LogError(exception, exception.Message);
 			}
 
-            var brandViewModels = brandEntities
+            var brandViewModels = brandEntities!
                 .Select(i => new BrandDomainModel()
                 {
                     BrandId = i.BrandId,
@@ -69,7 +69,7 @@ namespace eAuto.Domain.Services
 				var exception = new GenericNotFoundException<BrandService>("Brand not found");
 				_logger.LogError(exception, exception.Message);
 			}
-            return brand;
+            return brand!;
         }
 	}
 }

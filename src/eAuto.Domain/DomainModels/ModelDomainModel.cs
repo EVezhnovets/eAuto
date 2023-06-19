@@ -1,33 +1,21 @@
 ﻿using eAuto.Data.Interfaces;
 using eAuto.Domain.Interfaces;
-using eAuto.Domain.Interfaces.Exceptions;
 using ModelDataM = eAuto.Data.Interfaces.DataModels.ModelDataModel;
 
 namespace eAuto.Domain.DomainModels
 {
     public sealed class ModelDomainModel : IModel
     {
-        private readonly IRepository<ModelDataM> _modelRepository;
-        private string _name;
+        private readonly IRepository<ModelDataM>? _modelRepository;
+        private readonly string? _name;
         private readonly bool _isNew;
 
         public int ModelId { get; set; }
-        public string Name { get => _name;
-            set
-            {
-                if (string.IsNullOrEmpty(value))
-                {
-                    throw new GenericNotFoundException<ModelDomainModel>();
-                }
-                _name = value;
-            } 
-        }
+        public string? Name { get; set; }
         public int BrandId { get; set; }
-        public string Brand { get; set; }
+        public string? Brand { get; set; }
 
-        public ModelDomainModel()
-        {
-        }
+        public ModelDomainModel() { }
 
         public ModelDomainModel(IRepository<ModelDataM> modelRepository)
         {
@@ -42,9 +30,9 @@ namespace eAuto.Domain.DomainModels
             _modelRepository = modelRepository;
 
             ModelId = modelDataModel.ModelId;
-            _name = modelDataModel.Name;
+            Name = modelDataModel.Name;
             BrandId = modelDataModel.BrandId;
-            Brand = modelDataModel.Brand.Name.ToString();
+            Brand = modelDataModel.Brand!.Name!.ToString();
         }
 
 		public void Save()
@@ -53,13 +41,13 @@ namespace eAuto.Domain.DomainModels
 
             if (_isNew)
             {
-                var result = _modelRepository.Create(modelDataModel);
+                var result = _modelRepository!.Create(modelDataModel);
                 ModelId = result.ModelId;
                 BrandId = result.BrandId;
             }
             else
             {
-                _modelRepository.Update(modelDataModel);
+                _modelRepository!.Update(modelDataModel);
             }
         }
 
@@ -68,7 +56,7 @@ namespace eAuto.Domain.DomainModels
             var modelModel = GetModelDataModel();
             if (!_isNew)
             {
-                _modelRepository.Delete(modelModel);
+                _modelRepository!.Delete(modelModel);
             }
 		}
 

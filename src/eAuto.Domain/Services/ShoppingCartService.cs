@@ -4,8 +4,7 @@ using eAuto.Domain.DomainModels;
 using eAuto.Domain.Interfaces;
 using eAuto.Domain.Interfaces.Exceptions;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query;
-using System.Linq.Expressions;
+
 using System.Security.Claims;
 
 namespace eAuto.Domain.Services
@@ -36,7 +35,7 @@ namespace eAuto.Domain.Services
 				_logger.LogError(exception, exception.Message);
 			}
 
-            var shoppingCartViewModel = new ShoppingCartDomainModel(shoppingCartDataModel, _shoppingCartRepository);
+            var shoppingCartViewModel = new ShoppingCartDomainModel(shoppingCartDataModel!, _shoppingCartRepository);
             return shoppingCartViewModel;
         }
 
@@ -44,8 +43,8 @@ namespace eAuto.Domain.Services
         {
             var shoppingCartEntities = await _shoppingCartRepository
                 .GetAllAsync(
-                include: query => query
-                .Include(e => e.Product)
+                include: query => query!
+                .Include(e => e.Product!)
                 );
 
             if (shoppingCartEntities == null)
@@ -54,12 +53,12 @@ namespace eAuto.Domain.Services
 				_logger.LogError(exception, exception.Message);
 			}
 
-            var shoppingCartViewModels = shoppingCartEntities
+            var shoppingCartViewModels = shoppingCartEntities!
                 .Select(i => new ShoppingCartDomainModel()
                 {
                     ShoppingCartId = i.ShoppingCartId,
                     ProductId = i.ProductId,
-                    Product = i.Product.Name,
+                    Product = i.Product!.Name!,
                     Count = i.Count,
                     ApplicationUserId = i.ApplicationUserId,
                     Price = i.Price
@@ -85,7 +84,7 @@ namespace eAuto.Domain.Services
             var shoppingCart = _shoppingCartRepository
                 .Get(
                     predicate: bt => bt.ShoppingCartId == shoppingCartId, include: query => query
-                        .Include(g => g.Product)
+                        .Include(g => g.Product!)
                 );
 
             if (shoppingCart == null)
@@ -93,15 +92,15 @@ namespace eAuto.Domain.Services
                 var exception = new GenericNotFoundException<ShoppingCartDataModel>($"{nameof(ShoppingCartDataModel)} not found");
                 _logger.LogError(exception, exception.Message);
             }
-            return shoppingCart;
+            return shoppingCart!;
         }
 
         public async Task<IEnumerable<IShoppingCart>> GetShoppingCartModelsAsync(Claim claim)
         {
             var cartList = await _shoppingCartRepository.GetAllAsync(
                 predicate: c => c.ApplicationUserId == claim.Value,
-                include: query => query.Include(i => i.Product)
-                                       .Include(i => i.Product.ProductBrand));
+                include: query => query.Include(i => i.Product!)
+                                       .Include(i => i.Product!.ProductBrand!));
                 
             var responseCart = cartList.Select(i => 
             new ShoppingCartDomainModel()
@@ -110,7 +109,7 @@ namespace eAuto.Domain.Services
                 ProductId = i.ProductId,
                 OilProduct = new MotorOilDomainModel()
                 {
-                    MotorOilId = i.Product.MotorOilDataModelId,
+                    MotorOilId = i.Product!.MotorOilDataModelId,
                     Name = i.Product.Name,
                     PictureUrl = i.Product.PictureUrl,
                     Price = i.Product.Price,
@@ -118,7 +117,7 @@ namespace eAuto.Domain.Services
                     Composition = i.Product.Composition,
                     Volume = i.Product.Volume,
                     ProductBrandId = i.Product.ProductBrandId,
-                    ProductBrand = i.Product.ProductBrand.Name
+                    ProductBrand = i.Product.ProductBrand!.Name
                 },
                 Count = i.Count,
                 ApplicationUserId = i.ApplicationUserId,
@@ -158,7 +157,7 @@ namespace eAuto.Domain.Services
             var cartForDelete = _shoppingCartRepository.Get(
                 predicate: c => c.ShoppingCartId == cart.ShoppingCartId
                 );
-            _shoppingCartRepository.Delete(cartForDelete);
+            _shoppingCartRepository.Delete(cartForDelete!);
         }
 
 		public void RemoveRangeShoppingCart(IEnumerable<IShoppingCart> list)
@@ -179,13 +178,13 @@ namespace eAuto.Domain.Services
         {
             var cartIncluded = _shoppingCartRepository.Get(
                 predicate: c => c.ShoppingCartId == cart.ShoppingCartId,
-                include: query => query.Include(e => e.Product));
+                include: query => query.Include(e => e.Product!));
 
             var cartForDb = new ShoppingCartDataModel()
             {
                 ShoppingCartId = cart.ShoppingCartId,
                 ProductId = cart.ProductId,
-                Product = cartIncluded.Product,
+                Product = cartIncluded!.Product,
                 Count = cart.Count,
                 ApplicationUserId = cart.ApplicationUserId,
                 Price = cart.Price,
@@ -198,13 +197,13 @@ namespace eAuto.Domain.Services
         {
             var cartIncluded = _shoppingCartRepository.Get(
                 predicate: c => c.ShoppingCartId == cart.ShoppingCartId,
-                include: query => query.Include(e => e.Product));
+                include: query => query.Include(e => e.Product!));
 
             var cartForDb = new ShoppingCartDataModel()
             {
                 ShoppingCartId = cart.ShoppingCartId,
                 ProductId = cart.ProductId,
-                Product = cartIncluded.Product,
+                Product = cartIncluded!.Product,
                 Count = cart.Count,
                 ApplicationUserId = cart.ApplicationUserId,
                 Price = cart.Price,

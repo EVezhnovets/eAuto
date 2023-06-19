@@ -1,25 +1,23 @@
 ﻿using eAuto.Data.Interfaces;
 using eAuto.Domain.Interfaces;
-using eAuto.Domain.Interfaces.Exceptions;
 using MotorOilDataM = eAuto.Data.Interfaces.DataModels.MotorOilDataModel;
 
 namespace eAuto.Domain.DomainModels
 {
     public sealed class MotorOilDomainModel : IMotorOil
     {
-        private readonly IRepository<MotorOilDataM> _motorOilRepository;
-        private string _name;
+        private readonly IRepository<MotorOilDataM>? _motorOilRepository;
         private readonly bool _isNew;
 
         public int MotorOilId { get; set; }
-        public string Name { get; set; }
-        public string PictureUrl { get; set; }
+        public string? Name { get; set; }
+        public string? PictureUrl { get; set; }
         public double Price { get; set; }
-        public string Viscosity { get; set; }
-		public string Composition { get; set; }
+        public string? Viscosity { get; set; }
+		public string? Composition { get; set; }
 		public int Volume { get; set; }
 		public int ProductBrandId { get; set; }
-		public string ProductBrand { get; set; }
+		public string? ProductBrand { get; set; }
 
 		public MotorOilDomainModel() { }
 
@@ -37,7 +35,7 @@ namespace eAuto.Domain.DomainModels
             Composition = motorOilDataModel.Composition;
             Volume = motorOilDataModel.Volume;
             ProductBrandId = motorOilDataModel.ProductBrandId;
-            ProductBrand = motorOilDataModel.ProductBrand.Name;
+            ProductBrand = motorOilDataModel.ProductBrand!.Name;
 		}
 
         internal MotorOilDomainModel(
@@ -53,13 +51,13 @@ namespace eAuto.Domain.DomainModels
 
             if (_isNew)
             {
-                var result = _motorOilRepository.Create(motorOilDataModel);
+                var result = _motorOilRepository!.Create(motorOilDataModel);
                 MotorOilId = result.MotorOilDataModelId;
                 ProductBrandId = result.ProductBrandId;
             }
             else
             {
-                _motorOilRepository.Update(motorOilDataModel);
+                _motorOilRepository!.Update(motorOilDataModel);
             }
         }
 
@@ -68,7 +66,7 @@ namespace eAuto.Domain.DomainModels
             var motorOilModel = GetMotorOilDataModel();
             if (!_isNew)
             {
-                _motorOilRepository.Delete(motorOilModel);
+                _motorOilRepository!.Delete(motorOilModel);
             }
 		}
 
@@ -77,7 +75,7 @@ namespace eAuto.Domain.DomainModels
             var MotorOilDataM = new MotorOilDataM
             {
 				MotorOilDataModelId = MotorOilId,
-                Name = Name,
+                Name = Name!,
                 PictureUrl = PictureUrl,
                 Price = Price,
                 Viscosity = Viscosity,

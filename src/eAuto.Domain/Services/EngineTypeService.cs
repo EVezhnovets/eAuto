@@ -30,7 +30,7 @@ namespace eAuto.Domain.Services
 			}
 
             var engineTypeViewModel = 
-                new EngineTypeDomainModel(engineTypeDataModel, _engineTypeRepository);
+                new EngineTypeDomainModel(engineTypeDataModel!, _engineTypeRepository);
             return engineTypeViewModel;
         }
 
@@ -44,7 +44,7 @@ namespace eAuto.Domain.Services
 				_logger.LogError(exception, exception.Message);
 			}
 
-            var engineTypeViewModels = engineTypeEntities
+            var engineTypeViewModels = engineTypeEntities!
                 .Select(i => new EngineTypeDomainModel()
                 {
                     EngineTypeId = i.EngineTypeId,
@@ -66,7 +66,7 @@ namespace eAuto.Domain.Services
 				_logger.LogError(exception, exception.Message);
 			}
 
-            return engineType;
+            return engineType!;
         }
     }
 }

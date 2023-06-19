@@ -1,35 +1,23 @@
 ﻿using eAuto.Data.Interfaces;
 using eAuto.Domain.Interfaces;
-using eAuto.Domain.Interfaces.Exceptions;
 using GenerationDataM = eAuto.Data.Interfaces.DataModels.GenerationDataModel;
 
 namespace eAuto.Domain.DomainModels
 {
     public sealed class GenerationDomainModel : IGeneration
     {
-        private readonly IRepository<GenerationDataM> _generationRepository;
-        private string _name;
+        private readonly IRepository<GenerationDataM>? _generationRepository;
+        private readonly string? _name;
         private readonly bool _isNew;
 
         public int GenerationId { get; set; }
-        public string Name { get => _name;
-            set
-            {
-                if (string.IsNullOrEmpty(value))
-                {
-                    throw new GenericNotFoundException<GenerationDomainModel>();
-                }
-                _name = value;
-            } 
-        }
+        public string? Name { get; set; }
         public int BrandId { get; set; }
-        public string Brand { get; set; }
+        public string? Brand { get; set; }
         public int ModelId { get; set; }
-        public string Model { get; set; }
+        public string? Model { get; set; }
 
-        public GenerationDomainModel()
-        {
-        }
+        public GenerationDomainModel() { }
 
         public GenerationDomainModel(IRepository<GenerationDataM> generationRepository)
         {
@@ -42,13 +30,13 @@ namespace eAuto.Domain.DomainModels
             IRepository<GenerationDataM> generationRepository)
         {
             _generationRepository = generationRepository;
-            _name = generationDataModel.Name;
 
+            Name = generationDataModel.Name;
             GenerationId = generationDataModel.GenerationId;
             BrandId = generationDataModel.BrandId;
-            Brand = generationDataModel.Brand.Name.ToString();
+            Brand = generationDataModel!.Brand!.Name!.ToString();
             ModelId = generationDataModel.ModelId;
-            Model = generationDataModel.Model.Name.ToString();
+            Model = generationDataModel!.Model!.Name!.ToString();
         }
 
 		public void Save()
@@ -57,14 +45,14 @@ namespace eAuto.Domain.DomainModels
 
             if (_isNew)
             {
-                var result = _generationRepository.Create(generationDataModel);
+                var result = _generationRepository!.Create(generationDataModel);
                 GenerationId = result.GenerationId;
                 ModelId = result.ModelId;
                 BrandId = result.BrandId;
             }
             else
             {
-                _generationRepository.Update(generationDataModel);
+                _generationRepository!.Update(generationDataModel);
             }
         }
 
@@ -73,7 +61,7 @@ namespace eAuto.Domain.DomainModels
             var generationModel = GetGenerationDataModel();
             if (!_isNew)
             {
-                _generationRepository.Delete(generationModel);
+                _generationRepository!.Delete(generationModel);
             }
 		}
 

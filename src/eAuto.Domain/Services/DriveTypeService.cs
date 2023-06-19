@@ -29,7 +29,7 @@ namespace eAuto.Domain.Services
 				_logger.LogError(exception, exception.Message);
 			}
 
-            var driveTypeViewModel = new DriveTypeDomainModel(driveTypeDataModel, _driveTypeRepository);
+            var driveTypeViewModel = new DriveTypeDomainModel(driveTypeDataModel!, _driveTypeRepository);
             return driveTypeViewModel;
         }
 
@@ -43,7 +43,7 @@ namespace eAuto.Domain.Services
 				_logger.LogError(exception, exception.Message);
 			}
 
-            var driveTypeViewModels = driveTypeEntities
+            var driveTypeViewModels = driveTypeEntities!
                 .Select(i => new DriveTypeDomainModel()
                 {
                     DriveTypeId = i.DriveTypeId,
@@ -70,7 +70,7 @@ namespace eAuto.Domain.Services
 				var exception = new GenericNotFoundException<DriveTypeService>("Drive Type not found");
 				_logger.LogError(exception, exception.Message);
 			}
-            return driveType;
+            return driveType!;
         }
     }
 }

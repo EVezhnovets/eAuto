@@ -29,7 +29,7 @@ namespace eAuto.Domain.Services
                 _logger.LogError(exception, exception.Message);
             }
 
-            var bodyTypeViewModel = new BodyTypeDomainModel(bodyTypeDataModel, _bodyTypeRepository);
+            var bodyTypeViewModel = new BodyTypeDomainModel(bodyTypeDataModel!, _bodyTypeRepository);
             return bodyTypeViewModel;
         }
 
@@ -43,7 +43,7 @@ namespace eAuto.Domain.Services
 				_logger.LogError(exception, exception.Message);
 			}
 
-            var bodyTypeViewModels = bodyTypeEntities
+            var bodyTypeViewModels = bodyTypeEntities!
                 .Select(i => new BodyTypeDomainModel()
                 {
                     BodyTypeId = i.BodyTypeId,
@@ -70,7 +70,7 @@ namespace eAuto.Domain.Services
 				_logger.LogError(exception, exception.Message);
 			}
 
-            return bodyType;
+            return bodyType!;
         }
 	}
 }

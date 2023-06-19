@@ -30,7 +30,7 @@ namespace eAuto.Domain.Services
 			}
 
             var transmissionViewModel = 
-                new TransmissionDomainModel(transmissionDataModel, _transmissionRepository);
+                new TransmissionDomainModel(transmissionDataModel!, _transmissionRepository);
             return transmissionViewModel;
         }
 
@@ -44,7 +44,7 @@ namespace eAuto.Domain.Services
 				_logger.LogError(exception, exception.Message);
 			}
 
-            var transmissionViewModels = transmissionEntities
+            var transmissionViewModels = transmissionEntities!
                 .Select(i => new TransmissionDomainModel()
                 {
                     TransmissionId = i.TransmissionId,
@@ -72,7 +72,7 @@ namespace eAuto.Domain.Services
 				_logger.LogError(exception, exception.Message);
 			}
 
-            return transmission;
+            return transmission!;
         }
     }
 }

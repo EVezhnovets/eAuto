@@ -1,31 +1,19 @@
 ﻿using eAuto.Data.Interfaces;
 using eAuto.Domain.Interfaces;
-using eAuto.Domain.Interfaces.Exceptions;
 using ProductBrandDataM = eAuto.Data.Interfaces.DataModels.ProductBrandDataModel;
 
 namespace eAuto.Domain.DomainModels
 {
     public sealed class ProductBrandDomainModel : IProductBrand
     {
-        private readonly IRepository<ProductBrandDataM> _productBrandRepository;
-        private string _name;
+        private readonly IRepository<ProductBrandDataM>? _productBrandRepository;
+        private readonly string? _name;
         private readonly bool _isNew;
 
         public int ProductBrandId { get; set; }
-        public string Name { get => _name;
-            set
-            {
-                if (string.IsNullOrEmpty(value))
-                {
-                    throw new GenericNotFoundException<ProductBrandDomainModel>();
-                }
-                _name = value;
-            } 
-        }
+        public string? Name { get; set; }
 
-        public ProductBrandDomainModel()
-        {
-        }
+        public ProductBrandDomainModel() { }
 
         public ProductBrandDomainModel(IRepository<ProductBrandDataM> productBrandRepository)
         {
@@ -50,12 +38,12 @@ namespace eAuto.Domain.DomainModels
 
             if (_isNew)
             {
-                var result = _productBrandRepository.Create(productBrandDataModel);
+                var result = _productBrandRepository!.Create(productBrandDataModel);
                 ProductBrandId = result.ProductBrandDataModelId;
             }
             else
             {
-                _productBrandRepository.Update(productBrandDataModel);
+                _productBrandRepository!.Update(productBrandDataModel);
             }
         }
 
@@ -64,7 +52,7 @@ namespace eAuto.Domain.DomainModels
             var productBrandModel = GetProductBrandDataModel();
             if (!_isNew)
             {
-                _productBrandRepository.Delete(productBrandModel);
+                _productBrandRepository!.Delete(productBrandModel);
             }
 		}
 
