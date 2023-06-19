@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace eAuto.Web.Models
 {
@@ -6,7 +7,7 @@ namespace eAuto.Web.Models
 	{
 		public int BodyTypeId { get; set; }
 		[DisplayName("Body Type")]
-		public string Name { get; set; }
+		[Required]public string? Name { get; set; }
 		public BodyTypeViewModel()
 		{
 		}

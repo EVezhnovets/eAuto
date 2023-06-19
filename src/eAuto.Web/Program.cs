@@ -1,6 +1,5 @@
 using DiConfiguration;
 using eAuto.Data.Context;
-using eAuto.Data.Identity;
 using eAuto.Data.Interfaces;
 using eAuto.Domain.Interfaces;
 using eAuto.Web.Utilities;
@@ -24,9 +23,7 @@ builder.Host.UseSerilog();
 builder.Services.AddControllersWithViews();
 
 var appConnection= builder.Configuration.GetConnectionString("eAutoCatalogConnection");
-var identityConnection= builder.Configuration.GetConnectionString("eAutoIdentityConnection");
-
-var diConfigurator = new DiConfigurator(identityConnection, appConnection, builder.Configuration);
+var diConfigurator = new DiConfigurator(appConnection!, builder.Configuration);
 diConfigurator.ConfigureServices(builder.Services, builder.Logging);
 builder.Services.AddTransient<IImageManager, ImageManager>();
 builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
@@ -62,16 +59,10 @@ using (var scope = app.Services.CreateScope())
         if (context.Database.IsSqlServer())
         {
             context.Database.Migrate();
-        }
+			var dbinitializer = scopedProvider.GetRequiredService<IDbInitializer>();
+			dbinitializer.Initialize();
+		}
         await EntityContextSeed.SeedAsync(context);
-
-        var identityContext = scopedProvider.GetRequiredService<IdentityContext>();
-        if (identityContext.Database.IsSqlServer())
-        {
-            identityContext.Database.Migrate();
-            var dbinitializer = scopedProvider.GetRequiredService<IDbInitializer>();
-            dbinitializer.Initialize();
-        }
     }
     catch (Exception ex)
     {

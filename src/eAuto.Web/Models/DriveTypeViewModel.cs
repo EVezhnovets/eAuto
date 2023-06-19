@@ -6,7 +6,7 @@ namespace eAuto.Web.Models
     {
 		public int DriveTypeId { get; set; }
 		[DisplayName("Drive Type")]
-		public string Name { get; set; }
+		public string? Name { get; set; }
 		public DriveTypeViewModel()
 		{
 		}

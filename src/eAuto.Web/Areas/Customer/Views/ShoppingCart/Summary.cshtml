@@ -30,8 +30,8 @@
                                     <label>Name</label>
                                 </div>
                                 <div class="col-9">
-                                    <input asp-for="OrderHeader.Name" class="form-control" />
-                                    <span asp-validation-for="OrderHeader.Name" class="text-danger"></span>
+                                    <input asp-for="OrderHeader!.Name" class="form-control" />
+                                    <span asp-validation-for="OrderHeader!.Name" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="row my-1">
@@ -39,8 +39,8 @@
                                     <label>Phone</label>
                                 </div>
                                 <div class="col-9">
-                                    <input asp-for="OrderHeader.PhoneNumber" class="form-control" />
-                                    <span asp-validation-for="OrderHeader.PhoneNumber" class="text-danger"></span>
+                                    <input asp-for="OrderHeader!.PhoneNumber" class="form-control" />
+                                    <span asp-validation-for="OrderHeader!.PhoneNumber" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="row my-1">
@@ -48,8 +48,8 @@
                                     <label>Street Address</label>
                                 </div>
                                 <div class="col-9">
-                                    <input asp-for="OrderHeader.StreetAddress" class="form-control" />
-                                    <span asp-validation-for="OrderHeader.StreetAddress" class="text-danger"></span>
+                                    <input asp-for="OrderHeader!.StreetAddress" class="form-control" />
+                                    <span asp-validation-for="OrderHeader!.StreetAddress" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="row my-1">
@@ -57,8 +57,8 @@
                                     <label>City</label>
                                 </div>
                                 <div class="col-9">
-                                    <input asp-for="OrderHeader.City" class="form-control" />
-                                    <span asp-validation-for="OrderHeader.City" class="text-danger"></span>
+                                    <input asp-for="OrderHeader!.City" class="form-control" />
+                                    <span asp-validation-for="OrderHeader!.City" class="text-danger"></span>
                                 </div>
                             </div>
                         </div>
@@ -67,12 +67,12 @@
                                 <span class="text-info">Order Summary:</span>
                             </h4>
                             <ul class="list-group mb-3">
-                                @foreach (var detail in Model.ShoppingCartList)
+                                @foreach (var detail in Model.ShoppingCartList!)
                                 {
                                     <li class="list-group-item d-flex justify-content-between">
                                         <div class="row justify-content-between">
                                             <div class="col-2">
-                                                <img src="@detail.Product.PictureUrl" class="rounded" width="100%">
+                                                <img src="@detail.Product!.PictureUrl" class="rounded" width="100%">
                                             </div>
                                             <div class="col-3">
                                                 <h6 class="my-0">@detail.Product.Name</h6>
@@ -88,7 +88,7 @@
                                 }
                                 <li class="list-group-item d-flex justify-content-around bg-light">
                                     <small class="text-info">Total (USD)</small>
-                                    <strong class="text-info">@Model.OrderHeader.OrderTotal.ToString("c", WebConstants.CultureInfoEN_US)</strong>
+                                    <strong class="text-info">@Model.OrderHeader!.OrderTotal.ToString("c", WebConstants.CultureInfoEN_US)</strong>
                                 </li>
                             </ul>
                         </div>

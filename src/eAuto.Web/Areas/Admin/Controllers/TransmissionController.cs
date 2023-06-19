@@ -31,7 +31,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
                     .Select(i => new TransmissionViewModel
                     {
                         TransmissionId = i.TransmissionId,
-                        Name = i.Name
+                        Name = i.Name!
                     })
                     .OrderBy(i => i.Name);
 				return View(viewModelList);

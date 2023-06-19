@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace eAuto.Web.Models
 {
@@ -7,14 +8,12 @@ namespace eAuto.Web.Models
 	{
 		public int ModelId { get; set; }
 		[DisplayName("Model")]
-		public string Name { get; set; }
+		[Required]public string? Name { get; set; }
 
         public int BrandId { get; set; }
-        [ValidateNever] public string Brand { get; set; }
+        [ValidateNever] public string? Brand { get; set; }
         #region Ctor
-        public ModelViewModel()
-        {
-        }
+        public ModelViewModel() { }
 
         public ModelViewModel(int modelId, string name, string brand)
         {

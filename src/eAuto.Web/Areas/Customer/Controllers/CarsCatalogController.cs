@@ -59,7 +59,7 @@ namespace eAuto.Web.Areas.Customer.Controllers
 						Year = i.Year,
 						DateArrival = i.DateArrival,
 						Odometer = i.Odometer,
-						Description = i.Description,
+						Description = i!.Description!,
 						BrandId = i.BrandId,
 						EngineIdentificationName = i.EngineIdentificationName,
 						EngineCapacity = i.EngineCapacity,
@@ -90,22 +90,22 @@ namespace eAuto.Web.Areas.Customer.Controllers
 						new CarViewModel(
 							i.CarId,
 							i.PriceInitial,
-							i.PictureUrl,
+							i.PictureUrl!,
 							i.Year,
 							i.DateArrival,
 							i.Odometer,
-							i.Description,
+							i.Description!,
 							i.EngineIdentificationName,
 							i.EngineCapacity,
-							i.EngineFuelType,
+							i.EngineFuelType!,
 							i.EngineFuelTypeId,
 							i.EnginePower,
-							i.Brand,
-							i.Model,
-							i.Generation,
-							i.BodyType,
-							i.DriveType,
-							i.Transmission
+							i.Brand!,
+							i.Model!,
+							i.Generation!,
+							i.BodyType!,
+							i.DriveType!,
+							i.Transmission!
 					)).ToList();
 
 				var carsResult = new CarsIndexViewModel()
@@ -143,22 +143,22 @@ namespace eAuto.Web.Areas.Customer.Controllers
 			var result = new CarViewModel(
                     id,
                     queryCar.PriceInitial,
-                    queryCar.PictureUrl,
+                    queryCar.PictureUrl!,
                     queryCar.Year,
                     queryCar.DateArrival,
                     queryCar.Odometer,
-                    queryCar.Description,
-                    queryCar.EngineIdentificationName,
+                    queryCar.Description!,
+                    queryCar.EngineIdentificationName!,
                     queryCar.EngineCapacity,
-                    queryCar.EngineFuelType,
+                    queryCar.EngineFuelType!,
                     queryCar.EngineFuelTypeId,
                     queryCar.EnginePower,
-                    queryCar.Brand,
-                    queryCar.Model,
-                    queryCar.Generation,
-                    queryCar.BodyType,
-                    queryCar.DriveType,
-                    queryCar.Transmission);
+                    queryCar.Brand!,
+                    queryCar.Model!,
+                    queryCar.Generation!,
+                    queryCar.BodyType!,
+                    queryCar.DriveType!,
+                    queryCar.Transmission!);
        
 			return View(result);
 		}

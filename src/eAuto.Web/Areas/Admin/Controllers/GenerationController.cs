@@ -107,7 +107,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
                 {
 					generation = _generationService.CreateGenerationDomainModel();
 
-                    generation.GenerationId = viewModel.GenerationVModel.GenerationId;
+                    generation.GenerationId = viewModel!.GenerationVModel!.GenerationId;
 					generation.BrandId = viewModel.GenerationVModel.BrandId;
 					generation.ModelId = viewModel.GenerationVModel.ModelId;
                     generation.Name = viewModel.GenerationVModel.Name;
@@ -138,7 +138,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
                     .Select(b => new BrandViewModel()
                     {
                         BrandId = b.BrandId,
-                        Name = b.Name
+                        Name = b!.Name!
                     }).ToList();
 
                 var modelsIList = await _modelService.GetModelModelsAsync();
@@ -192,12 +192,12 @@ namespace eAuto.Web.Areas.Admin.Controllers
             {
                 if (ModelState.IsValid)
                 {
-					generation = _generationService.GetGenerationModel(viewModel.GenerationVModel.GenerationId);
+					generation = _generationService.GetGenerationModel(viewModel!.GenerationVModel!.GenerationId);
                     generation.Name = viewModel.GenerationVModel.Name;
                     generation.BrandId = viewModel.GenerationVModel.BrandId;
-                    generation.Brand = _brandService.GetBrandModel(viewModel.GenerationVModel.BrandId).Name.ToString();
+                    generation.Brand = _brandService.GetBrandModel(viewModel!.GenerationVModel!.BrandId).Name!.ToString();
                     generation.ModelId = viewModel.GenerationVModel.ModelId;
-                    generation.Model = _modelService.GetModelModel(viewModel.GenerationVModel.ModelId).Name.ToString();
+                    generation.Model = _modelService.GetModelModel(viewModel!.GenerationVModel!.ModelId).Name!.ToString();
                     generation.Save();
                     TempData["Success"] = "Generation edited successfully";
                     return RedirectToAction("Index");

@@ -11,8 +11,8 @@ namespace eAuto.Web.Models
 
         [Range(1, 50, ErrorMessage = "Please enter value between 1 and 50")]
         public int Count { get; set; }
-        public string ApplicationUserId { get; set; }
-        public ApplicationUser ApplicationUser { get; set; }
+        public string? ApplicationUserId { get; set; }
+        public ApplicationUser? ApplicationUser { get; set; }
         public double Price { get; set; }
     }
 }

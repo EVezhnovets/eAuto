@@ -17,7 +17,7 @@
             </div>
 
 
-            @if (Model.ShoppingCartList.Count() == 0)
+            @if (Model.ShoppingCartList!.Count() == 0)
             {
                 <div class="card-footer">
                     <div class="card-footer row">
@@ -29,12 +29,12 @@
             }
             else
             {
-                foreach (var item in Model.ShoppingCartList)
+                foreach (var item in Model.ShoppingCartList!)
                 {
                     <div class="card-body">
                         <div class="row">
                             <div class="d-none d-lg-block col-lg-1 text-center py-2">
-                                <img src="@item.Product.PictureUrl" class="rounded" width="100%" />
+                                <img src="@item.Product!.PictureUrl" class="rounded" width="100%" />
                             </div>
                             <div class="col-12 col-lg-6 pt-md-3">
                                 <h5><strong>@item.Product.Name</strong></h5>
@@ -76,7 +76,7 @@
                         <ul class="list-group">
                             <li class="list-group-item d-flex justify-content-between bg-light">
                                 <span class="text-info"> Total (USD)</span>
-                                <strong class="text-info">@Model.OrderHeader.OrderTotal.ToString("C", WebConstants.CultureInfoEN_US)</strong>
+                                <strong class="text-info">@Model.OrderHeader!.OrderTotal.ToString("C", WebConstants.CultureInfoEN_US)</strong>
                             </li>
                         </ul>
                     </div>

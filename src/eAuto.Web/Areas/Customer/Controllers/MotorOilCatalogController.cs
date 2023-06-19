@@ -42,14 +42,14 @@ namespace eAuto.Web.Areas.Customer.Controllers
 					.Select(i => new MotorOilViewModel
 					{
 						MotorOilId = i.MotorOilId,
-						Name = i.Name,
-						PictureUrl = i.PictureUrl,
+						Name = i.Name!,
+						PictureUrl = i.PictureUrl!,
 						Price = i.Price,
-						Viscosity = i.Viscosity,
-						Composition = i.Composition,
+						Viscosity = i.Viscosity!,
+						Composition = i.Composition!,
 						Volume = i.Volume,
 						ProductBrandId = i.ProductBrandId,
-						ProductBrand = i.ProductBrand
+						ProductBrand = i.ProductBrand!
 					})
 					.OrderBy(i => i.MotorOilId)
 					.ThenBy(i => i.ProductBrand)
@@ -85,13 +85,13 @@ namespace eAuto.Web.Areas.Customer.Controllers
 				ProductId = productId,
 				Product = new MotorOilViewModel(
                     productId,
-                    product.Name,
+                    product.Name!,
                     product.PictureUrl,
                     product.Price,
-                    product.Viscosity,
-                    product.Composition,
+                    product.Viscosity!,
+                    product.Composition!,
                     product.Volume,
-                    product.ProductBrand
+                    product.ProductBrand!
                     )
 			};
 
@@ -103,9 +103,9 @@ namespace eAuto.Web.Areas.Customer.Controllers
         [Authorize]
         public IActionResult Details(ShoppingCartViewModel shoppingCart)
         {
-            var claimIdentity = (ClaimsIdentity)User.Identity;
+            var claimIdentity = (ClaimsIdentity)User.Identity!;
             var claim = claimIdentity.FindFirst(ClaimTypes.NameIdentifier);
-            shoppingCart.ApplicationUserId = claim.Value;
+            shoppingCart.ApplicationUserId = claim!.Value;
 
 			var oilFromDb = _motorOilService.GetMotorOilModel(shoppingCart.ProductId);
 

@@ -47,7 +47,7 @@ namespace eAuto.Web.Areas.Customer.Controllers
                     PhoneNumber = orderCarView.PhoneNumber,
                     Name = orderCarView.Name
                 };
-                var claimIdentity = (ClaimsIdentity)User.Identity;
+                var claimIdentity = (ClaimsIdentity)User.Identity!;
                 var claim = claimIdentity.FindFirst(ClaimTypes.NameIdentifier);
                 if (claim != null)
                 {

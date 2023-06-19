@@ -88,7 +88,7 @@
                     @foreach (var obj in Model)
                     {
                         <tr>
-                            <td>@obj.Id</td>
+                            <td>@obj.OrderCarId</td>
                             <td>@obj.Name</td>
                             <td>@obj.PhoneNumber</td>
                             <td>@obj.OrderDate</td>
@@ -99,11 +99,11 @@
                                 {
                                     @if (@obj.OrderStatus == WebConstants.StatusPending)
                                     {
-                                        <input type="submit" asp-action="StartProcessing" asp-route-id="@obj.Id" class="btn btn-warning form-control my-1" value="Start Processing" />
+                                        <input type="submit" asp-action="StartProcessing" asp-route-id="@obj.OrderCarId" class="btn btn-warning form-control my-1" value="Start Processing" />
                                     }
                                     @if (@obj.OrderStatus == WebConstants.StatusProcessing)
                                     {
-                                        <input type="submit" asp-action="CompleteCallProccessing" asp-route-id="@obj.Id" class="btn btn-outline-success form-control my-1" value="Finish processing" />
+                                        <input type="submit" asp-action="CompleteCallProccessing" asp-route-id="@obj.OrderCarId" class="btn btn-outline-success form-control my-1" value="Finish processing" />
                                     }
                                     @if (@obj.OrderStatus == WebConstants.StatusCompleted)
                                     {
@@ -112,7 +112,7 @@
                                     @if (@obj.OrderStatus != WebConstants.StatusCancelled &&
                                          @obj.OrderStatus != WebConstants.StatusCompleted)
                                     {
-                                        <input type="submit" asp-action="RejectCall" asp-route-id="@obj.Id" class="btn btn-danger form-control my-1" value="Reject" />
+                                        <input type="submit" asp-action="RejectCall" asp-route-id="@obj.OrderCarId" class="btn btn-danger form-control my-1" value="Reject" />
                                     }
                                     @if (@obj.OrderStatus == WebConstants.StatusCancelled)
                                     {

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace eAuto.Web.Models
 {
@@ -8,15 +9,15 @@ namespace eAuto.Web.Models
 		public int MotorOilId { get; set; }
 		[DisplayName("Picture Url")]
 		public string? PictureUrl { get; set; }
-        public double Price { get; set; }
+        [Required]public double Price { get; set; }
 		[DisplayName("Name")]
-		public string Name { get; set; }
-		public string Viscosity { get; set; }
-		public string Composition { get; set; }
-		public int Volume { get; set; }
+        [Required] public string? Name { get; set; }
+        [Required] public string? Viscosity { get; set; }
+        [Required] public string? Composition { get; set; }
+        [Required] public int Volume { get; set; }
 		public int ProductBrandId { get; set; }
 		[DisplayName("Product Brand")]
-		[ValidateNever] public string ProductBrand { get; set; }
+		[ValidateNever] public string? ProductBrand { get; set; }
 
         #region Ctor
         public MotorOilViewModel() { }

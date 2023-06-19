@@ -2,6 +2,6 @@
 {
 	public sealed class MotorOilsIndexViewModel
     {
-		public IEnumerable<MotorOilViewModel> MotorOilVModels{ get; set; }
+		public IEnumerable<MotorOilViewModel>? MotorOilVModels{ get; set; }
 	}
 }

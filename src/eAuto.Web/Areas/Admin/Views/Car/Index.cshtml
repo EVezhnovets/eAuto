@@ -43,7 +43,7 @@
     </form>
 </div>
 
-@if (Model.CarVModels.Count() == 0)
+@if (Model.CarVModels!.Count() == 0)
 {
     <table class="table table-striped" style="width:95%; margin: 3rem auto">
         <thead style="border-top: solid 1px; border-bottom: solid 2px; vertical-align: middle; margin-top: 1rem">
@@ -72,7 +72,7 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var obj in Model.CarVModels)
+            @foreach (var obj in Model.CarVModels!)
             {
                 <tr>
                     <td width="5%">

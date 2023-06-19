@@ -1,7 +1,5 @@
-﻿using eAuto.Data;
-using eAuto.Data.Interfaces;
+﻿using eAuto.Data.Interfaces;
 using eAuto.Data.Interfaces.DataModels;
-using eAuto.Domain.DomainModels;
 using eAuto.Domain.Interfaces;
 using eAuto.Web.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -27,7 +25,7 @@ namespace eAuto.Web.Areas.Customer.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
 
         [BindProperty]
-        public ShoppingCartIndexViewModel ShoppingCartIndex { get; set; }
+        public ShoppingCartIndexViewModel? ShoppingCartIndex { get; set; }
         public int OrderTotal { get; set; }
 
         public ShoppingCartController(
@@ -54,11 +52,11 @@ namespace eAuto.Web.Areas.Customer.Controllers
         {
             var motorOils = await _motorOilService.GetMotorOilModelsAsync();
 
-            var claimIdentity = (ClaimsIdentity)User.Identity;
+            var claimIdentity = (ClaimsIdentity)User.Identity!;
             var claim = claimIdentity.FindFirst(ClaimTypes.NameIdentifier);
 
-            var shoppingCartListDomain = await _shoppingCartService.GetShoppingCartModelsAsync(claim);
-            var orderHeader = _orderHeaderRepository.Get(u => u.ApplicationUserId == claim.Value);
+            var shoppingCartListDomain = await _shoppingCartService.GetShoppingCartModelsAsync(claim!);
+            var orderHeader = _orderHeaderRepository.Get(u => u.ApplicationUserId == claim!.Value);
             ShoppingCartIndex = new ShoppingCartIndexViewModel()
             {
                 ShoppingCartList = shoppingCartListDomain
@@ -68,15 +66,15 @@ namespace eAuto.Web.Areas.Customer.Controllers
                     ProductId = i.ProductId,
                     Product = new MotorOilViewModel()
                     {
-                        MotorOilId = i.OilProduct.MotorOilId,
+                        MotorOilId = i.OilProduct!.MotorOilId,
                         PictureUrl = i.OilProduct.PictureUrl,
                         Price = i.OilProduct.Price,
-                        Name = i.OilProduct.Name,
-                        Viscosity = i.OilProduct.Viscosity,
-                        Composition = i.OilProduct.Composition,
-                        Volume = i.OilProduct.Volume,
-                        ProductBrandId = i.OilProduct.ProductBrandId,
-                        ProductBrand = i.OilProduct.ProductBrand
+                        Name = i.OilProduct!.Name!,
+                        Viscosity = i.OilProduct!.Viscosity!,
+                        Composition = i.OilProduct!.Composition!,
+                        Volume = i.OilProduct!.Volume,
+                        ProductBrandId = i.OilProduct!.ProductBrandId,
+                        ProductBrand = i.OilProduct!.ProductBrand!
                     },
                     Count = i.Count,
                     ApplicationUserId = i.ApplicationUserId,
@@ -86,7 +84,7 @@ namespace eAuto.Web.Areas.Customer.Controllers
 
             foreach (var cart in ShoppingCartIndex.ShoppingCartList)
             {
-                cart.Price = cart.Product.Price;
+                cart.Price = cart!.Product!.Price!;
                 ShoppingCartIndex.OrderHeader.OrderTotal += (cart.Price * cart.Count);
             }
 
@@ -95,10 +93,10 @@ namespace eAuto.Web.Areas.Customer.Controllers
 
         public async Task<IActionResult> Summary()
         {
-            var claimIdentity = (ClaimsIdentity)User.Identity;
+            var claimIdentity = (ClaimsIdentity)User.Identity!;
             var claim = claimIdentity.FindFirst(ClaimTypes.NameIdentifier);
 
-            var shoppingCartListDomain = await _shoppingCartService.GetShoppingCartModelsAsync(claim);
+            var shoppingCartListDomain = await _shoppingCartService.GetShoppingCartModelsAsync(claim!);
             ShoppingCartIndex = new ShoppingCartIndexViewModel()
             {
                 ShoppingCartList = shoppingCartListDomain
@@ -108,15 +106,15 @@ namespace eAuto.Web.Areas.Customer.Controllers
                     ProductId = i.ProductId,
                     Product = new MotorOilViewModel()
                     {
-                        MotorOilId = i.OilProduct.MotorOilId,
-                        PictureUrl = i.OilProduct.PictureUrl,
-                        Price = i.OilProduct.Price,
-                        Name = i.OilProduct.Name,
-                        Viscosity = i.OilProduct.Viscosity,
-                        Composition = i.OilProduct.Composition,
-                        Volume = i.OilProduct.Volume,
-                        ProductBrandId = i.OilProduct.ProductBrandId,
-                        ProductBrand = i.OilProduct.ProductBrand
+                        MotorOilId = i.OilProduct!.MotorOilId,
+                        PictureUrl = i.OilProduct!.PictureUrl,
+                        Price = i.OilProduct!.Price,
+                        Name = i.OilProduct!.Name!,
+                        Viscosity = i.OilProduct!.Viscosity!,
+                        Composition = i.OilProduct!.Composition!,
+                        Volume = i.OilProduct!.Volume,
+                        ProductBrandId = i.OilProduct!.ProductBrandId,
+                        ProductBrand = i.OilProduct!.ProductBrand
                     },
                     Count = i.Count,
                     ApplicationUserId = i.ApplicationUserId,
@@ -127,14 +125,14 @@ namespace eAuto.Web.Areas.Customer.Controllers
 
             ShoppingCartIndex.OrderHeader.ApplicationUser = await _userRepository.GetUserAsync(User);
 
-            ShoppingCartIndex.OrderHeader.Name = ShoppingCartIndex.OrderHeader.ApplicationUser.FirstName;
+            ShoppingCartIndex.OrderHeader.Name = ShoppingCartIndex.OrderHeader.ApplicationUser!.FirstName;
             ShoppingCartIndex.OrderHeader.PhoneNumber = ShoppingCartIndex.OrderHeader.ApplicationUser.Phone;
             ShoppingCartIndex.OrderHeader.StreetAddress = ShoppingCartIndex.OrderHeader.ApplicationUser.StreetAddress;
             ShoppingCartIndex.OrderHeader.City = ShoppingCartIndex.OrderHeader.ApplicationUser.City;
 
             foreach (var cart in ShoppingCartIndex.ShoppingCartList)
             {
-                cart.Price = cart.Product.Price;
+                cart.Price = cart.Product!.Price;
                 ShoppingCartIndex.OrderHeader.OrderTotal += (cart.Price * cart.Count);
             }
             if (ShoppingCartIndex.ShoppingCartList.Count() == 0)
@@ -153,11 +151,11 @@ namespace eAuto.Web.Areas.Customer.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SummaryPOST()
         {
-            var claimIdentity = (ClaimsIdentity)User.Identity;
+            var claimIdentity = (ClaimsIdentity)User.Identity!;
             var claim = claimIdentity.FindFirst(ClaimTypes.NameIdentifier);
 
-            var shoppingCartListDomain = await _shoppingCartService.GetShoppingCartModelsAsync(claim);
-            ShoppingCartIndex.ShoppingCartList = shoppingCartListDomain
+            var shoppingCartListDomain = await _shoppingCartService.GetShoppingCartModelsAsync(claim!);
+            ShoppingCartIndex!.ShoppingCartList = shoppingCartListDomain
                 .Select(i => new ShoppingCartViewModel()
                 {
                     ShoppingCartId = i.ShoppingCartId,
@@ -178,14 +176,14 @@ namespace eAuto.Web.Areas.Customer.Controllers
                     ApplicationUserId = i.ApplicationUserId,
                 }).ToList();
 
-            ShoppingCartIndex.OrderHeader.PaymentStatus = WebConstants.PaymentStatusPending;
+            ShoppingCartIndex.OrderHeader!.PaymentStatus = WebConstants.PaymentStatusPending;
             ShoppingCartIndex.OrderHeader.OrderStatus = WebConstants.StatusPending;
             ShoppingCartIndex.OrderHeader.OrderDate = DateTime.UtcNow;
-            ShoppingCartIndex.OrderHeader.ApplicationUserId = claim.Value;
+            ShoppingCartIndex.OrderHeader.ApplicationUserId = claim!.Value;
 
             foreach (var cart in ShoppingCartIndex.ShoppingCartList)
             {
-                cart.Price = cart.Product.Price;
+                cart.Price = cart.Product!.Price;
                 ShoppingCartIndex.OrderHeader.OrderTotal += (cart.Price * cart.Count);
             }
 
@@ -211,7 +209,7 @@ namespace eAuto.Web.Areas.Customer.Controllers
 
             _orderHeaderRepository.Create(orderHeaderToDb);
 
-            ShoppingCartIndex.OrderHeader.Id = orderHeaderToDb.Id;
+            ShoppingCartIndex.OrderHeader.Id = orderHeaderToDb.OrderId;
 
             foreach (var cart in ShoppingCartIndex.ShoppingCartList)
             {
@@ -252,7 +250,7 @@ namespace eAuto.Web.Areas.Customer.Controllers
                         Currency = "usd",
                         ProductData = new SessionLineItemPriceDataProductDataOptions
                         {
-                            Name = item.Product.Name
+                            Name = item.Product!.Name
 						},
 					},
 					Quantity = item.Count,
@@ -273,7 +271,7 @@ namespace eAuto.Web.Areas.Customer.Controllers
 
 		public async Task<IActionResult> OrderConfirmation(int id)
         {
-			OrderHeaderDataModel orderHeader = _orderHeaderRepository.Get(u => u.Id == id);
+			OrderHeaderDataModel orderHeader = _orderHeaderRepository.Get(u => u.OrderId == id)!;
             orderHeader.ApplicationUser = await _userRepository.GetUserAsync(User);
             var service = new SessionService();
 			Session session = service.Get(orderHeader.SessionId);
@@ -281,13 +279,13 @@ namespace eAuto.Web.Areas.Customer.Controllers
 			//check the stripe status
 			if (session.PaymentStatus.ToLower() == "paid")
 			{
-                _orderHeaderRepository.UpdateStripePaymentId(id, orderHeader.SessionId, session.PaymentIntentId);
+                _orderHeaderRepository.UpdateStripePaymentId(id, orderHeader.SessionId!, session.PaymentIntentId);
 				_orderHeaderRepository.UpdateStatus(id, WebConstants.StatusApproved, WebConstants.PaymentStatusApproved);
 			}
 
-            _emailSender.SendEmailAsync(orderHeader.ApplicationUser.Email, "eAuto Center - New Order", $"<p>New Order {orderHeader.Id} Created</p>");
+            //await _emailSender.SendEmailAsync(orderHeader.ApplicationUser!.Email!, "eAuto Center - New Order", $"<p>New Order {orderHeader.OrderId} Created</p>");
 
-            var list = await _shoppingCartService.GetShoppingCartModelsAsync(orderHeader.ApplicationUserId);
+            var list = await _shoppingCartService.GetShoppingCartModelsAsync(orderHeader.ApplicationUserId!);
             HttpContext.Session.Clear();
             _shoppingCartService.RemoveRangeShoppingCart(list);
 
@@ -305,14 +303,14 @@ namespace eAuto.Web.Areas.Customer.Controllers
 
         public IActionResult Minus(int cartId)
         {
-            var claimIdentity = (ClaimsIdentity)User.Identity;
+            var claimIdentity = (ClaimsIdentity)User.Identity!;
             var claim = claimIdentity.FindFirst(ClaimTypes.NameIdentifier);
 
             var cart = _shoppingCartService.GetShoppingCartModel(cartId);
             if(cart.Count <= 1)
             {
                 _shoppingCartService.RemoveShoppingCart(cart);
-                var count = _shoppingCartService.GetShoppingCartModelsAsync(claim).Result.ToList().Count - 1;
+                var count = _shoppingCartService.GetShoppingCartModelsAsync(claim!).Result.ToList().Count - 1;
                 HttpContext.Session.SetInt32(WebConstants.SessionCart, count);
             }
             else
@@ -324,14 +322,14 @@ namespace eAuto.Web.Areas.Customer.Controllers
 
         public IActionResult Remove(int cartId)
         {
-            var claimIdentity = (ClaimsIdentity)User.Identity;
+            var claimIdentity = (ClaimsIdentity)User.Identity!;
             var claim = claimIdentity.FindFirst(ClaimTypes.NameIdentifier);
 
             var cart = _shoppingCartService.GetShoppingCartModel(cartId);
 
             _shoppingCartService.RemoveShoppingCart(cart);
 
-            var count = _shoppingCartService.GetShoppingCartModelsAsync(claim).GetAwaiter().GetResult().ToList().Count;
+            var count = _shoppingCartService.GetShoppingCartModelsAsync(claim!).GetAwaiter().GetResult().ToList().Count;
             HttpContext.Session.SetInt32(WebConstants.SessionCart, count);
 
             return RedirectToAction("Index");
