@@ -1,4 +1,4 @@
-﻿namespace eAuto.Data.Identity
+﻿namespace eAuto.Data.Context
 {
     public static class DataConstants
     {
