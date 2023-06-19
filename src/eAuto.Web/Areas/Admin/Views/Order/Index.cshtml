@@ -87,10 +87,10 @@
                 @foreach (var obj in Model)
                 {
                     <tr>
-                        <td>@obj.OrderHeader.Id</td>
+                        <td>@obj.OrderHeader!.Id</td>
                         <td>@obj.OrderHeader.Name</td>
-                        <td>@obj.OrderHeader.PhoneNumber</td>
-                        <td>@obj.OrderHeader.ApplicationUser.Email</td>
+                        <td>@obj.OrderHeader!.PhoneNumber</td>
+                        <td>@obj.OrderHeader.ApplicationUser!.Email</td>
                         <td>@obj.OrderHeader.OrderStatus</td>
                         <td>@obj.OrderHeader.OrderTotal.ToString("c", WebConstants.CultureInfoEN_US)</td>
                         <td>

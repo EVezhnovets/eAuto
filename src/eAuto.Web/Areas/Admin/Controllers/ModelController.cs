@@ -36,9 +36,9 @@ namespace eAuto.Web.Areas.Admin.Controllers
                     .Select(i => new ModelViewModel
                     {
                         ModelId = i.ModelId,
-                        Name = i.Name,
+                        Name = i.Name!,
                         BrandId = i.BrandId,
-                        Brand = i.Brand
+                        Brand = i.Brand!
                     })
                     .OrderBy(i => i.Brand).ThenBy(i => i.Name);
                 return View(modelsList);
@@ -125,7 +125,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
                     .Select(b => new BrandViewModel()
                     {
                         BrandId = b.BrandId,
-                        Name = b.Name
+                        Name = b.Name!
                     }).ToList();
 
                 var viewModel = _modelService.GetModelModel(id);
@@ -136,8 +136,8 @@ namespace eAuto.Web.Areas.Admin.Controllers
                     {
                         ModelId = viewModel.ModelId,
                         BrandId = viewModel.BrandId,
-                        Name = viewModel.Name,
-                        Brand = viewModel.Brand,
+                        Name = viewModel.Name!,
+                        Brand = viewModel.Brand!,
                     },
                     Brands = brandsList.Select(b => new SelectListItem { Value = b.BrandId.ToString(), Text = b.Name })
                 };
@@ -167,10 +167,10 @@ namespace eAuto.Web.Areas.Admin.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    model = _modelService.GetModelModel(viewModel.ModelVModel.ModelId);
+                    model = _modelService.GetModelModel(viewModel.ModelVModel!.ModelId);
                     model.Name = viewModel.ModelVModel.Name;
                     model.BrandId = viewModel.ModelVModel.BrandId;
-                    model.Brand = _brandService.GetBrandModel(viewModel.ModelVModel.BrandId).Name.ToString();
+                    model.Brand = _brandService.GetBrandModel(viewModel.ModelVModel.BrandId).Name!.ToString();
                     model.Save();
                     TempData["Success"] = "Model edited successfully";
                     return RedirectToAction("Index");

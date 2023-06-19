@@ -1,32 +1,18 @@
 ﻿using eAuto.Data.Interfaces;
 using eAuto.Domain.Interfaces;
-using eAuto.Domain.Interfaces.Exceptions;
 using TransmissionDataM = eAuto.Data.Interfaces.DataModels.TransmissionDataModel;
 
 namespace eAuto.Domain.DomainModels
 {
     public sealed class TransmissionDomainModel : ITransmission
     {
-        private readonly IRepository<TransmissionDataM> _transmissionRepository;
-        private string _name;
+        private readonly IRepository<TransmissionDataM>? _transmissionRepository;
         private readonly bool _isNew;
 
         public int TransmissionId { get; set; }
-        public string Name { get => _name;
-            set
-            {
-                if (string.IsNullOrEmpty(value))
-                {
-                    throw new GenericNotFoundException<TransmissionDomainModel>();
-                }
-                _name = value;
-            } 
-        }
+        public string? Name { get; set; }
 
-        public TransmissionDomainModel()
-        {
-        }
-
+        public TransmissionDomainModel() { }
         public TransmissionDomainModel(IRepository<TransmissionDataM> transmissionRepository)
         {
             _transmissionRepository = transmissionRepository;
@@ -38,7 +24,7 @@ namespace eAuto.Domain.DomainModels
             IRepository<TransmissionDataM> transmissionRepository)
         {
             _transmissionRepository = transmissionRepository;
-            _name = transmissionDataModel.Name;
+            Name = transmissionDataModel.Name;
 
             TransmissionId = transmissionDataModel.TransmissionId;
         }
@@ -50,12 +36,12 @@ namespace eAuto.Domain.DomainModels
 
             if (_isNew)
             {
-                var result = _transmissionRepository.Create(transmissionDataModel);
+                var result = _transmissionRepository!.Create(transmissionDataModel);
                 TransmissionId = result.TransmissionId;
             }
             else
             {
-                _transmissionRepository.Update(transmissionDataModel);
+                _transmissionRepository!.Update(transmissionDataModel);
             }
         }
 
@@ -64,7 +50,7 @@ namespace eAuto.Domain.DomainModels
             var transmissionModel = GetTransmissionDataModel();
             if (!_isNew)
             {
-                _transmissionRepository.Delete(transmissionModel);
+                _transmissionRepository!.Delete(transmissionModel);
             }
 		}
 

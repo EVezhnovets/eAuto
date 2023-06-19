@@ -6,7 +6,7 @@ namespace eAuto.Web.Models
 	{
 		public int ProductBrandId { get; set; }
 		[DisplayName("Product Brand")]
-		public string Name { get; set; }
+		public string? Name { get; set; }
 		public ProductBrandViewModel() { }
 
 		public ProductBrandViewModel(int productBrandId, string name)

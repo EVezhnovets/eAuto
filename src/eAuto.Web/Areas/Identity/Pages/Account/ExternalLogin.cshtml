@@ -19,29 +19,29 @@
         <form asp-page-handler="Confirmation" asp-route-returnUrl="@Model.ReturnUrl" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
             <div class="form-floating mb-3">
-                <input asp-for="Input.Email" class="form-control" autocomplete="email" placeholder="Please enter your email."/>
-                <label asp-for="Input.Email" class="form-label"></label>
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
+                <input asp-for="Input!.Email" class="form-control" autocomplete="email" placeholder="Please enter your email."/>
+                <label asp-for="Input!.Email" class="form-label"></label>
+                <span asp-validation-for="Input!.Email" class="text-danger"></span>
             </div>
             <div class="form-floating mb-3">
-                <input asp-for="Input.FirstName" class="form-control" placeholder="First Name"/>
-                <label asp-for="Input.FirstName" class="form-label"></label>
-                <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                <input asp-for="Input!.FirstName" class="form-control" placeholder="First Name"/>
+                <label asp-for="Input!.FirstName" class="form-label"></label>
+                <span asp-validation-for="Input!.FirstName" class="text-danger"></span>
             </div>
             <div class="form-floating mb-3">
-                <input asp-for="Input.Phone" class="form-control" placeholder="Phone Number" />
-                <label asp-for="Input.Phone" class="form-label"></label>
-                <span asp-validation-for="Input.Phone" class="text-danger"></span>
+                <input asp-for="Input!.Phone" class="form-control" placeholder="Phone Number" />
+                <label asp-for="Input!.Phone" class="form-label"></label>
+                <span asp-validation-for="Input!.Phone" class="text-danger"></span>
             </div>
             <div class="form-floating mb-3">
-                <input asp-for="Input.StreetAddress" class="form-control" placeholder="Street Address"/>
-                <label asp-for="Input.StreetAddress" class="form-label"></label>
-                <span asp-validation-for="Input.StreetAddress" class="text-danger"></span>
+                <input asp-for="Input!.StreetAddress" class="form-control" placeholder="Street Address"/>
+                <label asp-for="Input!.StreetAddress" class="form-label"></label>
+                <span asp-validation-for="Input!.StreetAddress" class="text-danger"></span>
             </div>
             <div class="form-floating mb-3">
-                <input asp-for="Input.City" class="form-control" placeholder="City" />
-                <label asp-for="Input.City" class="form-label"></label>
-                <span asp-validation-for="Input.City" class="text-danger"></span>
+                <input asp-for="Input!.City" class="form-control" placeholder="City" />
+                <label asp-for="Input!.City" class="form-label"></label>
+                <span asp-validation-for="Input!.City" class="text-danger"></span>
             </div>
             <button type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
         </form>

@@ -10,11 +10,11 @@ namespace eAuto.Data.Interfaces.DataModels
         public int ModelId { get; set; }
         [Required]
         [MaxLength(50)]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         [Required]
         public int BrandId { get; set; }
-        [ForeignKey("BrandId")] public BrandDataModel Brand { get; set; }
+        [ForeignKey("BrandId")] public BrandDataModel? Brand { get; set; }
 
         #region Ctor
         public ModelDataModel() { }

@@ -13,7 +13,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
         private readonly IRepository<OrderCarDataModel> _orderCarRepository;
 
         [BindProperty]
-        public OrderCarViewModel OrderCarVM { get; set; }
+        public OrderCarViewModel? OrderCarVM { get; set; }
         public OrderCarController(IRepository<OrderCarDataModel> orderCarRepository)
         {
             _orderCarRepository = orderCarRepository;
@@ -78,7 +78,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
 
         private void UpdateStatus(int id, string orderStatus)
         {
-            var orderCarFromDb = _orderCarRepository.Get(i => i.Id == id);
+            var orderCarFromDb = _orderCarRepository.Get(i => i.OrderCarId == id);
 
             if (orderCarFromDb != null)
             {

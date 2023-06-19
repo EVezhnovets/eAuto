@@ -31,7 +31,7 @@ namespace eAuto.Web.Utilities
                 }
                 else
                 {
-                    foreach (var file in formFiles)
+                    foreach (var file in formFiles!)
                     {
                         string fileName = Guid.NewGuid().ToString();
                         string extension = Path.GetExtension(file.FileName);

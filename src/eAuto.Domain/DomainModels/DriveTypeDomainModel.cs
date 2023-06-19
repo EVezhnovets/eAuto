@@ -1,27 +1,17 @@
 ﻿using eAuto.Data.Interfaces;
 using eAuto.Domain.Interfaces;
-using eAuto.Domain.Interfaces.Exceptions;
 using DriveTypeDataM = eAuto.Data.Interfaces.DataModels.DriveTypeDataModel;
 
 namespace eAuto.Domain.DomainModels
 {
     public sealed class DriveTypeDomainModel : IDriveType
     {
-        private readonly IRepository<DriveTypeDataM> _driveTypeRepository;
-        private string _name;
+        private readonly IRepository<DriveTypeDataM>? _driveTypeRepository;
+        private readonly string? _name;
         private readonly bool _isNew;
 
         public int DriveTypeId { get; set; }
-        public string Name { get => _name;
-            set
-            {
-                if (string.IsNullOrEmpty(value))
-                {
-                    throw new GenericNotFoundException<DriveTypeDomainModel>();
-                }
-                _name = value;
-            } 
-        }
+        public string? Name { get;set; }
 
         public DriveTypeDomainModel()
         {
@@ -49,12 +39,12 @@ namespace eAuto.Domain.DomainModels
 
             if (_isNew)
             {
-                var result = _driveTypeRepository.Create(driveTypeDataModel);
+                var result = _driveTypeRepository!.Create(driveTypeDataModel);
                 DriveTypeId = result.DriveTypeId;
             }
             else
             {
-                _driveTypeRepository.Update(driveTypeDataModel);
+                _driveTypeRepository!.Update(driveTypeDataModel);
             }
         }
 
@@ -63,7 +53,7 @@ namespace eAuto.Domain.DomainModels
             var driveTypeModel = GetDriveTypeDataModel();
             if (!_isNew)
             {
-                _driveTypeRepository.Delete(driveTypeModel);
+                _driveTypeRepository!.Delete(driveTypeModel);
             }
 		}
 

@@ -13,7 +13,7 @@ namespace eAuto.Data
         }
         public void UpdateStatus(int id, string orderStatus, string? paymentStatus = null)
         {
-            var orderFromDb = _db.OrderHeaders.FirstOrDefault(i => i.Id == id);
+            var orderFromDb = _db.OrderHeaders.FirstOrDefault(i => i.OrderId == id);
 
             if (orderFromDb != null)
             {
@@ -27,9 +27,9 @@ namespace eAuto.Data
         }
         public void UpdateStripePaymentId(int id, string sessionId, string paymentIntentId)
         {
-			var orderFromDb = _db.OrderHeaders.FirstOrDefault(i => i.Id == id);
+			var orderFromDb = _db.OrderHeaders.FirstOrDefault(i => i.OrderId == id);
 
-            orderFromDb.PaymentDate = DateTime.Now;
+            orderFromDb!.PaymentDate = DateTime.Now;
 			orderFromDb.SessionId = sessionId;
 			orderFromDb.PaymentIntentId = paymentIntentId;
             _db.SaveChanges();

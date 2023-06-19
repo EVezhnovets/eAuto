@@ -7,16 +7,16 @@
 		</div>
 		<div class="row">
 			<div class="col mb-3">
-				<label asp-for="@Model.ViewModel.Brand"></label>
-				<select asp-for="@Model.ViewModel.BrandId" asp-items="@Model.ModelFK" class="form-select">
+				<label asp-for="@Model.ViewModel!.Brand"></label>
+				<select asp-for="@Model.ViewModel!.BrandId" asp-items="@Model.ModelFK" class="form-select">
 				<option disabled selected>--Select Category--</option>
 				</select>
-			<span asp-validation-for="@Model.ViewModel.BrandId" class="text-danger"></span>
+			<span asp-validation-for="@Model.ViewModel!.BrandId" class="text-danger"></span>
 			</div>
 			<div class="col mb-3">
-				<label asp-for="@Model.ViewModel.Name"></label>
-				<input asp-for="@Model.ViewModel.Name" class="form-control">
-				<span asp-validation-for="@Model.ViewModel.Name" class="text-danger"></span>
+				<label asp-for="@Model.ViewModel!.Name"></label>
+				<input asp-for="@Model.ViewModel!.Name" class="form-control">
+				<span asp-validation-for="@Model.ViewModel!.Name" class="text-danger"></span>
 			</div>
 		</div>
 		<button type="submit" class="btn btn-success btn-sm" style="width:100px">

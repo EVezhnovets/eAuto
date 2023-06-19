@@ -30,7 +30,7 @@ namespace eAuto.Domain.Services
 			}
 
             var productBrandViewModel = 
-                new ProductBrandDomainModel(productBrandDataModel, _productBrandRepository);
+                new ProductBrandDomainModel(productBrandDataModel!, _productBrandRepository);
             return productBrandViewModel;
         }
 
@@ -44,7 +44,7 @@ namespace eAuto.Domain.Services
 				_logger.LogError(exception, exception.Message);
 			}
 
-            var productBrandViewModels = productBrandEntities
+            var productBrandViewModels = productBrandEntities!
                 .Select(i => new ProductBrandDomainModel()
                 {
                     ProductBrandId = i.ProductBrandDataModelId,
@@ -72,7 +72,7 @@ namespace eAuto.Domain.Services
 				_logger.LogError(exception, exception.Message);
 			}
 
-            return productBrand;
+            return productBrand!;
         }
     }
 }

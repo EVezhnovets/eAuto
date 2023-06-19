@@ -6,11 +6,11 @@ namespace eAuto.Domain.DomainModels
 {
     public sealed class EngineTypeDomainModel : IEngineType
 	{
-        private readonly IRepository<EngineTypeDataM> _engineTypeRepository;
-        private string _name;
+        private readonly IRepository<EngineTypeDataM>? _engineTypeRepository;
+        private string? _name;
 
         public int EngineTypeId { get; set; }
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         public EngineTypeDomainModel() { }
 

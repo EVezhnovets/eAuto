@@ -30,7 +30,7 @@ namespace eAuto.Domain.Services
 				_logger.LogError(exception, exception.Message);
 			}
 
-            var generationViewModel = new GenerationDomainModel(generationDataModel, _generationRepository);
+            var generationViewModel = new GenerationDomainModel(generationDataModel!, _generationRepository);
             return generationViewModel;
         }
 
@@ -38,9 +38,9 @@ namespace eAuto.Domain.Services
         {
             var generationEntities = await _generationRepository
                 .GetAllAsync(
-                include: query => query
-                .Include(g => g.Brand)
-                .Include(g => g.Model)
+                include: query => query!
+                .Include(g => g.Brand!)
+                .Include(g => g.Model!)
                 );
 
             if (generationEntities == null)
@@ -49,15 +49,15 @@ namespace eAuto.Domain.Services
 				_logger.LogError(exception, exception.Message);
 			}
 
-            var generationViewModels = generationEntities
+            var generationViewModels = generationEntities!
                 .Select(i => new GenerationDomainModel()
                 {
                     GenerationId = i.GenerationId,
                     Name = i.Name,
                     BrandId = i.BrandId,
-                    Brand = i.Brand.Name.ToString(),
+                    Brand = i.Brand!.Name!.ToString(),
 					ModelId = i.ModelId,
-                    Model = i.Model.Name.ToString()
+                    Model = i.Model!.Name!.ToString()
 				}).ToList();
             var generationModels = generationViewModels.Cast<IGeneration>();
             return generationModels;
@@ -74,8 +74,8 @@ namespace eAuto.Domain.Services
             var generation = _generationRepository
                 .Get(
                     predicate: bt => bt.GenerationId == generationId, include: query => query
-                        .Include(g => g.Brand)
-                        .Include(g => g.Model)
+                        .Include(g => g.Brand!)
+                        .Include(g => g.Model!)
                 );
 
             if (generation == null)
@@ -83,7 +83,7 @@ namespace eAuto.Domain.Services
 				var exception = new GenericNotFoundException<GenerationService>("Generation not found");
 				_logger.LogError(exception, exception.Message);
 			}
-            return generation;
+            return generation!;
         }
     }
 }

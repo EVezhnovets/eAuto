@@ -7,7 +7,7 @@
         string? Product { get; set; }
         IMotorOil? OilProduct { get; set; }
         int Count { get; set; }
-        string ApplicationUserId { get; set; }
+        string? ApplicationUserId { get; set; }
         double Price { get; set; }
 
         void Save();

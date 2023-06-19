@@ -6,7 +6,7 @@ namespace eAuto.Domain.DomainModels
 {
     public sealed class ShoppingCartDomainModel : IShoppingCart
     {
-        private readonly IRepository<ShoppingCartDataM> _shoppingCartRepository;
+        private readonly IRepository<ShoppingCartDataM>? _shoppingCartRepository;
         private readonly bool _isNew;
 
         public int ShoppingCartId { get; set; }
@@ -14,7 +14,7 @@ namespace eAuto.Domain.DomainModels
         public string? Product { get; set; }
         public IMotorOil? OilProduct { get; set; }
         public int Count { get; set; }
-        public string ApplicationUserId { get; set; }
+        public string? ApplicationUserId { get; set; }
         public double Price { get; set; }
 
         public ShoppingCartDomainModel() { }
@@ -47,7 +47,7 @@ namespace eAuto.Domain.DomainModels
             _shoppingCartRepository = cartRepository;
             ShoppingCartId = cartDataModel.ShoppingCartId;
             ProductId = cartDataModel.ProductId;
-            Product = cartDataModel.Product.Name;
+            Product = cartDataModel.Product!.Name;
             Count = cartDataModel.Count;
             ApplicationUserId = cartDataModel.ApplicationUserId;
         }
@@ -58,14 +58,14 @@ namespace eAuto.Domain.DomainModels
 
             if (_isNew)
             {
-                var result = _shoppingCartRepository.Create(shoppingCartDataModel);
+                var result = _shoppingCartRepository!.Create(shoppingCartDataModel);
                 ShoppingCartId = result.ShoppingCartId;
                 ApplicationUserId = result.ApplicationUserId;
                 ShoppingCartId = result.ShoppingCartId; 
             }
             else
             {
-                _shoppingCartRepository.Update(shoppingCartDataModel);
+                _shoppingCartRepository!.Update(shoppingCartDataModel);
             }
         }
 
@@ -74,7 +74,7 @@ namespace eAuto.Domain.DomainModels
             var shoppingCartModel = GetShoppingCartDataModel();
             if (!_isNew)
             {
-                _shoppingCartRepository.Delete(shoppingCartModel);
+                _shoppingCartRepository!.Delete(shoppingCartModel);
             }
 		}
 

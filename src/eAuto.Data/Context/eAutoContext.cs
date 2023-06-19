@@ -1,11 +1,12 @@
 ﻿using eAuto.Data.Interfaces.DataModels;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace eAuto.Data.Context
 {
-    public class EAutoContext : DbContext
+    public class EAutoContext : IdentityDbContext
     {
-        private readonly string _connectionString;
+        private readonly string? _connectionString;
         public DbSet<BodyTypeDataModel> BodyTypes { get; set; }
         public DbSet<BrandDataModel> Brands { get; set; }
         public DbSet<CarDataModel> Cars { get; set; }
@@ -20,22 +21,14 @@ namespace eAuto.Data.Context
         public DbSet<OrderHeaderDataModel> OrderHeaders { get; set; }
         public DbSet<OrderDetailsDataModel> OrderDetails { get; set; }
         public DbSet<OrderCarDataModel> OrderCarDataModels { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
-        public EAutoContext(string connectionString)
-        {
-            _connectionString = connectionString;
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) 
-        {
-            optionsBuilder.UseSqlServer(_connectionString, builder =>
-            {
-                builder.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);
-            });
-        }
+        public EAutoContext(DbContextOptions<EAutoContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<BodyTypeDataModel>()
                 .HasKey(bt => bt.BodyTypeId);
 
@@ -52,7 +45,7 @@ namespace eAuto.Data.Context
                 .HasKey(m => m.ModelId);
 
             modelBuilder.Entity<TransmissionDataModel>()
-                .HasKey(t => t.TransmissionId);            
+                .HasKey(t => t.TransmissionId);
 
             modelBuilder.Entity<GenerationDataModel>()
                 .HasKey(g => g.GenerationId);
@@ -63,11 +56,20 @@ namespace eAuto.Data.Context
             modelBuilder.Entity<MotorOilDataModel>()
                 .HasKey(e => e.MotorOilDataModelId);
 
-			modelBuilder.Entity<ProductBrandDataModel>()
-				.HasKey(e => e.ProductBrandDataModelId);
+            modelBuilder.Entity<ProductBrandDataModel>()
+                .HasKey(e => e.ProductBrandDataModelId);
 
             modelBuilder.Entity<ShoppingCartDataModel>()
                 .HasKey(e => e.ShoppingCartId);
+
+            modelBuilder.Entity<OrderHeaderDataModel>()
+                .HasKey(e => e.OrderId);
+
+            modelBuilder.Entity<OrderDetailsDataModel>()
+                .HasKey(e => e.OrderDetailsId);
+
+            modelBuilder.Entity<OrderCarDataModel>()
+                .HasKey(e => e.OrderCarId);
         }
     }
 }

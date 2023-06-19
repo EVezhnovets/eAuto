@@ -1,19 +1,20 @@
-﻿using eAuto.Data.Interfaces;
-using eAuto.Data.Interfaces.DataModels;
+﻿using eAuto.Data.Interfaces.DataModels;
+using eAuto.Data.Interfaces;
 using Microsoft.AspNetCore.Identity;
 
-namespace eAuto.Data.Identity
+namespace eAuto.Data.Context
 {
+
     public class DbInitializer : IDbInitializer
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly IdentityContext _db;
+        private readonly EAutoContext _db;
 
         public DbInitializer(
             UserManager<ApplicationUser> userManager,
             RoleManager<IdentityRole> roleManager,
-            IdentityContext db)
+            EAutoContext db)
         {
             _userManager = userManager;
             _roleManager = roleManager;
@@ -39,9 +40,9 @@ namespace eAuto.Data.Identity
                 },
                    "Admin123*").GetAwaiter().GetResult();
 
-                ApplicationUser user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "admin@gmail.com");
+                ApplicationUser user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "admin@gmail.com")!;
 
-                _userManager.AddToRoleAsync(user, DataConstants.AdminRole).GetAwaiter().GetResult();
+                _userManager.AddToRoleAsync(user!, DataConstants.AdminRole).GetAwaiter().GetResult();
             }
             return;
         }

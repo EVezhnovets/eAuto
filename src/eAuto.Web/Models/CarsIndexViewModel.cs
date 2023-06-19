@@ -4,7 +4,7 @@ namespace eAuto.Web.Models
 {
 	public sealed class CarsIndexViewModel
     {
-		public IEnumerable<CarViewModel> CarVModels{ get; set; }
+		public IEnumerable<CarViewModel>? CarVModels{ get; set; }
 
 		public IEnumerable<SelectListItem>? Brands { get; set; }
 		public int? BrandFilterApplied { get; set; }

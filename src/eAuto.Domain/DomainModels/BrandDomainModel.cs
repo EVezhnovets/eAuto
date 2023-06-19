@@ -1,27 +1,16 @@
 ﻿using eAuto.Data.Interfaces;
 using eAuto.Domain.Interfaces;
-using eAuto.Domain.Interfaces.Exceptions;
 using BrandDataM = eAuto.Data.Interfaces.DataModels.BrandDataModel;
 
 namespace eAuto.Domain.DomainModels
 {
     public sealed class BrandDomainModel : IBrand
     {
-        private readonly IRepository<BrandDataM> _brandRepository;
-        private string _name;
+        private readonly IRepository<BrandDataM>? _brandRepository;
         private readonly bool _isNew;
 
         public int BrandId { get; set; }
-        public string Name { get => _name;
-            set
-            {
-                if (string.IsNullOrEmpty(value))
-                {
-                    throw new GenericNotFoundException<BrandDomainModel>();
-                }
-                _name = value;
-            } 
-        }
+        public string? Name { get; set; }
         public BrandDomainModel() { }
 
         internal BrandDomainModel(
@@ -31,7 +20,7 @@ namespace eAuto.Domain.DomainModels
             _brandRepository = brandRepository;
 
             BrandId = brandDataModel.BrandId;
-            _name = brandDataModel.Name;
+            Name = brandDataModel.Name!;
 
         }
 
@@ -50,12 +39,12 @@ namespace eAuto.Domain.DomainModels
 
             if (_isNew)
             {
-                var result = _brandRepository.Create(brandDataModel);
+                var result = _brandRepository!.Create(brandDataModel);
                 BrandId = result.BrandId;
             }
             else
             {
-                _brandRepository.Update(brandDataModel);
+                _brandRepository!.Update(brandDataModel);
             }
         }
 
@@ -64,7 +53,7 @@ namespace eAuto.Domain.DomainModels
             var brandModel = GetBrandDataModel();
             if (!_isNew)
             {
-                _brandRepository.Delete(brandModel);
+                _brandRepository!.Delete(brandModel);
             }
 		}
 

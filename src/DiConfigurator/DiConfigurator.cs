@@ -1,6 +1,5 @@
 ﻿using eAuto.Data;
 using eAuto.Data.Context;
-using eAuto.Data.Identity;
 using eAuto.Data.Interfaces;
 using eAuto.Data.Interfaces.DataModels;
 using eAuto.Domain.Interfaces;
@@ -14,13 +13,11 @@ namespace DiConfiguration
 {
     public sealed class DiConfigurator
     {
-        private readonly string _identityConnection;
         private readonly string _appDbConnection;
         private readonly IConfiguration _configuration;
 
-		public DiConfigurator(string identityConnection, string appDbConnection, IConfiguration configuration)
+		public DiConfigurator(string appDbConnection, IConfiguration configuration)
         {
-            _identityConnection = identityConnection;
             _appDbConnection = appDbConnection;
             _configuration = configuration;
         }
@@ -33,8 +30,6 @@ namespace DiConfiguration
 
         private void RegisterBuisnessPart(IServiceCollection services)
         {
-            IdentityConfigurator.Configure(services, _identityConnection);
-
             services.AddTransient<IBodyTypeService, BodyTypeService>();
             services.AddTransient<IBrandService, BrandService>();
             services.AddTransient<IModelService, ModelService>();
@@ -53,7 +48,6 @@ namespace DiConfiguration
 
         private void RegisterDataPart(IServiceCollection services)
         {
-            services.AddScoped(s => new EAutoContext(_appDbConnection));
             EAutoContextConfigurator.RegisterContext(services, _appDbConnection);
 
             services.AddTransient(typeof(IRepository<>), typeof(Repository<>));

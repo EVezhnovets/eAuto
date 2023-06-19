@@ -6,39 +6,39 @@ namespace eAuto.Domain.DomainModels
 {
     public sealed class CarDomainModel : ICar
     {
-        private readonly IRepository<CarDataM> _carRepository;
+        private readonly IRepository<CarDataM>? _carRepository;
         private readonly bool _isNew;
         
         public int CarId { get; set; }
         public decimal PriceInitial { get; set; }
-        public string PictureUrl { get; set; }
+        public string? PictureUrl { get; set; }
         public DateTime Year { get; set; }
         public DateTime DateArrival { get; set; }
         public int Odometer { get; set; }
-        public string Description { get; set; }
+        public string? Description { get; set; }
 		public string? EngineIdentificationName { get; set; }
-		public string EngineFuelType { get; set; }
+		public string? EngineFuelType { get; set; }
 		public int EngineFuelTypeId { get; set; }
 		public string? EngineCapacity { get; set; }
 		public int? EnginePower { get; set; }
 
 		public int BrandId { get; set; }
-		public string Brand { get; set; }
+		public string? Brand { get; set; }
 
 		public int ModelId { get; set; }
-		public string Model { get; set; }
+		public string? Model { get; set; }
 
         public int GenerationId { get; set; }
-        public string Generation { get; set; }
+        public string? Generation { get; set; }
 
         public int BodyTypeId { get; set; }
-        public string BodyType { get; set; }
+        public string? BodyType { get; set; }
 
         public int DriveTypeId { get; set; }
-        public string DriveType { get; set; }
+        public string? DriveType { get; set; }
 
         public int TransmissionId { get; set; }
-        public string Transmission { get; set; }
+        public string? Transmission { get; set; }
 
         public CarDomainModel()
         {
@@ -68,17 +68,17 @@ namespace eAuto.Domain.DomainModels
             EngineCapacity = carDataModel.EngineCapacity;
             EnginePower = carDataModel.EnginePower;
 			BrandId = carDataModel.BrandId;
-            Brand = carDataModel.Brand.Name;
+            Brand = carDataModel.Brand!.Name;
             ModelId = carDataModel.ModelId;
-            Model = carDataModel.Model.Name;
+            Model = carDataModel.Model!.Name;
             GenerationId = carDataModel.GenerationId;
-            Generation = carDataModel.Generation.Name;
+            Generation = carDataModel.Generation!.Name;
             BodyTypeId = carDataModel.BodyTypeId;
-            BodyType = carDataModel.BodyType.Name;
+            BodyType = carDataModel.BodyType!.Name;
             DriveTypeId = carDataModel.DriveTypeId;
-            DriveType = carDataModel.DriveType.Name;
+            DriveType = carDataModel.DriveType!.Name;
             TransmissionId = carDataModel.TransmissionId;
-            Transmission = carDataModel.Transmission.Name;
+            Transmission = carDataModel.Transmission!.Name;
         }
 
 		public void Save()
@@ -87,7 +87,7 @@ namespace eAuto.Domain.DomainModels
 
             if (_isNew)
             {
-                var result = _carRepository.Create(carDataModel);
+                var result = _carRepository!.Create(carDataModel);
                 CarId = result.CarId;
                 BrandId = result.BrandId;
                 ModelId = result.ModelId;
@@ -99,7 +99,7 @@ namespace eAuto.Domain.DomainModels
             }
             else
             {
-                _carRepository.Update(carDataModel);
+                _carRepository!.Update(carDataModel);
             }
         }
 
@@ -108,7 +108,7 @@ namespace eAuto.Domain.DomainModels
             var carModel = GetCarDataModel();
             if (!_isNew)
             {
-                _carRepository.Delete(carModel);
+                _carRepository!.Delete(carModel);
             }
 		}
 

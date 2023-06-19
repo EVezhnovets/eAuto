@@ -4,7 +4,7 @@ namespace eAuto.Web.Models
 {
 	public sealed class ModelCreateViewModel
 	{
-		public ModelViewModel ModelVModel { get; set; }
+		public ModelViewModel? ModelVModel { get; set; }
 		public IEnumerable<SelectListItem>? Brands { get; set; }
     }
 }

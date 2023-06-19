@@ -2,7 +2,6 @@
 using eAuto.Domain.Interfaces;
 using eAuto.Domain.Interfaces.Exceptions;
 using eAuto.Web.Models;
-using eAuto.Web.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -109,14 +108,14 @@ namespace eAuto.Web.Areas.Admin.Controllers
 				if (files.Count > 0)
                 {
 					_imageManager.UploadFiles(files, WebConstants.MotorOilsImages);
-					viewModel.MotorOilVModel.PictureUrl = string.Concat(WebConstants.MotorOilsImages, _imageManager.FilesName.FirstOrDefault());
+					viewModel.MotorOilVModel!.PictureUrl = string.Concat(WebConstants.MotorOilsImages, _imageManager.FilesName.FirstOrDefault());
 				}
 				if (ModelState.IsValid)
                 {
 					motorOil = _motorOilService.CreateMotorOilDomainModel();
 
-                    motorOil.MotorOilId = viewModel.MotorOilVModel.MotorOilId;
-                    motorOil.Name = viewModel.MotorOilVModel.Name;
+                    motorOil.MotorOilId = viewModel.MotorOilVModel!.MotorOilId;
+                    motorOil.Name = viewModel.MotorOilVModel!.Name;
                     motorOil.PictureUrl = viewModel.MotorOilVModel.PictureUrl;
                     motorOil.Price = viewModel.MotorOilVModel.Price;
                     motorOil.Viscosity = viewModel.MotorOilVModel.Viscosity;
@@ -199,20 +198,20 @@ namespace eAuto.Web.Areas.Admin.Controllers
 
 				if (files.Count > 0)
 				{
-					_imageManager.RemoveFile(WebConstants.MotorOilsImages, viewModel.MotorOilVModel.PictureUrl);
+					_imageManager.RemoveFile(WebConstants.MotorOilsImages, viewModel!.MotorOilVModel!.PictureUrl!);
 					_imageManager.UploadFiles(files, WebConstants.MotorOilsImages);
 					viewModel.MotorOilVModel.PictureUrl = string.Concat(WebConstants.MotorOilsImages, _imageManager.FilesName.FirstOrDefault());
 				}
 				if (ModelState.IsValid)
                 {
-					motorOil = _motorOilService.GetMotorOilModel(viewModel.MotorOilVModel.MotorOilId);
-                    motorOil.Name = viewModel.MotorOilVModel.Name;
-                    motorOil.PictureUrl = viewModel.MotorOilVModel.PictureUrl;
+					motorOil = _motorOilService.GetMotorOilModel(viewModel.MotorOilVModel!.MotorOilId);
+                    motorOil.Name = viewModel.MotorOilVModel.Name!;
+                    motorOil.PictureUrl = viewModel.MotorOilVModel.PictureUrl!;
                     motorOil.Price = viewModel.MotorOilVModel.Price;
                     motorOil.ProductBrandId = viewModel.MotorOilVModel.ProductBrandId;
-                    motorOil.ProductBrand = _productBrandService.GetProductBrandModel(viewModel.MotorOilVModel.ProductBrandId).Name.ToString();
-                    motorOil.Viscosity = viewModel.MotorOilVModel.Viscosity;
-                    motorOil.Composition = viewModel.MotorOilVModel.Composition;
+                    motorOil.ProductBrand = _productBrandService.GetProductBrandModel(viewModel.MotorOilVModel.ProductBrandId).Name!.ToString();
+                    motorOil.Viscosity = viewModel.MotorOilVModel.Viscosity!;
+                    motorOil.Composition = viewModel.MotorOilVModel.Composition!;
                     motorOil.Volume = viewModel.MotorOilVModel.Volume;
 
                     motorOil.Save();
@@ -235,7 +234,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
             try
             {
                 var motorOil = _motorOilService.GetMotorOilModel(id);
-				_imageManager.RemoveFile(WebConstants.MotorOilsImages, motorOil.PictureUrl);
+				_imageManager.RemoveFile(WebConstants.MotorOilsImages, motorOil!.PictureUrl!);
 				motorOil.Delete();
                 TempData["Success"] = "MotorOil deleted successfully";
                 return RedirectToAction("Index");

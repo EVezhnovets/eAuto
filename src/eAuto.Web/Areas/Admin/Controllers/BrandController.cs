@@ -29,7 +29,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
                 var orderedResult = result.Select(i => new BrandViewModel
                 {
                     BrandId = i.BrandId,
-                    Name = i.Name,
+                    Name = i.Name!,
                 }).OrderBy(i => i.Name);
 				return View(orderedResult);
 			}
@@ -63,7 +63,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
 			{
                 if (ModelState.IsValid)
                 {
-                    brand = _brandService.CreateBrandModel(viewModel.Name);
+                    brand = _brandService.CreateBrandModel(viewModel.Name!);
                     brand.Save();
                     TempData["Success"] = "Brand created successfully";
                     return RedirectToAction("Index");

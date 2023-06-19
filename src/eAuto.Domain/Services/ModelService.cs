@@ -30,7 +30,7 @@ namespace eAuto.Domain.Services
 				_logger.LogError(exception, exception.Message);
 			}
 
-            var modelViewModel = new ModelDomainModel(modelDataModel, _modelRepository);
+            var modelViewModel = new ModelDomainModel(modelDataModel!, _modelRepository);
             return modelViewModel;
         }
 
@@ -38,8 +38,8 @@ namespace eAuto.Domain.Services
         {
             var modelEntities = await _modelRepository
                 .GetAllAsync(
-                include: query => query
-                .Include(m => m.Brand)
+                include: query => query!
+                .Include(m => m.Brand!)
                 );
 
             if (modelEntities == null)
@@ -48,13 +48,13 @@ namespace eAuto.Domain.Services
 				_logger.LogError(exception, exception.Message);
 			}
 
-            var modelViewModels = modelEntities
+            var modelViewModels = modelEntities!
                 .Select(i => new ModelDomainModel()
                 {
                     ModelId = i.ModelId,
                     Name = i.Name,
                     BrandId = i.BrandId,
-                    Brand = i.Brand.Name.ToString()
+                    Brand = i.Brand!.Name!.ToString()
                 }).ToList();
             var modelModels = modelViewModels.Cast<IModel>();
             return modelModels;
@@ -71,7 +71,7 @@ namespace eAuto.Domain.Services
             var model = _modelRepository
                 .Get(
                     predicate: bt => bt.ModelId == modelId, include: query => query
-                        .Include(m => m.Brand)
+                        .Include(m => m.Brand!)
                 );
 
             if (model == null)
@@ -79,7 +79,7 @@ namespace eAuto.Domain.Services
 				var exception = new GenericNotFoundException<ModelService>("Model not found");
 				_logger.LogError(exception, exception.Message);
 			}
-            return model;
+            return model!;
         }
     }
 }

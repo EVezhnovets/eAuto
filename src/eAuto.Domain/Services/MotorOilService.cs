@@ -30,7 +30,7 @@ namespace eAuto.Domain.Services
 				_logger.LogError(exception, exception.Message);
 			}
 
-            var motorOilViewModel = new MotorOilDomainModel(motorOilDataModel, _motorOilRepository);
+            var motorOilViewModel = new MotorOilDomainModel(motorOilDataModel!, _motorOilRepository);
             return motorOilViewModel;
         }
 
@@ -38,8 +38,8 @@ namespace eAuto.Domain.Services
         {
             var motorOilEntities = await _motorOilRepository
                 .GetAllAsync(
-                include: query => query
-                .Include(g => g.ProductBrand)
+                include: query => query!
+                .Include(g => g.ProductBrand!)
                 );
 
             if (motorOilEntities == null)
@@ -48,7 +48,7 @@ namespace eAuto.Domain.Services
 				_logger.LogError(exception, exception.Message);
 			}
 
-            var motorOilViewModels = motorOilEntities
+            var motorOilViewModels = motorOilEntities!
                 .Select(i => new MotorOilDomainModel()
                 {
                     MotorOilId = i.MotorOilDataModelId,
@@ -59,7 +59,7 @@ namespace eAuto.Domain.Services
                     Composition = i.Composition,
                     Volume = i.Volume,
                     ProductBrandId = i.ProductBrandId,
-                    ProductBrand = i.ProductBrand.Name.ToString(),
+                    ProductBrand = i.ProductBrand!.Name!.ToString(),
 				}).ToList();
             var motorOilModels = motorOilViewModels.Cast<IMotorOil>();
             return motorOilModels;
@@ -76,7 +76,7 @@ namespace eAuto.Domain.Services
             var motorOil = _motorOilRepository
                 .Get(
                     predicate: bt => bt.MotorOilDataModelId == motorOilId, include: query => query
-                        .Include(g => g.ProductBrand)
+                        .Include(g => g.ProductBrand!)
                 );
 
             if (motorOil == null)
@@ -84,7 +84,7 @@ namespace eAuto.Domain.Services
 				var exception = new GenericNotFoundException<MotorOilService>("MotorOil not found");
 				_logger.LogError(exception, exception.Message);
 			}
-            return motorOil;
+            return motorOil!;
         }
     }
 }

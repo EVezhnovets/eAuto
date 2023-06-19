@@ -30,7 +30,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
                     .Select(i => new BodyTypeViewModel
                 {
                     BodyTypeId = i.BodyTypeId,
-                    Name = i.Name
+                    Name = i.Name!
                 })
                     .OrderBy(i => i.Name);
 				return View(orderedResult);
@@ -65,7 +65,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
 			{
                 if (ModelState.IsValid)
                 {
-                    bodyType = _bodyTypeService.CreateBodyTypeModel(viewModel.Name);
+                    bodyType = _bodyTypeService.CreateBodyTypeModel(viewModel.Name!);
                     bodyType.Save();
                     TempData["Success"] = "Body Type created successfully";
                     return RedirectToAction("Index");
@@ -92,7 +92,7 @@ namespace eAuto.Web.Areas.Admin.Controllers
                 var bodyTypeViewModel = new BodyTypeViewModel
                 {
                     BodyTypeId = id,
-                    Name = viewModel.Name
+                    Name = viewModel.Name!
                 };
                 return View(bodyTypeViewModel);
             }

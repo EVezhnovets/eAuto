@@ -2,7 +2,7 @@
 {
     public class ShoppingCartIndexViewModel
     {
-        public IEnumerable<ShoppingCartViewModel> ShoppingCartList { get; set; }
-        public OrderHeaderViewModel OrderHeader { get;set; }
+        public IEnumerable<ShoppingCartViewModel>? ShoppingCartList { get; set; }
+        public OrderHeaderViewModel? OrderHeader { get;set; }
     }
 }

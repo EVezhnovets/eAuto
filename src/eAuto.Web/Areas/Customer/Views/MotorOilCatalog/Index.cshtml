@@ -2,7 +2,7 @@
 
 <h2 class="text-primary text-black-50 mt-5" style="text-align:center">Engine Oils</h2>
 
-@if (Model.MotorOilVModels.Count() == 0)
+@if (Model.MotorOilVModels!.Count() == 0)
 {
     <table class="table table-striped" style="width:100%">
         <thead>
@@ -29,7 +29,7 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var obj in Model.MotorOilVModels)
+            @foreach (var obj in Model.MotorOilVModels!)
             {
                 <tr class="motor-index">
                     <td width="25%" style="padding:0.3rem">

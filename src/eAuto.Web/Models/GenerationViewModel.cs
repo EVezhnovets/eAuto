@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace eAuto.Web.Models
 {
@@ -7,13 +8,13 @@ namespace eAuto.Web.Models
 	{
 		public int GenerationId { get; set; }
 		[DisplayName("Generation")]
-		public string Name { get; set; }
+		[Required]public string? Name { get; set; }
 
         public int BrandId { get; set; }
-        [ValidateNever] public string Brand { get; set; }
+        [ValidateNever] public string? Brand { get; set; }
 
         public int ModelId { get; set; }
-        [ValidateNever] public string Model { get; set; }
+        [ValidateNever] public string? Model { get; set; }
         #region Ctor
         public GenerationViewModel() { }
 
