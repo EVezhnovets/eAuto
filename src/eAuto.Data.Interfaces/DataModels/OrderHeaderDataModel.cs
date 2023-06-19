@@ -1,14 +1,17 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace eAuto.Data.Interfaces.DataModels
 {
     public class OrderHeaderDataModel
     {
-        public int Id { get; set; }
+        public int OrderId { get; set; }
 
-        public string ApplicationUserId { get; set; }
-
-        public ApplicationUser ApplicationUser { get; set; }
+        public string? ApplicationUserId { get; set; }
+        [ForeignKey("ApplicationUserId")]
+        [ValidateNever]
+        public ApplicationUser? ApplicationUser { get; set; }
 
         [Required]
         public DateTime OrderDate { get; set; }
@@ -28,15 +31,15 @@ namespace eAuto.Data.Interfaces.DataModels
         public string? PaymentIntentId { get; set; }
 
         [Required]
-        public string PhoneNumber { get; set; }
+        public string? PhoneNumber { get; set; }
 
         [Required]
-        public string StreetAddress { get; set; }
+        public string? StreetAddress { get; set; }
 
         [Required]
-        public string City { get; set; }
+        public string? City { get; set; }
 
         [Required]
-        public string Name { get; set; }
+        public string? Name { get; set; }
     }
 }

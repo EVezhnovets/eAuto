@@ -29,15 +29,15 @@ namespace eAuto.Data.Interfaces.DataModels
         public int Odometer { get; set; }
         
         [Required]
-        [MaxLength(500)]
-        public string Description { get; set; }
+        [MaxLength(5000)]
+        public string? Description { get; set; }
 
 		[MaxLength(50)]
         public string? EngineIdentificationName { get; set; }
 
 		[Required]
 		[MaxLength(50)]
-        public string EngineFuelType { get; set; }
+        public string? EngineFuelType { get; set; }
 
 		[Required]
 		[MaxLength(50)]
@@ -52,32 +52,32 @@ namespace eAuto.Data.Interfaces.DataModels
 		[Required]
         [MaxLength(50)]
         public int BrandId { get; set; }
-        [ForeignKey("BrandId")]public BrandDataModel Brand { get; set; }
+        [ForeignKey("BrandId")]public BrandDataModel? Brand { get; set; }
         
         [Required] 
         [MaxLength(50)]
         public int ModelId { get; set; }
-        [ForeignKey("ModelId")]public ModelDataModel Model { get; set; }
+        [ForeignKey("ModelId")]public ModelDataModel? Model { get; set; }
 
         [Required] 
         [MaxLength(50)]
         public int GenerationId { get; set; }
-        [ForeignKey("GenerationId")] public GenerationDataModel Generation { get; set; }
+        [ForeignKey("GenerationId")] public GenerationDataModel? Generation { get; set; }
         
         [Required] 
         [MaxLength(50)]
         public int BodyTypeId { get; set; }
-        [ForeignKey("BodyTypeId")] public BodyTypeDataModel BodyType { get; set; }
+        [ForeignKey("BodyTypeId")] public BodyTypeDataModel? BodyType { get; set; }
 
         [Required] 
         [MaxLength(50)]
         public int DriveTypeId { get; set; }
-        [ForeignKey("DriveTypeId")]public DriveTypeDataModel DriveType { get; set; }
+        [ForeignKey("DriveTypeId")]public DriveTypeDataModel? DriveType { get; set; }
 
         [Required]
         [MaxLength(50)]
         public int TransmissionId { get; set; }
-        [ForeignKey("TransmissionId")]public TransmissionDataModel Transmission { get; set; }
+        [ForeignKey("TransmissionId")]public TransmissionDataModel? Transmission { get; set; }
 
         #region Ctor
         public CarDataModel() { }
