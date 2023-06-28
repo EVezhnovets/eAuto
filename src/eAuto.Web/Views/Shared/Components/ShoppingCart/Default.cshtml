@@ -1,6 +1,10 @@
 ﻿@model int
-
+@{
+    string? badgeColor = default;
+    if (Model == 0) badgeColor = "bg-info";
+    else badgeColor = "bg-success";
+}
 <i class="bi bi-bag"></i>
-<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info">
+<span class="position-absolute top-0 start-90 translate-middle badge rounded-pill @badgeColor">
     @Model
 </span>
