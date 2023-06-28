@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiConfiguration", "src\DiCo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eAuto.Domain.Interfaces", "src\eAuto.Domain.Interfaces\eAuto.Domain.Interfaces.csproj", "{DE1B23C8-AB08-4943-A345-8B1B1A1A55DB}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PublicApi", "src\PublicApi\PublicApi.csproj", "{BA543BD3-A15A-4695-8E69-3DF3637AA060}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{DE1B23C8-AB08-4943-A345-8B1B1A1A55DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE1B23C8-AB08-4943-A345-8B1B1A1A55DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE1B23C8-AB08-4943-A345-8B1B1A1A55DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA543BD3-A15A-4695-8E69-3DF3637AA060}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA543BD3-A15A-4695-8E69-3DF3637AA060}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA543BD3-A15A-4695-8E69-3DF3637AA060}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA543BD3-A15A-4695-8E69-3DF3637AA060}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -58,6 +64,7 @@ Global
 		{F0B90D67-E70D-4925-B71B-FEC227809BCB} = {9C81F387-7768-4185-8910-9CC9CE6CF39B}
 		{5B249BEF-1BC6-4DF0-89FB-7760C7155DE2} = {9C81F387-7768-4185-8910-9CC9CE6CF39B}
 		{DE1B23C8-AB08-4943-A345-8B1B1A1A55DB} = {9C81F387-7768-4185-8910-9CC9CE6CF39B}
+		{BA543BD3-A15A-4695-8E69-3DF3637AA060} = {9C81F387-7768-4185-8910-9CC9CE6CF39B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {37188887-6E07-49D7-B6F5-7EE74CE02706}

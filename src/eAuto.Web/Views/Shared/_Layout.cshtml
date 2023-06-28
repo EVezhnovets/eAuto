@@ -15,7 +15,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3" style="padding: 0.75rem">
+        <nav class="navbar navbar-expand-lg navbar-toggleable-lg navbar-dark bg-dark border-bottom box-shadow mb-3" style="padding: 0.75rem">
             <div class="container-fluid">
                 <div class="col-md-2">
                     <a class="nav-link" asp-area="Customer" asp-controller="CarsCatalog" asp-action="Index">
@@ -31,7 +31,7 @@
                     <ul class="navbar-nav flex-grow-1 justify-content-end">
                         @if (User.IsInRole(WebConstants.AdminRole))
                         {
-                            <li class="nav-item">
+                            <li class="nav-item" style="margin:auto">
                                 <button class="btn btn-outline-warning" style="width:10rem" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
                                     Admin Panel
                                     <span class="bi bi-gear-fill"></span>
