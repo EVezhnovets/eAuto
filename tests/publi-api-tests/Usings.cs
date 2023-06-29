@@ -1,0 +1,12 @@
+global using NUnit.Framework;
+global using eAuto.Data;
+global using eAuto.Data.Context;
+global using eAuto.Data.Interfaces.DataModels;
+global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.Extensions.Logging.Abstractions;
+global using PublicApi.Controllers;
+global using PublicApi.Services;
+global using PublicApi.Exceptions;
+global using eAuto.Data.Converters;
+global using eAuto.Data.Interfaces.Enum;

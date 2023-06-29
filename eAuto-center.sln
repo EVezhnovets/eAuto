@@ -19,6 +19,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eAuto.Domain.Interfaces", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PublicApi", "src\PublicApi\PublicApi.csproj", "{BA543BD3-A15A-4695-8E69-3DF3637AA060}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{3C08EE3D-CCFB-4212-BD99-F7C569269906}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "publi-api-tests", "tests\publi-api-tests\publi-api-tests.csproj", "{17B990AE-EC61-45D3-822E-F3B074C2606C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +57,10 @@ Global
 		{BA543BD3-A15A-4695-8E69-3DF3637AA060}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA543BD3-A15A-4695-8E69-3DF3637AA060}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA543BD3-A15A-4695-8E69-3DF3637AA060}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17B990AE-EC61-45D3-822E-F3B074C2606C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17B990AE-EC61-45D3-822E-F3B074C2606C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17B990AE-EC61-45D3-822E-F3B074C2606C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17B990AE-EC61-45D3-822E-F3B074C2606C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -65,6 +73,7 @@ Global
 		{5B249BEF-1BC6-4DF0-89FB-7760C7155DE2} = {9C81F387-7768-4185-8910-9CC9CE6CF39B}
 		{DE1B23C8-AB08-4943-A345-8B1B1A1A55DB} = {9C81F387-7768-4185-8910-9CC9CE6CF39B}
 		{BA543BD3-A15A-4695-8E69-3DF3637AA060} = {9C81F387-7768-4185-8910-9CC9CE6CF39B}
+		{17B990AE-EC61-45D3-822E-F3B074C2606C} = {3C08EE3D-CCFB-4212-BD99-F7C569269906}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {37188887-6E07-49D7-B6F5-7EE74CE02706}
